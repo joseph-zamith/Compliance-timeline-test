@@ -311,6 +311,214 @@
     transform: translateY(0);
   }
 
+  /* ===== PROPOSALS SECTION ===== */
+  .proposals-section {
+    margin-bottom: var(--space-2xl);
+  }
+  .proposals-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+  .proposals-header h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--ink-primary);
+  }
+  .proposals-count {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 2px 10px;
+    border-radius: 10px;
+  }
+
+  .proposal-card {
+    background: var(--surface-1);
+    border: 1.5px solid var(--surface-3);
+    border-radius: 10px;
+    padding: var(--space-lg);
+    margin-bottom: var(--space-md);
+    transition: border-color 0.15s;
+  }
+  .proposal-card:hover {
+    border-color: var(--gold-dim);
+  }
+  .proposal-card.decided {
+    opacity: 0.6;
+  }
+
+  .proposal-top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .action-badge {
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+  .action-badge--add {
+    background: oklch(50% 0.14 160);
+    color: oklch(98% 0.005 90);
+  }
+  .action-badge--update {
+    background: oklch(72% 0.14 70);
+    color: oklch(20% 0.05 70);
+  }
+  .action-badge--delete {
+    background: oklch(55% 0.2 25);
+    color: oklch(98% 0.005 90);
+  }
+
+  .proposal-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ink-primary);
+  }
+  .proposal-date {
+    font-size: 0.75rem;
+    color: var(--ink-tertiary);
+    font-weight: 500;
+  }
+  .proposal-desc {
+    font-size: 0.8125rem;
+    color: var(--ink-secondary);
+    line-height: 1.55;
+    margin: var(--space-xs) 0;
+    max-width: 70ch;
+  }
+  .proposal-reason {
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    font-style: italic;
+    margin: var(--space-sm) 0;
+    padding-left: var(--space-md);
+    border-left: 3px solid var(--surface-3);
+  }
+  .proposal-topics {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin: var(--space-sm) 0;
+  }
+
+  .proposal-diff {
+    background: var(--surface-2);
+    border-radius: 6px;
+    padding: var(--space-sm) var(--space-md);
+    margin: var(--space-sm) 0;
+    font-size: 0.75rem;
+  }
+  .proposal-diff-label {
+    font-weight: 600;
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+  }
+  .proposal-diff-old {
+    color: oklch(55% 0.15 25);
+    text-decoration: line-through;
+  }
+  .proposal-diff-new {
+    color: oklch(40% 0.14 160);
+  }
+
+  .proposal-actions {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+    align-items: center;
+  }
+
+  .btn-approve {
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 600;
+  }
+  .btn-approve:hover {
+    background: var(--gold-dim);
+    color: var(--navy);
+  }
+  .btn-reject {
+    background: var(--surface-3);
+    color: var(--ink-secondary);
+  }
+  .btn-reject:hover {
+    background: oklch(85% 0.01 260);
+    color: var(--ink-primary);
+  }
+  .btn-undo {
+    background: transparent;
+    color: var(--ink-muted);
+    text-decoration: underline;
+    padding: 7px 8px;
+  }
+  .btn-undo:hover {
+    color: var(--ink-primary);
+  }
+
+  .decision-status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+  .decision-approved {
+    background: oklch(93% 0.04 160);
+    color: oklch(35% 0.12 160);
+  }
+  .decision-rejected {
+    background: oklch(93% 0.04 25);
+    color: oklch(42% 0.12 25);
+  }
+
+  /* Inline indicators in milestones table */
+  .indicator-new {
+    display: inline-block;
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 1px 5px;
+    border-radius: 3px;
+    background: oklch(50% 0.14 160);
+    color: oklch(98% 0.005 90);
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .indicator-updated {
+    display: inline-block;
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 1px 5px;
+    border-radius: 3px;
+    background: oklch(72% 0.14 70);
+    color: oklch(20% 0.05 70);
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* Section divider */
+  .section-divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--surface-3) 60%);
+    margin: var(--space-2xl) 0;
+  }
+
   @media (max-width: 640px) {
     .page { padding: var(--space-lg) var(--space-md); }
     .toolbar { flex-direction: column; align-items: stretch; }
@@ -325,10 +533,13 @@
     <img src="https://cdn.prod.website-files.com/6850272ec839a090ed996f46/68c98307d72aef67f50014d9_68c905ee252fff8d68ba2807_logo-healthtech.svg" alt="Theodo HealthTech" class="topbar-logo">
     <h1>Regulatory Timeline <span>Back Office</span></h1>
   </div>
-  <a href="regulatory-timeline.html" class="topbar-link">&larr; View timeline</a>
+  <a href="index.html" class="topbar-link">&larr; View timeline</a>
 </div>
 
 <div class="page">
+  <!-- Proposals Section (dynamically populated) -->
+  <div id="proposals-section"></div>
+
   <div class="toolbar">
     <div class="toolbar-left">
       <input type="text" class="search" id="search" placeholder="Search milestones...">
@@ -356,54 +567,15 @@
 <div class="toast" id="toast">Saved</div>
 
 <script>
-// Same milestone data as the timeline page
-const M=[
-{d:"2026-02-02",l:"2 Feb 2026",y:2026,t:"FDA QMSR In Force",x:"Incorporates ISO 13485:2016 by reference, replacing decades-old QSR.",tp:["us","standards"],tg:["in-force"]},
-{d:"2026-01-26",l:"Jan 2026",y:2026,t:"South Korea: Fast-Track + AI Basic Act + DMPA",x:"Market access 80\u2013140 days, AI High-Impact, pre-approved change management.",tp:["other","ai"],tg:["new"]},
-{d:"2026-03-10",l:"10 Mar 2026",y:2026,t:"Singapore AIHGle 2.0",x:"Refreshed AI in Healthcare Guidelines with seven ethical principles.",tp:["other","ai"],tg:["new"]},
-{d:"2026-03-17",l:"17 Mar 2026",y:2026,t:"China NMPA YY/T 1406-2026",x:"Unified risk management standard. Effective 1 Mar 2027.",tp:["other","cyber"],tg:["new"]},
-{d:"2026-04-10",l:"10 Apr 2026",y:2026,t:"MHRA Indefinite CE Mark Recognition",x:"Permanent recognition of CE-marked devices in GB. Consultation closed.",tp:["uk","mdr"],tg:["high"]},
-{d:"2026-04-16",l:"16 Apr 2026",y:2026,t:"CNIL/HAS AI Healthcare Guide",x:"Joint guide on AI deployment in healthcare. Consultation closed.",tp:["france","ai"],tg:["critical"]},
-{d:"2026-05-01",l:"May 2026",y:2026,t:"HIPAA Security Rule Overhaul",x:"MFA, encryption, network segmentation mandatory.",tp:["us"],tg:["high"]},
-{d:"2026-05-06",l:"6 May 2026",y:2026,t:"MDR/IVDR Simplification \u2014 Feedback Deadline",x:"Revised Rule 11, removal of MD from AI Act scope.",tp:["mdr","ai"],tg:["critical"]},
-{d:"2026-05-16",l:"16 May 2026",y:2026,t:"HDS v2.0 Mandatory (France)",x:"EEA-only hosting, ISO 27001 alignment.",tp:["france","data"],tg:["critical"]},
-{d:"2026-05-22",l:"22 May 2026",y:2026,t:"IEC 62304 Ed.2 \u2014 Approval Phase",x:"Two Software Process Accuracy Levels replace three safety classes.",tp:["standards"],tg:["high"]},
-{d:"2026-05-28",l:"28 May 2026",y:2026,t:"EUDAMED \u2014 First 4 Modules Mandatory",x:"Actor Registration, UDI/Device, NB & Certificates, Market Surveillance.",tp:["mdr"],tg:["critical"]},
-{d:"2026-06-11",l:"11 Jun 2026",y:2026,t:"Cyber Resilience Act \u2014 CAB Notification",x:"MD under MDR/IVDR excluded but peripheral systems in scope.",tp:["cyber"],tg:["medium"]},
-{d:"2026-07-01",l:"1 Jul 2026",y:2026,t:"Australia TGA \u2014 UDI (Class IIb/III)",x:"UDI requirements begin in Australia.",tp:["other"],tg:["medium"]},
-{d:"2026-08-02",l:"Aug 2026",y:2026,t:"AI Act \u2014 Most Provisions Apply",x:"Digital Omnibus may delay for medical devices.",tp:["ai"],tg:["high"]},
-{d:"2026-08-12",l:"12 Aug 2026",y:2026,t:"IEC 62304 Edition 2 \u2014 Publication",x:"Expanded scope to all health software. AI/ML process planning.",tp:["standards"],tg:["critical"]},
-{d:"2026-09-01",l:"Sep 2026",y:2026,t:"NIS2 Directive \u2014 Full Implementation",x:"MD manufacturers in scope. Max fines EUR 10M / 2%.",tp:["cyber"],tg:["high"]},
-{d:"2026-09-11",l:"11 Sep 2026",y:2026,t:"CRA \u2014 Vulnerability Reporting Begins",x:"24h reporting to ENISA.",tp:["cyber"],tg:["high"]},
-{d:"2026-10-01",l:"Q4 2026",y:2026,t:"CEN-CENELEC JTC 21 \u2014 AI Standards",x:"10 harmonised standards target.",tp:["ai","standards"],tg:["high"]},
-{d:"2026-10-15",l:"Late 2026",y:2026,t:"prEN 18286 \u2014 AI Act QMS Standard",x:"Under revision after failed Jan 2026 vote.",tp:["ai","standards"],tg:["medium"]},
-{d:"2026-11-01",l:"Late 2026",y:2026,t:"UK Pre-Market SI \u2014 SaMD Up-Classification",x:"SaMD to at least Class IIa. UDI, reliance scheme.",tp:["uk"],tg:["high"]},
-{d:"2026-11-28",l:"28 Nov 2026",y:2026,t:"EUDAMED \u2014 Existing Devices Deadline",x:"All existing devices must be registered.",tp:["mdr"],tg:["high"]},
-{d:"2026-12-01",l:"Late 2026",y:2026,t:"Health Data Hub \u2192 SecNumCloud",x:"Sovereign cloud migration.",tp:["france","data"],tg:["medium"]},
-{d:"2026-12-15",l:"Late 2026",y:2026,t:"UK AI Commission Recommendations",x:"Regulatory rulebook for AI/ML medical devices.",tp:["uk","ai"],tg:["medium"]},
-{d:"2027-01-01",l:"2027",y:2027,t:"Brazil ANVISA \u2014 UDI (Class II)",x:"UDI extends to Class II.",tp:["other"],tg:["medium"]},
-{d:"2027-03-01",l:"Mar 2027",y:2027,t:"EHDS \u2014 Implementing Acts Deadline",x:"Cross-border health data framework.",tp:["data","mdr"],tg:["high"]},
-{d:"2027-03-01",l:"1 Mar 2027",y:2027,t:"China YY/T 1406-2026 Effective",x:"Unified risk framework mandatory.",tp:["other"],tg:["medium"]},
-{d:"2027-05-28",l:"28 May 2027",y:2027,t:"EUDAMED \u2014 NB Certificate Registration",x:"Retrospective registration of all certificates.",tp:["mdr"],tg:["medium"]},
-{d:"2027-06-01",l:"2027",y:2027,t:"MDR/IVDR Simplification \u2014 Earliest Adoption",x:"Rule 11 revision and AI Act scope changes.",tp:["mdr","ai"],tg:["high"]},
-{d:"2027-12-02",l:"Dec 2027",y:2027,t:"AI Act High-Risk Annex III (If Delayed)",x:"Potential delayed application.",tp:["ai"],tg:["high"]},
-{d:"2027-12-11",l:"11 Dec 2027",y:2027,t:"CRA \u2014 Full Application",x:"All requirements fully applicable.",tp:["cyber"],tg:["high"]},
-{d:"2028-01-01",l:"2028",y:2028,t:"Brazil ANVISA \u2014 UDI (Class I)",x:"Full phase-in complete.",tp:["other"],tg:["medium"]},
-{d:"2028-06-01",l:"2028\u20132029",y:2028,t:"ISO 13485 New Edition",x:"Expected to include cybersecurity and AI.",tp:["standards"],tg:["medium"]},
-{d:"2028-08-02",l:"Aug 2028",y:2028,t:"AI Act Annex I / Medical Devices (If Delayed)",x:"Potential delayed application for MD.",tp:["ai","mdr"],tg:["critical"]},
-{d:"2028-12-31",l:"Dec 2028",y:2028,t:"UK MHRA \u2014 MDD Transitional End",x:"Old EU MDD devices must transition.",tp:["uk","mdr"],tg:["high"]},
-{d:"2029-03-01",l:"Mar 2029",y:2029,t:"EHDS \u2014 Primary Use Provisions",x:"Patient Summaries, ePrescriptions across EU.",tp:["data","mdr"],tg:["high"]},
-{d:"2030-01-01",l:"2030",y:2030,t:"EU MDR/IVDR Full Maturity",x:"All transitional periods expired.",tp:["mdr","ai"],tg:["medium"]},
-{d:"2030-06-01",l:"2030",y:2030,t:"WHO Digital Health Strategy Mid-Term",x:"Mid-point of 2028\u20132033 strategy.",tp:["other"],tg:["medium"]}
-];
+let M = [];
+let allProposals = [];
 
-M.sort((a,b)=>new Date(a.d)-new Date(b.d));
+function cardId(m){ return m.d+"__"+m.t.slice(0,40).replace(/\W+/g,"_"); }
 
 const TL={mdr:"EU MDR/IVDR",ai:"AI Act",standards:"Standards",cyber:"Cybersecurity",france:"France",uk:"UK",us:"US (FDA)",other:"Other Regions",data:"Data / EHDS"};
 const TG={critical:"CRITICAL",high:"HIGH",medium:"MEDIUM","new":"NEW","in-force":"IN FORCE"};
 
-function cardId(m){ return m.d+"__"+m.t.slice(0,40).replace(/\W+/g,"_"); }
-
+/* ===== localStorage helpers ===== */
 function getHidden(){
   try { return new Set(JSON.parse(localStorage.getItem("rw_hidden_cards")||"[]")); }
   catch(e){ return new Set(); }
@@ -411,6 +583,27 @@ function getHidden(){
 function saveHidden(set){
   localStorage.setItem("rw_hidden_cards",JSON.stringify([...set]));
   showToast();
+}
+function getApprovedProposals(){
+  try { return JSON.parse(localStorage.getItem("rw_approved_proposals")||"[]"); }
+  catch(e){ return []; }
+}
+function saveApprovedProposals(arr){
+  localStorage.setItem("rw_approved_proposals",JSON.stringify(arr));
+}
+function getRejectedProposals(){
+  try { return JSON.parse(localStorage.getItem("rw_rejected_proposals")||"[]"); }
+  catch(e){ return []; }
+}
+function saveRejectedProposals(arr){
+  localStorage.setItem("rw_rejected_proposals",JSON.stringify(arr));
+}
+function getDeletedCards(){
+  try { return JSON.parse(localStorage.getItem("rw_deleted_cards")||"[]"); }
+  catch(e){ return []; }
+}
+function saveDeletedCards(arr){
+  localStorage.setItem("rw_deleted_cards",JSON.stringify(arr));
 }
 
 function showToast(){
@@ -420,14 +613,125 @@ function showToast(){
   t._timer=setTimeout(()=>t.classList.remove("visible"),1200);
 }
 
-let hidden=getHidden();
-let query="";
+let hidden = getHidden();
+let query = "";
 
+/* ===== Proposals rendering ===== */
+function renderProposals() {
+  const container = document.getElementById("proposals-section");
+  if (!allProposals.length) {
+    container.innerHTML = "";
+    return;
+  }
+
+  const approved = new Set(getApprovedProposals());
+  const rejected = new Set(getRejectedProposals());
+
+  // Build base card map for showing diffs on updates
+  const baseCardMap = new Map();
+  M.forEach(m => baseCardMap.set(cardId(m), m));
+
+  let html = `<div class="proposals-section">`;
+  html += `<div class="proposals-header"><h2>Pending Proposals</h2><span class="proposals-count">${allProposals.length}</span></div>`;
+
+  allProposals.forEach(p => {
+    const isApproved = approved.has(p.id);
+    const isRejected = rejected.has(p.id);
+    const isDecided = isApproved || isRejected;
+
+    html += `<div class="proposal-card ${isDecided ? 'decided' : ''}">`;
+    html += `<div class="proposal-top">`;
+    html += `<span class="action-badge action-badge--${p.action}">${p.action.toUpperCase()}</span>`;
+
+    if (p.card) {
+      html += `<span class="proposal-date">${p.card.l || p.card.d}</span>`;
+    } else if (p.action === "delete" && p.existing_id) {
+      const existing = baseCardMap.get(p.existing_id);
+      if (existing) html += `<span class="proposal-date">${existing.l || existing.d}</span>`;
+    }
+
+    html += `</div>`;
+
+    // Title
+    if (p.action === "delete" && p.existing_id) {
+      const existing = baseCardMap.get(p.existing_id);
+      html += `<div class="proposal-title">${existing ? existing.t : p.existing_id}</div>`;
+      if (existing) {
+        html += `<div class="proposal-desc">${existing.x}</div>`;
+        html += `<div class="proposal-topics">${existing.tp.map(tp => `<span class="tp tp-${tp}">${TL[tp]||tp}</span>`).join("")}</div>`;
+      }
+    } else if (p.card) {
+      html += `<div class="proposal-title">${p.card.t}</div>`;
+      html += `<div class="proposal-desc">${p.card.x}</div>`;
+      if (p.card.tp) {
+        html += `<div class="proposal-topics">${p.card.tp.map(tp => `<span class="tp tp-${tp}">${TL[tp]||tp}</span>`).join("")}</div>`;
+      }
+    }
+
+    // For UPDATE: show diff
+    if (p.action === "update" && p.existing_id && p.card) {
+      const old = baseCardMap.get(p.existing_id);
+      if (old) {
+        let diffs = [];
+        if (old.t !== p.card.t) diffs.push({field:"Title", old:old.t, new:p.card.t});
+        if (old.d !== p.card.d) diffs.push({field:"Date", old:old.l||old.d, new:p.card.l||p.card.d});
+        if (old.x !== p.card.x) diffs.push({field:"Description", old:old.x, new:p.card.x});
+        if (JSON.stringify(old.tp) !== JSON.stringify(p.card.tp)) diffs.push({field:"Topics", old:old.tp.join(", "), new:p.card.tp.join(", ")});
+        if (JSON.stringify(old.tg) !== JSON.stringify(p.card.tg)) diffs.push({field:"Tags", old:old.tg.join(", "), new:p.card.tg.join(", ")});
+
+        if (diffs.length) {
+          html += `<div class="proposal-diff">`;
+          html += `<div class="proposal-diff-label">Changes</div>`;
+          diffs.forEach(d => {
+            html += `<div><strong>${d.field}:</strong> <span class="proposal-diff-old">${d.old}</span> &rarr; <span class="proposal-diff-new">${d.new}</span></div>`;
+          });
+          html += `</div>`;
+        }
+      }
+    }
+
+    // Reason
+    if (p.reason) {
+      html += `<div class="proposal-reason">${p.reason}</div>`;
+    }
+
+    // Actions
+    html += `<div class="proposal-actions">`;
+    if (isApproved) {
+      html += `<span class="decision-status decision-approved">Approved</span>`;
+      html += `<button class="btn btn-undo" data-proposal-undo="${p.id}">Undo</button>`;
+    } else if (isRejected) {
+      html += `<span class="decision-status decision-rejected">Rejected</span>`;
+      html += `<button class="btn btn-undo" data-proposal-undo="${p.id}">Undo</button>`;
+    } else {
+      html += `<button class="btn btn-approve" data-proposal-approve="${p.id}" data-action="${p.action}" data-existing="${p.existing_id||''}">Approve</button>`;
+      html += `<button class="btn btn-reject" data-proposal-reject="${p.id}">Reject</button>`;
+    }
+    html += `</div>`;
+
+    html += `</div>`; // .proposal-card
+  });
+
+  html += `</div><hr class="section-divider">`;
+  container.innerHTML = html;
+}
+
+/* ===== Milestones table ===== */
 function buildTable(){
   const tbody=document.getElementById("tbody");
   let html="";
   let lastYear=null;
   let visCount=0;
+
+  // Determine which cards came from approved proposals
+  const approvedIds = new Set(getApprovedProposals());
+  const addedCardIds = new Set();
+  const updatedCardIds = new Set();
+  allProposals.forEach(p => {
+    if (!approvedIds.has(p.id)) return;
+    if (p.action === "add" && p.card) addedCardIds.add(cardId(p.card));
+    if (p.action === "update" && p.card) updatedCardIds.add(cardId(p.card));
+  });
 
   M.forEach(m=>{
     const id=cardId(m);
@@ -452,7 +756,12 @@ function buildTable(){
     html+=`<td class="cell-toggle"><label class="toggle"><input type="checkbox" ${isHidden?"":"checked"} data-id="${id}"><span class="toggle-track"></span></label></td>`;
     html+=`<td class="cell-date">${m.l}</td>`;
     html+=`<td><div class="cell-topics">${m.tp.map(p=>`<span class="tp tp-${p}">${TL[p]}</span>`).join("")}</div></td>`;
-    html+=`<td><span class="cell-title">${m.tg.map(g=>`<span class="ms-tag tag-${g}">${TG[g]||g}</span>`).join("")} ${m.t}</span></td>`;
+
+    let indicator = "";
+    if (addedCardIds.has(id)) indicator = `<span class="indicator-new">NEW</span>`;
+    else if (updatedCardIds.has(id)) indicator = `<span class="indicator-updated">UPDATED</span>`;
+
+    html+=`<td><span class="cell-title">${m.tg.map(g=>`<span class="ms-tag tag-${g}">${TG[g]||g}</span>`).join("")} ${m.t}${indicator}</span></td>`;
     html+=`</tr>`;
   });
 
@@ -461,7 +770,9 @@ function buildTable(){
   document.getElementById("cnt-total").textContent=M.length;
 }
 
-// Toggle handler
+/* ===== Event handlers ===== */
+
+// Toggle handler for milestones table
 document.getElementById("tbody").addEventListener("change",e=>{
   if(!e.target.matches("input[type=checkbox]"))return;
   const id=e.target.dataset.id;
@@ -491,7 +802,168 @@ document.getElementById("btn-hide-all").addEventListener("click",()=>{
   buildTable();
 });
 
-buildTable();
+// Proposal actions (delegated)
+document.getElementById("proposals-section").addEventListener("click", e => {
+  const approveBtn = e.target.closest("[data-proposal-approve]");
+  const rejectBtn = e.target.closest("[data-proposal-reject]");
+  const undoBtn = e.target.closest("[data-proposal-undo]");
+
+  if (approveBtn) {
+    const pid = approveBtn.dataset.proposalApprove;
+    const action = approveBtn.dataset.action;
+    const existingId = approveBtn.dataset.existing;
+
+    // Add to approved
+    const approved = getApprovedProposals();
+    if (!approved.includes(pid)) approved.push(pid);
+    saveApprovedProposals(approved);
+
+    // Remove from rejected if present
+    const rejected = getRejectedProposals().filter(id => id !== pid);
+    saveRejectedProposals(rejected);
+
+    // If it's a delete action, add existing card to deleted list
+    if (action === "delete" && existingId) {
+      const deleted = getDeletedCards();
+      if (!deleted.includes(existingId)) deleted.push(existingId);
+      saveDeletedCards(deleted);
+    }
+
+    // If it's an add/update action, apply to M
+    const proposal = allProposals.find(p => p.id === pid);
+    if (proposal) {
+      if (proposal.action === "add" && proposal.card) {
+        const newId = cardId(proposal.card);
+        if (!M.some(m => cardId(m) === newId)) {
+          M.push(proposal.card);
+          M.sort((a,b) => new Date(a.d) - new Date(b.d));
+        }
+      } else if (proposal.action === "update" && proposal.card && proposal.existing_id) {
+        const idx = M.findIndex(m => cardId(m) === proposal.existing_id);
+        if (idx !== -1) {
+          M[idx] = proposal.card;
+          M.sort((a,b) => new Date(a.d) - new Date(b.d));
+        }
+      } else if (proposal.action === "delete" && proposal.existing_id) {
+        M = M.filter(m => cardId(m) !== proposal.existing_id);
+      }
+    }
+
+    showToast();
+    renderProposals();
+    buildTable();
+  }
+
+  if (rejectBtn) {
+    const pid = rejectBtn.dataset.proposalReject;
+
+    const rejected = getRejectedProposals();
+    if (!rejected.includes(pid)) rejected.push(pid);
+    saveRejectedProposals(rejected);
+
+    // Remove from approved if present
+    const approved = getApprovedProposals().filter(id => id !== pid);
+    saveApprovedProposals(approved);
+
+    showToast();
+    renderProposals();
+  }
+
+  if (undoBtn) {
+    const pid = undoBtn.dataset.proposalUndo;
+
+    // Find the proposal to check if it was a delete that needs reverting
+    const proposal = allProposals.find(p => p.id === pid);
+
+    // Remove from both approved and rejected
+    saveApprovedProposals(getApprovedProposals().filter(id => id !== pid));
+    saveRejectedProposals(getRejectedProposals().filter(id => id !== pid));
+
+    // If it was an approved delete, remove from deleted cards and re-add the card
+    if (proposal && proposal.action === "delete" && proposal.existing_id) {
+      saveDeletedCards(getDeletedCards().filter(id => id !== proposal.existing_id));
+    }
+
+    // If it was an approved add, remove the added card from M
+    if (proposal && proposal.action === "add" && proposal.card) {
+      const addedId = cardId(proposal.card);
+      M = M.filter(m => cardId(m) !== addedId);
+    }
+
+    // If it was an approved update, we need to reload to restore original
+    // For simplicity, reload the page
+    if (proposal && proposal.action === "update") {
+      showToast();
+      location.reload();
+      return;
+    }
+
+    showToast();
+    renderProposals();
+    buildTable();
+  }
+});
+
+/* ===== Init: fetch data ===== */
+async function init() {
+  try {
+    const dataResp = await fetch("data.json");
+    if (!dataResp.ok) throw new Error("Failed to load data.json");
+    let baseMilestones = await dataResp.json();
+
+    // Fetch proposals
+    try {
+      const propResp = await fetch("proposals.json");
+      if (propResp.ok) {
+        const propData = await propResp.json();
+        allProposals = propData.proposals || [];
+      }
+    } catch(e) { allProposals = []; }
+
+    const approvedIds = new Set(getApprovedProposals());
+    const deletedCardsList = getDeletedCards();
+    const deletedCards = new Set(deletedCardsList);
+
+    // Remove deleted cards
+    baseMilestones = baseMilestones.filter(m => !deletedCards.has(cardId(m)));
+
+    // Build card map
+    const cardMap = new Map();
+    baseMilestones.forEach(m => cardMap.set(cardId(m), m));
+
+    // Apply approved proposals
+    allProposals.forEach(p => {
+      if (!approvedIds.has(p.id)) return;
+
+      if (p.action === "add" && p.card) {
+        const newId = cardId(p.card);
+        if (!cardMap.has(newId)) {
+          baseMilestones.push(p.card);
+          cardMap.set(newId, p.card);
+        }
+      } else if (p.action === "update" && p.card && p.existing_id) {
+        const idx = baseMilestones.findIndex(m => cardId(m) === p.existing_id);
+        if (idx !== -1) {
+          baseMilestones[idx] = p.card;
+          cardMap.delete(p.existing_id);
+          cardMap.set(cardId(p.card), p.card);
+        }
+      }
+    });
+
+    baseMilestones.sort((a, b) => new Date(a.d) - new Date(b.d));
+    M = baseMilestones;
+  } catch(e) {
+    console.error("Failed to initialize admin data:", e);
+    M = [];
+  }
+
+  hidden = getHidden();
+  renderProposals();
+  buildTable();
+}
+
+init();
 </script>
 </body>
 </html>

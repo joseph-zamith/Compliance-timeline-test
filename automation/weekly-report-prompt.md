@@ -161,6 +161,69 @@ print("Return code:", result.returncode)
 
 Replace [DATE] with today's date.
 
+## STEP 5: UPDATE REGULATORY TIMELINE
+
+After sending the email, update the compliance timeline at the local git repo `/tmp/Compliance-timeline/`.
+
+### 5a. Pull the latest repo
+```bash
+cd /tmp && ([ -d Compliance-timeline ] && cd Compliance-timeline && git pull || git clone https://github.com/nicolasbertrand-QARA/Compliance-timeline.git && cd Compliance-timeline)
+```
+
+### 5b. Read current data
+Read `/tmp/Compliance-timeline/data.json` to see the existing timeline milestones.
+
+### 5c. Generate proposals
+Based on your research findings, generate proposals for timeline changes. Compare your research with the existing milestones in data.json:
+
+- **ADD**: New milestones discovered (new regulations, deadlines, guidance documents with specific dates)
+- **UPDATE**: Existing milestones where dates changed, status evolved, or descriptions need updating
+- **DELETE**: Milestones that are no longer relevant (passed deadlines that are no longer actionable, withdrawn regulations)
+
+Each proposal must have:
+```json
+{
+  "id": "proposal-YYYY-MM-DD-sequential-number",
+  "action": "add" | "update" | "delete",
+  "reason": "Brief explanation of why this change is proposed, based on this week's research",
+  "card": {
+    "d": "YYYY-MM-DD",
+    "l": "Human readable date",
+    "y": 2026,
+    "t": "Milestone title",
+    "x": "Description with key details",
+    "u": "https://source-url",
+    "tp": ["topic1", "topic2"],
+    "tg": ["critical"],
+    "v": "c"
+  },
+  "existing_id": "only for update/delete - the ID of the existing card (format: date__title_slug)"
+}
+```
+
+Valid topics: mdr, ai, standards, cyber, france, uk, us, other, data
+Valid tags: critical, high, medium, new, in-force, draft, proposed
+Valid visual variants (v): "c" (critical/dark card), "h" (highlight/gold card), "n" (normal)
+
+### 5d. Write proposals.json
+Write the proposals to `/tmp/Compliance-timeline/proposals.json`:
+```json
+{
+  "generated": "YYYY-MM-DD",
+  "proposals": [...]
+}
+```
+
+### 5e. Push to GitHub
+```bash
+cd /tmp/Compliance-timeline
+git add proposals.json
+git commit -m "Regulatory watch: proposals for [DATE]"
+git push
+```
+
+This will trigger a GitHub Pages deploy, and the proposals will appear in the back office at https://nicolasbertrand-qara.github.io/Compliance-timeline/admin.html for review.
+
 ## IMPORTANT RULES
 - Every regulation, guidance, standard, or news item MUST include a clickable hyperlink to its source
 - If there is no news for a section, write 'No significant developments this week' and list upcoming deadlines
@@ -168,3 +231,4 @@ Replace [DATE] with today's date.
 - The report should be professional, concise, and actionable for a MDSW manufacturer in the EU
 - The email MUST be sent. This is the entire purpose of this task.
 - The HTML must be email-client compatible (inline styles, table layout, no CSS classes)
+- The proposals.json MUST be generated and pushed. This keeps the timeline up to date.
