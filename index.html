@@ -88,8 +88,6 @@
   }
   .header h1 {
     margin-top: 1px;
-  }
-  .header h1 {
     font-size: 1.125rem;
     font-weight: 500;
     color: oklch(98% 0.005 90);
@@ -127,9 +125,7 @@
     position: sticky;
     top: var(--space-lg);
     padding: var(--space-md);
-    background: oklch(99% 0.003 90 / 0.8);
-    backdrop-filter: saturate(180%) blur(20px);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: var(--surface-1);
     border: 1px solid var(--surface-3);
     border-radius: 12px;
   }
@@ -217,7 +213,7 @@
   .filter-stat-num {
     font-family: 'Poppins', sans-serif;
     font-size: 0.875rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--ink-primary);
     font-variant-numeric: tabular-nums;
   }
@@ -273,9 +269,16 @@
   }
 
   /* ===== MILESTONE ===== */
+  @keyframes ms-enter {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
   .ms {
     display: contents;
-    transition: opacity 0.25s;
+  }
+  .ms > * {
+    animation: ms-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--d, 0ms);
   }
   .ms.hidden { display: none; }
 
@@ -301,15 +304,15 @@
   }
 
   .ms-body {
-    padding: var(--space-md) 0 var(--space-2xl) var(--space-lg);
+    padding: var(--space-md) 0 var(--space-xl) var(--space-lg);
   }
 
   /* Variants */
   .ms--critical .ms-body {
     background: var(--navy);
-    padding: var(--space-lg);
+    padding: var(--space-lg) var(--space-lg) var(--space-xl);
     margin-left: var(--space-lg);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-lg);
     border-radius: 12px;
   }
   .ms--critical .ms-title { color: oklch(96% 0.005 90); }
@@ -324,6 +327,14 @@
     margin-bottom: var(--space-md);
     border-radius: 12px;
   }
+  .ms--highlight .ms-body,
+  .ms--critical .ms-body {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .ms--highlight .ms-body:hover,
+  .ms--critical .ms-body:hover {
+    transform: translateY(-2px);
+  }
 
   .ms-tags {
     display: flex;
@@ -333,13 +344,13 @@
   }
   .ms-tag {
     font-size: 0.625rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.05em;
     padding: 2px 7px;
     border-radius: 3px;
     text-transform: uppercase;
   }
-  .tag-critical { background: var(--gold); color: var(--navy); font-weight: 700; }
+  .tag-critical { background: var(--gold); color: var(--navy); }
   .tag-high { background: var(--gold-dim); color: var(--navy); }
   .tag-medium { background: var(--surface-3); color: var(--ink-secondary); }
   .tag-new { background: oklch(50% 0.14 160); color: oklch(98% 0.005 90); }
@@ -427,6 +438,12 @@
     color: oklch(55% 0.01 250);
     line-height: 1.6;
     max-width: 52ch;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ms > * { animation: none; }
+    .ms--highlight .ms-body:hover,
+    .ms--critical .ms-body:hover { transform: none; }
   }
 
   /* ===== COMMENTS ===== */
@@ -559,9 +576,11 @@ function cycleState(topic) {
 }
 function isAllDefault() { return included.size === 0 && excluded.size === 0; }
 
+let _hidden = new Set();
+function refreshHidden() { _hidden = new Set(lsGet("rw_hidden_cards")); }
+
 function isVis(m) {
-  const hidden = new Set(lsGet("rw_hidden_cards"));
-  if (hidden.has(cardId(m))) return false;
+  if (_hidden.has(cardId(m))) return false;
   if (isAllDefault()) return true;
   if (included.size > 0) return m.tp.some(t => included.has(t));
   if (m.tp.some(t => excluded.has(t))) return false;
@@ -580,9 +599,10 @@ function syncButtons() {
 }
 
 function render() {
+  refreshHidden();
   const el = document.getElementById("tl");
   const years = [...new Set(M.map(m => m.y))].sort();
-  let html = "", vis = 0, urg = 0;
+  let html = "", vis = 0, urg = 0, idx = 0;
 
   years.forEach(yr => {
     const ym = M.filter(m => m.y === yr);
@@ -593,7 +613,9 @@ function render() {
       const ok = isVis(m);
       if (ok) { vis++; if (m.tg.includes("critical") || m.tg.includes("high")) urg++; }
       const cls = m.v === "c" ? "ms--critical" : m.v === "h" ? "ms--highlight" : "";
-      html += `<div class="ms ${cls} ${ok ? "" : "hidden"}" data-topics="${m.tp.join(",")}" data-lead="${m.tp[0]}">`;
+      const delay = ok ? `style="--d:${idx * 40}ms"` : "";
+      if (ok) idx++;
+      html += `<div class="ms ${cls} ${ok ? "" : "hidden"}" data-topics="${m.tp.join(",")}" data-lead="${m.tp[0]}" ${delay}>`;
       html += `<div class="ms-date">${m.l}</div><div class="ms-body">`;
       html += `<div class="ms-tags">${m.tg.map(g => `<span class="ms-tag tag-${g}">${TG[g] || g}</span>`).join("")}</div>`;
       html += `<div class="ms-title">${m.u ? `<a href="${m.u}" target="_blank" rel="noopener">${m.t}</a>` : m.t}</div>`;
