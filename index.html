@@ -429,6 +429,29 @@
     max-width: 52ch;
   }
 
+  /* ===== COMMENTS ===== */
+  .ms-comment {
+    margin-top: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: oklch(95% 0.015 90);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--ink-secondary);
+  }
+  .ms-comment-author {
+    font-weight: 600;
+    color: var(--ink-primary);
+    margin-right: 4px;
+  }
+  .ms--critical .ms-comment {
+    background: oklch(28% 0.04 260);
+    color: oklch(78% 0.01 260);
+  }
+  .ms--critical .ms-comment-author {
+    color: var(--gold);
+  }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
     .page-layout {
@@ -520,6 +543,7 @@ const TL={mdr:"EU MDR/IVDR",ai:"AI Act",standards:"Standards",cyber:"Cybersecuri
 const TG={critical:"CRITICAL",high:"HIGH",medium:"MEDIUM","new":"NEW","in-force":"IN FORCE",draft:"DRAFT",proposed:"PROPOSED"};
 
 let M = [];
+let comments = {};
 
 // 3-state filter logic
 const included = new Set();
@@ -578,6 +602,8 @@ function render() {
       html += `<div class="ms-title">${m.u ? `<a href="${m.u}" target="_blank" rel="noopener">${m.t}</a>` : m.t}</div>`;
       html += `<div class="ms-desc">${m.x}</div>`;
       html += `<div class="ms-topics">${m.tp.map(p => `<span class="tp tp-${p}">${TL[p] || p}</span>`).join("")}</div>`;
+      const comment = comments[cardId(m)];
+      if (comment) html += `<div class="ms-comment"><span class="ms-comment-author">Nicolas Bertrand:</span> ${comment}</div>`;
       html += `</div></div>`;
     });
     html += `</div></section>`;
@@ -614,6 +640,7 @@ async function init() {
 
     const approved = new Set(lsGet("rw_approved_proposals"));
     const deleted = new Set(lsGet("rw_deleted_cards"));
+    comments = (() => { try { return JSON.parse(localStorage.getItem("rw_comments")||"{}"); } catch(e){ return {}; } })();
 
     // Start with base milestones, remove deleted
     M = base.filter(m => !deleted.has(cardId(m)));

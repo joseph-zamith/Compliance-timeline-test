@@ -260,6 +260,21 @@
   .tp-data { background: oklch(93% 0.04 290); color: oklch(35% 0.12 290); }
 
   .cell-toggle { width: 52px; text-align: center; }
+  .cell-comment { min-width: 160px; }
+  .comment-input {
+    width: 100%;
+    padding: 5px 8px;
+    border: 1.5px solid var(--surface-3);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.75rem;
+    background: var(--surface-1);
+    color: var(--ink-primary);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .comment-input:focus { border-color: var(--gold); }
+  .comment-input::placeholder { color: var(--ink-muted); font-style: italic; }
 
   .ms-tag {
     display: inline-block;
@@ -559,6 +574,7 @@
         <th>Date</th>
         <th>Topics</th>
         <th>Milestone</th>
+        <th>Comment</th>
       </tr>
     </thead>
     <tbody id="tbody"></tbody>
@@ -605,6 +621,18 @@ function getDeletedCards(){
 }
 function saveDeletedCards(arr){
   localStorage.setItem("rw_deleted_cards",JSON.stringify(arr));
+}
+
+function getComments(){
+  try { return JSON.parse(localStorage.getItem("rw_comments")||"{}"); }
+  catch(e){ return {}; }
+}
+function saveComment(cardId, text){
+  const c = getComments();
+  if(text.trim()) c[cardId] = text.trim();
+  else delete c[cardId];
+  localStorage.setItem("rw_comments", JSON.stringify(c));
+  showToast();
 }
 
 function showToast(){
@@ -748,7 +776,7 @@ function buildTable(){
 
     // Year group
     if(m.y!==lastYear){
-      html+=`<tr class="year-row"><td colspan="4"><span class="year-row-label">${m.y}</span></td></tr>`;
+      html+=`<tr class="year-row"><td colspan="5"><span class="year-row-label">${m.y}</span></td></tr>`;
       lastYear=m.y;
     }
 
@@ -763,6 +791,8 @@ function buildTable(){
     else if (updatedCardIds.has(id)) indicator = `<span class="indicator-updated">UPDATED</span>`;
 
     html+=`<td><span class="cell-title">${m.tg.map(g=>`<span class="ms-tag tag-${g}">${TG[g]||g}</span>`).join("")} ${m.t}${indicator}</span></td>`;
+    const comment = getComments()[id] || "";
+    html+=`<td class="cell-comment"><input type="text" class="comment-input" data-comment-id="${id}" value="${comment.replace(/"/g,'&quot;')}" placeholder="Add comment..."></td>`;
     html+=`</tr>`;
   });
 
@@ -781,6 +811,17 @@ document.getElementById("tbody").addEventListener("change",e=>{
   else{ hidden.add(id); }
   saveHidden(hidden);
   buildTable();
+});
+
+// Comment handler (save on blur or enter)
+document.getElementById("tbody").addEventListener("change", e => {
+  if (!e.target.matches(".comment-input")) return;
+  saveComment(e.target.dataset.commentId, e.target.value);
+});
+document.getElementById("tbody").addEventListener("keydown", e => {
+  if (e.target.matches(".comment-input") && e.key === "Enter") {
+    e.target.blur();
+  }
 });
 
 // Search
