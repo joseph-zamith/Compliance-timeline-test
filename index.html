@@ -432,24 +432,21 @@
   /* ===== COMMENTS ===== */
   .ms-comment {
     margin-top: var(--space-sm);
-    padding: var(--space-sm) var(--space-md);
-    background: oklch(95% 0.015 90);
-    border-radius: 6px;
     font-size: 0.75rem;
+    font-style: italic;
     line-height: 1.5;
-    color: var(--ink-secondary);
+    color: var(--ink-tertiary);
   }
   .ms-comment-author {
+    font-style: normal;
     font-weight: 600;
-    color: var(--ink-primary);
-    margin-right: 4px;
+    color: var(--ink-secondary);
   }
   .ms--critical .ms-comment {
-    background: oklch(28% 0.04 260);
-    color: oklch(78% 0.01 260);
+    color: oklch(68% 0.01 260);
   }
   .ms--critical .ms-comment-author {
-    color: var(--gold);
+    color: oklch(80% 0.01 260);
   }
 
   /* ===== RESPONSIVE ===== */
@@ -603,7 +600,7 @@ function render() {
       html += `<div class="ms-desc">${m.x}</div>`;
       html += `<div class="ms-topics">${m.tp.map(p => `<span class="tp tp-${p}">${TL[p] || p}</span>`).join("")}</div>`;
       const comment = comments[cardId(m)];
-      if (comment) html += `<div class="ms-comment"><span class="ms-comment-author">Nicolas Bertrand:</span> ${comment}</div>`;
+      if (comment) html += `<div class="ms-comment">\u201C${comment}\u201D <span class="ms-comment-author">Nicolas Bertrand</span></div>`;
       html += `</div></div>`;
     });
     html += `</div></section>`;
