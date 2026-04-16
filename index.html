@@ -704,6 +704,9 @@ async function init() {
     return;
   }
 
+  // Default: exclude "Other Regions"
+  excluded.add("other");
+
   syncButtons();
   render();
 }
