@@ -600,7 +600,7 @@ function render() {
       html += `<div class="ms-desc">${m.x}</div>`;
       html += `<div class="ms-topics">${m.tp.map(p => `<span class="tp tp-${p}">${TL[p] || p}</span>`).join("")}</div>`;
       const comment = comments[cardId(m)];
-      if (comment) html += `<div class="ms-comment">\u201C${comment}\u201D <span class="ms-comment-author">Nicolas Bertrand</span></div>`;
+      if (comment) html += `<div class="ms-comment">\u201C${comment}\u201D \u2003<span class="ms-comment-author">Nicolas Bertrand</span></div>`;
       html += `</div></div>`;
     });
     html += `</div></section>`;
