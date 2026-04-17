@@ -331,24 +331,50 @@
   .proposals-section {
     margin-bottom: var(--space-2xl);
   }
-  .proposals-header {
+  .proposals-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: var(--space-lg);
+    border-bottom: 2px solid var(--surface-3);
+  }
+  .proposals-tab {
+    padding: var(--space-sm) var(--space-lg);
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
     display: flex;
     align-items: center;
-    gap: var(--space-md);
-    margin-bottom: var(--space-lg);
+    gap: var(--space-sm);
   }
-  .proposals-header h2 {
-    font-size: 1.125rem;
-    font-weight: 600;
+  .proposals-tab:hover { color: var(--ink-secondary); }
+  .proposals-tab.active {
     color: var(--ink-primary);
+    border-bottom-color: var(--gold);
   }
-  .proposals-count {
-    font-size: 0.6875rem;
+  .proposals-tab-count {
+    font-size: 0.625rem;
     font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 8px;
+    background: var(--surface-3);
+    color: var(--ink-tertiary);
+  }
+  .proposals-tab.active .proposals-tab-count {
     background: var(--gold);
     color: var(--navy);
-    padding: 2px 10px;
-    border-radius: 10px;
+  }
+  .proposals-empty {
+    font-size: 0.8125rem;
+    color: var(--ink-muted);
+    padding: var(--space-xl) 0;
+    font-style: italic;
   }
 
   .proposal-card {
@@ -646,6 +672,71 @@ let hidden = getHidden();
 let query = "";
 
 /* ===== Proposals rendering ===== */
+let activeProposalTab = "pending";
+
+function renderProposalCard(p, baseCardMap, isApproved, isRejected) {
+  const isDecided = isApproved || isRejected;
+  let html = `<div class="proposal-card ${isDecided ? 'decided' : ''}">`;
+  html += `<div class="proposal-top">`;
+  html += `<span class="action-badge action-badge--${p.action}">${p.action.toUpperCase()}</span>`;
+
+  if (p.card) {
+    html += `<span class="proposal-date">${p.card.l || p.card.d}</span>`;
+  } else if (p.action === "delete" && p.existing_id) {
+    const existing = baseCardMap.get(p.existing_id);
+    if (existing) html += `<span class="proposal-date">${existing.l || existing.d}</span>`;
+  }
+  html += `</div>`;
+
+  if (p.action === "delete" && p.existing_id) {
+    const existing = baseCardMap.get(p.existing_id);
+    html += `<div class="proposal-title">${existing ? existing.t : p.existing_id}</div>`;
+    if (existing) {
+      html += `<div class="proposal-desc">${existing.x}</div>`;
+      html += `<div class="proposal-topics">${existing.tp.map(tp => `<span class="tp tp-${tp}">${TL[tp]||tp}</span>`).join("")}</div>`;
+    }
+  } else if (p.card) {
+    html += `<div class="proposal-title">${p.card.t}</div>`;
+    html += `<div class="proposal-desc">${p.card.x}</div>`;
+    if (p.card.tp) {
+      html += `<div class="proposal-topics">${p.card.tp.map(tp => `<span class="tp tp-${tp}">${TL[tp]||tp}</span>`).join("")}</div>`;
+    }
+  }
+
+  if (p.action === "update" && p.existing_id && p.card) {
+    const old = baseCardMap.get(p.existing_id);
+    if (old) {
+      let diffs = [];
+      if (old.t !== p.card.t) diffs.push({field:"Title", old:old.t, new:p.card.t});
+      if (old.d !== p.card.d) diffs.push({field:"Date", old:old.l||old.d, new:p.card.l||p.card.d});
+      if (old.x !== p.card.x) diffs.push({field:"Description", old:old.x, new:p.card.x});
+      if (JSON.stringify(old.tp) !== JSON.stringify(p.card.tp)) diffs.push({field:"Topics", old:old.tp.join(", "), new:p.card.tp.join(", ")});
+      if (JSON.stringify(old.tg) !== JSON.stringify(p.card.tg)) diffs.push({field:"Tags", old:old.tg.join(", "), new:p.card.tg.join(", ")});
+      if (diffs.length) {
+        html += `<div class="proposal-diff"><div class="proposal-diff-label">Changes</div>`;
+        diffs.forEach(d => { html += `<div><strong>${d.field}:</strong> <span class="proposal-diff-old">${d.old}</span> &rarr; <span class="proposal-diff-new">${d.new}</span></div>`; });
+        html += `</div>`;
+      }
+    }
+  }
+
+  if (p.reason) html += `<div class="proposal-reason">${p.reason}</div>`;
+
+  html += `<div class="proposal-actions">`;
+  if (isApproved) {
+    html += `<span class="decision-status decision-approved">Approved</span>`;
+    html += `<button class="btn btn-undo" data-proposal-undo="${p.id}">Undo</button>`;
+  } else if (isRejected) {
+    html += `<span class="decision-status decision-rejected">Rejected</span>`;
+    html += `<button class="btn btn-undo" data-proposal-undo="${p.id}">Undo</button>`;
+  } else {
+    html += `<button class="btn btn-approve" data-proposal-approve="${p.id}" data-action="${p.action}" data-existing="${p.existing_id||''}">Approve</button>`;
+    html += `<button class="btn btn-reject" data-proposal-reject="${p.id}">Reject</button>`;
+  }
+  html += `</div></div>`;
+  return html;
+}
+
 function renderProposals() {
   const container = document.getElementById("proposals-section");
   if (!allProposals.length) {
@@ -656,90 +747,36 @@ function renderProposals() {
   const approved = new Set(getApprovedProposals());
   const rejected = new Set(getRejectedProposals());
 
-  // Build base card map for showing diffs on updates
   const baseCardMap = new Map();
   M.forEach(m => baseCardMap.set(cardId(m), m));
 
+  const pending = allProposals.filter(p => !approved.has(p.id) && !rejected.has(p.id));
+  const archived = allProposals.filter(p => approved.has(p.id) || rejected.has(p.id));
+
   let html = `<div class="proposals-section">`;
-  html += `<div class="proposals-header"><h2>Pending Proposals</h2><span class="proposals-count">${allProposals.length}</span></div>`;
 
-  allProposals.forEach(p => {
-    const isApproved = approved.has(p.id);
-    const isRejected = rejected.has(p.id);
-    const isDecided = isApproved || isRejected;
+  // Tabs
+  html += `<div class="proposals-tabs">`;
+  html += `<button class="proposals-tab ${activeProposalTab === 'pending' ? 'active' : ''}" data-ptab="pending">Pending proposals <span class="proposals-tab-count">${pending.length}</span></button>`;
+  html += `<button class="proposals-tab ${activeProposalTab === 'archived' ? 'active' : ''}" data-ptab="archived">Archived <span class="proposals-tab-count">${archived.length}</span></button>`;
+  html += `</div>`;
 
-    html += `<div class="proposal-card ${isDecided ? 'decided' : ''}">`;
-    html += `<div class="proposal-top">`;
-    html += `<span class="action-badge action-badge--${p.action}">${p.action.toUpperCase()}</span>`;
-
-    if (p.card) {
-      html += `<span class="proposal-date">${p.card.l || p.card.d}</span>`;
-    } else if (p.action === "delete" && p.existing_id) {
-      const existing = baseCardMap.get(p.existing_id);
-      if (existing) html += `<span class="proposal-date">${existing.l || existing.d}</span>`;
-    }
-
-    html += `</div>`;
-
-    // Title
-    if (p.action === "delete" && p.existing_id) {
-      const existing = baseCardMap.get(p.existing_id);
-      html += `<div class="proposal-title">${existing ? existing.t : p.existing_id}</div>`;
-      if (existing) {
-        html += `<div class="proposal-desc">${existing.x}</div>`;
-        html += `<div class="proposal-topics">${existing.tp.map(tp => `<span class="tp tp-${tp}">${TL[tp]||tp}</span>`).join("")}</div>`;
-      }
-    } else if (p.card) {
-      html += `<div class="proposal-title">${p.card.t}</div>`;
-      html += `<div class="proposal-desc">${p.card.x}</div>`;
-      if (p.card.tp) {
-        html += `<div class="proposal-topics">${p.card.tp.map(tp => `<span class="tp tp-${tp}">${TL[tp]||tp}</span>`).join("")}</div>`;
-      }
-    }
-
-    // For UPDATE: show diff
-    if (p.action === "update" && p.existing_id && p.card) {
-      const old = baseCardMap.get(p.existing_id);
-      if (old) {
-        let diffs = [];
-        if (old.t !== p.card.t) diffs.push({field:"Title", old:old.t, new:p.card.t});
-        if (old.d !== p.card.d) diffs.push({field:"Date", old:old.l||old.d, new:p.card.l||p.card.d});
-        if (old.x !== p.card.x) diffs.push({field:"Description", old:old.x, new:p.card.x});
-        if (JSON.stringify(old.tp) !== JSON.stringify(p.card.tp)) diffs.push({field:"Topics", old:old.tp.join(", "), new:p.card.tp.join(", ")});
-        if (JSON.stringify(old.tg) !== JSON.stringify(p.card.tg)) diffs.push({field:"Tags", old:old.tg.join(", "), new:p.card.tg.join(", ")});
-
-        if (diffs.length) {
-          html += `<div class="proposal-diff">`;
-          html += `<div class="proposal-diff-label">Changes</div>`;
-          diffs.forEach(d => {
-            html += `<div><strong>${d.field}:</strong> <span class="proposal-diff-old">${d.old}</span> &rarr; <span class="proposal-diff-new">${d.new}</span></div>`;
-          });
-          html += `</div>`;
-        }
-      }
-    }
-
-    // Reason
-    if (p.reason) {
-      html += `<div class="proposal-reason">${p.reason}</div>`;
-    }
-
-    // Actions
-    html += `<div class="proposal-actions">`;
-    if (isApproved) {
-      html += `<span class="decision-status decision-approved">Approved</span>`;
-      html += `<button class="btn btn-undo" data-proposal-undo="${p.id}">Undo</button>`;
-    } else if (isRejected) {
-      html += `<span class="decision-status decision-rejected">Rejected</span>`;
-      html += `<button class="btn btn-undo" data-proposal-undo="${p.id}">Undo</button>`;
+  // Tab content
+  if (activeProposalTab === "pending") {
+    if (pending.length) {
+      pending.forEach(p => { html += renderProposalCard(p, baseCardMap, false, false); });
     } else {
-      html += `<button class="btn btn-approve" data-proposal-approve="${p.id}" data-action="${p.action}" data-existing="${p.existing_id||''}">Approve</button>`;
-      html += `<button class="btn btn-reject" data-proposal-reject="${p.id}">Reject</button>`;
+      html += `<div class="proposals-empty">All proposals have been reviewed.</div>`;
     }
-    html += `</div>`;
-
-    html += `</div>`; // .proposal-card
-  });
+  } else {
+    if (archived.length) {
+      archived.forEach(p => {
+        html += renderProposalCard(p, baseCardMap, approved.has(p.id), rejected.has(p.id));
+      });
+    } else {
+      html += `<div class="proposals-empty">No archived proposals yet.</div>`;
+    }
+  }
 
   html += `</div><hr class="section-divider">`;
   container.innerHTML = html;
@@ -842,6 +879,16 @@ document.getElementById("btn-hide-all").addEventListener("click",()=>{
   M.forEach(m=>hidden.add(cardId(m)));
   saveHidden(hidden);
   buildTable();
+});
+
+// Tab switching
+document.getElementById("proposals-section").addEventListener("click", e => {
+  const tab = e.target.closest("[data-ptab]");
+  if (tab) {
+    activeProposalTab = tab.dataset.ptab;
+    renderProposals();
+    return;
+  }
 });
 
 // Proposal actions (delegated)
