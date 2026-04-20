@@ -1,39 +1,699 @@
 [
-  {"d":"2026-02-02","l":"2 Feb 2026","y":2026,"t":"FDA QMSR In Force","x":"Incorporates ISO 13485:2016 by reference, replacing decades-old QSR. Major harmonization for EU-based manufacturers.","u":"https://www.fda.gov/medical-devices/postmarket-requirements-devices/quality-management-system-regulation-qmsr","tp":["us","standards"],"tg":["in-force"],"v":"n"},
-  {"d":"2026-01-26","l":"Jan 2026","y":2026,"t":"South Korea: Fast-Track + AI Basic Act + DMPA","x":"Three developments: market access cut to 80\u2013140 days, healthcare AI classified High-Impact, pre-approved change management for algorithms.","u":"https://www.complifegroup.com/2026/02/18/south-korea-medical-devices/","tp":["other","ai"],"tg":["new"],"v":"n"},
-  {"d":"2026-03-10","l":"10 Mar 2026","y":2026,"t":"Singapore AIHGle 2.0","x":"Refreshed AI in Healthcare Guidelines with seven ethical principles including generative AI provisions.","u":"https://www.bakermckenzie.com/en/insight/publications/2026/03/singapore-moh-and-hsa-launch-refreshed-ai-in-healthcare-guidelines","tp":["other","ai"],"tg":["new"],"v":"n"},
-  {"d":"2026-03-17","l":"17 Mar 2026","y":2026,"t":"China NMPA YY/T 1406-2026","x":"Revised risk management standard integrating functional safety and cybersecurity into a unified framework. Effective 1 Mar 2027.","u":"https://chinameddevice.com/nmpa-software-standard/","tp":["other","cyber"],"tg":["new"],"v":"n"},
-  {"d":"2026-04-10","l":"10 Apr 2026","y":2026,"t":"MHRA Indefinite CE Mark Recognition \u2014 Consultation Closed","x":"Proposes permanent recognition of CE-marked devices in GB. ~90% of devices on the GB market are CE-marked. Result pending.","u":"https://www.gov.uk/government/news/mhra-launches-a-consultation-on-indefinite-recognition-of-ce-marked-medical-devices","tp":["uk","mdr"],"tg":["high"],"v":"h"},
-  {"d":"2026-04-16","l":"16 Apr 2026","y":2026,"t":"CNIL/HAS AI Healthcare Guide \u2014 Consultation Closes","x":"Joint guide on AI deployment in healthcare covering acquisition through uninstallation, governance, and generative AI specifics.","u":"https://www.cnil.fr/fr/ia-et-sante-la-has-et-la-cnil-lancent-une-consultation-publique-sur-un-projet-de-guide","tp":["france","ai"],"tg":["critical"],"v":"h"},
-  {"d":"2026-05-01","l":"May 2026","y":2026,"t":"HIPAA Security Rule Overhaul \u2014 Finalization Target","x":"First major update since 2013. MFA, encryption, network segmentation mandatory. 24-hour incident reporting for business associates.","u":"https://www.hipaajournal.com/new-hipaa-regulations/","tp":["us"],"tg":["high"],"v":"h"},
-  {"d":"2026-05-06","l":"6 May 2026","y":2026,"t":"MDR/IVDR Simplification \u2014 Feedback Deadline","x":"Proposal 2025/0404: Revised Rule 11 reclassifies most MDSW as Class I by default. Also proposes removing medical devices from AI Act high-risk scope.","u":"https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en","tp":["mdr","ai"],"tg":["critical"],"v":"c"},
-  {"d":"2026-05-16","l":"16 May 2026","y":2026,"t":"HDS v2.0 Mandatory (France)","x":"Only v2.0-certified hosters may legally host health data for third parties. Reinforced EEA-only hosting, stronger ISO 27001 alignment.","u":"https://esante.gouv.fr/produits-services/hds","tp":["france","data"],"tg":["critical"],"v":"c"},
-  {"d":"2026-05-22","l":"22 May 2026","y":2026,"t":"IEC 62304 Ed.2 \u2014 Approval Phase Begins","x":"Major revision: three safety classes replaced by two Software Process Accuracy Levels. Expanded scope to all health software. AI/ML process planning included.","u":"https://lfhregulatory.co.uk/iec-62304-update-2026/","tp":["standards"],"tg":["high"],"v":"h"},
-  {"d":"2026-05-28","l":"28 May 2026","y":2026,"t":"EUDAMED \u2014 First 4 Modules Mandatory","x":"Actor Registration, UDI/Device Registration, NB & Certificates, Market Surveillance. All economic operators must have an SRN.","u":"https://health.ec.europa.eu/latest-updates/eudamed-four-first-modules-will-be-mandatory-use-28-may-2026-2025-11-27_en","tp":["mdr"],"tg":["critical"],"v":"c"},
-  {"d":"2026-06-11","l":"11 Jun 2026","y":2026,"t":"Cyber Resilience Act \u2014 CAB Notification","x":"Conformity assessment body notification deadline. MD under MDR/IVDR excluded, but peripheral apps and cloud services may be in scope.","u":"https://www.twobirds.com/en/insights/2026/cra%E2%80%99s-phased-entry-into-application-starts-in-september-2026","tp":["cyber"],"tg":["medium"],"v":"n"},
-  {"d":"2026-07-01","l":"1 Jul 2026","y":2026,"t":"Australia TGA \u2014 UDI Required (Class IIb/III)","x":"UDI requirements for Class IIb and III devices including SaMD begin in Australia.","u":"https://www.tga.gov.au/news/news-articles/medical-device-regulation-changes","tp":["other"],"tg":["medium"],"v":"n"},
-  {"d":"2026-08-02","l":"Aug 2026","y":2026,"t":"AI Act \u2014 Most Provisions Apply","x":"Original timeline for high-risk AI rules. Digital Omnibus may delay to Dec 2027 (Annex III) or Aug 2028 (Annex I/medical devices). MDR simplification could remove MD from scope entirely.","u":"https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation","tp":["ai"],"tg":["high"],"v":"c"},
-  {"d":"2026-08-12","l":"12 Aug 2026","y":2026,"t":"IEC 62304 Edition 2 \u2014 Expected Publication","x":"Two Software Process Accuracy Levels (I, II) replace Classes A/B/C. Scope expanded to all health software. AI/ML process planning. Aligned with IEC 82304 and IEC 81001.","u":"https://8foldgovernance.com/iec-62304-edition-2-big-changes-in-samd-requirements/","tp":["standards"],"tg":["critical"],"v":"c"},
-  {"d":"2026-09-01","l":"Sep 2026","y":2026,"t":"NIS2 Directive \u2014 Full Implementation","x":"Complete implementation of basic security measures required. Medical device manufacturers are in scope. Max fines EUR 10M / 2% turnover.","u":"https://cibersafety.com/en/nis2-health-sector-2026/","tp":["cyber"],"tg":["high"],"v":"h"},
-  {"d":"2026-09-11","l":"11 Sep 2026","y":2026,"t":"CRA \u2014 Vulnerability Reporting Begins","x":"Actively exploited vulnerabilities must be reported to ENISA within 24 hours.","u":"https://www.twobirds.com/en/insights/2026/cra%E2%80%99s-phased-entry-into-application-starts-in-september-2026","tp":["cyber"],"tg":["high"],"v":"h"},
-  {"d":"2026-10-01","l":"Q4 2026","y":2026,"t":"CEN-CENELEC JTC 21 \u2014 AI Act Harmonised Standards","x":"Target for 10 standards: risk management, data governance, transparency, human oversight, cybersecurity, QMS, conformity assessment, post-market monitoring.","u":"https://jtc21.eu/","tp":["ai","standards"],"tg":["high"],"v":"n"},
-  {"d":"2026-10-15","l":"Late 2026","y":2026,"t":"prEN 18286 \u2014 AI Act QMS Standard Revised","x":"First harmonised standard for AI Act QMS (Article 17). Failed Jan 2026 vote with 1,288 comments. Under revision since March 2026.","u":"https://cms-lawnow.com/en/ealerts/2025/12/the-first-draft-ai-act-standard-for-public-consultation-what-pren-18286-quality-management-system-for-eu-ai-act-regulatory-purposes-signals-for","tp":["ai","standards"],"tg":["medium"],"v":"n"},
-  {"d":"2026-11-01","l":"Late 2026","y":2026,"t":"UK Pre-Market SI \u2014 SaMD Up-Classification","x":"Second Statutory Instrument: SaMD up-classified to at least Class IIa, mirroring EU MDR. Includes UDI, international reliance scheme.","u":"https://www.gov.uk/government/publications/implementation-of-the-future-regulation-of-medical-devices/implementation-of-the-future-regulations","tp":["uk"],"tg":["high"],"v":"h"},
-  {"d":"2026-11-28","l":"28 Nov 2026","y":2026,"t":"EUDAMED \u2014 Existing Devices Registration Deadline","x":"All existing devices on the EU market must be registered in EUDAMED by this date.","u":"https://health.ec.europa.eu/latest-updates/eudamed-four-first-modules-will-be-mandatory-use-28-may-2026-2025-11-27_en","tp":["mdr"],"tg":["high"],"v":"h"},
-  {"d":"2026-12-01","l":"Late 2026","y":2026,"t":"Health Data Hub \u2192 SecNumCloud","x":"Migration from Azure to SecNumCloud-certified sovereign cloud. Signals de facto standard for health data hosting in France.","u":"https://next.ink/223140/health-data-hub-le-gouvernement-promet-une-bascule-sur-secnumcloud-dici-fin-2026/","tp":["france","data"],"tg":["medium"],"v":"n"},
-  {"d":"2026-12-15","l":"Late 2026","y":2026,"t":"UK AI Commission \u2014 Healthcare Recommendations","x":"Regulatory rulebook for AI/ML medical devices. Will shape the UK\u2019s bespoke AI medical device framework.","u":"https://www.gov.uk/government/groups/national-commission-into-the-regulation-of-ai-in-healthcare","tp":["uk","ai"],"tg":["medium"],"v":"n"},
-  {"d":"2027-01-01","l":"2027","y":2027,"t":"Brazil ANVISA \u2014 UDI Phase-In (Class II)","x":"UDI requirements extend to Class II medical devices in Brazil.","u":"https://www.emergobyul.com/news/brazil-anvisa-announces-priorities-2026-2027-year","tp":["other"],"tg":["medium"],"v":"n"},
-  {"d":"2027-03-01","l":"Mar 2027","y":2027,"t":"EHDS \u2014 Implementing Acts Deadline","x":"European Health Data Space implementing acts must be adopted. Framework for cross-border health data exchange.","u":"https://esante.gouv.fr/espace-europeen-donnees-sante","tp":["data","mdr"],"tg":["high"],"v":"h"},
-  {"d":"2027-03-01","l":"1 Mar 2027","y":2027,"t":"China YY/T 1406-2026 Effective","x":"Unified risk framework (functional safety + cybersecurity) for medical device software becomes mandatory in China.","u":"https://chinameddevice.com/nmpa-software-standard/","tp":["other"],"tg":["medium"],"v":"n"},
-  {"d":"2027-05-28","l":"28 May 2027","y":2027,"t":"EUDAMED \u2014 NB Retrospective Certificate Registration","x":"Notified bodies must complete retrospective registration of all certificates.","u":"https://health.ec.europa.eu/latest-updates/eudamed-four-first-modules-will-be-mandatory-use-28-may-2026-2025-11-27_en","tp":["mdr"],"tg":["medium"],"v":"n"},
-  {"d":"2027-06-01","l":"2027","y":2027,"t":"MDR/IVDR Simplification \u2014 Earliest Adoption","x":"Realistic earliest adoption of the simplification proposal including Rule 11 revision and AI Act scope changes.","u":"https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en","tp":["mdr","ai"],"tg":["high"],"v":"c"},
-  {"d":"2027-12-02","l":"Dec 2027","y":2027,"t":"AI Act High-Risk Annex III (If Delayed)","x":"Potential delayed application date for high-risk AI systems in Annex III under the Digital Omnibus proposal.","u":"https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation","tp":["ai"],"tg":["high"],"v":"h"},
-  {"d":"2027-12-11","l":"11 Dec 2027","y":2027,"t":"Cyber Resilience Act \u2014 Full Application","x":"All CRA requirements become fully applicable for products with digital elements.","u":"https://www.twobirds.com/en/insights/2026/cra%E2%80%99s-phased-entry-into-application-starts-in-september-2026","tp":["cyber"],"tg":["high"],"v":"h"},
-  {"d":"2028-01-01","l":"2028","y":2028,"t":"Brazil ANVISA \u2014 UDI Phase-In (Class I)","x":"UDI requirements extend to Class I devices, completing the full phase-in across all risk classes.","u":"https://www.emergobyul.com/news/brazil-anvisa-announces-priorities-2026-2027-year","tp":["other"],"tg":["medium"],"v":"n"},
-  {"d":"2028-06-01","l":"2028\u20132029","y":2028,"t":"ISO 13485 \u2014 New Edition Expected","x":"Revision under review since Jan 2025. Expected to include cybersecurity and AI provisions. Current version (2016) remains in force until publication.","u":"https://www.urmconsulting.com/blog/iso-13485-and-beyond-key-updates-shaping-the-medical-device-regulatory-landscape","tp":["standards"],"tg":["medium"],"v":"h"},
-  {"d":"2028-08-02","l":"Aug 2028","y":2028,"t":"AI Act Annex I / Medical Devices (If Delayed)","x":"Potential delayed application for AI systems covered under EU harmonisation legislation including medical devices.","u":"https://petrieflom.law.harvard.edu/2026/03/05/simplification-or-back-to-square-one-the-future-of-eu-medical-ai-regulation/","tp":["ai","mdr"],"tg":["critical"],"v":"c"},
-  {"d":"2028-12-31","l":"Dec 2028","y":2028,"t":"UK MHRA \u2014 MDD Transitional Period End","x":"Devices under old EU MDD must transition. Extended to Dec 2028 under the CE recognition proposal.","u":"https://www.gov.uk/government/news/mhra-launches-a-consultation-on-indefinite-recognition-of-ce-marked-medical-devices","tp":["uk","mdr"],"tg":["high"],"v":"h"},
-  {"d":"2029-03-01","l":"Mar 2029","y":2029,"t":"EHDS \u2014 Primary Use Provisions Apply","x":"Patient Summaries and ePrescriptions provisions become applicable across the EU.","u":"https://esante.gouv.fr/espace-europeen-donnees-sante","tp":["data","mdr"],"tg":["high"],"v":"c"},
-  {"d":"2030-01-01","l":"2030","y":2030,"t":"EU MDR/IVDR Full Maturity","x":"All transitional periods expired. Full EUDAMED functionality. Harmonised standards for AI Act expected to be stable.","u":"https://health.ec.europa.eu/medical-devices-sector/new-regulations_en","tp":["mdr","ai"],"tg":["medium"],"v":"n"},
-  {"d":"2030-06-01","l":"2030","y":2030,"t":"WHO Digital Health Strategy 2028\u20132033 Mid-Term","x":"Mid-point of the successor WHO strategy currently under global consultation.","u":"https://www.who.int/news-room/events/detail/2026/04/01/default-calendar/shaping-the-next-global-strategy-on-digital-health-(2028-2033)-global-stakeholder-consultation","tp":["other"],"tg":["medium"],"v":"n"}
+  {
+    "d": "2026-01-26",
+    "l": "Jan 2026",
+    "y": 2026,
+    "t": "South Korea: Fast-Track + AI Basic Act + DMPA",
+    "x": "Three developments: market access cut to 80–140 days, healthcare AI classified High-Impact, pre-approved change management for algorithms.",
+    "u": "https://www.complifegroup.com/2026/02/18/south-korea-medical-devices/",
+    "tp": [
+      "other",
+      "ai"
+    ],
+    "tg": [
+      "new"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-02-02",
+    "l": "2 Feb 2026",
+    "y": 2026,
+    "t": "FDA QMSR In Force",
+    "x": "Incorporates ISO 13485:2016 by reference, replacing decades-old QSR. Major harmonization for EU-based manufacturers.",
+    "u": "https://www.fda.gov/medical-devices/postmarket-requirements-devices/quality-management-system-regulation-qmsr",
+    "tp": [
+      "us",
+      "standards"
+    ],
+    "tg": [
+      "in-force"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-03-10",
+    "l": "10 Mar 2026",
+    "y": 2026,
+    "t": "Singapore AIHGle 2.0",
+    "x": "Refreshed AI in Healthcare Guidelines with seven ethical principles including generative AI provisions.",
+    "u": "https://www.bakermckenzie.com/en/insight/publications/2026/03/singapore-moh-and-hsa-launch-refreshed-ai-in-healthcare-guidelines",
+    "tp": [
+      "other",
+      "ai"
+    ],
+    "tg": [
+      "new"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-03-17",
+    "l": "17 Mar 2026",
+    "y": 2026,
+    "t": "China NMPA YY/T 1406-2026",
+    "x": "Revised risk management standard integrating functional safety and cybersecurity into a unified framework. Effective 1 Mar 2027.",
+    "u": "https://chinameddevice.com/nmpa-software-standard/",
+    "tp": [
+      "other",
+      "cyber"
+    ],
+    "tg": [
+      "new"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-04-01",
+    "l": "1 Apr 2026",
+    "y": 2026,
+    "t": "Canada: ML-Enabled Medical Device Guidance Published",
+    "x": "Health Canada published pre-market guidance for ML-enabled medical devices, covering training data, validation, and ongoing monitoring.",
+    "u": "https://www.canada.ca/en/health-canada/services/drugs-health-products/medical-devices/application-information/guidance-documents/software-medical-device-guidance-document.html",
+    "tp": [
+      "other",
+      "ai"
+    ],
+    "tg": [
+      "new"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-04-01",
+    "l": "1 Apr 2026",
+    "y": 2026,
+    "t": "Japan: eCTD v4.0 Mandatory + Revolutionary SaMD Priority Review",
+    "x": "PMDA only accepts eCTD v4.0 format from 1 Apr 2026. Priority review system for revolutionary SaMD creating new therapeutic categories.",
+    "u": "https://mymedicallab.net/japan-medical-device-regulation-news/",
+    "tp": [
+      "other"
+    ],
+    "tg": [
+      "new"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-04-01",
+    "l": "1 Apr 2026",
+    "y": 2026,
+    "t": "FDA QMSR Town Hall — Risk-Based Inspections",
+    "x": "FDA held town hall on QMSR implementation and the new medical device risk-based inspection programme (7382.850).",
+    "u": "https://www.fda.gov/medical-devices/postmarket-requirements-devices/quality-management-system-regulation-qmsr",
+    "tp": [
+      "us"
+    ],
+    "tg": [
+      "new"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-04-07",
+    "l": "7 Apr 2026",
+    "y": 2026,
+    "t": "IMDRF 29th MC Meeting — Singapore Outcome",
+    "x": "29th Management Committee meeting outcomes published. N90 PCCP for SaMD finalizing (target Q3 2026). N91 Global cybersecurity framework in consultation.",
+    "u": "https://www.imdrf.org/",
+    "tp": [
+      "standards"
+    ],
+    "tg": [
+      "new"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-04-10",
+    "l": "10 Apr 2026",
+    "y": 2026,
+    "t": "MHRA Indefinite CE Mark Recognition — Consultation Closed",
+    "x": "Proposes permanent recognition of CE-marked devices in GB. ~90% of devices on the GB market are CE-marked. Result pending.",
+    "u": "https://www.gov.uk/government/news/mhra-launches-a-consultation-on-indefinite-recognition-of-ce-marked-medical-devices",
+    "tp": [
+      "uk",
+      "mdr"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "h"
+  },
+  {
+    "d": "2026-04-14",
+    "l": "14 Apr 2026",
+    "y": 2026,
+    "t": "CNIL: Tracking Pixels Transparency Guidance",
+    "x": "CNIL published guidance requiring better transparency on tracking pixels in emails. Relevant for MD manufacturer communications.",
+    "u": "https://www.cnil.fr/fr",
+    "tp": [
+      "france",
+      "data"
+    ],
+    "tg": [
+      "new"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-04-15",
+    "l": "15 Apr 2026",
+    "y": 2026,
+    "t": "EU Breakthrough Devices Pilot Programme Launched",
+    "x": "European Commission launched a pilot programme to support breakthrough medical devices and IVDs. Accelerated coverage with enhanced post-market surveillance.",
+    "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations_en",
+    "tp": [
+      "mdr"
+    ],
+    "tg": [
+      "new"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-04-15",
+    "l": "15 Apr 2026",
+    "y": 2026,
+    "t": "MHRA AI Airlock Expansion — £3.6M Funding",
+    "x": "DHSC allocated £1.2M/year for 3 years to expand the MHRA AI Airlock regulatory sandbox for AI-based medical devices.",
+    "u": "https://www.gov.uk/government/news/mhra-ai-airlock",
+    "tp": [
+      "uk",
+      "ai"
+    ],
+    "tg": [
+      "new"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-04-15",
+    "l": "15 Apr 2026",
+    "y": 2026,
+    "t": "UK-US Medical Device Regulatory Cooperation",
+    "x": "MHRA and FDA announced strengthened cooperation on medical device regulation, exploring future mutual recognition mechanisms.",
+    "u": "https://www.gov.uk/government/news/uk-and-us-deepen-regulatory-cooperation-on-medical-devices-building-on-wider-pharmaceutical-partnership",
+    "tp": [
+      "uk",
+      "us"
+    ],
+    "tg": [
+      "new"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-04-16",
+    "l": "16 Apr 2026",
+    "y": 2026,
+    "t": "CNIL/HAS AI Healthcare Guide — Consultation Closes",
+    "x": "Joint guide on AI deployment in healthcare covering acquisition through uninstallation, governance, and generative AI specifics.",
+    "u": "https://www.cnil.fr/fr/ia-et-sante-la-has-et-la-cnil-lancent-une-consultation-publique-sur-un-projet-de-guide",
+    "tp": [
+      "france",
+      "ai"
+    ],
+    "tg": [
+      "critical"
+    ],
+    "v": "h"
+  },
+  {
+    "d": "2026-05-01",
+    "l": "May 2026",
+    "y": 2026,
+    "t": "HIPAA Security Rule Overhaul — Finalization Target",
+    "x": "First major update since 2013. MFA, encryption, network segmentation mandatory. 24-hour incident reporting for business associates.",
+    "u": "https://www.hipaajournal.com/new-hipaa-regulations/",
+    "tp": [
+      "us"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "h"
+  },
+  {
+    "d": "2026-05-06",
+    "l": "6 May 2026",
+    "y": 2026,
+    "t": "MDR/IVDR Simplification — Feedback Deadline",
+    "x": "Proposal 2025/0404: Revised Rule 11 reclassifies most MDSW as Class I by default. Also proposes removing medical devices from AI Act high-risk scope.",
+    "u": "https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en",
+    "tp": [
+      "mdr",
+      "ai"
+    ],
+    "tg": [
+      "critical"
+    ],
+    "v": "c"
+  },
+  {
+    "d": "2026-05-16",
+    "l": "16 May 2026",
+    "y": 2026,
+    "t": "HDS v2.0 Mandatory (France)",
+    "x": "Only v2.0-certified hosters may legally host health data for third parties. Reinforced EEA-only hosting, stronger ISO 27001 alignment.",
+    "u": "https://esante.gouv.fr/produits-services/hds",
+    "tp": [
+      "france",
+      "data"
+    ],
+    "tg": [
+      "critical"
+    ],
+    "v": "c"
+  },
+  {
+    "d": "2026-05-22",
+    "l": "22 May 2026",
+    "y": 2026,
+    "t": "IEC 62304 Ed.2 — Approval Phase Begins",
+    "x": "Major revision: three safety classes replaced by two Software Process Accuracy Levels. Expanded scope to all health software. AI/ML process planning included.",
+    "u": "https://lfhregulatory.co.uk/iec-62304-update-2026/",
+    "tp": [
+      "standards"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "h"
+  },
+  {
+    "d": "2026-05-28",
+    "l": "28 May 2026",
+    "y": 2026,
+    "t": "EUDAMED — First 4 Modules Mandatory",
+    "x": "Actor Registration, UDI/Device Registration, NB & Certificates, Market Surveillance. All economic operators must have an SRN.",
+    "u": "https://health.ec.europa.eu/latest-updates/eudamed-four-first-modules-will-be-mandatory-use-28-may-2026-2025-11-27_en",
+    "tp": [
+      "mdr"
+    ],
+    "tg": [
+      "critical"
+    ],
+    "v": "c"
+  },
+  {
+    "d": "2026-06-11",
+    "l": "11 Jun 2026",
+    "y": 2026,
+    "t": "Cyber Resilience Act — CAB Notification",
+    "x": "Conformity assessment body notification deadline. MD under MDR/IVDR excluded, but peripheral apps and cloud services may be in scope.",
+    "u": "https://www.twobirds.com/en/insights/2026/cra%E2%80%99s-phased-entry-into-application-starts-in-september-2026",
+    "tp": [
+      "cyber"
+    ],
+    "tg": [
+      "medium"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-07-01",
+    "l": "1 Jul 2026",
+    "y": 2026,
+    "t": "Australia TGA — UDI Required (Class IIb/III)",
+    "x": "UDI requirements for Class IIb and III devices including SaMD begin in Australia.",
+    "u": "https://www.tga.gov.au/news/news-articles/medical-device-regulation-changes",
+    "tp": [
+      "other"
+    ],
+    "tg": [
+      "medium"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-08-02",
+    "l": "Aug 2026",
+    "y": 2026,
+    "t": "AI Act — Most Provisions Apply",
+    "x": "Original timeline for high-risk AI rules. Digital Omnibus may delay to Dec 2027 (Annex III) or Aug 2028 (Annex I/medical devices). MDR simplification could remove MD from scope entirely.",
+    "u": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation",
+    "tp": [
+      "ai"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "c"
+  },
+  {
+    "d": "2026-08-12",
+    "l": "12 Aug 2026",
+    "y": 2026,
+    "t": "IEC 62304 Edition 2 — Expected Publication",
+    "x": "Two Software Process Accuracy Levels (I, II) replace Classes A/B/C. Scope expanded to all health software. AI/ML process planning. Aligned with IEC 82304 and IEC 81001.",
+    "u": "https://8foldgovernance.com/iec-62304-edition-2-big-changes-in-samd-requirements/",
+    "tp": [
+      "standards"
+    ],
+    "tg": [
+      "critical"
+    ],
+    "v": "c"
+  },
+  {
+    "d": "2026-09-01",
+    "l": "Sep 2026",
+    "y": 2026,
+    "t": "NIS2 Directive — Full Implementation",
+    "x": "Complete implementation of basic security measures required. Medical device manufacturers are in scope. Max fines EUR 10M / 2% turnover.",
+    "u": "https://cibersafety.com/en/nis2-health-sector-2026/",
+    "tp": [
+      "cyber"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "h"
+  },
+  {
+    "d": "2026-09-11",
+    "l": "11 Sep 2026",
+    "y": 2026,
+    "t": "CRA — Vulnerability Reporting Begins",
+    "x": "Actively exploited vulnerabilities must be reported to ENISA within 24 hours.",
+    "u": "https://www.twobirds.com/en/insights/2026/cra%E2%80%99s-phased-entry-into-application-starts-in-september-2026",
+    "tp": [
+      "cyber"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "h"
+  },
+  {
+    "d": "2026-10-01",
+    "l": "Q4 2026",
+    "y": 2026,
+    "t": "CEN-CENELEC JTC 21 — AI Act Harmonised Standards",
+    "x": "Target for 10 standards: risk management, data governance, transparency, human oversight, cybersecurity, QMS, conformity assessment, post-market monitoring.",
+    "u": "https://jtc21.eu/",
+    "tp": [
+      "ai",
+      "standards"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-10-15",
+    "l": "Late 2026",
+    "y": 2026,
+    "t": "prEN 18286 — AI Act QMS Standard Revised",
+    "x": "First harmonised standard for AI Act QMS (Article 17). Failed Jan 2026 vote with 1,288 comments. Under revision since March 2026.",
+    "u": "https://cms-lawnow.com/en/ealerts/2025/12/the-first-draft-ai-act-standard-for-public-consultation-what-pren-18286-quality-management-system-for-eu-ai-act-regulatory-purposes-signals-for",
+    "tp": [
+      "ai",
+      "standards"
+    ],
+    "tg": [
+      "medium"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-11-01",
+    "l": "Late 2026",
+    "y": 2026,
+    "t": "UK Pre-Market SI — SaMD Up-Classification",
+    "x": "Second Statutory Instrument: SaMD up-classified to at least Class IIa, mirroring EU MDR. Includes UDI, international reliance scheme.",
+    "u": "https://www.gov.uk/government/publications/implementation-of-the-future-regulation-of-medical-devices/implementation-of-the-future-regulations",
+    "tp": [
+      "uk"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "h"
+  },
+  {
+    "d": "2026-11-28",
+    "l": "28 Nov 2026",
+    "y": 2026,
+    "t": "EUDAMED — Existing Devices Registration Deadline",
+    "x": "All existing devices on the EU market must be registered in EUDAMED by this date.",
+    "u": "https://health.ec.europa.eu/latest-updates/eudamed-four-first-modules-will-be-mandatory-use-28-may-2026-2025-11-27_en",
+    "tp": [
+      "mdr"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "h"
+  },
+  {
+    "d": "2026-12-01",
+    "l": "Late 2026",
+    "y": 2026,
+    "t": "Health Data Hub → SecNumCloud",
+    "x": "Migration from Azure to SecNumCloud-certified sovereign cloud. Signals de facto standard for health data hosting in France.",
+    "u": "https://next.ink/223140/health-data-hub-le-gouvernement-promet-une-bascule-sur-secnumcloud-dici-fin-2026/",
+    "tp": [
+      "france",
+      "data"
+    ],
+    "tg": [
+      "medium"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2026-12-15",
+    "l": "Late 2026",
+    "y": 2026,
+    "t": "UK AI Commission — Healthcare Recommendations",
+    "x": "Regulatory rulebook for AI/ML medical devices. Will shape the UK’s bespoke AI medical device framework.",
+    "u": "https://www.gov.uk/government/groups/national-commission-into-the-regulation-of-ai-in-healthcare",
+    "tp": [
+      "uk",
+      "ai"
+    ],
+    "tg": [
+      "medium"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2027-01-01",
+    "l": "2027",
+    "y": 2027,
+    "t": "Brazil ANVISA — UDI Phase-In (Class II)",
+    "x": "UDI requirements extend to Class II medical devices in Brazil.",
+    "u": "https://www.emergobyul.com/news/brazil-anvisa-announces-priorities-2026-2027-year",
+    "tp": [
+      "other"
+    ],
+    "tg": [
+      "medium"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2027-03-01",
+    "l": "Mar 2027",
+    "y": 2027,
+    "t": "EHDS — Implementing Acts Deadline",
+    "x": "European Health Data Space implementing acts must be adopted. Framework for cross-border health data exchange.",
+    "u": "https://esante.gouv.fr/espace-europeen-donnees-sante",
+    "tp": [
+      "data",
+      "mdr"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "h"
+  },
+  {
+    "d": "2027-03-01",
+    "l": "1 Mar 2027",
+    "y": 2027,
+    "t": "China YY/T 1406-2026 Effective",
+    "x": "Unified risk framework (functional safety + cybersecurity) for medical device software becomes mandatory in China.",
+    "u": "https://chinameddevice.com/nmpa-software-standard/",
+    "tp": [
+      "other"
+    ],
+    "tg": [
+      "medium"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2027-05-28",
+    "l": "28 May 2027",
+    "y": 2027,
+    "t": "EUDAMED — NB Retrospective Certificate Registration",
+    "x": "Notified bodies must complete retrospective registration of all certificates.",
+    "u": "https://health.ec.europa.eu/latest-updates/eudamed-four-first-modules-will-be-mandatory-use-28-may-2026-2025-11-27_en",
+    "tp": [
+      "mdr"
+    ],
+    "tg": [
+      "medium"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2027-06-01",
+    "l": "2027",
+    "y": 2027,
+    "t": "MDR/IVDR Simplification — Earliest Adoption",
+    "x": "Realistic earliest adoption of the simplification proposal including Rule 11 revision and AI Act scope changes.",
+    "u": "https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en",
+    "tp": [
+      "mdr",
+      "ai"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "c"
+  },
+  {
+    "d": "2027-12-02",
+    "l": "Dec 2027",
+    "y": 2027,
+    "t": "AI Act High-Risk Annex III (If Delayed)",
+    "x": "Potential delayed application date for high-risk AI systems in Annex III under the Digital Omnibus proposal.",
+    "u": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation",
+    "tp": [
+      "ai"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "h"
+  },
+  {
+    "d": "2027-12-11",
+    "l": "11 Dec 2027",
+    "y": 2027,
+    "t": "Cyber Resilience Act — Full Application",
+    "x": "All CRA requirements become fully applicable for products with digital elements.",
+    "u": "https://www.twobirds.com/en/insights/2026/cra%E2%80%99s-phased-entry-into-application-starts-in-september-2026",
+    "tp": [
+      "cyber"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "h"
+  },
+  {
+    "d": "2028-01-01",
+    "l": "2028",
+    "y": 2028,
+    "t": "Brazil ANVISA — UDI Phase-In (Class I)",
+    "x": "UDI requirements extend to Class I devices, completing the full phase-in across all risk classes.",
+    "u": "https://www.emergobyul.com/news/brazil-anvisa-announces-priorities-2026-2027-year",
+    "tp": [
+      "other"
+    ],
+    "tg": [
+      "medium"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2028-06-01",
+    "l": "2028–2029",
+    "y": 2028,
+    "t": "ISO 13485 — New Edition Expected",
+    "x": "Revision under review since Jan 2025. Expected to include cybersecurity and AI provisions. Current version (2016) remains in force until publication.",
+    "u": "https://www.urmconsulting.com/blog/iso-13485-and-beyond-key-updates-shaping-the-medical-device-regulatory-landscape",
+    "tp": [
+      "standards"
+    ],
+    "tg": [
+      "medium"
+    ],
+    "v": "h"
+  },
+  {
+    "d": "2028-08-02",
+    "l": "Aug 2028",
+    "y": 2028,
+    "t": "AI Act Annex I / Medical Devices (If Delayed)",
+    "x": "Potential delayed application for AI systems covered under EU harmonisation legislation including medical devices.",
+    "u": "https://petrieflom.law.harvard.edu/2026/03/05/simplification-or-back-to-square-one-the-future-of-eu-medical-ai-regulation/",
+    "tp": [
+      "ai",
+      "mdr"
+    ],
+    "tg": [
+      "critical"
+    ],
+    "v": "c"
+  },
+  {
+    "d": "2028-12-31",
+    "l": "Dec 2028",
+    "y": 2028,
+    "t": "UK MHRA — MDD Transitional Period End",
+    "x": "Devices under old EU MDD must transition. Extended to Dec 2028 under the CE recognition proposal.",
+    "u": "https://www.gov.uk/government/news/mhra-launches-a-consultation-on-indefinite-recognition-of-ce-marked-medical-devices",
+    "tp": [
+      "uk",
+      "mdr"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "h"
+  },
+  {
+    "d": "2029-03-01",
+    "l": "Mar 2029",
+    "y": 2029,
+    "t": "EHDS — Primary Use Provisions Apply",
+    "x": "Patient Summaries and ePrescriptions provisions become applicable across the EU.",
+    "u": "https://esante.gouv.fr/espace-europeen-donnees-sante",
+    "tp": [
+      "data",
+      "mdr"
+    ],
+    "tg": [
+      "high"
+    ],
+    "v": "c"
+  },
+  {
+    "d": "2030-01-01",
+    "l": "2030",
+    "y": 2030,
+    "t": "EU MDR/IVDR Full Maturity",
+    "x": "All transitional periods expired. Full EUDAMED functionality. Harmonised standards for AI Act expected to be stable.",
+    "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations_en",
+    "tp": [
+      "mdr",
+      "ai"
+    ],
+    "tg": [
+      "medium"
+    ],
+    "v": "n"
+  },
+  {
+    "d": "2030-06-01",
+    "l": "2030",
+    "y": 2030,
+    "t": "WHO Digital Health Strategy 2028–2033 Mid-Term",
+    "x": "Mid-point of the successor WHO strategy currently under global consultation.",
+    "u": "https://www.who.int/news-room/events/detail/2026/04/01/default-calendar/shaping-the-next-global-strategy-on-digital-health-(2028-2033)-global-stakeholder-consultation",
+    "tp": [
+      "other"
+    ],
+    "tg": [
+      "medium"
+    ],
+    "v": "n"
+  }
 ]
