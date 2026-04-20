@@ -568,6 +568,14 @@
 </footer>
 
 <script>
+// One-time migration: clear old title-based localStorage keys
+if (!localStorage.getItem("rw_migrated_to_stable_ids")) {
+  ["rw_hidden_cards","rw_approved_proposals","rw_rejected_proposals","rw_deleted_cards",
+   "rw_approved_proposals_fr","rw_rejected_proposals_fr","rw_deleted_cards_fr","rw_hidden_cards_fr","rw_comments_fr"
+  ].forEach(k => localStorage.removeItem(k));
+  localStorage.setItem("rw_migrated_to_stable_ids", "1");
+}
+
 // Utilities
 function cardId(m){ return m.id || m.d+"__"+m.t.slice(0,40).replace(/\W+/g,"_"); }
 function lsGet(k){ try { return JSON.parse(localStorage.getItem(k)||"[]"); } catch(e){ return []; } }
