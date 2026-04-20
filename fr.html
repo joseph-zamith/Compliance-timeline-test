@@ -596,7 +596,7 @@ function cycleState(topic) {
 function isAllDefault() { return included.size === 0 && excluded.size === 0; }
 
 let _hidden = new Set();
-function refreshHidden() { _hidden = new Set(lsGet("rw_hidden_cards")); }
+function refreshHidden() { _hidden = new Set(lsGet("rw_hidden_cards_fr")); }
 
 function isVis(m) {
   if (_hidden.has(cardId(m))) return false;
@@ -670,16 +670,16 @@ async function init() {
     if (!resp.ok) throw new Error("data-fr.json failed");
     const base = await resp.json();
 
-    // Load proposals + approval state
+    // French page: load French proposals if available, skip English ones
     let proposals = [];
     try {
-      const pResp = await fetch("proposals.json");
+      const pResp = await fetch("proposals-fr.json");
       if (pResp.ok) { const pd = await pResp.json(); proposals = pd.proposals || []; }
     } catch(e) {}
 
-    const approved = new Set(lsGet("rw_approved_proposals"));
-    const deleted = new Set(lsGet("rw_deleted_cards"));
-    comments = (() => { try { return JSON.parse(localStorage.getItem("rw_comments")||"{}"); } catch(e){ return {}; } })();
+    const approved = new Set(lsGet("rw_approved_proposals_fr"));
+    const deleted = new Set(lsGet("rw_deleted_cards_fr"));
+    comments = (() => { try { return JSON.parse(localStorage.getItem("rw_comments_fr")||"{}"); } catch(e){ return {}; } })();
 
     // Start with base milestones, remove deleted
     M = base.filter(m => !deleted.has(cardId(m)));
