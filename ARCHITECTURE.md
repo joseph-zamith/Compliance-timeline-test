@@ -14,78 +14,7 @@ All three subsystems share data through a Git repository hosted on GitHub, deplo
 
 ## System Architecture
 
-See diagram: `system-overview.png`
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    macOS (local machine)                     │
-│                                                             │
-│  launchd Agent (com.theodo.regulatory-watch)                │
-│  Triggers: Every Friday 08:00 CET                           │
-│  Runs: ~/.claude/regulatory-watch/run.sh                    │
-│                     │                                       │
-│                     ▼                                       │
-│  Claude Code CLI (--print --dangerously-skip-permissions)   │
-│  Prompt: ~/.claude/regulatory-watch/prompt.md               │
-│                                                             │
-│  Steps 1-3: WebSearch + WebFetch (12 sources, 21 queries)   │
-│  Step 4:    Build HTML email → gws gmail → 5 recipients     │
-│  Step 5a:   git pull repo                                   │
-│  Step 5b-d: Read data.json, generate proposals.json (EN)    │
-│  Step 5e:   Generate proposals-fr.json (FR translations)    │
-│  Step 5f:   git push proposals.json + proposals-fr.json     │
-└────────────────────────┬────────────────────────────────────┘
-                         │ git push
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│  GitHub: nicolasbertrand-QARA/Compliance-timeline           │
-│  ├── index.html         (EN timeline)                       │
-│  ├── fr.html            (FR timeline)                       │
-│  ├── admin.html         (back office, manages both langs)   │
-│  ├── data.json          (EN milestones, 37 cards)           │
-│  ├── data-fr.json       (FR milestones, 37 cards)           │
-│  ├── proposals.json     (EN proposals from cron)            │
-│  ├── proposals-fr.json  (FR proposals from cron)            │
-│  ├── logo.png           (Theodo HealthTech logo)            │
-│  ├── *.png              (Mermaid architecture diagrams)     │
-│  ├── reports/           (archived markdown reports)         │
-│  ├── automation/        (cron prompt + shell script)        │
-│  └── .github/workflows/pages.yml                            │
-│                                                             │
-│  GitHub Actions: Deploy to Pages on push to main            │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│  GitHub Pages: nicolasbertrand-qara.github.io/              │
-│                Compliance-timeline/                          │
-│  ├── /             → EN timeline                            │
-│  ├── /fr.html      → FR timeline                            │
-│  ├── /admin.html   → back office                            │
-│  ├── /data.json        ← fetched by EN + admin              │
-│  ├── /data-fr.json     ← fetched by FR                      │
-│  ├── /proposals.json   ← fetched by EN + admin              │
-│  └── /proposals-fr.json← fetched by FR                      │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│  User's Browser — localStorage (shared origin)              │
-│                                                             │
-│  Shared across EN + FR (approval is "two birds one stone"): │
-│  ├── rw_hidden_cards         (card IDs hidden on both)      │
-│  ├── rw_approved_proposals   (approved proposal IDs)        │
-│  ├── rw_rejected_proposals   (rejected proposal IDs)        │
-│  └── rw_deleted_cards        (deleted card IDs)             │
-│                                                             │
-│  Language-specific (separate comment per language):          │
-│  ├── rw_comments             (EN cardId → comment)          │
-│  └── rw_comments_fr          (FR cardId → comment)          │
-│                                                             │
-│  Migration flag:                                            │
-│  └── rw_migrated_to_stable_ids (version number)             │
-└─────────────────────────────────────────────────────────────┘
-```
+![System Architecture](system-overview.png)
 
 ---
 
@@ -104,19 +33,9 @@ The EN and FR timelines are parallel but share a single admin workflow:
 - **Proposal files** — `proposals.json` (English) and `proposals-fr.json` (French), same proposal IDs and card IDs, different title/description/date labels
 - **Comments** — `rw_comments` (EN) and `rw_comments_fr` (FR), managed via two text inputs per row in the back office
 
-### How approval works across languages
+### How it all connects
 
-```
-User approves proposal "proposal-2026-04-25-001" in admin
-         │
-         ├──→ EN timeline loads proposals.json
-         │    finds "proposal-2026-04-25-001"
-         │    merges the English card into the view
-         │
-         └──→ FR timeline loads proposals-fr.json
-              finds "proposal-2026-04-25-001" (same ID!)
-              merges the French card into the view
-```
+![Bilingual Data Flow](bilingual-flow.png)
 
 ### Stable ID Convention
 
@@ -147,6 +66,8 @@ localStorage(rw_comments) → EN comments
 
 Displayed = (base - deleted + approved_adds/updates) - hidden
 ```
+
+![Merge Logic](merge-logic.png)
 
 **Key features:**
 - **3-state topic filters** (sidebar, sticky on scroll):
@@ -197,6 +118,8 @@ All admin decisions (hide, approve, reject, delete) are shared via the same loca
 - UPDATE proposals show a diff view (old → new for each changed field)
 - Each proposal includes a `reason` field explaining why the cron suggested it
 - One approval/rejection applies to both EN and FR timelines
+
+![Proposal Lifecycle](proposal-lifecycle.png)
 
 #### B. Milestones Table
 - Toggle switches to show/hide each card (applies to both languages)
@@ -382,43 +305,17 @@ Both timelines respect the same hide/delete decisions
 
 ## File Map
 
-```
-Repository: nicolasbertrand-QARA/Compliance-timeline
-├── index.html                     # EN timeline
-├── fr.html                        # FR timeline
-├── admin.html                     # Back office (manages both languages)
-├── data.json                      # 37 EN milestones (source of truth)
-├── data-fr.json                   # 37 FR milestones (same IDs as data.json)
-├── proposals.json                 # EN proposals (updated weekly by cron)
-├── proposals-fr.json              # FR proposals (same IDs as proposals.json)
-├── logo.png                       # Theodo HealthTech logo (transparent bg)
-├── system-overview.png            # Architecture diagram (Mermaid)
-├── data-flow.png                  # Data flow diagram (Mermaid)
-├── merge-logic.png                # Timeline merge logic diagram (Mermaid)
-├── proposal-lifecycle.png         # Proposal state diagram (Mermaid)
-├── file-map.png                   # File map diagram (Mermaid)
-├── ARCHITECTURE.md                # This document
-├── reports/
-│   └── April_2026.md              # First full regulatory watch report
-├── automation/
-│   ├── weekly-report-prompt.md    # Claude CLI prompt (copy of active prompt)
-│   └── run.sh                     # Shell wrapper (copy of active script)
-└── .github/
-    └── workflows/
-        └── pages.yml              # GitHub Pages deployment
+![File Map](file-map.png)
 
-Local only (not in repo):
-~/.claude/regulatory-watch/
-├── prompt.md                      # Active prompt (source of truth for cron)
-├── run.sh                         # Active shell script
-├── repo/                          # Persistent local git clone
-├── last_run.log                   # Latest run output
-├── launchd_stdout.log             # launchd stdout
-└── launchd_stderr.log             # launchd stderr
+**Local only (not in repo):**
 
-~/Library/LaunchAgents/
-└── com.theodo.regulatory-watch.plist  # launchd schedule definition
-```
+| Path | Purpose |
+|------|---------|
+| `~/.claude/regulatory-watch/prompt.md` | Active prompt (source of truth for cron) |
+| `~/.claude/regulatory-watch/run.sh` | Active shell script |
+| `~/.claude/regulatory-watch/repo/` | Persistent local git clone |
+| `~/.claude/regulatory-watch/last_run.log` | Latest run output |
+| `~/Library/LaunchAgents/com.theodo.regulatory-watch.plist` | launchd schedule definition |
 
 ---
 
