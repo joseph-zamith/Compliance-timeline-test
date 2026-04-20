@@ -613,7 +613,7 @@
 let M = [];
 let allProposals = [];
 
-function cardId(m){ return m.d+"__"+m.t.slice(0,40).replace(/\W+/g,"_"); }
+function cardId(m){ return m.id || m.d+"__"+m.t.slice(0,40).replace(/\W+/g,"_"); }
 
 const TL={mdr:"EU MDR/IVDR",ai:"AI Act",standards:"Standards",cyber:"Cybersecurity",france:"France",uk:"UK",us:"US (FDA)",other:"Other Regions",data:"Data / EHDS"};
 const TG={critical:"CRITICAL",high:"HIGH",medium:"MEDIUM","new":"NEW","in-force":"IN FORCE"};

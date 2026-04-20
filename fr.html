@@ -569,7 +569,7 @@
 
 <script>
 // Utilities
-function cardId(m){ return m.d+"__"+m.t.slice(0,40).replace(/\W+/g,"_"); }
+function cardId(m){ return m.id || m.d+"__"+m.t.slice(0,40).replace(/\W+/g,"_"); }
 function lsGet(k){ try { return JSON.parse(localStorage.getItem(k)||"[]"); } catch(e){ return []; } }
 
 const TL={mdr:"EU MDR/IVDR",ai:"R\u00e8glement IA",standards:"Normes",cyber:"Cybers\u00e9curit\u00e9",france:"France",uk:"Royaume-Uni",us:"\u00c9tats-Unis (FDA)",other:"Autres r\u00e9gions",data:"Donn\u00e9es / EHDS"};

@@ -13,7 +13,8 @@
     "tg": [
       "new"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-01-26--south-korea-fast-track-ai-basic-act-dmpa"
   },
   {
     "d": "2026-02-02",
@@ -29,7 +30,8 @@
     "tg": [
       "in-force"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-02-02--fda-qmsr-in-force"
   },
   {
     "d": "2026-03-10",
@@ -45,7 +47,8 @@
     "tg": [
       "new"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-03-10--singapore-aihgle-2-0"
   },
   {
     "d": "2026-03-17",
@@ -61,7 +64,8 @@
     "tg": [
       "new"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-03-17--china-nmpa-yy-t-1406-2026"
   },
   {
     "d": "2026-04-01",
@@ -77,7 +81,8 @@
     "tg": [
       "new"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-04-01--canada-ml-enabled-medical-device-guidance-publish"
   },
   {
     "d": "2026-04-01",
@@ -92,7 +97,8 @@
     "tg": [
       "new"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-04-01--japan-ectd-v4-0-mandatory-revolutionary-samd-pr"
   },
   {
     "d": "2026-04-01",
@@ -107,7 +113,8 @@
     "tg": [
       "new"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-04-01--fda-qmsr-town-hall-risk-based-inspections"
   },
   {
     "d": "2026-04-07",
@@ -122,7 +129,8 @@
     "tg": [
       "new"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-04-07--imdrf-29th-mc-meeting-singapore-outcome"
   },
   {
     "d": "2026-04-10",
@@ -138,7 +146,8 @@
     "tg": [
       "high"
     ],
-    "v": "h"
+    "v": "h",
+    "id": "2026-04-10--mhra-indefinite-ce-mark-recognition-consultation"
   },
   {
     "d": "2026-04-14",
@@ -154,7 +163,8 @@
     "tg": [
       "new"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-04-14--cnil-tracking-pixels-transparency-guidance"
   },
   {
     "d": "2026-04-15",
@@ -169,7 +179,8 @@
     "tg": [
       "new"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-04-15--eu-breakthrough-devices-pilot-programme-launched"
   },
   {
     "d": "2026-04-15",
@@ -185,7 +196,8 @@
     "tg": [
       "new"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-04-15--mhra-ai-airlock-expansion-3-6m-funding"
   },
   {
     "d": "2026-04-15",
@@ -201,7 +213,8 @@
     "tg": [
       "new"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-04-15--uk-us-medical-device-regulatory-cooperation"
   },
   {
     "d": "2026-04-16",
@@ -217,7 +230,8 @@
     "tg": [
       "critical"
     ],
-    "v": "h"
+    "v": "h",
+    "id": "2026-04-16--cnil-has-ai-healthcare-guide-consultation-closes"
   },
   {
     "d": "2026-05-01",
@@ -232,7 +246,8 @@
     "tg": [
       "high"
     ],
-    "v": "h"
+    "v": "h",
+    "id": "2026-05-01--hipaa-security-rule-overhaul-finalization-target"
   },
   {
     "d": "2026-05-06",
@@ -248,7 +263,8 @@
     "tg": [
       "critical"
     ],
-    "v": "c"
+    "v": "c",
+    "id": "2026-05-06--mdr-ivdr-simplification-feedback-deadline"
   },
   {
     "d": "2026-05-16",
@@ -264,7 +280,8 @@
     "tg": [
       "critical"
     ],
-    "v": "c"
+    "v": "c",
+    "id": "2026-05-16--hds-v2-0-mandatory-france"
   },
   {
     "d": "2026-05-22",
@@ -279,7 +296,8 @@
     "tg": [
       "high"
     ],
-    "v": "h"
+    "v": "h",
+    "id": "2026-05-22--iec-62304-ed-2-approval-phase-begins"
   },
   {
     "d": "2026-05-28",
@@ -294,7 +312,8 @@
     "tg": [
       "critical"
     ],
-    "v": "c"
+    "v": "c",
+    "id": "2026-05-28--eudamed-first-4-modules-mandatory"
   },
   {
     "d": "2026-06-11",
@@ -309,7 +328,8 @@
     "tg": [
       "medium"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-06-11--cyber-resilience-act-cab-notification"
   },
   {
     "d": "2026-07-01",
@@ -324,7 +344,8 @@
     "tg": [
       "medium"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-07-01--australia-tga-udi-required-class-iib-iii"
   },
   {
     "d": "2026-08-02",
@@ -339,7 +360,8 @@
     "tg": [
       "high"
     ],
-    "v": "c"
+    "v": "c",
+    "id": "2026-08-02--ai-act-most-provisions-apply"
   },
   {
     "d": "2026-08-12",
@@ -354,7 +376,8 @@
     "tg": [
       "critical"
     ],
-    "v": "c"
+    "v": "c",
+    "id": "2026-08-12--iec-62304-edition-2-expected-publication"
   },
   {
     "d": "2026-09-01",
@@ -369,7 +392,8 @@
     "tg": [
       "high"
     ],
-    "v": "h"
+    "v": "h",
+    "id": "2026-09-01--nis2-directive-full-implementation"
   },
   {
     "d": "2026-09-11",
@@ -384,7 +408,8 @@
     "tg": [
       "high"
     ],
-    "v": "h"
+    "v": "h",
+    "id": "2026-09-11--cra-vulnerability-reporting-begins"
   },
   {
     "d": "2026-10-01",
@@ -400,7 +425,8 @@
     "tg": [
       "high"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-10-01--cen-cenelec-jtc-21-ai-act-harmonised-standards"
   },
   {
     "d": "2026-10-15",
@@ -416,7 +442,8 @@
     "tg": [
       "medium"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-10-15--pren-18286-ai-act-qms-standard-revised"
   },
   {
     "d": "2026-11-01",
@@ -431,7 +458,8 @@
     "tg": [
       "high"
     ],
-    "v": "h"
+    "v": "h",
+    "id": "2026-11-01--uk-pre-market-si-samd-up-classification"
   },
   {
     "d": "2026-11-28",
@@ -446,7 +474,8 @@
     "tg": [
       "high"
     ],
-    "v": "h"
+    "v": "h",
+    "id": "2026-11-28--eudamed-existing-devices-registration-deadline"
   },
   {
     "d": "2026-12-01",
@@ -462,7 +491,8 @@
     "tg": [
       "medium"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-12-01--health-data-hub-secnumcloud"
   },
   {
     "d": "2026-12-15",
@@ -478,7 +508,8 @@
     "tg": [
       "medium"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2026-12-15--uk-ai-commission-healthcare-recommendations"
   },
   {
     "d": "2027-01-01",
@@ -493,7 +524,8 @@
     "tg": [
       "medium"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2027-01-01--brazil-anvisa-udi-phase-in-class-ii"
   },
   {
     "d": "2027-03-01",
@@ -509,7 +541,8 @@
     "tg": [
       "high"
     ],
-    "v": "h"
+    "v": "h",
+    "id": "2027-03-01--ehds-implementing-acts-deadline"
   },
   {
     "d": "2027-03-01",
@@ -524,7 +557,8 @@
     "tg": [
       "medium"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2027-03-01--china-yy-t-1406-2026-effective"
   },
   {
     "d": "2027-05-28",
@@ -539,7 +573,8 @@
     "tg": [
       "medium"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2027-05-28--eudamed-nb-retrospective-certificate-registratio"
   },
   {
     "d": "2027-06-01",
@@ -555,7 +590,8 @@
     "tg": [
       "high"
     ],
-    "v": "c"
+    "v": "c",
+    "id": "2027-06-01--mdr-ivdr-simplification-earliest-adoption"
   },
   {
     "d": "2027-12-02",
@@ -570,7 +606,8 @@
     "tg": [
       "high"
     ],
-    "v": "h"
+    "v": "h",
+    "id": "2027-12-02--ai-act-high-risk-annex-iii-if-delayed"
   },
   {
     "d": "2027-12-11",
@@ -585,7 +622,8 @@
     "tg": [
       "high"
     ],
-    "v": "h"
+    "v": "h",
+    "id": "2027-12-11--cyber-resilience-act-full-application"
   },
   {
     "d": "2028-01-01",
@@ -600,7 +638,8 @@
     "tg": [
       "medium"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2028-01-01--brazil-anvisa-udi-phase-in-class-i"
   },
   {
     "d": "2028-06-01",
@@ -615,7 +654,8 @@
     "tg": [
       "medium"
     ],
-    "v": "h"
+    "v": "h",
+    "id": "2028-06-01--iso-13485-new-edition-expected"
   },
   {
     "d": "2028-08-02",
@@ -631,7 +671,8 @@
     "tg": [
       "critical"
     ],
-    "v": "c"
+    "v": "c",
+    "id": "2028-08-02--ai-act-annex-i-medical-devices-if-delayed"
   },
   {
     "d": "2028-12-31",
@@ -647,7 +688,8 @@
     "tg": [
       "high"
     ],
-    "v": "h"
+    "v": "h",
+    "id": "2028-12-31--uk-mhra-mdd-transitional-period-end"
   },
   {
     "d": "2029-03-01",
@@ -663,7 +705,8 @@
     "tg": [
       "high"
     ],
-    "v": "c"
+    "v": "c",
+    "id": "2029-03-01--ehds-primary-use-provisions-apply"
   },
   {
     "d": "2030-01-01",
@@ -679,7 +722,8 @@
     "tg": [
       "medium"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2030-01-01--eu-mdr-ivdr-full-maturity"
   },
   {
     "d": "2030-06-01",
@@ -694,6 +738,7 @@
     "tg": [
       "medium"
     ],
-    "v": "n"
+    "v": "n",
+    "id": "2030-06-01--who-digital-health-strategy-2028-2033-mid-term"
   }
 ]
