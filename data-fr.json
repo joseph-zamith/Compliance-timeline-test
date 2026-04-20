@@ -122,7 +122,7 @@
     "l": "6 mai 2026",
     "y": 2026,
     "t": "Simplification MDR/IVDR — Date limite de retour",
-    "x": "Proposition 2025/0404 : la Règle 11 révisée reclasserait la plupart des DMSN en Classe I par défaut. Propose également de retirer les DM du champ « haut risque » de l’IA Act.",
+    "x": "Proposition 2025/0404 : la Règle 11 révisée reclasserait la plupart des MDSW en Classe I par défaut. Propose également de retirer les DM du champ « haut risque » de l’IA Act.",
     "u": "https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en",
     "tp": [
       "mdr",
@@ -204,7 +204,7 @@
     "l": "1er juill. 2026",
     "y": 2026,
     "t": "Australie TGA — IUD obligatoire (Classe IIb/III)",
-    "x": "Exigences d’identification unique des dispositifs pour les classes IIb et III, y compris les DMSN, en Australie.",
+    "x": "Exigences d’identification unique des dispositifs pour les classes IIb et III, y compris les MDSW, en Australie.",
     "u": "https://www.tga.gov.au/news/news-articles/medical-device-regulation-changes",
     "tp": [
       "other"
@@ -317,8 +317,8 @@
     "d": "2026-11-01",
     "l": "fin 2026",
     "y": 2026,
-    "t": "UK SI pré-marché — Reclassification des DMSN",
-    "x": "Second Statutory Instrument : DMSN reclassifiés en Classe IIa minimum, alignement sur le MDR. Inclut IUD et schéma de confiance internationale.",
+    "t": "UK SI pré-marché — Reclassification des MDSW",
+    "x": "Second Statutory Instrument : MDSW reclassifiés en Classe IIa minimum, alignement sur le MDR. Inclut IUD et schéma de confiance internationale.",
     "u": "https://www.gov.uk/government/publications/implementation-of-the-future-regulation-of-medical-devices/implementation-of-the-future-regulations",
     "tp": [
       "uk"
