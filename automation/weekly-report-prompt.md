@@ -187,6 +187,7 @@ Each proposal must have:
   "action": "add" | "update" | "delete",
   "reason": "Brief explanation of why this change is proposed, based on this week's research",
   "card": {
+    "id": "YYYY-MM-DD--lowercase-slug-from-english-title",
     "d": "YYYY-MM-DD",
     "l": "Human readable date",
     "y": 2026,
@@ -197,9 +198,11 @@ Each proposal must have:
     "tg": ["critical"],
     "v": "c"
   },
-  "existing_id": "only for update/delete - the ID of the existing card (format: date__title_slug)"
+  "existing_id": "only for update/delete - the stable id of the existing card from data.json (format: YYYY-MM-DD--lowercase-slug)"
 }
 ```
+
+**CRITICAL: The `card.id` field and `existing_id` field must use the stable ID format: `YYYY-MM-DD--lowercase-english-slug` (double dash, lowercase, hyphens for spaces/special chars, max 50 chars of title). This ID is shared between the English and French data files and must never change. For update/delete proposals, read the `id` field from the existing card in data.json and use it as `existing_id`.**
 
 Valid topics: mdr, ai, standards, cyber, france, uk, us, other, data
 Valid tags: critical, high, medium, new, in-force, draft, proposed
@@ -215,7 +218,15 @@ Write the proposals to `/Users/nicolasbertrand/.claude/regulatory-watch/repo/pro
 ```
 
 ### 5e. Generate French translations for each proposal
-For each proposal in proposals.json, create a French-translated version of the card. The `id`, `action`, `existing_id`, topics (`tp`), tags (`tg`), variant (`v`), date (`d`), year (`y`), and URL (`u`) stay identical. Translate `t` (title), `x` (description), and `l` (date label, using French format: janv., févr., mars, avr., mai, juin, juill., août, sept., oct., nov., déc.).
+For each proposal in proposals.json, create an identical copy with French translations. These fields stay IDENTICAL (do not change them): `id` (proposal ID), `action`, `existing_id`, `card.id` (stable card ID), `card.d`, `card.y`, `card.u`, `card.tp`, `card.tg`, `card.v`.
+
+Translate these fields into French:
+- `card.t` — title in French
+- `card.x` — description in French
+- `card.l` — date label in French format (1er janv., 2 févr., 10 mars, 15 avr., mai, juin, 1er juill., août, sept., oct., nov., déc.)
+- `reason` — keep in English (internal)
+
+The proposal `id` (e.g. "proposal-2026-04-25-001") and `card.id` (e.g. "2026-04-25--some-english-slug") MUST be identical between EN and FR files. This is what allows a single approval in the back office to apply to both languages.
 
 Write the French proposals to `/Users/nicolasbertrand/.claude/regulatory-watch/repo/proposals-fr.json` with the same structure.
 
