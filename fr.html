@@ -689,7 +689,7 @@ async function init() {
 
     const approved = new Set(lsGet("rw_approved_proposals"));
     const deleted = new Set(lsGet("rw_deleted_cards"));
-    comments = (() => { try { return JSON.parse(localStorage.getItem("rw_comments")||"{}"); } catch(e){ return {}; } })();
+    comments = (() => { try { return JSON.parse(localStorage.getItem("rw_comments_fr")||"{}"); } catch(e){ return {}; } })();
 
     // Start with base milestones, remove deleted
     M = base.filter(m => !deleted.has(cardId(m)));

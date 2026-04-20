@@ -260,7 +260,12 @@
   .tp-data { background: oklch(93% 0.04 290); color: oklch(35% 0.12 290); }
 
   .cell-toggle { width: 52px; text-align: center; }
-  .cell-comment { min-width: 160px; }
+  .cell-comment { min-width: 300px; }
+  .comment-pair {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
   .comment-input {
     width: 100%;
     padding: 5px 8px;
@@ -600,7 +605,7 @@
         <th>Date</th>
         <th>Topics</th>
         <th>Milestone</th>
-        <th>Comment</th>
+        <th>Comments</th>
       </tr>
     </thead>
     <tbody id="tbody"></tbody>
@@ -658,15 +663,17 @@ function saveDeletedCards(arr){
   localStorage.setItem("rw_deleted_cards",JSON.stringify(arr));
 }
 
-function getComments(){
-  try { return JSON.parse(localStorage.getItem("rw_comments")||"{}"); }
+function getComments(lang){
+  const key = lang === "fr" ? "rw_comments_fr" : "rw_comments";
+  try { return JSON.parse(localStorage.getItem(key)||"{}"); }
   catch(e){ return {}; }
 }
-function saveComment(cardId, text){
-  const c = getComments();
+function saveComment(cardId, text, lang){
+  const key = lang === "fr" ? "rw_comments_fr" : "rw_comments";
+  const c = getComments(lang);
   if(text.trim()) c[cardId] = text.trim();
   else delete c[cardId];
-  localStorage.setItem("rw_comments", JSON.stringify(c));
+  localStorage.setItem(key, JSON.stringify(c));
   showToast();
 }
 
@@ -837,8 +844,9 @@ function buildTable(){
     else if (updatedCardIds.has(id)) indicator = `<span class="indicator-updated">UPDATED</span>`;
 
     html+=`<td><span class="cell-title">${m.tg.map(g=>`<span class="ms-tag tag-${g}">${TG[g]||g}</span>`).join("")} ${m.t}${indicator}</span></td>`;
-    const comment = getComments()[id] || "";
-    html+=`<td class="cell-comment"><input type="text" class="comment-input" data-comment-id="${id}" value="${comment.replace(/"/g,'&quot;')}" placeholder="Add comment..."></td>`;
+    const commentEn = (getComments("en")[id] || "").replace(/"/g,'&quot;');
+    const commentFr = (getComments("fr")[id] || "").replace(/"/g,'&quot;');
+    html+=`<td class="cell-comment"><div class="comment-pair"><input type="text" class="comment-input" data-comment-id="${id}" data-comment-lang="en" value="${commentEn}" placeholder="Add an EN comment..."><input type="text" class="comment-input" data-comment-id="${id}" data-comment-lang="fr" value="${commentFr}" placeholder="Commentaire en FR..."></div></td>`;
     html+=`</tr>`;
   });
 
@@ -862,7 +870,7 @@ document.getElementById("tbody").addEventListener("change",e=>{
 // Comment handler (save on blur or enter)
 document.getElementById("tbody").addEventListener("change", e => {
   if (!e.target.matches(".comment-input")) return;
-  saveComment(e.target.dataset.commentId, e.target.value);
+  saveComment(e.target.dataset.commentId, e.target.value, e.target.dataset.commentLang);
 });
 document.getElementById("tbody").addEventListener("keydown", e => {
   if (e.target.matches(".comment-input") && e.key === "Enter") {
