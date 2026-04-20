@@ -690,6 +690,8 @@ async function init() {
     const approved = new Set(lsGet("rw_approved_proposals"));
     const deleted = new Set(lsGet("rw_deleted_cards"));
     comments = (() => { try { return JSON.parse(localStorage.getItem("rw_comments_fr")||"{}"); } catch(e){ return {}; } })();
+    const tagOverrides = (() => { try { return JSON.parse(localStorage.getItem("rw_tag_overrides")||"{}"); } catch(e){ return {}; } })();
+    M.forEach(m => { const o = tagOverrides[cardId(m)]; if (o) m.tg = [o]; });
 
     // Start with base milestones, remove deleted
     M = base.filter(m => !deleted.has(cardId(m)));

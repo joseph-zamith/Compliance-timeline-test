@@ -281,6 +281,38 @@
   .comment-input:focus { border-color: var(--gold); }
   .comment-input::placeholder { color: var(--ink-muted); font-style: italic; }
 
+  /* Tag editor */
+  .tag-editable {
+    cursor: pointer;
+    position: relative;
+  }
+  .tag-editable:hover { opacity: 0.8; }
+  .tag-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 50;
+    background: var(--surface-1);
+    border: 1.5px solid var(--surface-3);
+    border-radius: 6px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 100px;
+    box-shadow: 0 4px 12px oklch(20% 0.02 260 / 0.12);
+  }
+  .tag-dropdown .ms-tag {
+    cursor: pointer;
+    padding: 4px 10px;
+    display: block;
+    text-align: left;
+  }
+  .tag-dropdown .ms-tag:hover {
+    outline: 1.5px solid var(--gold);
+    outline-offset: -1px;
+  }
+
   .ms-tag {
     display: inline-block;
     font-size: 0.5625rem;
@@ -677,6 +709,17 @@ function saveComment(cardId, text, lang){
   showToast();
 }
 
+function getTagOverrides(){
+  try { return JSON.parse(localStorage.getItem("rw_tag_overrides")||"{}"); }
+  catch(e){ return {}; }
+}
+function saveTagOverride(cardId, tag){
+  const o = getTagOverrides();
+  o[cardId] = tag;
+  localStorage.setItem("rw_tag_overrides", JSON.stringify(o));
+  showToast();
+}
+
 function showToast(){
   const t=document.getElementById("toast");
   t.classList.add("visible");
@@ -843,7 +886,9 @@ function buildTable(){
     if (addedCardIds.has(id)) indicator = `<span class="indicator-new">NEW</span>`;
     else if (updatedCardIds.has(id)) indicator = `<span class="indicator-updated">UPDATED</span>`;
 
-    html+=`<td><span class="cell-title">${m.tg.map(g=>`<span class="ms-tag tag-${g}">${TG[g]||g}</span>`).join("")} ${m.t}${indicator}</span></td>`;
+    const overriddenTag = getTagOverrides()[id];
+    const displayTag = overriddenTag || m.tg[0] || "medium";
+    html+=`<td><span class="cell-title"><span class="tag-editable" data-tag-id="${id}" data-current-tag="${displayTag}"><span class="ms-tag tag-${displayTag}">${TG[displayTag]||displayTag}</span></span> ${m.t}${indicator}</span></td>`;
     const commentEn = (getComments("en")[id] || "").replace(/"/g,'&quot;');
     const commentFr = (getComments("fr")[id] || "").replace(/"/g,'&quot;');
     html+=`<td class="cell-comment"><div class="comment-pair"><input type="text" class="comment-input" data-comment-id="${id}" data-comment-lang="en" value="${commentEn}" placeholder="Add an EN comment..."><input type="text" class="comment-input" data-comment-id="${id}" data-comment-lang="fr" value="${commentFr}" placeholder="Commentaire en FR..."></div></td>`;
@@ -875,6 +920,58 @@ document.getElementById("tbody").addEventListener("change", e => {
 document.getElementById("tbody").addEventListener("keydown", e => {
   if (e.target.matches(".comment-input") && e.key === "Enter") {
     e.target.blur();
+  }
+});
+
+// Tag editor
+let openDropdown = null;
+const ALL_TAGS = ["critical","high","medium","new","in-force","draft","proposed"];
+
+document.getElementById("tbody").addEventListener("click", e => {
+  const editable = e.target.closest(".tag-editable");
+  if (!editable) {
+    // Click outside — close any open dropdown
+    if (openDropdown) { openDropdown.remove(); openDropdown = null; }
+    return;
+  }
+
+  // Close existing dropdown
+  if (openDropdown) { openDropdown.remove(); openDropdown = null; }
+
+  const cardId = editable.dataset.tagId;
+  const currentTag = editable.dataset.currentTag;
+
+  // Create dropdown
+  const dd = document.createElement("div");
+  dd.className = "tag-dropdown";
+  ALL_TAGS.forEach(tag => {
+    if (tag === currentTag) return;
+    const opt = document.createElement("span");
+    opt.className = `ms-tag tag-${tag}`;
+    opt.textContent = TG[tag] || tag;
+    opt.dataset.tag = tag;
+    opt.dataset.cardId = cardId;
+    dd.appendChild(opt);
+  });
+  editable.style.position = "relative";
+  editable.appendChild(dd);
+  openDropdown = dd;
+});
+
+document.getElementById("tbody").addEventListener("click", e => {
+  const opt = e.target.closest(".tag-dropdown .ms-tag");
+  if (!opt) return;
+  e.stopPropagation();
+  saveTagOverride(opt.dataset.cardId, opt.dataset.tag);
+  if (openDropdown) { openDropdown.remove(); openDropdown = null; }
+  buildTable();
+});
+
+// Close dropdown on outside click
+document.addEventListener("click", e => {
+  if (openDropdown && !e.target.closest(".tag-editable")) {
+    openDropdown.remove();
+    openDropdown = null;
   }
 });
 
