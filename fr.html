@@ -690,8 +690,6 @@ async function init() {
     const approved = new Set(lsGet("rw_approved_proposals"));
     const deleted = new Set(lsGet("rw_deleted_cards"));
     comments = (() => { try { return JSON.parse(localStorage.getItem("rw_comments_fr")||"{}"); } catch(e){ return {}; } })();
-    const tagOverrides = (() => { try { return JSON.parse(localStorage.getItem("rw_tag_overrides")||"{}"); } catch(e){ return {}; } })();
-    M.forEach(m => { const o = tagOverrides[cardId(m)]; if (o) m.tg = [o]; });
 
     // Start with base milestones, remove deleted
     M = base.filter(m => !deleted.has(cardId(m)));
@@ -710,6 +708,18 @@ async function init() {
     });
 
     M.sort((a, b) => new Date(a.d) - new Date(b.d));
+
+    // Apply tag overrides (must happen after M is fully built)
+    const tagOverrides = (() => { try { return JSON.parse(localStorage.getItem("rw_tag_overrides")||"{}"); } catch(e){ return {}; } })();
+    M.forEach(m => {
+      const o = tagOverrides[cardId(m)];
+      if (o) {
+        m.tg = [o];
+        if (o === "critical") m.v = "c";
+        else if (o === "high") m.v = "h";
+        else m.v = "n";
+      }
+    });
   } catch(e) {
     console.error("Failed to load timeline data:", e);
     document.getElementById("tl").innerHTML = '<p style="padding:32px;color:var(--ink-muted);">\u00c9chec du chargement des donn\u00e9es.</p>';
