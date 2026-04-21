@@ -27,7 +27,8 @@
     "2026-09-11--cra-vulnerability-reporting-begins": "medium",
     "2026-11-01--uk-pre-market-si-samd-up-classification": "critical",
     "2026-11-28--eudamed-existing-devices-registration-deadline": "in-force",
-    "2027-03-01--ehds-implementing-acts-deadline": "in-force"
+    "2027-03-01--ehds-implementing-acts-deadline": "in-force",
+    "2027-06-01--mdr-ivdr-simplification-earliest-adoption": "critical"
   },
   "approval_dates": {
     "proposal-2026-04-17-001": "2026-04-21",
