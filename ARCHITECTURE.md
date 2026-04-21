@@ -70,32 +70,55 @@ All admin decisions are persisted in `decisions.json` within the GitHub repo, ma
 └──────────────────────────────────────────────────────────────┘
 ```
 
-### decisions.json — The Cross-Device State Store
+### decisions.json — Dual Storage (Instant + Cross-Device)
+
+Admin decisions are stored in two layers:
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  decisions.json (committed to repo via GitHub API)           │
-│                                                              │
-│  {                                                           │
-│    "hidden_cards":        [...],   ← shared EN + FR          │
-│    "approved_proposals":  [...],   ← shared EN + FR          │
-│    "rejected_proposals":  [...],   ← shared EN + FR          │
-│    "deleted_cards":       [...],   ← shared EN + FR          │
-│    "comments":            {...},   ← EN comments only        │
-│    "comments_fr":         {...},   ← FR comments only        │
-│    "tag_overrides":       {...},   ← shared EN + FR          │
-│    "approval_dates":      {...}    ← shared EN + FR          │
-│  }                                                           │
-└─────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────┐
+│  Layer 1: localStorage (instant, same browser)            │
+│  Key: "rw_decisions"                                      │
+│  Written: on every admin action (synchronous)             │
+│  Read by: timelines on same browser (fallback)            │
+│                                                           │
+│  Layer 2: decisions.json in GitHub repo (cross-device)    │
+│  Written: async after each admin action via GitHub API    │
+│  Read by: all timelines on all devices (primary)          │
+└──────────────────────────────────────────────────────────┘
 
-Admin writes via GitHub Contents API:
-  PUT /repos/{owner}/{repo}/contents/decisions.json
-  Authorization: token {PAT}
-  Body: { message, content (base64), sha }
+Admin action flow:
+  1. User clicks Approve/Reject/Hide/Comment/Tag
+  2. In-memory `decisions` object updated
+  3. Saved to localStorage instantly → toast "Saved"
+  4. If PAT is set: async PUT to GitHub API → toast "Synced"
+  5. If no PAT: stays local only (still fully functional)
 
-Timelines read via simple fetch:
-  GET https://...github.io/.../decisions.json
+Timeline load flow:
+  1. fetch(decisions.json) from GitHub Pages
+  2. If non-empty → use it (cross-device state)
+  3. If empty or fetch fails → read localStorage("rw_decisions")
+  4. Merge with data.json + proposals.json → render
+
+Structure of decisions:
+  {
+    "hidden_cards":        [...],   ← shared EN + FR
+    "approved_proposals":  [...],   ← shared EN + FR
+    "rejected_proposals":  [...],   ← shared EN + FR
+    "deleted_cards":       [...],   ← shared EN + FR
+    "comments":            {...},   ← EN comments only
+    "comments_fr":         {...},   ← FR comments only
+    "tag_overrides":       {...},   ← shared EN + FR
+    "approval_dates":      {...}    ← shared EN + FR
+  }
 ```
+
+### GitHub PAT Setup (for cross-device sync)
+
+The admin page has a PAT field in the top bar with a status indicator:
+- **"Connected"** (green) — PAT is set, decisions sync to all devices
+- **"Local only"** (grey) — no PAT, decisions stay in this browser
+
+PAT is stored in browser localStorage (`rw_github_token`), entered once, auto-filled on subsequent visits. Requires `repo` scope. Created at https://github.com/settings/tokens.
 
 ---
 
@@ -149,7 +172,7 @@ Format: `{YYYY-MM-DD}--{lowercase-english-slug}`
 ```
 fetch(data.json)       → 37 base milestones (EN)
 fetch(proposals.json)  → pending proposals (EN)
-fetch(decisions.json)  → admin decisions (shared)
+fetch(decisions.json)  → admin decisions (try repo, fallback localStorage)
 
 Merge:
   base milestones
@@ -192,14 +215,14 @@ Same structure as EN. Differences:
 
 **URL:** `https://nicolasbertrand-qara.github.io/Compliance-timeline/admin.html`
 
-**Authentication:** GitHub Personal Access Token (repo scope) entered in the top bar. Stored in browser localStorage (never sent anywhere except GitHub API).
+**Authentication:** Optional GitHub PAT in the top bar (for cross-device sync). Without PAT, everything works locally.
 
 **How it works:**
-1. On load: fetches `decisions.json` via GitHub API (gets file content + SHA)
+1. On load: tries GitHub API for `decisions.json` (gets content + SHA), falls back to localStorage, then to Pages fetch
 2. Admin makes changes (approve, reject, hide, comment, tag edit)
 3. Each change updates in-memory `decisions` object
-4. Pushes updated `decisions.json` to GitHub via Contents API (PUT with SHA)
-5. GitHub Actions deploys → all users see changes on next page load
+4. Saves to localStorage immediately (instant for same browser)
+5. If PAT is set: async push to GitHub → "Synced" toast → all devices see changes after deploy (~30s)
 
 **Three functional areas:**
 
@@ -290,7 +313,7 @@ Same structure as EN. Differences:
 }
 ```
 
-Written by the admin via GitHub Contents API. Read by timelines via simple fetch.
+Written by admin to localStorage (instant) + GitHub API (async). Read by timelines from GitHub Pages (primary) or localStorage (fallback).
 
 ---
 
@@ -311,11 +334,12 @@ Friday 8am: Cron runs
 
 Admin opens back office
   → Reviews proposals (approve/reject)
-  → decisions.json committed via GitHub API → deploy
+  → Saved to localStorage instantly (same browser)
+  → If PAT set: pushed to decisions.json via GitHub API → deploy
 
-Any user on any device loads timeline
-  → Fetches data + proposals + decisions
-  → Sees the curated, consistent view
+Same browser: timeline reflects changes instantly (localStorage)
+Other devices: see changes after GitHub Pages deploy (~30s)
+No PAT: everything works locally, no cross-device sync
 ```
 
 ---
@@ -373,18 +397,22 @@ Local only:
 
 ## Limitations
 
-1. **GitHub API rate limits.** Unauthenticated: 60 req/hr. With PAT: 5,000 req/hr. Each admin action = 1 PUT. Unlikely to hit limits in normal use.
+1. **Cross-device sync requires a GitHub PAT.** Without it, decisions stay in localStorage (same browser only). PAT needs `repo` scope and is entered once in the admin.
 
-2. **Deploy delay.** After decisions.json is committed, GitHub Pages takes ~30s to deploy. Other users won't see changes until the next deploy completes.
+2. **Deploy delay for cross-device.** After admin commits decisions.json, GitHub Pages takes ~30s to deploy. Same-browser changes are instant (localStorage).
 
-3. **No authentication on the admin page.** Anyone with the URL can view it. But writing requires a valid GitHub PAT, so only token holders can make changes.
+3. **GitHub API rate limits.** With PAT: 5,000 req/hr. Each admin action = 1 PUT. Unlikely to hit limits.
 
-4. **Cron requires Mac to be on.** 4-hour catch-up window via `StartCalendarIntervalAllowedDelay`.
+4. **No authentication on the admin page.** Anyone can view it. Writing to GitHub requires a valid PAT, so only token holders can change decisions. Read-only viewers see the same state.
 
-5. **gws auth token expiration.** May require re-authentication for email sending.
+5. **Cron requires Mac to be on.** 4-hour catch-up window via `StartCalendarIntervalAllowedDelay`.
 
-6. **Proposals overwritten weekly.** Undecided proposals are lost when the next batch arrives.
+6. **gws auth token expiration.** May require re-authentication for email sending.
 
-7. **Single-font design.** Poppins only (Theodo HealthTech brand requirement).
+7. **Proposals overwritten weekly.** Undecided proposals are lost when the next batch arrives.
 
-8. **Comments are per-language but not enforced.** Admin can add EN comment without FR (or vice versa).
+8. **Single-font design.** Poppins only (Theodo HealthTech brand requirement).
+
+9. **Comments are per-language but not enforced.** Admin can add EN comment without FR (or vice versa).
+
+10. **Concurrent edits.** If two admins edit simultaneously, the second push may fail (SHA mismatch). The page must be reloaded to get the latest SHA.
