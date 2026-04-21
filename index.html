@@ -548,6 +548,13 @@
       <button class="filter-btn" data-topic="us"><span class="dot" style="background:var(--c-us)"></span>US (FDA)</button>
       <button class="filter-btn" data-topic="other"><span class="dot" style="background:var(--c-other)"></span>Other Regions</button>
     </div>
+    <div class="filter-sep"></div>
+    <div class="filters-label">Recency</div>
+    <div class="filters" id="recency-filters">
+      <button class="filter-btn filter-btn-all active" data-recency="all">All</button>
+      <button class="filter-btn" data-recency="week">Last week</button>
+      <button class="filter-btn" data-recency="month">Last month</button>
+    </div>
     <div class="filter-stats">
       <div class="filter-stat"><span class="filter-stat-label">Showing</span><span class="filter-stat-num" id="s-visible">0</span></div>
       <div class="filter-stat"><span class="filter-stat-label">Total</span><span class="filter-stat-num" id="s-total">0</span></div>
@@ -585,6 +592,8 @@ const TG={critical:"CRITICAL",high:"HIGH",medium:"MEDIUM","new":"NEW","in-force"
 
 let M = [];
 let comments = {};
+let cardAddedDates = {}; // cardId -> ISO date string
+let activeRecency = "all";
 
 // 3-state filter logic
 const included = new Set();
@@ -608,6 +617,17 @@ function refreshHidden() { _hidden = new Set(lsGet("rw_hidden_cards")); }
 
 function isVis(m) {
   if (_hidden.has(cardId(m))) return false;
+  // Recency filter
+  if (activeRecency !== "all") {
+    const added = cardAddedDates[cardId(m)];
+    if (!added) return false; // base cards without a date are hidden in recency mode
+    const addedDate = new Date(added);
+    const now = new Date();
+    const diffDays = (now - addedDate) / (1000 * 60 * 60 * 24);
+    if (activeRecency === "week" && diffDays > 7) return false;
+    if (activeRecency === "month" && diffDays > 31) return false;
+  }
+  // Topic filters
   if (isAllDefault()) return true;
   if (included.size > 0) return m.tp.some(t => included.has(t));
   if (m.tp.some(t => excluded.has(t))) return false;
@@ -671,6 +691,16 @@ document.getElementById("filters").addEventListener("click", e => {
   render();
 });
 
+// Recency filter
+document.getElementById("recency-filters").addEventListener("click", e => {
+  const btn = e.target.closest(".filter-btn");
+  if (!btn) return;
+  activeRecency = btn.dataset.recency;
+  document.querySelectorAll("#recency-filters .filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  render();
+});
+
 // Load data and proposals, merge, then render
 async function init() {
   try {
@@ -680,9 +710,10 @@ async function init() {
 
     // Load proposals + approval state
     let proposals = [];
+    let proposalsGenDate = null;
     try {
       const pResp = await fetch("proposals.json");
-      if (pResp.ok) { const pd = await pResp.json(); proposals = pd.proposals || []; }
+      if (pResp.ok) { const pd = await pResp.json(); proposals = pd.proposals || []; proposalsGenDate = pd.generated || null; }
     } catch(e) {}
 
     const approved = new Set(lsGet("rw_approved_proposals"));
@@ -706,6 +737,16 @@ async function init() {
     });
 
     M.sort((a, b) => new Date(a.d) - new Date(b.d));
+
+    // Track when cards were added/updated (for recency filter)
+    const approvalDates = (() => { try { return JSON.parse(localStorage.getItem("rw_approval_dates")||"{}"); } catch(e){ return {}; } })();
+    proposals.forEach(p => {
+      if (!approved.has(p.id)) return;
+      const cid = p.card ? (p.card.id || cardId(p.card)) : p.existing_id;
+      if (cid) {
+        cardAddedDates[cid] = approvalDates[p.id] || proposalsGenDate || new Date().toISOString().slice(0,10);
+      }
+    });
 
     // Apply tag overrides (must happen after M is fully built)
     const tagOverrides = (() => { try { return JSON.parse(localStorage.getItem("rw_tag_overrides")||"{}"); } catch(e){ return {}; } })();

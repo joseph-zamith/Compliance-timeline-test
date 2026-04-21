@@ -1016,10 +1016,13 @@ document.getElementById("proposals-section").addEventListener("click", e => {
     const action = approveBtn.dataset.action;
     const existingId = approveBtn.dataset.existing;
 
-    // Add to approved
+    // Add to approved + record approval date
     const approved = getApprovedProposals();
     if (!approved.includes(pid)) approved.push(pid);
     saveApprovedProposals(approved);
+    const dates = (() => { try { return JSON.parse(localStorage.getItem("rw_approval_dates")||"{}"); } catch(e){ return {}; } })();
+    dates[pid] = new Date().toISOString().slice(0,10);
+    localStorage.setItem("rw_approval_dates", JSON.stringify(dates));
 
     // Remove from rejected if present
     const rejected = getRejectedProposals().filter(id => id !== pid);
