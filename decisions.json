@@ -16,7 +16,9 @@
   "deleted_cards": [],
   "comments": {},
   "comments_fr": {},
-  "tag_overrides": {},
+  "tag_overrides": {
+    "2026-04-16--cnil-has-ai-healthcare-guide-consultation-closed": "medium"
+  },
   "approval_dates": {
     "proposal-2026-04-17-001": "2026-04-21",
     "proposal-2026-04-17-004": "2026-04-21",
