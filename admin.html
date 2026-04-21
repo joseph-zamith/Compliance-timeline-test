@@ -71,6 +71,24 @@
     margin-top: 1px;
   }
   .topbar h1 span { color: var(--gold); font-weight: 600; }
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  .gh-token-input {
+    width: 140px;
+    padding: 4px 8px;
+    border: 1px solid oklch(35% 0.04 260);
+    border-radius: 4px;
+    background: oklch(28% 0.04 260);
+    color: oklch(75% 0.01 260);
+    font-family: inherit;
+    font-size: 0.6875rem;
+    outline: none;
+  }
+  .gh-token-input:focus { border-color: var(--gold); }
+  .gh-token-input::placeholder { color: oklch(50% 0.01 260); }
   .topbar-link {
     font-size: 0.75rem;
     font-weight: 500;
@@ -612,7 +630,10 @@
     <img src="logo.png" alt="Theodo HealthTech" class="topbar-logo">
     <h1>Regulatory Timeline <span>Back Office</span></h1>
   </div>
-  <a href="index.html" class="topbar-link">&larr; View timeline</a>
+  <div class="topbar-right">
+    <input type="password" id="gh-token" class="gh-token-input" placeholder="GitHub PAT" title="Personal Access Token (repo scope) for saving decisions">
+    <a href="index.html" class="topbar-link">&larr; View timeline</a>
+  </div>
 </div>
 
 <div class="page">
@@ -647,15 +668,6 @@
 <div class="toast" id="toast">Saved</div>
 
 <script>
-// One-time migration: clear old title-based localStorage keys
-if (localStorage.getItem("rw_migrated_to_stable_ids") !== "3") {
-  ["rw_hidden_cards","rw_approved_proposals","rw_rejected_proposals","rw_deleted_cards",
-   "rw_approved_proposals_fr","rw_rejected_proposals_fr","rw_deleted_cards_fr","rw_hidden_cards_fr","rw_comments_fr"
-  ].forEach(k => localStorage.removeItem(k));
-  localStorage.setItem("rw_migrated_to_stable_ids", "3");
-  console.log("Migrated: cleared old localStorage keys for stable ID transition");
-}
-
 let M = [];
 let allProposals = [];
 
@@ -664,67 +676,108 @@ function cardId(m){ return m.id || m.d+"__"+m.t.slice(0,40).replace(/\W+/g,"_");
 const TL={mdr:"EU MDR/IVDR",ai:"AI Act",standards:"Standards",cyber:"Cybersecurity",france:"France",uk:"UK",us:"US (FDA)",other:"Other Regions",data:"Data / EHDS"};
 const TG={critical:"CRITICAL",high:"HIGH",medium:"MEDIUM","new":"NEW","in-force":"IN FORCE"};
 
-/* ===== localStorage helpers ===== */
-function getHidden(){
-  try { return new Set(JSON.parse(localStorage.getItem("rw_hidden_cards")||"[]")); }
-  catch(e){ return new Set(); }
+/* ===== decisions.json — shared state via GitHub repo ===== */
+const REPO_OWNER = "nicolasbertrand-QARA";
+const REPO_NAME = "Compliance-timeline";
+const DEC_PATH = "decisions.json";
+
+let decisions = {
+  hidden_cards: [], approved_proposals: [], rejected_proposals: [],
+  deleted_cards: [], comments: {}, comments_fr: {},
+  tag_overrides: {}, approval_dates: {}
+};
+let decisionsSha = null; // GitHub file SHA for updates
+
+function getGitHubToken() { return localStorage.getItem("rw_github_token") || ""; }
+
+async function pushDecisions() {
+  const token = getGitHubToken();
+  if (!token) {
+    showToast("Set GitHub token first!");
+    return;
+  }
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(decisions, null, 2))));
+  try {
+    const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DEC_PATH}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `token ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: "Update decisions from back office",
+        content: content,
+        sha: decisionsSha,
+      }),
+    });
+    if (resp.ok) {
+      const data = await resp.json();
+      decisionsSha = data.content.sha;
+      showToast();
+    } else {
+      const err = await resp.json();
+      console.error("GitHub push failed:", err);
+      showToast("Push failed — check console");
+    }
+  } catch(e) {
+    console.error("GitHub push error:", e);
+    showToast("Push failed — check console");
+  }
 }
+
+// Accessors that read from in-memory decisions object
+function getHidden(){ return new Set(decisions.hidden_cards || []); }
 function saveHidden(set){
-  localStorage.setItem("rw_hidden_cards",JSON.stringify([...set]));
-  showToast();
+  decisions.hidden_cards = [...set];
+  pushDecisions();
 }
-function getApprovedProposals(){
-  try { return JSON.parse(localStorage.getItem("rw_approved_proposals")||"[]"); }
-  catch(e){ return []; }
-}
+function getApprovedProposals(){ return decisions.approved_proposals || []; }
 function saveApprovedProposals(arr){
-  localStorage.setItem("rw_approved_proposals",JSON.stringify(arr));
+  decisions.approved_proposals = arr;
+  pushDecisions();
 }
-function getRejectedProposals(){
-  try { return JSON.parse(localStorage.getItem("rw_rejected_proposals")||"[]"); }
-  catch(e){ return []; }
-}
+function getRejectedProposals(){ return decisions.rejected_proposals || []; }
 function saveRejectedProposals(arr){
-  localStorage.setItem("rw_rejected_proposals",JSON.stringify(arr));
+  decisions.rejected_proposals = arr;
+  pushDecisions();
 }
-function getDeletedCards(){
-  try { return JSON.parse(localStorage.getItem("rw_deleted_cards")||"[]"); }
-  catch(e){ return []; }
-}
+function getDeletedCards(){ return decisions.deleted_cards || []; }
 function saveDeletedCards(arr){
-  localStorage.setItem("rw_deleted_cards",JSON.stringify(arr));
+  decisions.deleted_cards = arr;
+  pushDecisions();
 }
-
 function getComments(lang){
-  const key = lang === "fr" ? "rw_comments_fr" : "rw_comments";
-  try { return JSON.parse(localStorage.getItem(key)||"{}"); }
-  catch(e){ return {}; }
+  return lang === "fr" ? (decisions.comments_fr || {}) : (decisions.comments || {});
 }
-function saveComment(cardId, text, lang){
-  const key = lang === "fr" ? "rw_comments_fr" : "rw_comments";
-  const c = getComments(lang);
-  if(text.trim()) c[cardId] = text.trim();
-  else delete c[cardId];
-  localStorage.setItem(key, JSON.stringify(c));
-  showToast();
+function saveComment(cid, text, lang){
+  const key = lang === "fr" ? "comments_fr" : "comments";
+  if (!decisions[key]) decisions[key] = {};
+  if (text.trim()) decisions[key][cid] = text.trim();
+  else delete decisions[key][cid];
+  pushDecisions();
 }
-
-function getTagOverrides(){
-  try { return JSON.parse(localStorage.getItem("rw_tag_overrides")||"{}"); }
-  catch(e){ return {}; }
-}
-function saveTagOverride(cardId, tag){
-  const o = getTagOverrides();
-  o[cardId] = tag;
-  localStorage.setItem("rw_tag_overrides", JSON.stringify(o));
-  showToast();
+function getTagOverrides(){ return decisions.tag_overrides || {}; }
+function saveTagOverride(cid, tag){
+  if (!decisions.tag_overrides) decisions.tag_overrides = {};
+  decisions.tag_overrides[cid] = tag;
+  pushDecisions();
 }
 
-function showToast(){
+// GitHub token persistence
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("gh-token");
+  input.value = getGitHubToken();
+  input.addEventListener("change", () => {
+    localStorage.setItem("rw_github_token", input.value.trim());
+  });
+});
+
+function showToast(msg){
   const t=document.getElementById("toast");
+  t.textContent = msg || "Saved";
   t.classList.add("visible");
   clearTimeout(t._timer);
-  t._timer=setTimeout(()=>t.classList.remove("visible"),1200);
+  t._timer=setTimeout(()=>t.classList.remove("visible"),1500);
 }
 
 let hidden = getHidden();
@@ -1020,9 +1073,8 @@ document.getElementById("proposals-section").addEventListener("click", e => {
     const approved = getApprovedProposals();
     if (!approved.includes(pid)) approved.push(pid);
     saveApprovedProposals(approved);
-    const dates = (() => { try { return JSON.parse(localStorage.getItem("rw_approval_dates")||"{}"); } catch(e){ return {}; } })();
-    dates[pid] = new Date().toISOString().slice(0,10);
-    localStorage.setItem("rw_approval_dates", JSON.stringify(dates));
+    if (!decisions.approval_dates) decisions.approval_dates = {};
+    decisions.approval_dates[pid] = new Date().toISOString().slice(0,10);
 
     // Remove from rejected if present
     const rejected = getRejectedProposals().filter(id => id !== pid);
@@ -1110,37 +1162,51 @@ document.getElementById("proposals-section").addEventListener("click", e => {
   }
 });
 
-/* ===== Init: fetch data ===== */
+/* ===== Init: fetch data + decisions ===== */
 async function init() {
   try {
-    const dataResp = await fetch("data.json");
+    // Fetch data, proposals, and decisions in parallel
+    const [dataResp, propResp, decResp] = await Promise.all([
+      fetch("data.json"),
+      fetch("proposals.json").catch(() => null),
+      fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DEC_PATH}`).catch(() => null),
+    ]);
+
     if (!dataResp.ok) throw new Error("Failed to load data.json");
     let baseMilestones = await dataResp.json();
 
-    // Fetch proposals
-    try {
-      const propResp = await fetch("proposals.json");
-      if (propResp.ok) {
-        const propData = await propResp.json();
-        allProposals = propData.proposals || [];
+    if (propResp && propResp.ok) {
+      const propData = await propResp.json();
+      allProposals = propData.proposals || [];
+    }
+
+    // Load decisions from GitHub API (to get SHA for future updates)
+    if (decResp && decResp.ok) {
+      const ghFile = await decResp.json();
+      decisionsSha = ghFile.sha;
+      try {
+        decisions = JSON.parse(atob(ghFile.content.replace(/\n/g, "")));
+      } catch(e) {
+        console.warn("Failed to parse decisions.json:", e);
       }
-    } catch(e) { allProposals = []; }
+    } else {
+      // Fallback: fetch from Pages
+      try {
+        const fallback = await fetch("decisions.json");
+        if (fallback.ok) decisions = await fallback.json();
+      } catch(e) {}
+    }
 
     const approvedIds = new Set(getApprovedProposals());
-    const deletedCardsList = getDeletedCards();
-    const deletedCards = new Set(deletedCardsList);
+    const deletedCards = new Set(getDeletedCards());
 
-    // Remove deleted cards
     baseMilestones = baseMilestones.filter(m => !deletedCards.has(cardId(m)));
 
-    // Build card map
     const cardMap = new Map();
     baseMilestones.forEach(m => cardMap.set(cardId(m), m));
 
-    // Apply approved proposals
     allProposals.forEach(p => {
       if (!approvedIds.has(p.id)) return;
-
       if (p.action === "add" && p.card) {
         const newId = cardId(p.card);
         if (!cardMap.has(newId)) {

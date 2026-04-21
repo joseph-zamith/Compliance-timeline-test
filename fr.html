@@ -613,7 +613,8 @@ function cycleState(topic) {
 function isAllDefault() { return included.size === 0 && excluded.size === 0; }
 
 let _hidden = new Set();
-function refreshHidden() { _hidden = new Set(lsGet("rw_hidden_cards")); }
+let _decHidden = [];
+function refreshHidden() { _hidden = new Set(_decHidden); }
 
 function isVis(m) {
   if (_hidden.has(cardId(m))) return false;
@@ -697,31 +698,37 @@ document.getElementById("recency-filters").addEventListener("click", e => {
   render();
 });
 
-// Load data and proposals, merge, then render
+// Load data, proposals, decisions, merge, then render
 async function init() {
   try {
-    const resp = await fetch("data-fr.json");
-    if (!resp.ok) throw new Error("data-fr.json failed");
-    const base = await resp.json();
+    const [dataResp, propResp, decResp] = await Promise.all([
+      fetch("data-fr.json"),
+      fetch("proposals-fr.json").catch(() => fetch("proposals.json")).catch(() => null),
+      fetch("decisions.json").catch(() => null),
+    ]);
 
-    // French page: load French proposals if available, skip English ones
-    let proposals = [];
-    let proposalsGenDate = null;
-    try {
-      // Load French proposals for translated content, fall back to English
-      let pResp = await fetch("proposals-fr.json");
-      if (!pResp.ok) pResp = await fetch("proposals.json");
-      if (pResp.ok) { const pd = await pResp.json(); proposals = pd.proposals || []; proposalsGenDate = pd.generated || null; }
-    } catch(e) {}
+    if (!dataResp.ok) throw new Error("data-fr.json failed");
+    const base = await dataResp.json();
 
-    const approved = new Set(lsGet("rw_approved_proposals"));
-    const deleted = new Set(lsGet("rw_deleted_cards"));
-    comments = (() => { try { return JSON.parse(localStorage.getItem("rw_comments_fr")||"{}"); } catch(e){ return {}; } })();
+    let proposals = [], proposalsGenDate = null;
+    if (propResp && propResp.ok) {
+      const pd = await propResp.json();
+      proposals = pd.proposals || [];
+      proposalsGenDate = pd.generated || null;
+    }
 
-    // Start with base milestones, remove deleted
+    let dec = { hidden_cards:[], approved_proposals:[], deleted_cards:[], comments_fr:{}, tag_overrides:{}, approval_dates:{} };
+    if (decResp && decResp.ok) {
+      try { dec = await decResp.json(); } catch(e) {}
+    }
+
+    const approved = new Set(dec.approved_proposals || []);
+    const deleted = new Set(dec.deleted_cards || []);
+    _decHidden = dec.hidden_cards || [];
+    comments = dec.comments_fr || {};
+
     M = base.filter(m => !deleted.has(cardId(m)));
 
-    // Add approved "add" proposals, apply approved "update" proposals
     proposals.forEach(p => {
       if (!approved.has(p.id)) return;
       if (p.action === "add" && p.card) {
@@ -731,21 +738,18 @@ async function init() {
         if (idx >= 0) M[idx] = p.card;
         else M.push(p.card);
       }
-      // "delete" handled via rw_deleted_cards
     });
 
     M.sort((a, b) => new Date(a.d) - new Date(b.d));
 
-    // Track when cards were added/updated (for recency filter)
-    const approvalDates = (() => { try { return JSON.parse(localStorage.getItem("rw_approval_dates")||"{}"); } catch(e){ return {}; } })();
+    const approvalDates = dec.approval_dates || {};
     proposals.forEach(p => {
       if (!approved.has(p.id)) return;
       const cid = p.card ? (p.card.id || cardId(p.card)) : p.existing_id;
       if (cid) cardAddedDates[cid] = approvalDates[p.id] || proposalsGenDate || new Date().toISOString().slice(0,10);
     });
 
-    // Apply tag overrides (must happen after M is fully built)
-    const tagOverrides = (() => { try { return JSON.parse(localStorage.getItem("rw_tag_overrides")||"{}"); } catch(e){ return {}; } })();
+    const tagOverrides = dec.tag_overrides || {};
     M.forEach(m => {
       const o = tagOverrides[cardId(m)];
       if (o) {
