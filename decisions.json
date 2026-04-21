@@ -3,7 +3,8 @@
   "approved_proposals": [
     "proposal-2026-04-17-001",
     "proposal-2026-04-17-004",
-    "proposal-2026-04-17-005"
+    "proposal-2026-04-17-005",
+    "proposal-2026-04-17-006"
   ],
   "rejected_proposals": [
     "proposal-2026-04-17-002",
@@ -15,6 +16,7 @@
   "tag_overrides": {},
   "approval_dates": {
     "proposal-2026-04-17-001": "2026-04-21",
-    "proposal-2026-04-17-004": "2026-04-21"
+    "proposal-2026-04-17-004": "2026-04-21",
+    "proposal-2026-04-17-005": "2026-04-21"
   }
 }
