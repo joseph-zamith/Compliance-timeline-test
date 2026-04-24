@@ -1,201 +1,158 @@
 {
-  "generated": "2026-04-17",
+  "generated": "2026-04-24",
   "proposals": [
     {
-      "id": "proposal-2026-04-17-001",
+      "id": "proposal-2026-04-24-001",
       "action": "add",
-      "reason": "EU Commission announced pilot programme for breakthrough medical devices and IVDs on 15 April 2026, implementing MDCG 2025-9.",
+      "reason": "MDCG 2021-24 rev.1 published 20 April 2026 with updated classification guidance. Key changes to Rules 2, 8, 9, 10, 12, 16, 22.",
       "card": {
-        "d": "2026-04-15",
-        "l": "15 avr. 2026",
+        "id": "2026-04-20--mdcg-2021-24-rev1-classification-guidance-updated",
+        "d": "2026-04-20",
+        "l": "20 avr. 2026",
         "y": 2026,
-        "t": "Programme pilote UE pour les dispositifs innovants",
-        "x": "La Commission européenne a lancé un programme pilote de soutien aux dispositifs médicaux et DIV innovants (« breakthrough »). Couverture accélérée avec suivi post-marché renforcé.",
-        "u": "https://ec.europa.eu/newsroom/sante/newsletter-archives/74172",
-        "tp": [
-          "mdr"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n",
-        "id": "2026-04-15--eu-breakthrough-devices-pilot-programme-launched"
+        "t": "MDCG 2021-24 rev.1 — Guide de classification mis à jour",
+        "x": "Guide révisé sur la classification des dispositifs médicaux. Changements clés : « chirurgical » remplacé par « clinique » pour l'invasivité, mises à jour des Règles 2, 8, 9, 10, 12, 16 et 22 avec de nouveaux exemples. Pas de changement spécifique aux logiciels dans cette révision.",
+        "u": "https://health.ec.europa.eu/latest-updates/update-mdcg-2021-24-rev1-guidance-classification-medical-devices-april-2026-2026-04-20_en",
+        "tp": ["mdr", "standards"],
+        "tg": ["new"],
+        "v": "n"
       }
     },
     {
-      "id": "proposal-2026-04-17-002",
+      "id": "proposal-2026-04-24-002",
       "action": "add",
-      "reason": "MHRA secured GBP 3.6M to expand AI Airlock regulatory sandbox, announced April 2026. Phase 2 report expected Summer 2026.",
+      "reason": "Borderline and Classification Manual v5 published 22 April 2026 by European Commission.",
       "card": {
-        "d": "2026-04-15",
-        "l": "15 avr. 2026",
+        "id": "2026-04-22--borderline-classification-manual-v5",
+        "d": "2026-04-22",
+        "l": "22 avr. 2026",
         "y": 2026,
-        "t": "MHRA AI Airlock — Extension à 3,6 M£",
-        "x": "Le DHSC a alloué 1,2 M£/an sur 3 ans pour étendre le bac à sable réglementaire AI Airlock de la MHRA pour les dispositifs médicaux basés sur l'IA.",
-        "u": "https://www.digitalhealth.net/2026/04/mhra-secures-3-6m-to-expand-ai-regulatory-sandbox/",
-        "tp": [
-          "uk",
-          "ai"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n",
-        "id": "2026-04-15--mhra-ai-airlock-expansion-3-6m-funding"
+        "t": "Manuel Borderline & Classification v5 publié",
+        "x": "Cinquième version du Manuel sur les cas limites et la classification selon le MDR/IVDR. Nouvelles sections sur les dispositifs d'administration de médicaments. FAQ EMDN mises à jour sur les extensions de code 90 vs 92.",
+        "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-mdcg-endorsed-documents-and-other-guidance_en",
+        "tp": ["mdr"],
+        "tg": ["new"],
+        "v": "n"
       }
     },
     {
-      "id": "proposal-2026-04-17-003",
+      "id": "proposal-2026-04-24-003",
       "action": "add",
-      "reason": "UK and US announced deepened regulatory cooperation on medical devices in April 2026, exploring mutual recognition.",
+      "reason": "Digital Omnibus trilogue #2 scheduled for 28 April 2026, potentially finalizing AI Act high-risk deadline shifts for medical devices.",
       "card": {
-        "d": "2026-04-15",
-        "l": "15 avr. 2026",
+        "id": "2026-04-28--digital-omnibus-trilogue-2-ai-act-delays",
+        "d": "2026-04-28",
+        "l": "28 avr. 2026",
         "y": 2026,
-        "t": "Coopération réglementaire UK-US sur les dispositifs médicaux",
-        "x": "La MHRA et la FDA ont annoncé un renforcement de leur coopération sur la réglementation des DM, explorant de futurs mécanismes de reconnaissance mutuelle.",
-        "u": "https://www.gov.uk/government/news/uk-and-us-deepen-regulatory-cooperation-on-medical-devices-building-on-wider-pharmaceutical-partnership",
-        "tp": [
-          "uk",
-          "us"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n",
-        "id": "2026-04-15--uk-us-medical-device-regulatory-cooperation"
+        "t": "Omnibus numérique Trilogue #2 — Décision report IA Act",
+        "x": "Deuxième trilogue sur l'Omnibus numérique. Pourrait finaliser : IA HR Annexe III reportée à déc. 2027, Annexe I (dispositifs médicaux) à août 2028. Positions du Parlement et du Conseil confirmées en mars 2026.",
+        "u": "https://specculo.com/eu-ai-act-omnibus-hrai-delay-medical-devices/",
+        "tp": ["ai", "mdr"],
+        "tg": ["high"],
+        "v": "h"
       }
     },
     {
-      "id": "proposal-2026-04-17-004",
+      "id": "proposal-2026-04-24-004",
       "action": "add",
-      "reason": "Health Canada published pre-market guidance for ML-enabled medical devices on 1 April 2026.",
+      "reason": "IMDRF opened public consultation on AI/ML Lifecycle Framework on 10 April 2026, closing 10 July 2026.",
       "card": {
+        "id": "2026-07-10--imdrf-ai-ml-lifecycle-framework-consultation-closes",
+        "d": "2026-07-10",
+        "l": "10 juill. 2026",
+        "y": 2026,
+        "t": "IMDRF Cadre cycle de vie IA/ML — Fin de consultation",
+        "x": "Date limite de consultation publique pour le projet de cadre technique IMDRF sur la gestion du cycle de vie de l'intelligence artificielle. Document clé pour la convergence réglementaire mondiale des DM à IA.",
+        "u": "https://bioexcelife.com/2026/04/15/imdrfs-new-ai-ml-lifecycle-draft-could-reshape-global-medtech-compliance/",
+        "tp": ["standards", "ai"],
+        "tg": ["high"],
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-04-24-005",
+      "action": "add",
+      "reason": "South Korea granted first approval for a generative AI medical device (chest X-ray analysis) in April 2026.",
+      "card": {
+        "id": "2026-04-01--south-korea-first-generative-ai-md-approved",
         "d": "2026-04-01",
         "l": "1er avr. 2026",
         "y": 2026,
-        "t": "Canada : Guide DM avec apprentissage automatique",
-        "x": "Santé Canada a publié un guide pré-marché pour les dispositifs médicaux utilisant l'apprentissage automatique, couvrant les données d'entraînement, la validation et la surveillance continue.",
-        "u": "https://www.canada.ca/en/health-canada/services/drugs-health-products/medical-devices/application-information/guidance-documents/pre-market-guidance-machine-learning-enabled-medical-devices.html",
-        "tp": [
-          "other",
-          "ai"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n",
-        "id": "2026-04-01--canada-ml-enabled-medical-device-guidance-publish"
+        "t": "Corée du Sud : Premier DM à IA générative approuvé",
+        "x": "Le MFDS a approuvé le premier dispositif médical numérique utilisant l'IA générative. Analyse les radiographies thoraciques et résume les anomalies en texte. Jalon au-delà de l'IA conventionnelle d'analyse d'images.",
+        "u": "https://en.sedaily.com/culture/2026/04/01/korea-grants-first-approval-for-generative-ai-medical-device",
+        "tp": ["other", "ai"],
+        "tg": ["new"],
+        "v": "n"
       }
     },
     {
-      "id": "proposal-2026-04-17-005",
+      "id": "proposal-2026-04-24-006",
       "action": "add",
-      "reason": "IMDRF published 29th Management Committee meeting outcome statement on 7 April 2026, covering SaMD and AI/ML working group progress.",
+      "reason": "G_NIUS launched Simplific'ACTION initiative on 21 April 2026 for digital health regulatory simplification in France.",
       "card": {
-        "d": "2026-04-07",
-        "l": "7 avr. 2026",
+        "id": "2026-04-21--gnius-simplificaction-digital-health-france",
+        "d": "2026-04-21",
+        "l": "21 avr. 2026",
         "y": 2026,
-        "t": "IMDRF 29e réunion du Comité de gestion — Singapour",
-        "x": "Résultats de la 29e réunion publiés. N90 PCCP pour les MDSW en cours de finalisation (objectif T3 2026). N91 Cadre global de cybersécurité en consultation.",
-        "u": "https://www.imdrf.org/documents/imdrf-29th-mc-meeting-singapore-march-2026-outcome-statement",
-        "tp": [
-          "other",
-          "standards"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n",
-        "id": "2026-04-07--imdrf-29th-mc-meeting-singapore-outcome"
+        "t": "G_NIUS lance Simplific'ACTION (France)",
+        "x": "L'agence française du numérique en santé ANS/G_NIUS lance l'initiative Simplific'ACTION pour accompagner les innovateurs en santé numérique dans la simplification réglementaire. Également annoncé : appel à projets CE pour l'IA en imagerie médicale (22 avr.).",
+        "u": "https://gnius.esante.gouv.fr/fr/a-la-une/actualites/gnius-lance-simplificaction",
+        "tp": ["france"],
+        "tg": ["new"],
+        "v": "n"
       }
     },
     {
-      "id": "proposal-2026-04-17-006",
+      "id": "proposal-2026-04-24-007",
+      "action": "add",
+      "reason": "MHRA developing Early Access Service for innovative AI medical devices, initially targeting dementia diagnostics, launching 2026.",
+      "card": {
+        "id": "2026-06-01--mhra-early-access-service-ai-diagnostics",
+        "d": "2026-06-01",
+        "l": "2026",
+        "y": 2026,
+        "t": "MHRA Service d'accès anticipé — Diagnostics IA",
+        "x": "Voie d'accès conditionnelle au marché pour les dispositifs innovants répondant à des besoins cliniques non satisfaits. Ciblant initialement le diagnostic de la démence avec un objectif de 92 % en 18 semaines. Pertinent pour les fabricants d'IA-SaMD.",
+        "u": "https://med-techinsights.com/2026/04/21/a-pivotal-year-for-regulatory-reform-and-innovation/",
+        "tp": ["uk", "ai"],
+        "tg": ["new"],
+        "v": "n"
+      }
+    },
+    {
+      "id": "proposal-2026-04-24-008",
       "action": "update",
-      "reason": "CNIL/HAS AI Healthcare Guide consultation closed on 16 April 2026. Status changed from consultation open to publication expected Q2 2026.",
+      "reason": "CNIL/HAS AI Healthcare Guide consultation is now closed (16 Apr). Final joint recommendation expected Q2 2026.",
       "existing_id": "2026-04-16--cnil-has-ai-healthcare-guide-consultation-closes",
       "card": {
-        "d": "2026-04-16",
-        "l": "16 avr. 2026",
+        "id": "2026-04-16--cnil-has-ai-healthcare-guide-consultation-closes",
+        "d": "2026-06-30",
+        "l": "T2 2026",
         "y": 2026,
-        "t": "CNIL/HAS — Guide IA et Santé (consultation close)",
-        "x": "Guide conjoint sur le déploiement de l'IA en santé couvrant l'acquisition jusqu'à la désinstallation, la gouvernance et les spécificités de l'IA générative.",
-        "u": "https://www.cnil.fr/fr/ia-et-sante-la-has-et-la-cnil-lancent-une-consultation-publique-sur-un-projet-de-guide",
-        "tp": [
-          "france",
-          "ai"
-        ],
-        "tg": [
-          "in-force"
-        ],
-        "v": "n",
-        "id": "2026-04-16--cnil-has-ai-healthcare-guide-consultation-closed"
+        "t": "Guide IA CNIL/HAS — Publication finale attendue",
+        "x": "Recommandation conjointe sur le bon usage de l'IA en santé pour les professionnels et établissements. Consultation clôturée le 16 avr. 2026. Publication finale attendue T2 2026. Couvre le cadre juridique, la gouvernance, l'IA générative.",
+        "u": "https://www.cnil.fr/fr/accompagnement-des-professionnels-le-programme-de-travail-de-la-cnil-pour-2026",
+        "tp": ["france", "ai"],
+        "tg": ["high"],
+        "v": "h"
       }
     },
     {
-      "id": "proposal-2026-04-17-007",
+      "id": "proposal-2026-04-24-009",
       "action": "add",
-      "reason": "CNIL published guidance on tracking pixels in emails on 14 April 2026. Relevant for health apps using email communications.",
+      "reason": "EDPB adopted guidelines on scientific research and certification on 22 April 2026. Relevant for clinical evaluation data processing.",
       "card": {
-        "d": "2026-04-14",
-        "l": "14 avr. 2026",
+        "id": "2026-04-22--edpb-guidelines-scientific-research-certification",
+        "d": "2026-04-22",
+        "l": "22 avr. 2026",
         "y": 2026,
-        "t": "CNIL : Guide transparence sur les pixels de suivi",
-        "x": "La CNIL a publié un guide exigeant une meilleure transparence sur les pixels de suivi dans les e-mails. Pertinent pour les communications des fabricants de DM.",
-        "u": "https://www.cnil.fr/fr/pixels-de-suivi-dans-les-courriers-electroniques-vous-devez-etre-mieux-informes",
-        "tp": [
-          "france",
-          "data"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n",
-        "id": "2026-04-14--cnil-tracking-pixels-transparency-guidance"
-      }
-    },
-    {
-      "id": "proposal-2026-04-17-008",
-      "action": "add",
-      "reason": "Japan PMDA mandated eCTD v4.0 format from 1 April 2026 and established priority review for revolutionary SaMD.",
-      "card": {
-        "d": "2026-04-01",
-        "l": "1er avr. 2026",
-        "y": 2026,
-        "t": "Japon : eCTD v4.0 obligatoire + Examen prioritaire MDSW révolutionnaires",
-        "x": "Le PMDA n'accepte que le format eCTD v4.0 depuis le 1er avril 2026. Système d'examen prioritaire pour les MDSW révolutionnaires créant de nouvelles catégories thérapeutiques.",
-        "u": "https://mymedicallab.net/japan-medical-device-regulation-news/",
-        "tp": [
-          "other"
-        ],
-        "tg": [
-          "in-force"
-        ],
-        "v": "n",
-        "id": "2026-04-01--japan-ectd-v4-0-mandatory-revolutionary-samd-pr"
-      }
-    },
-    {
-      "id": "proposal-2026-04-17-009",
-      "action": "add",
-      "reason": "FDA held town hall on QMSR and risk-based inspections on 1 April 2026, providing clarity on the new inspection approach.",
-      "card": {
-        "d": "2026-04-01",
-        "l": "1er avr. 2026",
-        "y": 2026,
-        "t": "FDA Town Hall QMSR — Inspections basées sur les risques",
-        "x": "La FDA a tenu un Town Hall sur la mise en œuvre du QMSR et le nouveau programme d'inspection des DM basé sur les risques (7382.850).",
-        "u": "https://www.fda.gov/medical-devices/medical-devices-news-and-events/town-hall-fdas-quality-management-system-regulation-qmsr-medical-device-risk-based-inspections",
-        "tp": [
-          "us",
-          "standards"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n",
-        "id": "2026-04-01--fda-qmsr-town-hall-risk-based-inspections"
+        "t": "Lignes directrices CEPD : Recherche scientifique & certification",
+        "x": "Le Comité européen de la protection des données a adopté des lignes directrices sur la recherche scientifique et la certification. Pertinent pour les fabricants de DM traitant des données d'évaluation clinique et de surveillance post-commercialisation selon le RGPD.",
+        "u": "https://www.cnil.fr/fr/cepd-lignes-directrices-pour-la-recherche-scientifique-et-certification",
+        "tp": ["data"],
+        "tg": ["new"],
+        "v": "n"
       }
     }
   ]
