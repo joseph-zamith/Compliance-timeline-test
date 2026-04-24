@@ -705,11 +705,12 @@ document.getElementById("recency-filters").addEventListener("click", e => {
 // Load data, proposals, decisions, merge, then render
 async function init() {
   try {
-    // Fetch all data sources in parallel
+    // Fetch all data sources in parallel (cache-bust decisions.json)
+    const cacheBust = "?t=" + Date.now();
     const [dataResp, propResp, decResp] = await Promise.all([
       fetch("data.json"),
       fetch("proposals.json").catch(() => null),
-      fetch("decisions.json").catch(() => null),
+      fetch("decisions.json" + cacheBust).catch(() => null),
     ]);
 
     if (!dataResp.ok) throw new Error("data.json failed");
