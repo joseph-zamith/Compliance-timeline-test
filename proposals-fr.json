@@ -1,157 +1,105 @@
 {
-  "generated": "2026-04-24",
+  "generated": "2026-05-01",
   "proposals": [
     {
-      "id": "proposal-2026-04-24-001",
+      "id": "proposal-2026-05-01-001",
       "action": "add",
-      "reason": "MDCG 2021-24 rev.1 published 20 April 2026 with updated classification guidance. Key changes to Rules 2, 8, 9, 10, 12, 16, 22.",
+      "reason": "MDCG 2021-24 Rev.1 published on 20 April 2026 by the European Commission. Updated classification rules 2, 8, 9, 10, 12, 16 and 22 with new examples for active devices, defibrillator accessories and sterilisers. Important for SaMD borderline cases.",
       "card": {
-        "id": "2026-04-20--mdcg-2021-24-rev1-classification-guidance-updated",
+        "id": "2026-04-20--mdcg-2021-24-rev-1-classification-update",
         "d": "2026-04-20",
         "l": "20 avr. 2026",
         "y": 2026,
-        "t": "MDCG 2021-24 rev.1 — Guide de classification mis à jour",
-        "x": "Guide révisé sur la classification des dispositifs médicaux. Changements clés : « chirurgical » remplacé par « clinique » pour l'invasivité, mises à jour des Règles 2, 8, 9, 10, 12, 16 et 22 avec de nouveaux exemples. Pas de changement spécifique aux logiciels dans cette révision.",
+        "t": "MDCG 2021-24 Rev.1 — Mise à jour de la classification",
+        "x": "Mise à jour des règles de classification MDR 2, 8, 9, 10, 12, 16, 22. Nouveaux exemples pour les DM actifs, accessoires de défibrillateur, stérilisateurs. Impacte les déterminations frontières pour les SaMD.",
         "u": "https://health.ec.europa.eu/latest-updates/update-mdcg-2021-24-rev1-guidance-classification-medical-devices-april-2026-2026-04-20_en",
-        "tp": ["mdr", "standards"],
-        "tg": ["new"],
-        "v": "n"
+        "tp": ["mdr"],
+        "tg": ["high", "new"],
+        "v": "h"
       }
     },
     {
-      "id": "proposal-2026-04-24-002",
+      "id": "proposal-2026-05-01-002",
       "action": "add",
-      "reason": "Borderline and Classification Manual v5 published 22 April 2026 by European Commission.",
+      "reason": "EU Borderline & Classification Manual v5 published 22 April 2026. Refines SaMD borderline determinations under MDR/IVDR — directly relevant to qualification decisions.",
       "card": {
         "id": "2026-04-22--borderline-classification-manual-v5",
         "d": "2026-04-22",
         "l": "22 avr. 2026",
         "y": 2026,
-        "t": "Manuel Borderline & Classification v5 publié",
-        "x": "Cinquième version du Manuel sur les cas limites et la classification selon le MDR/IVDR. Nouvelles sections sur les dispositifs d'administration de médicaments. FAQ EMDN mises à jour sur les extensions de code 90 vs 92.",
-        "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-mdcg-endorsed-documents-and-other-guidance_en",
+        "t": "Manuel Borderline & Classification v5 (RDM/RDIV)",
+        "x": "Version 5 du Manuel borderline & classification au titre des règlements UE 2017/745 et 2017/746. Affine les décisions de qualification SaMD et les cas frontières.",
+        "u": "https://health.ec.europa.eu/latest-updates/update-manual-borderline-and-classification-under-regulations-eu-2017745-and-2017746-v5-2026-04-22_en",
         "tp": ["mdr"],
         "tg": ["new"],
         "v": "n"
       }
     },
     {
-      "id": "proposal-2026-04-24-003",
+      "id": "proposal-2026-05-01-003",
       "action": "add",
-      "reason": "Digital Omnibus trilogue #2 scheduled for 28 April 2026, potentially finalizing AI Act high-risk deadline shifts for medical devices.",
+      "reason": "MDCG 2026-1, 2 and 3 published 22 April 2026 introducing EMDN v2026 nomenclature. Affects UDI-DI assignment for all new MDR registrations and EUDAMED submissions.",
       "card": {
-        "id": "2026-04-28--digital-omnibus-trilogue-2-ai-act-delays",
-        "d": "2026-04-28",
-        "l": "28 avr. 2026",
-        "y": 2026,
-        "t": "Omnibus numérique Trilogue #2 — Décision report IA Act",
-        "x": "Deuxième trilogue sur l'Omnibus numérique. Pourrait finaliser : IA HR Annexe III reportée à déc. 2027, Annexe I (dispositifs médicaux) à août 2028. Positions du Parlement et du Conseil confirmées en mars 2026.",
-        "u": "https://specculo.com/eu-ai-act-omnibus-hrai-delay-medical-devices/",
-        "tp": ["ai", "mdr"],
-        "tg": ["high"],
-        "v": "h"
-      }
-    },
-    {
-      "id": "proposal-2026-04-24-004",
-      "action": "add",
-      "reason": "IMDRF opened public consultation on AI/ML Lifecycle Framework on 10 April 2026, closing 10 July 2026.",
-      "card": {
-        "id": "2026-07-10--imdrf-ai-ml-lifecycle-framework-consultation-closes",
-        "d": "2026-07-10",
-        "l": "10 juill. 2026",
-        "y": 2026,
-        "t": "IMDRF Cadre cycle de vie IA/ML — Fin de consultation",
-        "x": "Date limite de consultation publique pour le projet de cadre technique IMDRF sur la gestion du cycle de vie de l'intelligence artificielle. Document clé pour la convergence réglementaire mondiale des DM à IA.",
-        "u": "https://bioexcelife.com/2026/04/15/imdrfs-new-ai-ml-lifecycle-draft-could-reshape-global-medtech-compliance/",
-        "tp": ["standards", "ai"],
-        "tg": ["high"],
-        "v": "h"
-      }
-    },
-    {
-      "id": "proposal-2026-04-24-005",
-      "action": "add",
-      "reason": "South Korea granted first approval for a generative AI medical device (chest X-ray analysis) in April 2026.",
-      "card": {
-        "id": "2026-04-01--south-korea-first-generative-ai-md-approved",
-        "d": "2026-04-01",
-        "l": "1er avr. 2026",
-        "y": 2026,
-        "t": "Corée du Sud : Premier DM à IA générative approuvé",
-        "x": "Le MFDS a approuvé le premier dispositif médical numérique utilisant l'IA générative. Analyse les radiographies thoraciques et résume les anomalies en texte. Jalon au-delà de l'IA conventionnelle d'analyse d'images.",
-        "u": "https://en.sedaily.com/culture/2026/04/01/korea-grants-first-approval-for-generative-ai-medical-device",
-        "tp": ["other", "ai"],
-        "tg": ["new"],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-04-24-006",
-      "action": "add",
-      "reason": "G_NIUS launched Simplific'ACTION initiative on 21 April 2026 for digital health regulatory simplification in France.",
-      "card": {
-        "id": "2026-04-21--gnius-simplificaction-digital-health-france",
-        "d": "2026-04-21",
-        "l": "21 avr. 2026",
-        "y": 2026,
-        "t": "G_NIUS lance Simplific'ACTION (France)",
-        "x": "L'agence française du numérique en santé ANS/G_NIUS lance l'initiative Simplific'ACTION pour accompagner les innovateurs en santé numérique dans la simplification réglementaire. Également annoncé : appel à projets CE pour l'IA en imagerie médicale (22 avr.).",
-        "u": "https://gnius.esante.gouv.fr/fr/a-la-une/actualites/gnius-lance-simplificaction",
-        "tp": ["france"],
-        "tg": ["new"],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-04-24-007",
-      "action": "add",
-      "reason": "MHRA developing Early Access Service for innovative AI medical devices, initially targeting dementia diagnostics, launching 2026.",
-      "card": {
-        "id": "2026-06-01--mhra-early-access-service-ai-diagnostics",
-        "d": "2026-06-01",
-        "l": "2026",
-        "y": 2026,
-        "t": "MHRA Service d'accès anticipé — Diagnostics IA",
-        "x": "Voie d'accès conditionnelle au marché pour les dispositifs innovants répondant à des besoins cliniques non satisfaits. Ciblant initialement le diagnostic de la démence avec un objectif de 92 % en 18 semaines. Pertinent pour les fabricants d'IA-SaMD.",
-        "u": "https://med-techinsights.com/2026/04/21/a-pivotal-year-for-regulatory-reform-and-innovation/",
-        "tp": ["uk", "ai"],
-        "tg": ["new"],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-04-24-008",
-      "action": "update",
-      "reason": "CNIL/HAS AI Healthcare Guide consultation is now closed (16 Apr). Final joint recommendation expected Q2 2026.",
-      "existing_id": "2026-04-16--cnil-has-ai-healthcare-guide-consultation-closes",
-      "card": {
-        "id": "2026-04-16--cnil-has-ai-healthcare-guide-consultation-closes",
-        "d": "2026-06-30",
-        "l": "T2 2026",
-        "y": 2026,
-        "t": "Guide IA CNIL/HAS — Publication finale attendue",
-        "x": "Recommandation conjointe sur le bon usage de l'IA en santé pour les professionnels et établissements. Consultation clôturée le 16 avr. 2026. Publication finale attendue T2 2026. Couvre le cadre juridique, la gouvernance, l'IA générative.",
-        "u": "https://www.cnil.fr/fr/accompagnement-des-professionnels-le-programme-de-travail-de-la-cnil-pour-2026",
-        "tp": ["france", "ai"],
-        "tg": ["high"],
-        "v": "h"
-      }
-    },
-    {
-      "id": "proposal-2026-04-24-009",
-      "action": "add",
-      "reason": "EDPB adopted guidelines on scientific research and certification on 22 April 2026. Relevant for clinical evaluation data processing.",
-      "card": {
-        "id": "2026-04-22--edpb-guidelines-scientific-research-certification",
+        "id": "2026-04-22--mdcg-2026-1-2-3-emdn-v2026",
         "d": "2026-04-22",
         "l": "22 avr. 2026",
         "y": 2026,
-        "t": "Lignes directrices CEPD : Recherche scientifique & certification",
-        "x": "Le Comité européen de la protection des données a adopté des lignes directrices sur la recherche scientifique et la certification. Pertinent pour les fabricants de DM traitant des données d'évaluation clinique et de surveillance post-commercialisation selon le RGPD.",
-        "u": "https://www.cnil.fr/fr/cepd-lignes-directrices-pour-la-recherche-scientifique-et-certification",
-        "tp": ["data"],
+        "t": "MDCG 2026-1/2/3 — Nomenclature EMDN v2026",
+        "x": "Nomenclature européenne des dispositifs médicaux v2026 publiée avec trois guides MDCG associés. Les fabricants doivent réaffecter les codes UDI-DI pour les nouvelles déclarations EUDAMED.",
+        "u": "https://www.qualitiso.com/mdcg-2026-1-2-et-3-emdn-v2026-et-evolutions-par-rapport-a-2025/",
+        "tp": ["mdr"],
         "tg": ["new"],
+        "v": "n"
+      }
+    },
+    {
+      "id": "proposal-2026-05-01-004",
+      "action": "add",
+      "reason": "AI Act Omnibus final trilogue 28 April 2026 established new fixed deadlines: 2 December 2027 (standalone Annex III high-risk) and 2 August 2028 (AI embedded in regulated products including AI-MDSW). Major timeline shift driven by missing harmonised standards.",
+      "card": {
+        "id": "2026-04-28--ai-act-omnibus-final-trilogue",
+        "d": "2026-04-28",
+        "l": "28 avr. 2026",
+        "y": 2026,
+        "t": "AI Act Omnibus — Trilogue final conclu",
+        "x": "Parlement/Conseil/Commission ont conclu le second et dernier trilogue. IA embarquée (dont AI-MDSW au titre de l'Annexe I MDR) reportée au 2 août 2028 ; IA haut risque Annexe III autonome au 2 déc. 2027. Motivé par l'absence de normes harmonisées CEN-CENELEC.",
+        "u": "https://iapp.org/news/a/ai-act-omnibus-what-just-happened-and-what-comes-next",
+        "tp": ["ai", "mdr"],
+        "tg": ["critical"],
+        "v": "c"
+      }
+    },
+    {
+      "id": "proposal-2026-05-01-005",
+      "action": "add",
+      "reason": "IMDRF opened public consultation 10 April 2026 on draft Technical Framework for AI Lifecycle Management; comments due 10 July 2026. Complements N81 (SaMD risk) and N88 (GMLP). Foundational for global AI/ML SaMD harmonisation.",
+      "card": {
+        "id": "2026-07-10--imdrf-ai-lifecycle-framework-consultation-closes",
+        "d": "2026-07-10",
+        "l": "10 juill. 2026",
+        "y": 2026,
+        "t": "Cadre IMDRF Cycle de vie IA — Clôture consultation",
+        "x": "Consultation publique IMDRF sur le Cadre technique de gestion du cycle de vie de l'IA (ouverte le 10 avr. 2026). Vise à harmoniser FDA PCCP, Health Canada MLMD, IDATEN Japon, DMPA Corée.",
+        "u": "https://www.imdrf.org/working-groups/artificial-intelligencemachine-learning-enabled",
+        "tp": ["ai", "standards"],
+        "tg": ["high", "draft"],
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-05-01-006",
+      "action": "add",
+      "reason": "ISO 14155 Edition 4 published March 2026, replacing 2020 version. Introduces formal Clinical Events Committees, mandatory DMC justification, advanced statistical Annex K. Applies immediately — no transition period — affects ongoing clinical investigations supporting MDR submissions.",
+      "card": {
+        "id": "2026-03-15--iso-14155-edition-4-published",
+        "d": "2026-03-15",
+        "l": "mars 2026",
+        "y": 2026,
+        "t": "ISO 14155:2026 Édition 4 — Publiée",
+        "x": "Édition 4 publiée. Introduit formellement les Comités d'événements cliniques (CEC), impose une justification documentée en cas de non-recours à un DMC, ajoute l'Annexe K (cadres statistiques avancés). Pas de période de transition — applicabilité immédiate aux nouvelles investigations.",
+        "u": "https://www.iso.org/standard/83968.html",
+        "tp": ["standards"],
+        "tg": ["new", "in-force"],
         "v": "n"
       }
     }
