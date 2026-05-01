@@ -32,7 +32,9 @@
     "proposal-2026-05-01-005"
   ],
   "deleted_cards": [],
-  "comments": {},
+  "comments": {
+    "2026-02-02--fda-qmsr-in-force": "You cn now use your ISO 13485 for the USA !"
+  },
   "comments_fr": {},
   "tag_overrides": {
     "2026-04-16--cnil-has-ai-healthcare-guide-consultation-closed": "medium",
