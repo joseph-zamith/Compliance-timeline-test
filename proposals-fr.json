@@ -1,106 +1,178 @@
 {
-  "generated": "2026-05-01",
+  "generated": "2026-05-08",
   "proposals": [
     {
-      "id": "proposal-2026-05-01-001",
+      "id": "proposal-2026-05-08-001",
       "action": "add",
-      "reason": "MDCG 2021-24 Rev.1 published on 20 April 2026 by the European Commission. Updated classification rules 2, 8, 9, 10, 12, 16 and 22 with new examples for active devices, defibrillator accessories and sterilisers. Important for SaMD borderline cases.",
+      "reason": "Council and Parliament reached provisional political agreement on 7 May 2026 on the Digital Omnibus on AI — major regulatory event of the week. Confirms Annex III delay to 2 Dec 2027 and Annex I (medical devices) delay to 2 Aug 2028. MDs were not exempted.",
       "card": {
-        "id": "2026-04-20--mdcg-2021-24-rev-1-classification-update",
-        "d": "2026-04-20",
-        "l": "20 avr. 2026",
+        "id": "2026-05-07--ai-act-digital-omnibus-political-agreement",
+        "d": "2026-05-07",
+        "l": "7 mai 2026",
         "y": 2026,
-        "t": "MDCG 2021-24 Rev.1 — Mise à jour de la classification",
-        "x": "Mise à jour des règles de classification MDR 2, 8, 9, 10, 12, 16, 22. Nouveaux exemples pour les DM actifs, accessoires de défibrillateur, stérilisateurs. Impacte les déterminations frontières pour les SaMD.",
-        "u": "https://health.ec.europa.eu/latest-updates/update-mdcg-2021-24-rev1-guidance-classification-medical-devices-april-2026-2026-04-20_en",
+        "t": "AI Act Digital Omnibus — Accord politique",
+        "x": "Le Conseil et le Parlement ont trouvé un accord politique provisoire : annexe III (IA haut risque) applicable au 2 déc. 2027 ; annexe I (dispositifs médicaux) au 2 août 2028. Les DM ne sont pas exemptés ; la Commission publiera des lignes directrices et pourra restreindre les chevauchements via des actes d'exécution.",
+        "u": "https://www.consilium.europa.eu/en/press/press-releases/2026/05/07/artificial-intelligence-council-and-parliament-agree-to-simplify-and-streamline-rules/",
+        "tp": ["ai", "mdr"],
+        "tg": ["critical", "new"],
+        "v": "c"
+      }
+    },
+    {
+      "id": "proposal-2026-05-08-002",
+      "action": "add",
+      "reason": "Implementing Regulation (EU) 2026/977 published 5 May 2026 — uniform conformity-assessment / Annex VII rules for Notified Bodies. Operational impact on every MDR/IVDR manufacturer's NB engagement.",
+      "card": {
+        "id": "2026-05-05--implementing-regulation-2026-977-nb-rules",
+        "d": "2026-05-05",
+        "l": "5 mai 2026",
+        "y": 2026,
+        "t": "Règlement d'exécution (UE) 2026/977 — Règles ON",
+        "x": "Exigences uniformes pour l'évaluation de la conformité et les Organismes Notifiés (Annexe VII RDM/RDIV). Comportement plus strict et plus homogène attendu lors des audits de surveillance.",
+        "u": "https://eur-lex.europa.eu/eli/reg_impl/2026/977/oj",
         "tp": ["mdr"],
-        "tg": ["high", "new"],
+        "tg": ["high", "in-force"],
         "v": "h"
       }
     },
     {
-      "id": "proposal-2026-05-01-002",
+      "id": "proposal-2026-05-08-003",
       "action": "add",
-      "reason": "EU Borderline & Classification Manual v5 published 22 April 2026. Refines SaMD borderline determinations under MDR/IVDR — directly relevant to qualification decisions.",
+      "reason": "ISO 14155:2026 (Edition 4) published in March 2026 — applies immediately, no transition. Major rewrite affecting all MDSW manufacturers running clinical investigations. Should be on the timeline.",
       "card": {
-        "id": "2026-04-22--borderline-classification-manual-v5",
-        "d": "2026-04-22",
-        "l": "22 avr. 2026",
+        "id": "2026-03-15--iso-14155-edition-4-published",
+        "d": "2026-03-15",
+        "l": "mars 2026",
         "y": 2026,
-        "t": "Manuel Borderline & Classification v5 (RDM/RDIV)",
-        "x": "Version 5 du Manuel borderline & classification au titre des règlements UE 2017/745 et 2017/746. Affine les décisions de qualification SaMD et les cas frontières.",
-        "u": "https://health.ec.europa.eu/latest-updates/update-manual-borderline-and-classification-under-regulations-eu-2017745-and-2017746-v5-2026-04-22_en",
-        "tp": ["mdr"],
-        "tg": ["new"],
+        "t": "ISO 14155:2026 — Édition 4 publiée",
+        "x": "Remplace ISO 14155:2020. Nouvelles exigences pour la gestion des risques, comités d'événements cliniques (CEC), comités de surveillance des données (DMC), conception de l'étude (alignement ICH E9(R1)), reporting des EI. Application immédiate — pas de période de transition.",
+        "u": "https://www.iso.org/standard/83968.html",
+        "tp": ["standards"],
+        "tg": ["high", "in-force"],
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-05-08-004",
+      "action": "add",
+      "reason": "ISO 27701:2025 transformed into a standalone PIMS (no longer an extension to 27001). Certification bodies must transition by 31 Oct 2026; certified orgs by 2028. Important deadline for any MDSW handling EU health data.",
+      "card": {
+        "id": "2026-10-31--iso-27701-2025-cb-transition-deadline",
+        "d": "2026-10-31",
+        "l": "31 oct. 2026",
+        "y": 2026,
+        "t": "ISO 27701:2025 — Échéance transition OC",
+        "x": "Les organismes de certification doivent migrer vers ISO 27701:2025 (désormais PIMS autonome) avant le 31 oct. 2026. Les organisations certifiées ont jusqu'à 2028. Cadre restructuré sur les clauses 4-10 (miroir d'ISO 27001:2022 / ISO 42001:2023).",
+        "u": "https://www.iso.org/standard/27701",
+        "tp": ["standards", "data"],
+        "tg": ["high"],
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-05-08-005",
+      "action": "add",
+      "reason": "Health Canada Pre-market Guidance for Machine Learning-Enabled Medical Devices (PMGMLMD) finalised — official document available 1 Apr 2026. Aligned with FDA/MHRA five-principles PCCP. Relevant to any AI/ML SaMD seeking Canadian market.",
+      "card": {
+        "id": "2026-04-01--health-canada-mlmd-final-guidance",
+        "d": "2026-04-01",
+        "l": "1er avr. 2026",
+        "y": 2026,
+        "t": "Health Canada — Guide MLMD final",
+        "x": "Guide pré-commercialisation pour les dispositifs médicaux à base de machine-learning finalisé. Attentes cycle de vie (données, entraînement, tests, validation clinique, transparence, post-market). Aligné avec les cinq principes PCCP FDA/MHRA.",
+        "u": "https://www.canada.ca/en/health-canada/services/drugs-health-products/medical-devices/application-information/guidance-documents/pre-market-guidance-machine-learning-enabled-medical-devices.html",
+        "tp": ["other", "ai"],
+        "tg": ["high", "in-force"],
         "v": "n"
       }
     },
     {
-      "id": "proposal-2026-05-01-003",
+      "id": "proposal-2026-05-08-006",
       "action": "add",
-      "reason": "MDCG 2026-1, 2 and 3 published 22 April 2026 introducing EMDN v2026 nomenclature. Affects UDI-DI assignment for all new MDR registrations and EUDAMED submissions.",
+      "reason": "FDA Premarket Cybersecurity guidance updated March 2026 — replaces June 2025 version, aligns with QMSR + IMDRF 2020 + closer to MDCG 2019-16. Practical impact on every 510(k) cyber section.",
       "card": {
-        "id": "2026-04-22--mdcg-2026-1-2-3-emdn-v2026",
-        "d": "2026-04-22",
-        "l": "22 avr. 2026",
+        "id": "2026-03-20--fda-premarket-cybersecurity-guidance-update",
+        "d": "2026-03-20",
+        "l": "mars 2026",
         "y": 2026,
-        "t": "MDCG 2026-1/2/3 — Nomenclature EMDN v2026",
-        "x": "Nomenclature européenne des dispositifs médicaux v2026 publiée avec trois guides MDCG associés. Les fabricants doivent réaffecter les codes UDI-DI pour les nouvelles déclarations EUDAMED.",
-        "u": "https://www.qualitiso.com/mdcg-2026-1-2-et-3-emdn-v2026-et-evolutions-par-rapport-a-2025/",
-        "tp": ["mdr"],
-        "tg": ["new"],
+        "t": "FDA — Guide cybersécurité pré-commercialisation mis à jour",
+        "x": "Remplace la version de juin 2025. Aligne les attentes SBOM et Secure Product Development Framework avec le QMSR (effectif fév. 2026). Convergence accrue avec IMDRF 2020 et MDCG 2019-16 Rev.1.",
+        "u": "https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity",
+        "tp": ["us", "cyber"],
+        "tg": ["high", "in-force"],
         "v": "n"
       }
     },
     {
-      "id": "proposal-2026-05-01-004",
-      "action": "add",
-      "reason": "AI Act Omnibus final trilogue 28 April 2026 established new fixed deadlines: 2 December 2027 (standalone Annex III high-risk) and 2 August 2028 (AI embedded in regulated products including AI-MDSW). Major timeline shift driven by missing harmonised standards.",
+      "id": "proposal-2026-05-08-007",
+      "action": "update",
+      "reason": "Update existing AI Act 2 Aug 2026 card to reflect that the Digital Omnibus political agreement on 7 May 2026 effectively voided this milestone for high-risk systems. Original date no longer the operational deadline.",
+      "existing_id": "2026-08-02--ai-act-most-provisions-apply",
       "card": {
-        "id": "2026-04-28--ai-act-omnibus-final-trilogue",
-        "d": "2026-04-28",
-        "l": "28 avr. 2026",
+        "id": "2026-08-02--ai-act-most-provisions-apply",
+        "d": "2026-08-02",
+        "l": "2 août 2026",
         "y": 2026,
-        "t": "AI Act Omnibus — Trilogue final conclu",
-        "x": "Parlement/Conseil/Commission ont conclu le second et dernier trilogue. IA embarquée (dont AI-MDSW au titre de l'Annexe I MDR) reportée au 2 août 2028 ; IA haut risque Annexe III autonome au 2 déc. 2027. Motivé par l'absence de normes harmonisées CEN-CENELEC.",
-        "u": "https://iapp.org/news/a/ai-act-omnibus-what-just-happened-and-what-comes-next",
+        "t": "AI Act — Date initiale haut risque (caduque)",
+        "x": "Date d'application initiale du volet haut risque du Règlement IA — supplantée par l'accord politique Digital Omnibus du 7 mai 2026. Désormais : annexe III au 2 déc. 2027 ; annexe I (DM) au 2 août 2028. Les volets GPAI, pratiques interdites et gouvernance restent applicables.",
+        "u": "https://www.consilium.europa.eu/en/press/press-releases/2026/05/07/artificial-intelligence-council-and-parliament-agree-to-simplify-and-streamline-rules/",
+        "tp": ["ai"],
+        "tg": ["medium"],
+        "v": "n"
+      }
+    },
+    {
+      "id": "proposal-2026-05-08-008",
+      "action": "update",
+      "reason": "Update existing Annex III Dec 2027 card — no longer 'If Delayed', the delay is now confirmed by the 7 May 2026 political agreement.",
+      "existing_id": "2027-12-02--ai-act-high-risk-annex-iii-if-delayed",
+      "card": {
+        "id": "2027-12-02--ai-act-high-risk-annex-iii-if-delayed",
+        "d": "2027-12-02",
+        "l": "2 déc. 2027",
+        "y": 2027,
+        "t": "AI Act — Annexe III haut risque applicable",
+        "x": "Date d'application confirmée pour les systèmes d'IA haut risque autonomes (annexe III) suite à l'accord politique Digital Omnibus du 7 mai 2026. Adoption finale attendue avant l'échéance initiale d'août 2026.",
+        "u": "https://www.consilium.europa.eu/en/press/press-releases/2026/05/07/artificial-intelligence-council-and-parliament-agree-to-simplify-and-streamline-rules/",
+        "tp": ["ai"],
+        "tg": ["high"],
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-05-08-009",
+      "action": "update",
+      "reason": "Update existing Annex I Aug 2028 card — no longer 'If Delayed', the delay is now confirmed for AI embedded in medical devices.",
+      "existing_id": "2028-08-02--ai-act-annex-i-medical-devices-if-delayed",
+      "card": {
+        "id": "2028-08-02--ai-act-annex-i-medical-devices-if-delayed",
+        "d": "2028-08-02",
+        "l": "2 août 2028",
+        "y": 2028,
+        "t": "AI Act — Annexe I / Dispositifs médicaux applicable",
+        "x": "Date d'application confirmée pour l'IA embarquée dans les produits régulés annexe I (dispositifs médicaux, machines, jouets, ascenseurs, navires). Confirmée par l'accord politique Digital Omnibus du 7 mai 2026. Les DM ne sont PAS exemptés.",
+        "u": "https://www.consilium.europa.eu/en/press/press-releases/2026/05/07/artificial-intelligence-council-and-parliament-agree-to-simplify-and-streamline-rules/",
         "tp": ["ai", "mdr"],
         "tg": ["critical"],
         "v": "c"
       }
     },
     {
-      "id": "proposal-2026-05-01-005",
-      "action": "add",
-      "reason": "IMDRF opened public consultation 10 April 2026 on draft Technical Framework for AI Lifecycle Management; comments due 10 July 2026. Complements N81 (SaMD risk) and N88 (GMLP). Foundational for global AI/ML SaMD harmonisation.",
+      "id": "proposal-2026-05-08-010",
+      "action": "update",
+      "reason": "Update existing 6 May card now that the feedback period is closed — next phase is Council/EP positions. Tighten description.",
+      "existing_id": "2026-05-06--mdr-ivdr-simplification-feedback-deadline",
       "card": {
-        "id": "2026-07-10--imdrf-ai-lifecycle-framework-consultation-closes",
-        "d": "2026-07-10",
-        "l": "10 juill. 2026",
+        "id": "2026-05-06--mdr-ivdr-simplification-feedback-deadline",
+        "d": "2026-05-06",
+        "l": "6 mai 2026",
         "y": 2026,
-        "t": "Cadre IMDRF Cycle de vie IA — Clôture consultation",
-        "x": "Consultation publique IMDRF sur le Cadre technique de gestion du cycle de vie de l'IA (ouverte le 10 avr. 2026). Vise à harmoniser FDA PCCP, Health Canada MLMD, IDATEN Japon, DMPA Corée.",
-        "u": "https://www.imdrf.org/working-groups/artificial-intelligencemachine-learning-enabled",
-        "tp": ["ai", "standards"],
-        "tg": ["high", "draft"],
-        "v": "h"
-      }
-    },
-    {
-      "id": "proposal-2026-05-01-006",
-      "action": "add",
-      "reason": "ISO 14155 Edition 4 published March 2026, replacing 2020 version. Introduces formal Clinical Events Committees, mandatory DMC justification, advanced statistical Annex K. Applies immediately — no transition period — affects ongoing clinical investigations supporting MDR submissions.",
-      "card": {
-        "id": "2026-03-15--iso-14155-edition-4-published",
-        "d": "2026-03-15",
-        "l": "mars 2026",
-        "y": 2026,
-        "t": "ISO 14155:2026 Édition 4 — Publiée",
-        "x": "Édition 4 publiée. Introduit formellement les Comités d'événements cliniques (CEC), impose une justification documentée en cas de non-recours à un DMC, ajoute l'Annexe K (cadres statistiques avancés). Pas de période de transition — applicabilité immédiate aux nouvelles investigations.",
-        "u": "https://www.iso.org/standard/83968.html",
-        "tp": ["standards"],
-        "tg": ["new", "in-force"],
-        "v": "n"
+        "t": "Simplification RDM/RDIV — Consultation close",
+        "x": "Période de consultation publique sur la Proposition 2025/0404 close. Suite : le Conseil et le Parlement préparent leurs positions avant le trilogue. Révision de la Règle 11 (classe I par défaut pour la majorité des MDSW) et délimitation IA haut risque en négociation. Adoption au plus tôt fin 2026 / 2027.",
+        "u": "https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en",
+        "tp": ["mdr", "ai"],
+        "tg": ["critical"],
+        "v": "c"
       }
     }
   ]
