@@ -1,296 +1,139 @@
 {
-  "generated": "2026-05-15",
+  "generated": "2026-05-22",
   "proposals": [
     {
-      "id": "proposal-2026-05-08-001",
+      "id": "proposal-2026-05-22-001",
       "action": "add",
-      "reason": "Council and Parliament reached provisional political agreement on 7 May 2026 on the Digital Omnibus on AI — major regulatory event of the week. Confirms Annex III delay to 2 Dec 2027 and Annex I (medical devices) delay to 2 Aug 2028. MDs were not exempted.",
+      "reason": "Implementing Regulation (EU) 2026/977 published in the Official Journal on 18 May 2026 sets uniform requirements for conformity assessment and notified body operations under MDR. Material regulatory event of the week with direct operational impact on every NB engagement.",
       "card": {
-        "id": "2026-05-07--ai-act-digital-omnibus-political-agreement",
-        "d": "2026-05-07",
-        "l": "7 May 2026",
+        "id": "2026-05-18--implementing-reg-2026-977-conformity-assessment",
+        "d": "2026-05-18",
+        "l": "18 May 2026",
         "y": 2026,
-        "t": "AI Act Digital Omnibus — Political Agreement",
-        "x": "Council + Parliament reached provisional political agreement: Annex III high-risk AI applies from 2 Dec 2027; Annex I (medical devices) from 2 Aug 2028. Medical devices remain in scope; Commission to publish guidance and may limit overlap with sectoral law via implementing acts.",
-        "u": "https://www.consilium.europa.eu/en/press/press-releases/2026/05/07/artificial-intelligence-council-and-parliament-agree-to-simplify-and-streamline-rules/",
-        "tp": ["ai", "mdr"],
-        "tg": ["critical", "new"],
-        "v": "c"
-      }
-    },
-    {
-      "id": "proposal-2026-05-08-002",
-      "action": "add",
-      "reason": "Implementing Regulation (EU) 2026/977 published 5 May 2026 — uniform conformity-assessment / Annex VII rules for Notified Bodies. Operational impact on every MDR/IVDR manufacturer's NB engagement.",
-      "card": {
-        "id": "2026-05-05--implementing-regulation-2026-977-nb-rules",
-        "d": "2026-05-05",
-        "l": "5 May 2026",
-        "y": 2026,
-        "t": "Implementing Reg. (EU) 2026/977 — NB Rules",
-        "x": "Uniform requirements for conformity assessment and Notified Bodies (Annex VII MDR/IVDR). Tighter and more consistent NB behaviour expected during surveillance audits.",
+        "t": "Implementing Regulation (EU) 2026/977: Uniform NB Conformity Assessment Rules",
+        "x": "Sets standardised requirements for conformity assessment and notified body operations under MDR: harmonised quotation inputs, mandatory cost breakdowns, and EU-wide maximum timelines. Operational discipline tightens for every MDR/IVDR manufacturer.",
         "u": "https://eur-lex.europa.eu/eli/reg_impl/2026/977/oj",
         "tp": ["mdr"],
-        "tg": ["high", "in-force"],
+        "tg": ["high", "new"],
         "v": "h"
       }
     },
     {
-      "id": "proposal-2026-05-08-003",
+      "id": "proposal-2026-05-22-002",
       "action": "add",
-      "reason": "ISO 14155:2026 (Edition 4) published in March 2026 — applies immediately, no transition. Major rewrite affecting all MDSW manufacturers running clinical investigations. Should be on the timeline.",
+      "reason": "ISO 14155:2026 Edition 4 published on 23 March 2026 with NO transition period. Replaces ISO 14155:2020 immediately for any new clinical investigation. Major impact on clinical evaluation strategy under MDR Annex XIV.",
       "card": {
-        "id": "2026-03-15--iso-14155-edition-4-published",
-        "d": "2026-03-15",
-        "l": "Mar 2026",
+        "id": "2026-03-23--iso-14155-2026-edition-4-published",
+        "d": "2026-03-23",
+        "l": "23 Mar 2026",
         "y": 2026,
-        "t": "ISO 14155:2026 — Edition 4 Published",
-        "x": "Replaces ISO 14155:2020. New requirements for risk management, Clinical Events Committees, Data Monitoring Committees, study design (ICH E9(R1) alignment), adverse event reporting. Applies immediately — no transition period.",
+        "t": "ISO 14155:2026 Edition 4 Published (No Transition)",
+        "x": "Fourth edition of the GCP standard for medical device clinical investigations. Introduces mandatory Clinical Events Committees, formal DMC justification, estimand framework (ICH E9 R1 alignment), and advanced statistical methods (new Annex K). No defined transition period: new investigations should reference ISO 14155:2026.",
         "u": "https://www.iso.org/standard/83968.html",
         "tp": ["standards"],
-        "tg": ["high", "in-force"],
+        "tg": ["high", "new"],
         "v": "h"
       }
     },
     {
-      "id": "proposal-2026-05-08-004",
+      "id": "proposal-2026-05-22-003",
       "action": "add",
-      "reason": "ISO 27701:2025 transformed into a standalone PIMS (no longer an extension to 27001). Certification bodies must transition by 31 Oct 2026; certified orgs by 2028. Important deadline for any MDSW handling EU health data.",
-      "card": {
-        "id": "2026-10-31--iso-27701-2025-cb-transition-deadline",
-        "d": "2026-10-31",
-        "l": "31 Oct 2026",
-        "y": 2026,
-        "t": "ISO 27701:2025 — CB Transition Deadline",
-        "x": "Certification bodies must transition to ISO 27701:2025 (now standalone PIMS) by 31 Oct 2026. Certified organisations have until 2028 to align. Restructured framework mirrors ISO 27001:2022 / ISO 42001:2023 (clauses 4-10).",
-        "u": "https://www.iso.org/standard/27701",
-        "tp": ["standards", "data"],
-        "tg": ["high"],
-        "v": "h"
-      }
-    },
-    {
-      "id": "proposal-2026-05-08-005",
-      "action": "add",
-      "reason": "Health Canada Pre-market Guidance for Machine Learning-Enabled Medical Devices (PMGMLMD) finalised — official document available 1 Apr 2026. Aligned with FDA/MHRA five-principles PCCP. Relevant to any AI/ML SaMD seeking Canadian market.",
+      "reason": "Health Canada published the final pre-market guidance for Machine Learning-enabled Medical Devices on 1 April 2026. Aligns Canada with FDA-PCCP and MHRA 2026 trajectories; adds SGBA Plus health-equity overlay. Important reference for multi-region AI/ML SaMD strategies.",
       "card": {
         "id": "2026-04-01--health-canada-mlmd-final-guidance",
         "d": "2026-04-01",
         "l": "1 Apr 2026",
         "y": 2026,
-        "t": "Health Canada MLMD Final Guidance",
-        "x": "Pre-market Guidance for Machine Learning-Enabled Medical Devices finalised. Lifecycle expectations (data, training, testing, clinical validation, transparency, post-market). Aligned with FDA/MHRA five-principles PCCP.",
+        "t": "Health Canada MLMD Pre-Market Guidance Finalised",
+        "x": "Final pre-market guidance for Machine Learning-enabled Medical Devices. Lifecycle expectations on design, data, training, testing, clinical validation, transparency, post-market monitoring, with explicit SGBA Plus requirements (sex, gender, race, age, pregnancy).",
         "u": "https://www.canada.ca/en/health-canada/services/drugs-health-products/medical-devices/application-information/guidance-documents/pre-market-guidance-machine-learning-enabled-medical-devices.html",
         "tp": ["other", "ai"],
-        "tg": ["high", "in-force"],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-05-08-006",
-      "action": "add",
-      "reason": "FDA Premarket Cybersecurity guidance updated March 2026 — replaces June 2025 version, aligns with QMSR + IMDRF 2020 + closer to MDCG 2019-16. Practical impact on every 510(k) cyber section.",
-      "card": {
-        "id": "2026-03-20--fda-premarket-cybersecurity-guidance-update",
-        "d": "2026-03-20",
-        "l": "Mar 2026",
-        "y": 2026,
-        "t": "FDA Premarket Cybersecurity Guidance — Update",
-        "x": "Replaces June 2025 version. Aligns SBOM and Secure Product Development Framework expectations with QMSR (effective Feb 2026). Closer convergence with IMDRF 2020 and MDCG 2019-16 Rev.1.",
-        "u": "https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity",
-        "tp": ["us", "cyber"],
-        "tg": ["high", "in-force"],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-05-08-007",
-      "action": "update",
-      "reason": "Update existing AI Act 2 Aug 2026 card to reflect that the Digital Omnibus political agreement on 7 May 2026 effectively voided this milestone for high-risk systems. Original date no longer the operational deadline.",
-      "existing_id": "2026-08-02--ai-act-most-provisions-apply",
-      "card": {
-        "id": "2026-08-02--ai-act-most-provisions-apply",
-        "d": "2026-08-02",
-        "l": "2 Aug 2026",
-        "y": 2026,
-        "t": "AI Act — Original High-Risk Date (Superseded)",
-        "x": "Original AI Act high-risk application date — superseded by 7 May 2026 Digital Omnibus political agreement. High-risk obligations now Annex III: 2 Dec 2027; Annex I (medical devices): 2 Aug 2028. GPAI / prohibited-practice / governance provisions still apply.",
-        "u": "https://www.consilium.europa.eu/en/press/press-releases/2026/05/07/artificial-intelligence-council-and-parliament-agree-to-simplify-and-streamline-rules/",
-        "tp": ["ai"],
-        "tg": ["medium"],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-05-08-008",
-      "action": "update",
-      "reason": "Update existing Annex III Dec 2027 card — no longer 'If Delayed', the delay is now confirmed by the 7 May 2026 political agreement.",
-      "existing_id": "2027-12-02--ai-act-high-risk-annex-iii-if-delayed",
-      "card": {
-        "id": "2027-12-02--ai-act-high-risk-annex-iii-if-delayed",
-        "d": "2027-12-02",
-        "l": "2 Dec 2027",
-        "y": 2027,
-        "t": "AI Act — Annex III High-Risk Apply",
-        "x": "Confirmed application date for autonomous high-risk AI systems (Annex III) following the 7 May 2026 Digital Omnibus political agreement. Final adoption expected before original Aug 2026 deadline.",
-        "u": "https://www.consilium.europa.eu/en/press/press-releases/2026/05/07/artificial-intelligence-council-and-parliament-agree-to-simplify-and-streamline-rules/",
-        "tp": ["ai"],
-        "tg": ["high"],
+        "tg": ["new", "high"],
         "v": "h"
       }
     },
     {
-      "id": "proposal-2026-05-08-009",
-      "action": "update",
-      "reason": "Update existing Annex I Aug 2028 card — no longer 'If Delayed', the delay is now confirmed for AI embedded in medical devices.",
-      "existing_id": "2028-08-02--ai-act-annex-i-medical-devices-if-delayed",
-      "card": {
-        "id": "2028-08-02--ai-act-annex-i-medical-devices-if-delayed",
-        "d": "2028-08-02",
-        "l": "2 Aug 2028",
-        "y": 2028,
-        "t": "AI Act — Annex I / Medical Devices Apply",
-        "x": "Confirmed application date for AI embedded in regulated Annex I products (medical devices, machinery, toys, lifts, watercraft). Confirmed by the 7 May 2026 Digital Omnibus political agreement. MDs were NOT exempted.",
-        "u": "https://www.consilium.europa.eu/en/press/press-releases/2026/05/07/artificial-intelligence-council-and-parliament-agree-to-simplify-and-streamline-rules/",
-        "tp": ["ai", "mdr"],
-        "tg": ["critical"],
-        "v": "c"
-      }
-    },
-    {
-      "id": "proposal-2026-05-08-010",
-      "action": "update",
-      "reason": "Update existing 6 May card now that the feedback period is closed — next phase is Council/EP positions. Tighten description.",
-      "existing_id": "2026-05-06--mdr-ivdr-simplification-feedback-deadline",
-      "card": {
-        "id": "2026-05-06--mdr-ivdr-simplification-feedback-deadline",
-        "d": "2026-05-06",
-        "l": "6 May 2026",
-        "y": 2026,
-        "t": "MDR/IVDR Simplification — Feedback Closed",
-        "x": "Public feedback period on Proposal 2025/0404 closed. Next: Council and Parliament draft their respective positions before trilogue. Revised Rule 11 (default Class I for most MDSW) and AI Act high-risk delineation under negotiation. Earliest adoption late 2026 / 2027.",
-        "u": "https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en",
-        "tp": ["mdr", "ai"],
-        "tg": ["critical"],
-        "v": "c"
-      }
-    },
-    {
-      "id": "proposal-2026-05-15-001",
+      "id": "proposal-2026-05-22-004",
       "action": "add",
-      "reason": "Korea's MFDS approved the country's first generative AI medical device (chest X-ray analyser with text summarisation) in April 2026 — operational validation of MFDS Generative AI guidelines (24 Jan 2025). Signals South Korea as fastest jurisdiction for genAI MDSW.",
+      "reason": "TGA Australia released finalised AI SaMD regulatory guidance in February 2026. Confirms intended-purpose-driven classification, lifecycle and change-control obligations, and clinical-data primacy over synthetic data. Material for any client with APAC ambition.",
       "card": {
-        "id": "2026-04-01--korea-first-generative-ai-medical-device-approval",
-        "d": "2026-04-01",
-        "l": "Apr 2026",
+        "id": "2026-02-15--tga-ai-samd-guidance-australia",
+        "d": "2026-02-15",
+        "l": "Feb 2026",
         "y": 2026,
-        "t": "Korea — First Generative-AI Medical Device Approved",
-        "x": "MFDS grants first approval for a generative AI medical device (chest X-ray analyser with text summarisation). Operational validation of MFDS Generative AI guidelines (Jan 2025). Korea now leading genAI MDSW market access.",
-        "u": "https://en.sedaily.com/culture/2026/04/01/korea-grants-first-approval-for-generative-ai-medical-device",
-        "tp": ["other", "ai"],
-        "tg": ["high", "new"],
-        "v": "h"
-      }
-    },
-    {
-      "id": "proposal-2026-05-15-002",
-      "action": "add",
-      "reason": "MHRA secured £3.6M (£1.2M/year × 3 years 2026-2029) to expand its AI Airlock regulatory sandbox. Phase 2 closes Spring 2026 (reports Summer 2026); Phase 3 call later in 2026. Major signal UK is positioning as fast-validation jurisdiction for genAI / LLM medical software.",
-      "card": {
-        "id": "2026-04-15--mhra-ai-airlock-funding-expansion",
-        "d": "2026-04-15",
-        "l": "Apr 2026",
-        "y": 2026,
-        "t": "MHRA AI Airlock — £3.6M Funding Expansion",
-        "x": "DHSC allocates £1.2M/year × 3 years (2026-2029). Phase 2 closes Spring 2026 with reports in Summer 2026 (AI diagnostics, PCCPs, LLMs, voice tools, rare-disease diagnostics). Phase 3 design later in 2026.",
-        "u": "https://www.gov.uk/government/news/mhra-expands-ai-airlock-programme-with-a-36-million-funding-boost-over-three-years",
-        "tp": ["uk", "ai"],
-        "tg": ["high", "new"],
-        "v": "h"
-      }
-    },
-    {
-      "id": "proposal-2026-05-15-003",
-      "action": "add",
-      "reason": "On 5 February 2026 the Australian TGA published an updated guidance on AI in medical device software, clarifying that AI is regulated under the existing SaMD framework and does not auto-increase risk class. Important for clients pursuing TGA listings.",
-      "card": {
-        "id": "2026-02-05--australia-tga-ai-medical-device-guidance",
-        "d": "2026-02-05",
-        "l": "5 Feb 2026",
-        "y": 2026,
-        "t": "Australia TGA — AI Medical Device Guidance Update",
-        "x": "AI not regulated separately; full SaMD framework applies. Use of AI does not auto-increase risk class. Lifecycle management, change control, clinical evidence and scope-creep obligations apply.",
+        "t": "TGA Australia: AI and SaMD Guidance Issued",
+        "x": "Confirms intended-purpose-driven regulation: AI does not automatically raise the device class. Established SaMD requirements apply in full (lifecycle, change control, clinical evidence). Synthetic data may supplement but not replace clinical data; Australian population generalisability must be shown.",
         "u": "https://www.tga.gov.au/products/medical-devices/software-and-artificial-intelligence/manufacturing/artificial-intelligence-ai-and-medical-device-software",
         "tp": ["other", "ai"],
-        "tg": ["medium", "new"],
+        "tg": ["new"],
         "v": "n"
       }
     },
     {
-      "id": "proposal-2026-05-15-004",
+      "id": "proposal-2026-05-22-005",
       "action": "add",
-      "reason": "Two decrees of 21 April 2026 (published in Official Journal) modify the French Code de la santé publique to align the national framework with MDR/IVDR obligations. Direct impact on French market deployment dossiers for Theodo clients.",
+      "reason": "MDCG 2021-24 Rev.1 on classification of medical devices was published on 20 April 2026, alongside the Manual on Borderline and Classification Version 5. Important pre-EUDAMED alignment for manufacturers preparing UDI/Device registrations.",
       "card": {
-        "id": "2026-04-21--france-public-health-code-mdr-ivdr-alignment",
+        "id": "2026-04-20--mdcg-2021-24-rev-1-classification-update",
+        "d": "2026-04-20",
+        "l": "20 Apr 2026",
+        "y": 2026,
+        "t": "MDCG 2021-24 Rev.1: Classification Guidance Updated",
+        "x": "Updated MDCG guidance on medical device classification, published together with the Manual on Borderline and Classification (Version 5) and EMDN annual revisions (MDCG 2026-1, 2026-2, 2026-3). Operational input for EUDAMED 28 May mandatory registration.",
+        "u": "https://health.ec.europa.eu/latest-updates/update-mdcg-2021-24-rev1-guidance-classification-medical-devices-april-2026-2026-04-20_en",
+        "tp": ["mdr"],
+        "tg": ["high", "new"],
+        "v": "n"
+      }
+    },
+    {
+      "id": "proposal-2026-05-22-006",
+      "action": "add",
+      "reason": "CNIL 2025 Annual Report published 18 May 2026 highlights AI accompaniment, sanctions trend, and focus on biometric and health data. Sets the data-protection enforcement tone for the next 12 months in France.",
+      "card": {
+        "id": "2026-05-18--cnil-2025-annual-report",
+        "d": "2026-05-18",
+        "l": "18 May 2026",
+        "y": 2026,
+        "t": "CNIL 2025 Annual Report Published",
+        "x": "Annual review of CNIL activity in 2025: emphasis on AI accompaniment (AI Act readiness, health-AI sandboxes), sanctions trend, and reinforced control on biometric and health data. Sets the data-protection enforcement priorities for 2026.",
+        "u": "https://www.cnil.fr/fr/rapport-annuel-2025",
+        "tp": ["france", "data", "ai"],
+        "tg": ["new"],
+        "v": "n"
+      }
+    },
+    {
+      "id": "proposal-2026-05-22-007",
+      "action": "add",
+      "reason": "France: two JORF decrees of 21 April 2026 align the Code de la santé publique with MDR/IVDR. National-level transposition adjustments relevant to French market-facing manufacturers.",
+      "card": {
+        "id": "2026-04-21--france-csp-mdr-ivdr-decrees",
         "d": "2026-04-21",
         "l": "21 Apr 2026",
         "y": 2026,
-        "t": "France — Public Health Code Aligned with MDR/IVDR",
-        "x": "Two decrees published in the Official Journal modify the Code de la santé publique to align French national framework with MDR/IVDR obligations.",
-        "u": "https://www.dm-experts.fr/2026/05/code-de-la-sante-publique-adaptation-du-cadre-national-aux-exigences-du-rdm-et-du-rdmdiv/",
+        "t": "France: CSP Decrees Aligning with MDR/IVDR",
+        "x": "Two JORF decrees published 21 April 2026 adapt the Code de la santé publique to MDR (EU 2017/745) and IVDR (EU 2017/746). Affects national procedures, market-surveillance interfaces and ANSM reporting expectations.",
+        "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
         "tp": ["france", "mdr"],
-        "tg": ["medium", "new"],
+        "tg": ["in-force"],
         "v": "n"
       }
     },
     {
-      "id": "proposal-2026-05-15-005",
+      "id": "proposal-2026-05-22-008",
       "action": "add",
-      "reason": "IMDRF released a draft harmonised technical framework for AI medical device lifecycle management on 6 May 2026 (out of the 29th MC Meeting, Singapore, March 2026). First convergence signal between FDA PCCP, MHRA AI Airlock, Health Canada MLMD, and PMDA IDATEN approaches.",
+      "reason": "IMDRF 29th Management Committee outcome (Singapore, March 2026) published 7 April 2026. Sets the international regulatory agenda for AI/ML, regulatory reliance, and adverse event terminology.",
       "card": {
-        "id": "2026-05-06--imdrf-ai-lifecycle-management-framework-draft",
-        "d": "2026-05-06",
-        "l": "6 May 2026",
+        "id": "2026-04-07--imdrf-29th-mc-singapore-outcome",
+        "d": "2026-04-07",
+        "l": "7 Apr 2026",
         "y": 2026,
-        "t": "IMDRF AI Lifecycle Management Framework — Draft",
-        "x": "Draft harmonised technical framework for managing AI-based medical device lifecycles. First convergence signal between FDA PCCP, MHRA AI Airlock, Health Canada MLMD, and PMDA IDATEN.",
-        "u": "https://www.dm-experts.fr/2026/05/imdrf-cadre-technique-pour-la-gestion-du-cycle-de-vie-de-lintelligence-artificielle/",
-        "tp": ["ai", "standards"],
-        "tg": ["high", "draft"],
-        "v": "h"
-      }
-    },
-    {
-      "id": "proposal-2026-05-15-006",
-      "action": "add",
-      "reason": "MDCG 2025-10 (issued 19 Dec 2025) is the new PMS guidance for MDR/IVDR — shifts from reactive complaint-driven to proactive data-generating PMS systems integrated with QMS. Affects every Theodo client. Missing from data.json — should be in the timeline.",
-      "card": {
-        "id": "2025-12-19--mdcg-2025-10-pms-guidance",
-        "d": "2025-12-19",
-        "l": "19 Dec 2025",
-        "y": 2025,
-        "t": "MDCG 2025-10 — Post-Market Surveillance Guidance",
-        "x": "New EU PMS guidance under MDR/IVDR: shift from reactive to proactive data-generating PMS, integrated into QMS, with PMCF/PMPF, indicators for benefit-risk reassessment, and EUDAMED data sourcing. Mandatory rework of PMS plans.",
-        "u": "https://health.ec.europa.eu/document/download/a9ad86b7-1b8e-4bae-beb4-48b2b3ed2f05_en?filename=mdcg_2025-10_en.pdf",
-        "tp": ["mdr"],
-        "tg": ["high", "in-force"],
-        "v": "h"
-      }
-    },
-    {
-      "id": "proposal-2026-05-15-007",
-      "action": "add",
-      "reason": "New MIR 7.3.1 manufacturer incident report PDF and XSD/XSL files now accepted from 1 May 2026 (SB 11154). Operational vigilance/PMS update — every Theodo client with incidents in pipeline must update their reporting tooling.",
-      "card": {
-        "id": "2026-05-01--mir-7-3-1-manufacturer-incident-report",
-        "d": "2026-05-01",
-        "l": "1 May 2026",
-        "y": 2026,
-        "t": "MIR 7.3.1 — Incident Report Forms in Force",
-        "x": "New manufacturer incident report PDF and XSD/XSL files in force from 1 May 2026 (SB 11154). EC published guidance on which MIR 7.3.1 versions are accepted. Operational vigilance update required.",
-        "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-mdcg-endorsed-documents-and-other-guidance/pmsv-reporting-forms_en",
-        "tp": ["mdr"],
-        "tg": ["medium", "in-force"],
+        "t": "IMDRF 29th MC Singapore: Outcome Statement",
+        "x": "Outcome of the 29th Management Committee meeting: international priorities on AI/ML lifecycle, regulatory reliance programs, and harmonised adverse event terminology. Signals continued convergence between FDA, MHRA, Health Canada, TGA and Singapore HSA.",
+        "u": "https://www.imdrf.org/documents/imdrf-29th-mc-meeting-singapore-march-2026-outcome-statement",
+        "tp": ["other"],
+        "tg": ["new"],
         "v": "n"
       }
     }
