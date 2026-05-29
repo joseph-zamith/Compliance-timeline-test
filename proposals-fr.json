@@ -1,137 +1,154 @@
 {
-  "generated": "2026-05-22",
+  "generated": "2026-05-29",
   "proposals": [
     {
-      "id": "proposal-2026-05-22-001",
+      "id": "proposal-2026-05-29-001",
       "action": "add",
-      "reason": "Implementing Regulation (EU) 2026/977 published in the Official Journal on 18 May 2026 sets uniform requirements for conformity assessment and notified body operations under MDR. Material regulatory event of the week with direct operational impact on every NB engagement.",
+      "reason": "CNIL Restricted Committee sanctioned IQVIA EUR 5M on 26 May 2026 for operating LRX and EMR health-data warehouses on data re-qualified as pseudonymous (not anonymous as IQVIA claimed). Major doctrinal shift: anonymisation-by-removal-of-identifiers is no longer a credible defence. Direct impact on every AI/ML MDSW relying on secondary-use pipelines.",
       "card": {
-        "id": "2026-05-18--implementing-reg-2026-977-conformity-assessment",
-        "d": "2026-05-18",
-        "l": "18 mai 2026",
+        "id": "2026-05-26--cnil-iqvia-5m-pseudonymous-warehouse",
+        "d": "2026-05-26",
+        "l": "26 mai 2026",
         "y": 2026,
-        "t": "Règlement d'exécution (UE) 2026/977 : règles uniformes d'évaluation de la conformité par les ON",
-        "x": "Fixe des exigences harmonisées pour l'évaluation de la conformité et le fonctionnement des organismes notifiés sous MDR : chiffrages standardisés, structure de coûts détaillée, délais maximaux à l'échelle de l'UE. La discipline opérationnelle se resserre pour tout fabricant MDR/IVDR.",
-        "u": "https://eur-lex.europa.eu/eli/reg_impl/2026/977/oj",
-        "tp": ["mdr"],
-        "tg": ["high", "new"],
-        "v": "h"
-      }
-    },
-    {
-      "id": "proposal-2026-05-22-002",
-      "action": "add",
-      "reason": "ISO 14155:2026 Edition 4 published on 23 March 2026 with NO transition period. Replaces ISO 14155:2020 immediately for any new clinical investigation. Major impact on clinical evaluation strategy under MDR Annex XIV.",
-      "card": {
-        "id": "2026-03-23--iso-14155-2026-edition-4-published",
-        "d": "2026-03-23",
-        "l": "23 mars 2026",
-        "y": 2026,
-        "t": "ISO 14155:2026 édition 4 publiée (sans transition)",
-        "x": "Quatrième édition de la norme BPC pour les investigations cliniques de dispositifs médicaux. Introduit des Comités d'événements cliniques obligatoires, la justification formelle des CSI, le cadre estimand (aligné ICH E9 R1) et des méthodes statistiques avancées (nouvelle Annexe K). Pas de période de transition : les nouvelles investigations doivent référencer ISO 14155:2026.",
-        "u": "https://www.iso.org/standard/83968.html",
-        "tp": ["standards"],
-        "tg": ["high", "new"],
-        "v": "h"
-      }
-    },
-    {
-      "id": "proposal-2026-05-22-003",
-      "action": "add",
-      "reason": "Health Canada published the final pre-market guidance for Machine Learning-enabled Medical Devices on 1 April 2026. Aligns Canada with FDA-PCCP and MHRA 2026 trajectories; adds SGBA Plus health-equity overlay. Important reference for multi-region AI/ML SaMD strategies.",
-      "card": {
-        "id": "2026-04-01--health-canada-mlmd-final-guidance",
-        "d": "2026-04-01",
-        "l": "1er avr. 2026",
-        "y": 2026,
-        "t": "Santé Canada : guide pré-marché MLMD finalisé",
-        "x": "Guide pré-marché final pour les dispositifs médicaux à apprentissage automatique. Couvre conception, données, entraînement, tests, validation clinique, transparence et surveillance post-marché ; ajoute des exigences explicites ACSG Plus (sexe, genre, ethnicité, âge, grossesse).",
-        "u": "https://www.canada.ca/fr/sante-canada/services/medicaments-produits-sante/instruments-medicaux/information-demandes/documents-orientation/orientation-prealable-mise-en-marche-instruments-medicaux-apprentissage-automatique.html",
-        "tp": ["other", "ai"],
-        "tg": ["new", "high"],
-        "v": "h"
-      }
-    },
-    {
-      "id": "proposal-2026-05-22-004",
-      "action": "add",
-      "reason": "TGA Australia released finalised AI SaMD regulatory guidance in February 2026. Confirms intended-purpose-driven classification, lifecycle and change-control obligations, and clinical-data primacy over synthetic data. Material for any client with APAC ambition.",
-      "card": {
-        "id": "2026-02-15--tga-ai-samd-guidance-australia",
-        "d": "2026-02-15",
-        "l": "févr. 2026",
-        "y": 2026,
-        "t": "TGA Australie : guide IA et SaMD publié",
-        "x": "Confirme une régulation pilotée par la destination : l'IA n'augmente pas automatiquement la classe du dispositif. Les exigences SaMD établies s'appliquent intégralement (cycle de vie, contrôle des changements, preuve clinique). Les données synthétiques peuvent compléter mais non remplacer les données cliniques ; la généralisabilité à la population australienne doit être démontrée.",
-        "u": "https://www.tga.gov.au/products/medical-devices/software-and-artificial-intelligence/manufacturing/artificial-intelligence-ai-and-medical-device-software",
-        "tp": ["other", "ai"],
-        "tg": ["new"],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-05-22-005",
-      "action": "add",
-      "reason": "MDCG 2021-24 Rev.1 on classification of medical devices was published on 20 April 2026, alongside the Manual on Borderline and Classification Version 5. Important pre-EUDAMED alignment for manufacturers preparing UDI/Device registrations.",
-      "card": {
-        "id": "2026-04-20--mdcg-2021-24-rev-1-classification-update",
-        "d": "2026-04-20",
-        "l": "20 avr. 2026",
-        "y": 2026,
-        "t": "MDCG 2021-24 Rév.1 : guide de classification mis à jour",
-        "x": "Mise à jour du guide MDCG sur la classification des dispositifs médicaux, publiée avec le Manuel sur les produits frontières et la classification (Version 5) et les révisions annuelles EMDN (MDCG 2026-1, 2026-2, 2026-3). Apport opérationnel direct pour l'enregistrement EUDAMED obligatoire du 28 mai.",
-        "u": "https://health.ec.europa.eu/latest-updates/update-mdcg-2021-24-rev1-guidance-classification-medical-devices-april-2026-2026-04-20_en",
-        "tp": ["mdr"],
-        "tg": ["high", "new"],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-05-22-006",
-      "action": "add",
-      "reason": "CNIL 2025 Annual Report published 18 May 2026 highlights AI accompaniment, sanctions trend, and focus on biometric and health data. Sets the data-protection enforcement tone for the next 12 months in France.",
-      "card": {
-        "id": "2026-05-18--cnil-2025-annual-report",
-        "d": "2026-05-18",
-        "l": "18 mai 2026",
-        "y": 2026,
-        "t": "Rapport annuel CNIL 2025 publié",
-        "x": "Bilan de l'activité 2025 de la CNIL : accent sur l'accompagnement IA (préparation IA Act, bacs à sable santé), tendance des sanctions et contrôle renforcé des données biométriques et de santé. Pose les priorités de contrôle pour 2026.",
-        "u": "https://www.cnil.fr/fr/rapport-annuel-2025",
+        "t": "La CNIL sanctionne IQVIA de 5 M€ : entrepôts de données de santé pseudonymes",
+        "x": "La formation restreinte de la CNIL requalifie les données des entrepôts LRX et EMR d'IQVIA comme pseudonymes, et non anonymes. Manquements : non-respect des conditions d'autorisation, information et droits des personnes, sécurité. Injonctions assorties d'une astreinte de 10 000 €/jour. Précédent majeur pour toute revendication d'usage secondaire en IA/ML.",
+        "u": "https://www.cnil.fr/fr/donnees-sante-sanction-5-millions-iqvia",
         "tp": ["france", "data", "ai"],
+        "tg": ["critical", "new"],
+        "v": "c"
+      }
+    },
+    {
+      "id": "proposal-2026-05-29-002",
+      "action": "add",
+      "reason": "IMDRF opened a public consultation on draft Best Practices for AI in medical devices on 20 May 2026, closing 10 June 2026. Reinforces GMLP/PCCP alignment trend and shapes how Health Canada, TGA, PMDA, NMPA, MFDS, SFDA, HSA, CDSCO will codify their AI/ML expectations. Critical neutral forum to influence.",
+      "card": {
+        "id": "2026-06-10--imdrf-ai-best-practices-consultation-closes",
+        "d": "2026-06-10",
+        "l": "10 juin 2026",
+        "y": 2026,
+        "t": "Clôture de la consultation IMDRF sur les bonnes pratiques IA",
+        "x": "Consultation publique sur le projet de document technique « Bonnes pratiques pour l'utilisation de l'IA dans les dispositifs médicaux », ouverte le 20 mai 2026. Cadrera les attentes internationales sur le cycle de vie IA/ML et la trajectoire d'alignement GMLP/PCCP au sein des membres de l'IMDRF.",
+        "u": "https://www.raps.org/resource/imdrf-drafts-framework-on-best-practices-for-using-ai-in-medical-devices.html",
+        "tp": ["ai", "other"],
+        "tg": ["high", "draft"],
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-05-29-003",
+      "action": "add",
+      "reason": "European Commission opened a stakeholder consultation on 19 May 2026 on draft Guidelines on the classification of high-risk AI systems, closing 23 June 2026. Worked examples for Annex I (medical devices) directly affect MDSW manufacturers' AI Act compliance path.",
+      "card": {
+        "id": "2026-06-23--ec-high-risk-ai-classification-guidelines-close",
+        "d": "2026-06-23",
+        "l": "23 juin 2026",
+        "y": 2026,
+        "t": "Clôture des lignes directrices CE sur la classification IA à haut risque",
+        "x": "Projet de lignes directrices de la Commission sur la classification des systèmes d'IA à haut risque au titre de l'AI Act, avec exemples couvrant l'Annexe I (dont les DM régulés par le RDM/RDIV) et l'Annexe III. Dernière fenêtre pour influencer la définition opérationnelle « haut risque » pour les MDSW.",
+        "u": "https://digital-strategy.ec.europa.eu/en/policies/guidelines-ai-high-risk-systems",
+        "tp": ["ai", "mdr"],
+        "tg": ["high", "draft"],
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-05-29-004",
+      "action": "add",
+      "reason": "European Commission published its first annual AI Act Article 112 review report on 22 May 2026. No amendments proposed to Article 5 prohibited list or Annex III high-risk list at this stage, but areas flagged for monitoring include malware AI, therapy chatbots, dark-pattern AI, broadened emotion-recognition prohibition. Signals the future direction of AI Act scope review.",
+      "card": {
+        "id": "2026-05-22--ec-ai-act-article-112-annual-review",
+        "d": "2026-05-22",
+        "l": "22 mai 2026",
+        "y": 2026,
+        "t": "Premier rapport annuel CE Article 112 AI Act",
+        "x": "Évaluation annuelle obligatoire d'amendement des listes de pratiques d'IA interdites (Art. 5) et des cas à haut risque (Annexe III). Aucune modification proposée à ce stade ; points de vigilance signalés : IA malware, chatbots thérapeutiques, IA aux schémas addictifs, élargissement de l'interdiction reconnaissance d'émotions, périmètre infrastructures critiques.",
+        "u": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+        "tp": ["ai"],
         "tg": ["new"],
         "v": "n"
       }
     },
     {
-      "id": "proposal-2026-05-22-007",
+      "id": "proposal-2026-05-29-005",
       "action": "add",
-      "reason": "France: two JORF decrees of 21 April 2026 align the Code de la santé publique with MDR/IVDR. National-level transposition adjustments relevant to French market-facing manufacturers.",
+      "reason": "NMPA released an AI roadmap covering AI-supported review, inspections, traceability, risk monitoring, and digital governance across drugs, medical devices, and cosmetics through 2035. Signals official strategy that NMPA itself will use AI in its oversight machinery. Material for any manufacturer planning a China registration.",
       "card": {
-        "id": "2026-04-21--france-csp-mdr-ivdr-decrees",
-        "d": "2026-04-21",
-        "l": "21 avr. 2026",
+        "id": "2026-05-15--nmpa-ai-roadmap-2035",
+        "d": "2026-05-15",
+        "l": "mai 2026",
         "y": 2026,
-        "t": "France : décrets CSP d'alignement MDR/IVDR",
-        "x": "Deux décrets publiés au JORF du 21 avril 2026 adaptent le Code de la santé publique aux règlements MDR (UE 2017/745) et IVDR (UE 2017/746). Impacte les procédures nationales, les interfaces de surveillance du marché et les attentes ANSM en matière de déclaration.",
-        "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
-        "tp": ["france", "mdr"],
-        "tg": ["in-force"],
+        "t": "Chine : feuille de route IA de la NMPA à 2035",
+        "x": "La NMPA publie une feuille de route IA couvrant l'évaluation, les inspections, la traçabilité, la surveillance des risques et la gouvernance numérique pour les médicaments, dispositifs médicaux et cosmétiques jusqu'en 2035. Prolonge la norme YY/T 1406-2026 (publiée le 17 mars 2026, en vigueur le 1er mars 2027) et le plan de révision 2026 portant sur 56 DM Classe III et 219 Classe II.",
+        "u": "https://chinameddevice.com/nmpa-regulatory-clinical-news-may-2026/",
+        "tp": ["other", "ai"],
+        "tg": ["new"],
         "v": "n"
       }
     },
     {
-      "id": "proposal-2026-05-22-008",
+      "id": "proposal-2026-05-29-006",
       "action": "add",
-      "reason": "IMDRF 29th Management Committee outcome (Singapore, March 2026) published 7 April 2026. Sets the international regulatory agenda for AI/ML, regulatory reliance, and adverse event terminology.",
+      "reason": "MHRA Stakeholder Impact Survey on the draft Medical Devices (Amendment) Regulations 2026 closes 19 June 2026, 23:59 UK. Last realistic window to shape PCCP scope, SaMD up-classification (most to Class IIa+), UDI rollout and international reliance pathway before December 2026 adoption.",
       "card": {
-        "id": "2026-04-07--imdrf-29th-mc-singapore-outcome",
-        "d": "2026-04-07",
-        "l": "7 avr. 2026",
+        "id": "2026-06-19--mhra-stakeholder-survey-uk-mdr-2026-closes",
+        "d": "2026-06-19",
+        "l": "19 juin 2026",
         "y": 2026,
-        "t": "IMDRF 29e MC Singapour : déclaration de conclusions",
-        "x": "Conclusions de la 29e réunion du Management Committee : priorités internationales sur le cycle de vie IA/ML, les programmes de reconnaissance réglementaire et la terminologie harmonisée des événements indésirables. Confirme la convergence FDA, MHRA, Santé Canada, TGA et HSA Singapour.",
-        "u": "https://www.imdrf.org/documents/imdrf-29th-mc-meeting-singapore-march-2026-outcome-statement",
+        "t": "Clôture du sondage MHRA sur le projet de règlement DM UK 2026",
+        "x": "Consultation du MHRA sur le projet de Medical Devices (Amendment) Regulations 2026 : alignement de la classification sur le RDM/RDIV (la plupart des SaMD passent en Classe IIa+), UDI obligatoire, PCCP formels pour les DM IA, voies de reliance internationale (USA/Canada/Australie). Adoption prévue déc. 2026, en vigueur juin 2027.",
+        "u": "https://www.gov.uk/government/calls-for-evidence/pre-market-medical-devices-regulation-stakeholder-impact-survey",
+        "tp": ["uk", "mdr", "ai"],
+        "tg": ["high", "in-progress"],
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-05-29-007",
+      "action": "add",
+      "reason": "Next staged commencement of the UK Data (Use and Access) Act 2025: 19 June 2026 tranche includes Art. 6 lawful-basis changes and mandatory data-protection complaint-handling process. Schedule 15 binds IT providers directly to NHS information standards. Direct operational hook for MDSW vendors integrating with NHS systems.",
+      "card": {
+        "id": "2026-06-19--uk-duaa-2025-next-commencement-tranche",
+        "d": "2026-06-19",
+        "l": "19 juin 2026",
+        "y": 2026,
+        "t": "UK Data (Use and Access) Act 2025 : prochaine tranche d'entrée en vigueur",
+        "x": "Mise en application étagée : évolution de l'Article 6 (bases légales), processus formel obligatoire de traitement des réclamations en protection des données. L'Annexe 15 étend les normes d'information NHS aux fournisseurs IT directement, et non plus uniquement aux établissements de santé. Impact opérationnel direct sur les éditeurs MDSW intégrés au NHS.",
+        "u": "https://www.legislation.gov.uk/uksi/2026/82/regulation/2/made",
+        "tp": ["uk", "data"],
+        "tg": ["high", "in-force"],
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-05-29-008",
+      "action": "add",
+      "reason": "IMDRF AI Lifecycle Management technical framework consultation opened 10 April 2026, closing 10 July 2026. Sets planning, design, deployment, monitoring, update, retirement expectations for AI-enabled medical devices. Critical for shaping the harmonised approach across IMDRF members.",
+      "card": {
+        "id": "2026-07-10--imdrf-ai-lifecycle-mgmt-consultation-closes",
+        "d": "2026-07-10",
+        "l": "10 juill. 2026",
+        "y": 2026,
+        "t": "Clôture de la consultation IMDRF sur le cycle de vie de l'IA",
+        "x": "Consultation publique sur le projet de cadre technique pour la gestion du cycle de vie de l'IA. Complète N88 (GMLP), N81 (caractérisation SaMD et risque logiciel), SaMD N12, et les travaux IMDRF sur la cybersécurité. 30e session du Comité de gestion IMDRF à Singapour, 14-18 septembre 2026.",
+        "u": "https://www.imdrf.org/consultations/technical-framework-artificial-intelligence-life-cycle-management",
+        "tp": ["ai", "other"],
+        "tg": ["high", "draft"],
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-05-29-009",
+      "action": "add",
+      "reason": "PMDA refreshed its English-language SaMD consolidated information page on 25 May 2026, opening consultation slots from June 2026 and aligning with DASH for SaMD 2 strategy and the January 2026 two-step approval mechanism. Operationalisation milestone for any manufacturer planning a Japan submission.",
+      "card": {
+        "id": "2026-05-25--pmda-samd-page-refresh-consultation-slots",
+        "d": "2026-05-25",
+        "l": "25 mai 2026",
+        "y": 2026,
+        "t": "Japon : la PMDA met à jour sa page SaMD et ouvre des créneaux de consultation",
+        "x": "La PMDA met à jour sa page SaMD en anglais, regroupant les informations d'évaluation, FAQ et le Guide to Regulatory Development and Approval Application of SaMD. S'inscrit dans DASH for SaMD 2 et le mécanisme d'approbation en deux étapes (notification MHLW PSB/MDED 1116-2, janv. 2026). Créneaux de consultation à partir de juin 2026.",
+        "u": "https://www.pmda.go.jp/english/review-services/reviews/0009.html",
         "tp": ["other"],
         "tg": ["new"],
         "v": "n"
