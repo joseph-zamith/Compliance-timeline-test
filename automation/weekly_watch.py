@@ -114,6 +114,13 @@ def is_dry_run() -> bool:
     return os.environ.get("DRY_RUN", "").lower() == "true"
 
 
+def skip_fixed_sources() -> bool:
+    """Test-only escape hatch: skip the ~12 fixed-source HTTP fetches (already
+    validated separately) to iterate faster on the writing model. Sonar
+    research still runs, so there's still real content to write from."""
+    return os.environ.get("SKIP_FIXED_SOURCES", "").lower() == "true"
+
+
 # ---------------------------------------------------------------------------
 # Step 1: config, recipients, existing data
 # ---------------------------------------------------------------------------
@@ -587,8 +594,12 @@ def main() -> None:
 
     log(f"Modèle recherche: {config['research_model']} / rédaction: {config['writing_model']}")
 
-    log("Recherche — fetch des sources fixes...")
-    fixed_sources_blob = fetch_fixed_sources()
+    if skip_fixed_sources():
+        log("Recherche — fetch des sources fixes SKIPPÉ (SKIP_FIXED_SOURCES=true, test rapide).")
+        fixed_sources_blob = "(sources fixes non interrogées cette fois — SKIP_FIXED_SOURCES actif, test rapide)"
+    else:
+        log("Recherche — fetch des sources fixes...")
+        fixed_sources_blob = fetch_fixed_sources()
 
     log("Recherche — requêtes Perplexity Sonar...")
     sonar_blob = run_sonar_research(client, config["research_model"])

@@ -9,6 +9,10 @@ on:
         description: "Générer sans envoyer d'email ni pousser sur git (test)"
         type: boolean
         default: true
+      skip_fixed_sources:
+        description: "Sauter le fetch des ~12 sources fixes (test rapide, déjà validé séparément)"
+        type: boolean
+        default: false
 
   # Cron désactivé pour l'instant — décommenter une fois les tests manuels validés.
   # schedule:
@@ -41,6 +45,7 @@ jobs:
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          SKIP_FIXED_SOURCES: ${{ github.event.inputs.skip_fixed_sources || 'false' }}
         run: python automation/weekly_watch.py
 
       - name: Upload generated artifacts (dry-run inspection)
