@@ -645,6 +645,34 @@
 </div>
 
 <div class="page">
+  <!-- AI model configuration (research + writing models used by the weekly automation) -->
+  <div class="proposal-card" id="model-config-card">
+    <div class="proposal-top">
+      <span class="proposal-title">Configuration IA — veille hebdomadaire</span>
+      <span id="model-config-status" class="gh-token-status"></span>
+    </div>
+    <div class="proposal-desc">Modèles utilisés par le job automatique du vendredi. Change ici, pas besoin de toucher au code.</div>
+    <div style="display:flex; gap:24px; margin-top:12px; flex-wrap:wrap;">
+      <label style="display:flex; flex-direction:column; gap:4px; font-size:0.75rem; color:var(--ink-tertiary);">
+        Modèle de recherche
+        <select id="research-model-select" class="search" style="max-width:280px;">
+          <option value="vercel/perplexity-sonar">Sonar (standard) — coût de base</option>
+          <option value="vercel/perplexity-sonar-pro">Sonar Pro — ~5x plus cher</option>
+          <option value="vercel/perplexity-sonar-reasoning-pro">Sonar Reasoning Pro — le plus cher</option>
+        </select>
+      </label>
+      <label style="display:flex; flex-direction:column; gap:4px; font-size:0.75rem; color:var(--ink-tertiary);">
+        Modèle de rédaction
+        <select id="writing-model-select" class="search" style="max-width:280px;">
+          <option value="vercel/anthropic-claude-haiku-4.5">Claude Haiku 4.5 — le moins cher</option>
+          <option value="vercel/anthropic-claude-sonnet-4.5">Claude Sonnet 4.5 — recommandé</option>
+          <option value="vercel/anthropic-claude-opus-4.5">Claude Opus 4.5 — plus cher</option>
+          <option value="vercel/anthropic-claude-opus-4.6">Claude Opus 4.6 — le plus cher</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
   <!-- Proposals Section (dynamically populated) -->
   <div id="proposals-section"></div>
 
@@ -685,9 +713,12 @@ const TL={mdr:"EU MDR/IVDR",ai:"AI Act",standards:"Standards",cyber:"Cybersecuri
 const TG={critical:"CRITICAL",high:"HIGH",medium:"MEDIUM","new":"NEW","in-force":"IN FORCE"};
 
 /* ===== decisions.json — shared state via GitHub repo ===== */
-const REPO_OWNER = "nicolasbertrand-QARA";
-const REPO_NAME = "Compliance-timeline";
+// TEMPORAIRE — pointe vers le repo de test pendant la migration.
+// Remettre "theodo-group" / "Compliance-timeline" avant le déploiement final.
+const REPO_OWNER = "joseph-zamith";
+const REPO_NAME = "Compliance-timeline-test";
 const DEC_PATH = "decisions.json";
+const CONFIG_PATH = "automation/config.json";
 
 let decisions = {
   hidden_cards: [], approved_proposals: [], rejected_proposals: [],
@@ -695,6 +726,83 @@ let decisions = {
   tag_overrides: {}, approval_dates: {}
 };
 let decisionsSha = null; // GitHub file SHA for updates
+
+/* ===== automation/config.json — AI model selection for the weekly job ===== */
+let modelConfig = {
+  research_model: "vercel/perplexity-sonar",
+  writing_model: "vercel/anthropic-claude-sonnet-4.5"
+};
+let modelConfigSha = null;
+
+async function pushModelConfig() {
+  const token = getGitHubToken();
+  const status = document.getElementById("model-config-status");
+  if (!token) {
+    if (status) { status.textContent = "Local only (pas de token)"; status.className = "gh-token-status none"; }
+    return;
+  }
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(modelConfig, null, 2))));
+  try {
+    const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CONFIG_PATH}`, {
+      method: "PUT",
+      headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: "Update AI model config from back office",
+        content: content,
+        sha: modelConfigSha,
+      }),
+    });
+    if (resp.ok) {
+      const data = await resp.json();
+      modelConfigSha = data.content.sha;
+      if (status) { status.textContent = "Synced"; status.className = "gh-token-status ok"; }
+      showToast("Config IA synchronisée");
+    } else {
+      const err = await resp.json();
+      console.error("Model config push failed:", err);
+      if (status) { status.textContent = "Sync échouée"; status.className = "gh-token-status none"; }
+    }
+  } catch(e) {
+    console.error("Model config push error:", e);
+  }
+}
+
+async function loadModelConfig() {
+  try {
+    const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CONFIG_PATH}`);
+    if (resp.ok) {
+      const ghFile = await resp.json();
+      modelConfigSha = ghFile.sha;
+      const parsed = JSON.parse(atob(ghFile.content.replace(/\n/g, "")));
+      if (parsed.research_model) modelConfig = parsed;
+    }
+  } catch(e) { console.warn("Could not load automation/config.json:", e); }
+
+  const researchSelect = document.getElementById("research-model-select");
+  const writingSelect = document.getElementById("writing-model-select");
+  if (researchSelect) researchSelect.value = modelConfig.research_model;
+  if (writingSelect) writingSelect.value = modelConfig.writing_model;
+
+  const status = document.getElementById("model-config-status");
+  if (status) {
+    if (getGitHubToken()) { status.textContent = "Connected"; status.className = "gh-token-status ok"; }
+    else { status.textContent = "Local only"; status.className = "gh-token-status none"; }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const researchSelect = document.getElementById("research-model-select");
+  const writingSelect = document.getElementById("writing-model-select");
+  if (researchSelect) researchSelect.addEventListener("change", () => {
+    modelConfig.research_model = researchSelect.value;
+    pushModelConfig();
+  });
+  if (writingSelect) writingSelect.addEventListener("change", () => {
+    modelConfig.writing_model = writingSelect.value;
+    pushModelConfig();
+  });
+  loadModelConfig();
+});
 
 function getGitHubToken() { return localStorage.getItem("rw_github_token") || ""; }
 

@@ -1,0 +1,56 @@
+name: Regulatory Watch (weekly)
+
+on:
+  # Déclenchement manuel pendant la phase de test (voir automation/recipients.json —
+  # ne mettre que des destinataires de test tant que le cron ci-dessous est désactivé).
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Générer sans envoyer d'email ni pousser sur git (test)"
+        type: boolean
+        default: true
+
+  # Cron désactivé pour l'instant — décommenter une fois les tests manuels validés.
+  # schedule:
+  #   - cron: "30 6 * * 5"   # 06h30 UTC tous les vendredis (~7h30 CET / 8h30 CEST)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: regulatory-watch
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -r automation/requirements.txt
+          playwright install --with-deps chromium
+
+      - name: Run weekly regulatory watch
+        env:
+          LITELLM_API_KEY: ${{ secrets.LITELLM_API_KEY }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: python automation/weekly_watch.py
+
+      - name: Upload generated artifacts (dry-run inspection)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regulatory-watch-output
+          path: |
+            proposals.json
+            proposals-fr.json
+            automation/state/last_email.html
+          if-no-files-found: ignore
