@@ -325,6 +325,10 @@ semaine sur les autres normes suivies." (do not reprint the full register every 
 {STANDARDS_REGISTER}
 
 ## OUTPUT FORMAT — respect EXACTLY, nothing else before/after
+Use ONLY these three markers, exactly as written, nothing else: never invent your own extra
+marker (e.g. do not write "===END_EMAIL===" or "===END_REPORT===" or anything similar) — the
+HTML for each section ends the instant the next marker below appears, that is the only signal
+needed.
 {EMAIL_MARKER}
 <the email body HTML>
 {REPORT_MARKER}
@@ -389,6 +393,9 @@ description) concise — 1-2 sentences, not a paragraph.
 }}
 
 ## OUTPUT FORMAT — respect EXACTLY, nothing else before/after
+Use ONLY these three markers, exactly as written, nothing else: never invent your own extra
+marker — the JSON for each block ends the instant the next marker below appears, that is the
+only signal needed.
 {PROPOSALS_EN_MARKER}
 {{"generated": "YYYY-MM-DD", "proposals": [...]}}
 {PROPOSALS_FR_MARKER}
@@ -473,6 +480,16 @@ def _fail_missing_markers(raw: str, markers: list, debug_filename: str, what: st
     )
 
 
+def _strip_stray_markers(text: str) -> str:
+    """The model sometimes invents its own closing marker (seen in real runs:
+    "===END_EMAIL===", "===END_REPORT===") that isn't one of ours. Since our
+    marker regex captures everything up to the next REAL marker, any such
+    invented marker ends up swallowed into the extracted content and would
+    leak into the actual sent email/report. Strip any standalone "===...==="
+    line defensively rather than relying on the model never doing this again."""
+    return re.sub(r"(?m)^\s*={3,}[A-Za-z0-9_ ]+={3,}\s*$\n?", "", text).strip()
+
+
 def split_content_sections(raw: str) -> dict:
     save_debug_output(raw, "content")
     pattern = re.escape(EMAIL_MARKER) + r"(.*?)" + re.escape(REPORT_MARKER) + r"(.*?)" + re.escape(END_MARKER)
@@ -482,7 +499,7 @@ def split_content_sections(raw: str) -> dict:
             raw, [EMAIL_MARKER, REPORT_MARKER, END_MARKER],
             "debug_last_content_output.txt", "email + rapport",
         )
-    email_body, full_report = (s.strip() for s in m.groups())
+    email_body, full_report = (_strip_stray_markers(s) for s in m.groups())
     return {"email_body": email_body, "full_report": full_report}
 
 
@@ -495,7 +512,7 @@ def split_proposals_sections(raw: str) -> dict:
             raw, [PROPOSALS_EN_MARKER, PROPOSALS_FR_MARKER, END_MARKER],
             "debug_last_proposals_output.txt", "propositions",
         )
-    proposals_en_raw, proposals_fr_raw = (s.strip() for s in m.groups())
+    proposals_en_raw, proposals_fr_raw = (_strip_stray_markers(s) for s in m.groups())
     return {"proposals_en_raw": proposals_en_raw, "proposals_fr_raw": proposals_fr_raw}
 
 
