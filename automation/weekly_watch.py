@@ -521,16 +521,19 @@ def send_email(email_body_html: str, full_report_html: str, recipients: list) ->
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
 
+    # En DRY_RUN, on ne cherche jamais à envoyer réellement — donc pas besoin
+    # d'exiger les identifiants Gmail, qui ne sont pas encore configurés tant
+    # que la boîte mail dédiée (tâche #4/#5) n'existe pas.
     gmail_address = os.environ.get("GMAIL_ADDRESS")
     gmail_password = os.environ.get("GMAIL_APP_PASSWORD")
-    if not gmail_address or not gmail_password:
+    if not is_dry_run() and (not gmail_address or not gmail_password):
         fail("GMAIL_ADDRESS / GMAIL_APP_PASSWORD manquant (secrets GitHub Actions).")
 
     today_str = date.today().strftime("%d %B %Y")
     outer = MIMEMultipart("mixed")
     outer["To"] = ", ".join(recipients)
     outer["Subject"] = f"Veille reglementaire (focus UE) - Logiciels DM & AI Act - {today_str}"
-    outer["From"] = gmail_address
+    outer["From"] = gmail_address or "(dry-run, adresse non configurée)"
 
     body = MIMEMultipart("alternative")
     plain_text = (
