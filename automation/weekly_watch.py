@@ -33,9 +33,11 @@ import os
 import re
 import subprocess
 import sys
+import time
 from datetime import date, datetime, timezone
 from pathlib import Path
 
+import httpx
 import requests
 from bs4 import BeautifulSoup
 from openai import OpenAI
@@ -150,7 +152,12 @@ def get_litellm_client() -> OpenAI:
     api_key = os.environ.get("LITELLM_API_KEY")
     if not api_key:
         fail("LITELLM_API_KEY manquant (secret GitHub Actions non configuré).")
-    return OpenAI(api_key=api_key, base_url=LITELLM_BASE_URL)
+    # read=90 : chaque lecture réseau attend au plus 90s de nouvelles données.
+    # Tant que le flux avance (même lentement, un long rapport par ex.), chaque
+    # lecture réussit et le compteur repart à zéro — seul un vrai blocage
+    # (rien reçu pendant 90s d'affilée) déclenche une erreur.
+    timeout = httpx.Timeout(connect=10.0, read=90.0, write=30.0, pool=10.0)
+    return OpenAI(api_key=api_key, base_url=LITELLM_BASE_URL, timeout=timeout)
 
 
 # ---------------------------------------------------------------------------
@@ -162,11 +169,18 @@ def fetch_fixed_sources() -> str:
     Confirmed during migration: all these sources are server-rendered (their
     real content is present in the raw HTML), so no headless browser is
     needed — a simple request + text extraction is enough and much faster."""
-    headers = {"User-Agent": "Mozilla/5.0 (compatible; TheodoRegWatch/1.0)"}
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
+        ),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9,fr;q=0.8",
+    }
     chunks = []
     for url in FIXED_SOURCES:
         try:
-            resp = requests.get(url, headers=headers, timeout=20)
+            resp = requests.get(url, headers=headers, timeout=30)
             resp.raise_for_status()
             soup = BeautifulSoup(resp.text, "html.parser")
             for tag in soup(["script", "style"]):
@@ -289,17 +303,42 @@ def run_writing_model(client: OpenAI, model: str, research_blob: str, last_email
         f"Today's date: {date.today().isoformat()}. Produce the four sections in the exact "
         f"required format."
     )
-    resp = client.chat.completions.create(
-        model=model,
-        messages=[
-            {"role": "system", "content": WRITING_SYSTEM_PROMPT},
-            {"role": "user", "content": user_content},
-        ],
-        max_tokens=32000,
-    )
-    choice = resp.choices[0]
-    log(f"Rédaction terminée — finish_reason={choice.finish_reason}, longueur={len(choice.message.content)} caractères.")
-    return choice.message.content
+    # Streaming : le flux avance token par token. Le timeout "read" configuré
+    # sur le client (voir get_litellm_client) protège contre un vrai blocage
+    # sans jamais couper un rapport long qui progresse normalement.
+    try:
+        stream = client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": WRITING_SYSTEM_PROMPT},
+                {"role": "user", "content": user_content},
+            ],
+            max_tokens=32000,
+            stream=True,
+        )
+        chunks = []
+        finish_reason = None
+        total_chars = 0
+        last_progress_log = time.monotonic()
+        for chunk in stream:
+            if not chunk.choices:
+                continue
+            delta = chunk.choices[0].delta.content
+            if delta:
+                chunks.append(delta)
+                total_chars += len(delta)
+            if chunk.choices[0].finish_reason:
+                finish_reason = chunk.choices[0].finish_reason
+            now = time.monotonic()
+            if now - last_progress_log > 15:
+                log(f"  ... toujours en cours, {total_chars} caractères reçus jusqu'ici.")
+                last_progress_log = now
+    except httpx.ReadTimeout:
+        fail("Modèle de rédaction bloqué : aucune donnée reçue pendant plus de 90s.")
+
+    content = "".join(chunks)
+    log(f"Rédaction terminée — finish_reason={finish_reason}, longueur={len(content)} caractères.")
+    return content
 
 
 def save_debug_output(raw: str) -> None:
