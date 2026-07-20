@@ -187,8 +187,10 @@ def fetch_fixed_sources() -> str:
                 tag.decompose()
             text = soup.get_text(separator="\n")
             text = re.sub(r"\n{3,}", "\n\n", text).strip()
-            # Cap per-source length to keep the writing-model prompt manageable.
-            chunks.append(f"--- SOURCE: {url} ---\n{text[:6000]}")
+            # Cap per-source length to keep the writing-model prompt manageable — a
+            # smaller prompt also reduces the model's tendency to try to cover
+            # everything at length (see CONTENT_SYSTEM_PROMPT hard length budget).
+            chunks.append(f"--- SOURCE: {url} ---\n{text[:2500]}")
         except Exception as e:  # noqa: BLE001 - one bad source must not kill the run
             log(f"Fetch échoué pour {url}: {e}")
             chunks.append(f"--- SOURCE: {url} ---\n(fetch échoué: {e})")
@@ -240,6 +242,15 @@ not an exhaustive dump:
    than the email on items that moved, but do not pad with boilerplate or restate unchanged
    background. If nothing material happened in a region/section this week, one line saying so
    is enough — do not describe it at length anyway.
+
+HARD TECHNICAL CONSTRAINT — this is not a style preference, it is a system limit: your total
+output for this call (email HTML + report HTML combined) is capped at roughly 9000 tokens. If
+you go over, the call is cut off mid-output and the ENTIRE run fails (nothing gets sent, nothing
+gets published). It is always better to under-deliver (shorter items, fewer words per item,
+drop a minor item) than to risk running out of budget. Write tightly from the start — 1-2
+sentences per item, no throat-clearing, no restating the item you just covered in the email
+inside the report. If you notice you are already past 1500 words combined and not yet at the
+proposals-adjacent sections, start compressing aggressively.
 
 Language: BOTH outputs are in FRENCH, native register (not translated English). Banned calques:
 "actionnable", "re-actionner", "En 60 secondes", "Sur le radar", "atteindre le seuil",
@@ -314,12 +325,21 @@ description) concise — 1-2 sentences, not a paragraph.
 """
 
 
-def run_model_call(client: OpenAI, model: str, system_prompt: str, user_content: str, label: str) -> str:
+def run_model_call(
+    client: OpenAI, model: str, system_prompt: str, user_content: str, label: str,
+    max_tokens: int = 16000,
+) -> str:
     """Shared streaming call used for both the content call (email+report) and
     the proposals call. Splitting these into two smaller requests (instead of
     one call producing all four sections) keeps each call's total generation
     time comfortably under the gateway's apparent hard cap on request
-    duration — the cause of the earlier finish_reason=None cutoffs."""
+    duration — the cause of the earlier finish_reason=None cutoffs.
+
+    max_tokens is deliberately kept much lower than the model's real ceiling:
+    it acts as a hard, deterministic backstop so a call that ignores the
+    length guidance in the prompt fails fast and clearly (finish_reason=
+    "length", caught below) instead of silently running into the gateway's
+    duration cutoff."""
     # Streaming : le flux avance token par token. Le timeout "read" configuré
     # sur le client (voir get_litellm_client) protège contre un vrai blocage
     # sans jamais couper un rapport long qui progresse normalement.
@@ -330,7 +350,7 @@ def run_model_call(client: OpenAI, model: str, system_prompt: str, user_content:
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_content},
             ],
-            max_tokens=32000,
+            max_tokens=max_tokens,
             stream=True,
         )
         chunks = []
@@ -355,6 +375,11 @@ def run_model_call(client: OpenAI, model: str, system_prompt: str, user_content:
 
     content = "".join(chunks)
     log(f"{label} terminé — finish_reason={finish_reason}, longueur={len(content)} caractères.")
+    if finish_reason == "length":
+        log(
+            f"  ATTENTION ({label}) : coupé par max_tokens={max_tokens}, pas par le modèle "
+            f"lui-même — le contenu est probablement incomplet (pas de marqueur de fin)."
+        )
     return content
 
 
@@ -572,28 +597,28 @@ def main() -> None:
 
     log("Rédaction — appel au modèle (email + rapport)...")
     content_user_content = (
-        f"## Previous edition (do not repeat unchanged items)\n{last_email[:8000]}\n\n"
-        f"## Fixed-source research\n{research_blob[:40000]}\n\n"
+        f"## Previous edition (do not repeat unchanged items)\n{last_email[:6000]}\n\n"
+        f"## Fixed-source research\n{research_blob[:18000]}\n\n"
         f"Today's date: {date.today().isoformat()}. Produce the two sections (email body, "
-        f"full report) in the exact required format."
+        f"full report) in the exact required format. Remember the hard token budget."
     )
     content_raw = run_model_call(
         client, config["writing_model"], CONTENT_SYSTEM_PROMPT, content_user_content,
-        "Rédaction (email + rapport)",
+        "Rédaction (email + rapport)", max_tokens=9000,
     )
     content_sections = split_content_sections(content_raw)
 
     log("Rédaction — appel au modèle (propositions)...")
     proposals_user_content = (
         f"## This week's full report (already written — source of truth, do not re-research)\n"
-        f"{content_sections['full_report'][:30000]}\n\n"
-        f"## Existing timeline milestones (data.json)\n{json.dumps(data_json, ensure_ascii=False)[:20000]}\n\n"
+        f"{content_sections['full_report'][:15000]}\n\n"
+        f"## Existing timeline milestones (data.json)\n{json.dumps(data_json, ensure_ascii=False)[:15000]}\n\n"
         f"Today's date: {date.today().isoformat()}. Produce the two proposals JSON blocks in "
         f"the exact required format."
     )
     proposals_raw = run_model_call(
         client, config["writing_model"], PROPOSALS_SYSTEM_PROMPT, proposals_user_content,
-        "Rédaction (propositions)",
+        "Rédaction (propositions)", max_tokens=5000,
     )
     proposals_sections = split_proposals_sections(proposals_raw)
 
