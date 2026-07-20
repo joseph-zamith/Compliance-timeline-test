@@ -346,16 +346,47 @@ changes — most weeks do NOT need 8). Stable id format: "YYYY-MM-DD--lowercase-
 Valid tags: {VALID_TAGS}. Valid variants: {VALID_VARIANTS} (c=critical/navy, h=highlight/gold,
 n=normal). Action value must be lowercase: "add", "update", or "delete" — never uppercase.
 
-EVERY proposal object, whatever the action, MUST have a top-level "id" field (this is required,
-there is no optional case):
-- action="add": "id" is a brand new stable slug (format above); no "existing_id".
+EVERY proposal object, whatever the action, MUST have BOTH a top-level "id" field AND a
+top-level "reason" field — these two are never optional, never skip either one even when it
+feels redundant with "card":
+- action="add": "id" is a brand new stable slug (format above); no "existing_id". "reason"
+  explains why this is being added (can echo card.x, that's fine).
 - action="update" or "delete": "id" MUST be set to the EXACT SAME VALUE as "existing_id" (repeat
   it — do not omit "id" just because the item already exists). "existing_id" must match an id
-  already present in the existing timeline milestones given below.
+  already present in the existing timeline milestones given below. "reason" explains what
+  changed / why it's being removed.
 
 FR proposals: IDENTICAL id/action/existing_id/card.id/card.d/card.y/card.u/card.tp/card.tg/card.v;
 translate card.t, card.x, card.l only (reason stays in English). Keep "reason" and "x" (card
 description) concise — 1-2 sentences, not a paragraph.
+
+## EXAMPLE — every field shown here is mandatory on every proposal, copy this exact shape
+{{
+  "generated": "2026-07-20",
+  "proposals": [
+    {{
+      "action": "add",
+      "id": "2026-07-20--example-new-guidance-published",
+      "reason": "New MDCG guidance clarifies X, directly affects MDSW classification.",
+      "card": {{
+        "id": "2026-07-20--example-new-guidance-published", "d": "2026-07-20", "l": "20 Jul 2026",
+        "y": 2026, "t": "Example New Guidance Published", "x": "One-sentence description of the change.",
+        "u": "https://example.org/source", "tp": ["mdr"], "tg": ["new", "high"], "v": "h"
+      }}
+    }},
+    {{
+      "action": "update",
+      "id": "2026-05-28--eudamed-first-4-modules-mandatory",
+      "existing_id": "2026-05-28--eudamed-first-4-modules-mandatory",
+      "reason": "Deadline confirmed, status moved from proposed to in-force.",
+      "card": {{
+        "id": "2026-05-28--eudamed-first-4-modules-mandatory", "d": "2026-05-28", "l": "28 May 2026",
+        "y": 2026, "t": "EUDAMED - First 4 Modules Mandatory", "x": "Updated status: now in mandatory use.",
+        "u": "https://example.org/source", "tp": ["mdr"], "tg": ["critical", "in-force"], "v": "c"
+      }}
+    }}
+  ]
+}}
 
 ## OUTPUT FORMAT — respect EXACTLY, nothing else before/after
 {PROPOSALS_EN_MARKER}
@@ -497,6 +528,11 @@ def validate_proposals_json(raw: str, label: str) -> dict:
         # (voir PROPOSALS_SYSTEM_PROMPT) — donc on le déduit plutôt que d'échouer.
         if "id" not in p and action in ("update", "delete") and p.get("existing_id"):
             p["id"] = p["existing_id"]
+        # Filet de sécurité : le modèle oublie parfois "reason" (vu en test réel,
+        # cas différent du précédent) alors que "card.x" contient une description
+        # équivalente — on la réutilise plutôt que d'échouer sur un champ redondant.
+        if "reason" not in p and p.get("card", {}).get("x"):
+            p["reason"] = p["card"]["x"]
         if "id" not in p or "reason" not in p:
             log(f"Proposition problématique ({label}): {json.dumps(p, ensure_ascii=False)[:1000]}")
             fail(f"JSON {label} : proposition sans id ou reason.")
