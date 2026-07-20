@@ -227,7 +227,7 @@ SONAR_QUERIES = [
 
 def run_sonar_research(client: OpenAI, model: str) -> str:
     answers = []
-    for query in SONAR_QUERIES:
+    for i, query in enumerate(SONAR_QUERIES, start=1):
         try:
             resp = client.chat.completions.create(
                 model=model,
@@ -237,9 +237,11 @@ def run_sonar_research(client: OpenAI, model: str) -> str:
                                 f"(today is {date.today().isoformat()}). Cite source URLs.",
                 }],
             )
-            answers.append(f"Q: {query}\n{resp.choices[0].message.content}")
+            answer = resp.choices[0].message.content or ""
+            answers.append(f"Q: {query}\n{answer}")
+            log(f"  Sonar {i}/{len(SONAR_QUERIES)} OK ({len(answer)} caractères) — {query[:60]}")
         except Exception as e:  # noqa: BLE001
-            log(f"Requête Sonar échouée ({query}): {e}")
+            log(f"  Sonar {i}/{len(SONAR_QUERIES)} ÉCHEC — {query[:60]} : {e}")
     return "\n\n".join(answers)
 
 
@@ -621,6 +623,7 @@ def main() -> None:
 
     log("Recherche — requêtes Perplexity Sonar...")
     sonar_blob = run_sonar_research(client, config["research_model"])
+    log(f"Recherche Sonar terminée — {len(sonar_blob)} caractères récupérés sur {len(SONAR_QUERIES)} requêtes.")
 
     research_blob = f"## Sources fixes\n{fixed_sources_blob}\n\n## Recherche Sonar\n{sonar_blob}"
 
