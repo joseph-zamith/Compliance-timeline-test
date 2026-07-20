@@ -229,7 +229,7 @@ def run_sonar_research(client: OpenAI, model: str) -> str:
 # Step 3: writing — one call to the writing model, structured output
 # ---------------------------------------------------------------------------
 
-WRITING_SYSTEM_PROMPT = f"""You are an expert QARA (Quality Assurance & Regulatory Affairs) consultant
+CONTENT_SYSTEM_PROMPT = f"""You are an expert QARA (Quality Assurance & Regulatory Affairs) consultant
 specialised in Medical Device Software (MDSW) in the EU, writing for Theodo HealthTech.
 
 ## EDITORIAL MANDATE
@@ -280,21 +280,32 @@ week with what changed; for everything else, a single closing line: "Aucun chang
 semaine sur les autres normes suivies." (do not reprint the full register every week):
 {STANDARDS_REGISTER}
 
-## PROPOSALS (timeline update)
-Compare your research to the existing milestones (JSON provided below) and produce ADD/UPDATE/DELETE
-proposals — only for genuinely material developments this week (typically 2-8 items; skip
-cosmetic or non-material changes). Stable id format: "YYYY-MM-DD--lowercase-english-slug"
-(double dash, max 50 chars), identical between EN and FR. Valid topics: {VALID_TOPICS}.
-Valid tags: {VALID_TAGS}. Valid variants: {VALID_VARIANTS} (c=critical/navy, h=highlight/gold,
-n=normal). FR proposals: IDENTICAL id/action/existing_id/card.id/card.d/card.y/card.u/card.tp/
-card.tg/card.v; translate card.t, card.x, card.l only (reason stays in English). Keep "reason"
-and "x" (card description) concise — 1-2 sentences, not a paragraph.
-
 ## OUTPUT FORMAT — respect EXACTLY, nothing else before/after
 {EMAIL_MARKER}
 <the email body HTML>
 {REPORT_MARKER}
 <the full report HTML>
+{END_MARKER}
+"""
+
+PROPOSALS_SYSTEM_PROMPT = f"""You are an expert QARA (Quality Assurance & Regulatory Affairs) consultant
+producing structured timeline-update proposals for Theodo HealthTech's public MDSW regulatory
+timeline. You are given this week's full regulatory-watch report (already written) and the
+existing timeline milestones. Your only job here is to turn genuinely material developments
+from the report into ADD/UPDATE/DELETE proposals — do not re-research, do not add anything not
+already in the report below.
+
+## RULES
+Only genuinely material developments (typically 2-8 items total; skip cosmetic or non-material
+changes — most weeks do NOT need 8). Stable id format: "YYYY-MM-DD--lowercase-english-slug"
+(double dash, max 50 chars), identical between EN and FR. Valid topics: {VALID_TOPICS}.
+Valid tags: {VALID_TAGS}. Valid variants: {VALID_VARIANTS} (c=critical/navy, h=highlight/gold,
+n=normal). Action value must be lowercase: "add", "update", or "delete" — never uppercase.
+FR proposals: IDENTICAL id/action/existing_id/card.id/card.d/card.y/card.u/card.tp/card.tg/card.v;
+translate card.t, card.x, card.l only (reason stays in English). Keep "reason" and "x" (card
+description) concise — 1-2 sentences, not a paragraph.
+
+## OUTPUT FORMAT — respect EXACTLY, nothing else before/after
 {PROPOSALS_EN_MARKER}
 {{"generated": "YYYY-MM-DD", "proposals": [...]}}
 {PROPOSALS_FR_MARKER}
@@ -303,14 +314,12 @@ and "x" (card description) concise — 1-2 sentences, not a paragraph.
 """
 
 
-def run_writing_model(client: OpenAI, model: str, research_blob: str, last_email: str, data_json: list) -> str:
-    user_content = (
-        f"## Previous edition (do not repeat unchanged items)\n{last_email[:8000]}\n\n"
-        f"## Existing timeline milestones (data.json)\n{json.dumps(data_json, ensure_ascii=False)[:20000]}\n\n"
-        f"## Fixed-source research\n{research_blob[:40000]}\n\n"
-        f"Today's date: {date.today().isoformat()}. Produce the four sections in the exact "
-        f"required format."
-    )
+def run_model_call(client: OpenAI, model: str, system_prompt: str, user_content: str, label: str) -> str:
+    """Shared streaming call used for both the content call (email+report) and
+    the proposals call. Splitting these into two smaller requests (instead of
+    one call producing all four sections) keeps each call's total generation
+    time comfortably under the gateway's apparent hard cap on request
+    duration — the cause of the earlier finish_reason=None cutoffs."""
     # Streaming : le flux avance token par token. Le timeout "read" configuré
     # sur le client (voir get_litellm_client) protège contre un vrai blocage
     # sans jamais couper un rapport long qui progresse normalement.
@@ -318,7 +327,7 @@ def run_writing_model(client: OpenAI, model: str, research_blob: str, last_email
         stream = client.chat.completions.create(
             model=model,
             messages=[
-                {"role": "system", "content": WRITING_SYSTEM_PROMPT},
+                {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_content},
             ],
             max_tokens=32000,
@@ -339,49 +348,58 @@ def run_writing_model(client: OpenAI, model: str, research_blob: str, last_email
                 finish_reason = chunk.choices[0].finish_reason
             now = time.monotonic()
             if now - last_progress_log > 15:
-                log(f"  ... toujours en cours, {total_chars} caractères reçus jusqu'ici.")
+                log(f"  ... {label} toujours en cours, {total_chars} caractères reçus jusqu'ici.")
                 last_progress_log = now
     except httpx.ReadTimeout:
-        fail("Modèle de rédaction bloqué : aucune donnée reçue pendant plus de 90s.")
+        fail(f"Modèle bloqué ({label}) : aucune donnée reçue pendant plus de 90s.")
 
     content = "".join(chunks)
-    log(f"Rédaction terminée — finish_reason={finish_reason}, longueur={len(content)} caractères.")
+    log(f"{label} terminé — finish_reason={finish_reason}, longueur={len(content)} caractères.")
     return content
 
 
-def save_debug_output(raw: str) -> None:
+def save_debug_output(raw: str, kind: str) -> None:
     """Always persist the raw model output so a failed run can be inspected
     via the workflow artifact — never fail blind."""
     STATE_DIR.mkdir(parents=True, exist_ok=True)
-    (STATE_DIR / "debug_last_writing_output.txt").write_text(raw, encoding="utf-8")
+    (STATE_DIR / f"debug_last_{kind}_output.txt").write_text(raw, encoding="utf-8")
 
 
-def split_sections(raw: str) -> dict:
-    save_debug_output(raw)
-    pattern = (
-        re.escape(EMAIL_MARKER) + r"(.*?)" +
-        re.escape(REPORT_MARKER) + r"(.*?)" +
-        re.escape(PROPOSALS_EN_MARKER) + r"(.*?)" +
-        re.escape(PROPOSALS_FR_MARKER) + r"(.*?)" +
-        re.escape(END_MARKER)
+def _fail_missing_markers(raw: str, markers: list, debug_filename: str, what: str) -> None:
+    for marker in markers:
+        log(f"Marqueur {marker} présent: {marker in raw}")
+    log(f"Aperçu du début de la réponse (500 car.): {raw[:500]!r}")
+    log(f"Aperçu de la fin de la réponse (500 car.): {raw[-500:]!r}")
+    fail(
+        f"Sortie du modèle ({what}) mal formée : marqueurs de section introuvables. "
+        f"Voir automation/state/{debug_filename} (artefact du run) pour la sortie complète."
     )
+
+
+def split_content_sections(raw: str) -> dict:
+    save_debug_output(raw, "content")
+    pattern = re.escape(EMAIL_MARKER) + r"(.*?)" + re.escape(REPORT_MARKER) + r"(.*?)" + re.escape(END_MARKER)
     m = re.search(pattern, raw, re.DOTALL)
     if not m:
-        for marker in (EMAIL_MARKER, REPORT_MARKER, PROPOSALS_EN_MARKER, PROPOSALS_FR_MARKER, END_MARKER):
-            log(f"Marqueur {marker} présent: {marker in raw}")
-        log(f"Aperçu du début de la réponse (500 car.): {raw[:500]!r}")
-        log(f"Aperçu de la fin de la réponse (500 car.): {raw[-500:]!r}")
-        fail(
-            "Sortie du modèle de rédaction mal formée : marqueurs de section introuvables. "
-            "Voir automation/state/debug_last_writing_output.txt (artefact du run) pour la sortie complète."
+        _fail_missing_markers(
+            raw, [EMAIL_MARKER, REPORT_MARKER, END_MARKER],
+            "debug_last_content_output.txt", "email + rapport",
         )
-    email_body, full_report, proposals_en_raw, proposals_fr_raw = (s.strip() for s in m.groups())
-    return {
-        "email_body": email_body,
-        "full_report": full_report,
-        "proposals_en_raw": proposals_en_raw,
-        "proposals_fr_raw": proposals_fr_raw,
-    }
+    email_body, full_report = (s.strip() for s in m.groups())
+    return {"email_body": email_body, "full_report": full_report}
+
+
+def split_proposals_sections(raw: str) -> dict:
+    save_debug_output(raw, "proposals")
+    pattern = re.escape(PROPOSALS_EN_MARKER) + r"(.*?)" + re.escape(PROPOSALS_FR_MARKER) + r"(.*?)" + re.escape(END_MARKER)
+    m = re.search(pattern, raw, re.DOTALL)
+    if not m:
+        _fail_missing_markers(
+            raw, [PROPOSALS_EN_MARKER, PROPOSALS_FR_MARKER, END_MARKER],
+            "debug_last_proposals_output.txt", "propositions",
+        )
+    proposals_en_raw, proposals_fr_raw = (s.strip() for s in m.groups())
+    return {"proposals_en_raw": proposals_en_raw, "proposals_fr_raw": proposals_fr_raw}
 
 
 # ---------------------------------------------------------------------------
@@ -398,8 +416,14 @@ def validate_proposals_json(raw: str, label: str) -> dict:
         fail(f"JSON {label} : structure racine invalide (attendu generated + proposals).")
 
     for p in parsed["proposals"]:
-        if p.get("action") not in ("add", "update", "delete"):
+        # Le modèle sort parfois "ADD"/"UPDATE"/"DELETE" en majuscule (ambigu dans le
+        # prompt) — on normalise ici plutôt que de dépendre uniquement de la casse
+        # respectée par le modèle. p["action"] est réécrit en place, donc le reste
+        # du pipeline (validate_existing_ids, etc.) voit toujours la version normalisée.
+        action = str(p.get("action", "")).lower()
+        if action not in ("add", "update", "delete"):
             fail(f"JSON {label} : action invalide sur la proposition {p.get('id')}.")
+        p["action"] = action
         if "id" not in p or "reason" not in p:
             fail(f"JSON {label} : proposition sans id ou reason.")
         card = p.get("card")
@@ -546,9 +570,34 @@ def main() -> None:
 
     research_blob = f"## Sources fixes\n{fixed_sources_blob}\n\n## Recherche Sonar\n{sonar_blob}"
 
-    log("Rédaction — appel au modèle d'écriture...")
-    raw_output = run_writing_model(client, config["writing_model"], research_blob, last_email, data_json)
-    sections = split_sections(raw_output)
+    log("Rédaction — appel au modèle (email + rapport)...")
+    content_user_content = (
+        f"## Previous edition (do not repeat unchanged items)\n{last_email[:8000]}\n\n"
+        f"## Fixed-source research\n{research_blob[:40000]}\n\n"
+        f"Today's date: {date.today().isoformat()}. Produce the two sections (email body, "
+        f"full report) in the exact required format."
+    )
+    content_raw = run_model_call(
+        client, config["writing_model"], CONTENT_SYSTEM_PROMPT, content_user_content,
+        "Rédaction (email + rapport)",
+    )
+    content_sections = split_content_sections(content_raw)
+
+    log("Rédaction — appel au modèle (propositions)...")
+    proposals_user_content = (
+        f"## This week's full report (already written — source of truth, do not re-research)\n"
+        f"{content_sections['full_report'][:30000]}\n\n"
+        f"## Existing timeline milestones (data.json)\n{json.dumps(data_json, ensure_ascii=False)[:20000]}\n\n"
+        f"Today's date: {date.today().isoformat()}. Produce the two proposals JSON blocks in "
+        f"the exact required format."
+    )
+    proposals_raw = run_model_call(
+        client, config["writing_model"], PROPOSALS_SYSTEM_PROMPT, proposals_user_content,
+        "Rédaction (propositions)",
+    )
+    proposals_sections = split_proposals_sections(proposals_raw)
+
+    sections = {**content_sections, **proposals_sections}
 
     log("Validation du JSON produit...")
     proposals_en = validate_proposals_json(sections["proposals_en_raw"], "EN")
