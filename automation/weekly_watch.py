@@ -330,6 +330,14 @@ changes — most weeks do NOT need 8). Stable id format: "YYYY-MM-DD--lowercase-
 (double dash, max 50 chars), identical between EN and FR. Valid topics: {VALID_TOPICS}.
 Valid tags: {VALID_TAGS}. Valid variants: {VALID_VARIANTS} (c=critical/navy, h=highlight/gold,
 n=normal). Action value must be lowercase: "add", "update", or "delete" — never uppercase.
+
+EVERY proposal object, whatever the action, MUST have a top-level "id" field (this is required,
+there is no optional case):
+- action="add": "id" is a brand new stable slug (format above); no "existing_id".
+- action="update" or "delete": "id" MUST be set to the EXACT SAME VALUE as "existing_id" (repeat
+  it — do not omit "id" just because the item already exists). "existing_id" must match an id
+  already present in the existing timeline milestones given below.
+
 FR proposals: IDENTICAL id/action/existing_id/card.id/card.d/card.y/card.u/card.tp/card.tg/card.v;
 translate card.t, card.x, card.l only (reason stays in English). Keep "reason" and "x" (card
 description) concise — 1-2 sentences, not a paragraph.
@@ -468,6 +476,12 @@ def validate_proposals_json(raw: str, label: str) -> dict:
             log(f"Proposition problématique ({label}): {json.dumps(p, ensure_ascii=False)[:1000]}")
             fail(f"JSON {label} : action invalide sur la proposition {p.get('id')}.")
         p["action"] = action
+        # Filet de sécurité : pour update/delete, le modèle omet parfois "id" en
+        # pensant qu'"existing_id" suffit (vu en test réel). Sémantiquement, pour
+        # ces deux actions "id" doit être identique à "existing_id" de toute façon
+        # (voir PROPOSALS_SYSTEM_PROMPT) — donc on le déduit plutôt que d'échouer.
+        if "id" not in p and action in ("update", "delete") and p.get("existing_id"):
+            p["id"] = p["existing_id"]
         if "id" not in p or "reason" not in p:
             log(f"Proposition problématique ({label}): {json.dumps(p, ensure_ascii=False)[:1000]}")
             fail(f"JSON {label} : proposition sans id ou reason.")
