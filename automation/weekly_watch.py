@@ -295,12 +295,22 @@ def run_writing_model(client: OpenAI, model: str, research_blob: str, last_email
             {"role": "system", "content": WRITING_SYSTEM_PROMPT},
             {"role": "user", "content": user_content},
         ],
-        max_tokens=16000,
+        max_tokens=32000,
     )
-    return resp.choices[0].message.content
+    choice = resp.choices[0]
+    log(f"Rédaction terminée — finish_reason={choice.finish_reason}, longueur={len(choice.message.content)} caractères.")
+    return choice.message.content
+
+
+def save_debug_output(raw: str) -> None:
+    """Always persist the raw model output so a failed run can be inspected
+    via the workflow artifact — never fail blind."""
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    (STATE_DIR / "debug_last_writing_output.txt").write_text(raw, encoding="utf-8")
 
 
 def split_sections(raw: str) -> dict:
+    save_debug_output(raw)
     pattern = (
         re.escape(EMAIL_MARKER) + r"(.*?)" +
         re.escape(REPORT_MARKER) + r"(.*?)" +
@@ -310,7 +320,14 @@ def split_sections(raw: str) -> dict:
     )
     m = re.search(pattern, raw, re.DOTALL)
     if not m:
-        fail("Sortie du modèle de rédaction mal formée : marqueurs de section introuvables.")
+        for marker in (EMAIL_MARKER, REPORT_MARKER, PROPOSALS_EN_MARKER, PROPOSALS_FR_MARKER, END_MARKER):
+            log(f"Marqueur {marker} présent: {marker in raw}")
+        log(f"Aperçu du début de la réponse (500 car.): {raw[:500]!r}")
+        log(f"Aperçu de la fin de la réponse (500 car.): {raw[-500:]!r}")
+        fail(
+            "Sortie du modèle de rédaction mal formée : marqueurs de section introuvables. "
+            "Voir automation/state/debug_last_writing_output.txt (artefact du run) pour la sortie complète."
+        )
     email_body, full_report, proposals_en_raw, proposals_fr_raw = (s.strip() for s in m.groups())
     return {
         "email_body": email_body,

@@ -51,4 +51,5 @@ jobs:
             proposals.json
             proposals-fr.json
             automation/state/last_email.html
+            automation/state/debug_last_writing_output.txt
           if-no-files-found: ignore
