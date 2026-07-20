@@ -121,6 +121,15 @@ def skip_fixed_sources() -> bool:
     return os.environ.get("SKIP_FIXED_SOURCES", "").lower() == "true"
 
 
+def skip_content_call() -> bool:
+    """Test-only escape hatch: skip the (slower) email+report model call and
+    feed the proposals call directly from the raw research blob instead. Lets
+    us iterate quickly on the proposals prompt/JSON validation without paying
+    for and waiting on the content call each time. Never use outside testing —
+    email_body will be a placeholder, unusable for a real send."""
+    return os.environ.get("SKIP_CONTENT_CALL", "").lower() == "true"
+
+
 # ---------------------------------------------------------------------------
 # Step 1: config, recipients, existing data
 # ---------------------------------------------------------------------------
@@ -612,18 +621,25 @@ def main() -> None:
 
     research_blob = f"## Sources fixes\n{fixed_sources_blob}\n\n## Recherche Sonar\n{sonar_blob}"
 
-    log("Rédaction — appel au modèle (email + rapport)...")
-    content_user_content = (
-        f"## Previous edition (do not repeat unchanged items)\n{last_email[:6000]}\n\n"
-        f"## Fixed-source research\n{research_blob[:18000]}\n\n"
-        f"Today's date: {date.today().isoformat()}. Produce the two sections (email body, "
-        f"full report) in the exact required format. Remember the hard token budget."
-    )
-    content_raw = run_model_call(
-        client, config["writing_model"], CONTENT_SYSTEM_PROMPT, content_user_content,
-        "Rédaction (email + rapport)", max_tokens=9000,
-    )
-    content_sections = split_content_sections(content_raw)
+    if skip_content_call():
+        log("Rédaction (email + rapport) SKIPPÉE (SKIP_CONTENT_CALL=true, test rapide sur les propositions).")
+        content_sections = {
+            "email_body": "<!-- SKIP_CONTENT_CALL actif : email non généré, test propositions uniquement -->",
+            "full_report": research_blob[:15000],
+        }
+    else:
+        log("Rédaction — appel au modèle (email + rapport)...")
+        content_user_content = (
+            f"## Previous edition (do not repeat unchanged items)\n{last_email[:6000]}\n\n"
+            f"## Fixed-source research\n{research_blob[:18000]}\n\n"
+            f"Today's date: {date.today().isoformat()}. Produce the two sections (email body, "
+            f"full report) in the exact required format. Remember the hard token budget."
+        )
+        content_raw = run_model_call(
+            client, config["writing_model"], CONTENT_SYSTEM_PROMPT, content_user_content,
+            "Rédaction (email + rapport)", max_tokens=9000,
+        )
+        content_sections = split_content_sections(content_raw)
 
     log("Rédaction — appel au modèle (propositions)...")
     proposals_user_content = (
