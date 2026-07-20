@@ -580,13 +580,16 @@ def send_email(email_body_html: str, full_report_html: str, recipients: list) ->
 # Step 6: persist state + git commit/push
 # ---------------------------------------------------------------------------
 
-def write_outputs(proposals_en: dict, proposals_fr: dict, email_body_html: str) -> None:
+def write_outputs(proposals_en: dict, proposals_fr: dict, email_body_html: str, full_report_html: str) -> None:
     (REPO_ROOT / "proposals.json").write_text(json.dumps(proposals_en, ensure_ascii=False, indent=2), encoding="utf-8")
     (REPO_ROOT / "proposals-fr.json").write_text(json.dumps(proposals_fr, ensure_ascii=False, indent=2), encoding="utf-8")
 
     STATE_DIR.mkdir(parents=True, exist_ok=True)
     ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
     (STATE_DIR / "last_email.html").write_text(email_body_html, encoding="utf-8")
+    # Fichier autonome, ouvrable directement dans un navigateur depuis l'artefact
+    # du run — sinon le rapport complet ne vit que noyé dans le debug brut.
+    (STATE_DIR / "last_full_report.html").write_text(full_report_html, encoding="utf-8")
     date_slug = date.today().strftime("%Y-%m-%d")
     (ARCHIVE_DIR / f"email-{date_slug}.html").write_text(email_body_html, encoding="utf-8")
 
@@ -688,7 +691,7 @@ def main() -> None:
     log("JSON valide.")
 
     send_email(sections["email_body"], sections["full_report"], recipients)
-    write_outputs(proposals_en, proposals_fr, sections["email_body"])
+    write_outputs(proposals_en, proposals_fr, sections["email_body"], sections["full_report"])
     git_commit_and_push()
 
     log("Terminé avec succès.")
