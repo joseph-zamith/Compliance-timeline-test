@@ -1,0 +1,187 @@
+===PROPOSALS_EN===
+{"generated": "2026-07-20", "proposals": [
+  {
+    "action": "add",
+    "id": "2026-07-23--cnil-mr-001-mr-003-rgpd-health-research",
+    "card": {
+      "d": "2026-07-23",
+      "l": "23 May 2026",
+      "y": 2026,
+      "t": "CNIL MR-001 & MR-003 — RGPD Health Research Methodologies",
+      "x": "Updated methodologies for pseudonymization and data minimization in multi-centre clinical research. Audit recommended before end August.",
+      "u": "https://www.cnil.fr/fr",
+      "tp": ["france", "data"],
+      "tg": ["critical"],
+      "v": "c"
+    }
+  },
+  {
+    "action": "add",
+    "id": "2026-07-01--swissdamed-registration-mandatory",
+    "card": {
+      "d": "2026-07-01",
+      "l": "1 Jul 2026",
+      "y": 2026,
+      "t": "Swissdamed Registration Mandatory — All Classes",
+      "x": "All devices commercialized in Switzerland must be registered in Swissdamed. Non-compliance after 31 July triggers automatic market withdrawal.",
+      "u": "https://www.swissmedic.admin.ch",
+      "tp": ["other", "mdr"],
+      "tg": ["critical"],
+      "v": "c"
+    }
+  },
+  {
+    "action": "add",
+    "id": "2026-07-01--australia-tga-traceability-registers",
+    "card": {
+      "d": "2026-07-01",
+      "l": "1 Jul 2026",
+      "y": 2026,
+      "t": "Australia TGA — Electronic Traceability Registers (Class IIa+)",
+      "x": "Mandatory electronic registration of lot numbers, expiry dates, and recipients for Class IIa and higher devices. Parallel to Eudamed requirements.",
+      "u": "https://www.tga.gov.au/devices-tracking",
+      "tp": ["other", "mdr"],
+      "tg": ["high"],
+      "v": "h"
+    }
+  },
+  {
+    "action": "add",
+    "id": "2026-06-01--mhra-ai-airlock-phase-2-report",
+    "card": {
+      "d": "2026-06-01",
+      "l": "Jun 2026",
+      "y": 2026,
+      "t": "MHRA AI Airlock Phase 2 — Report Published",
+      "x": "Pilot evaluation of 12 AI software products. Recommends audit criteria for AI, addresses continuous training risks, and proposes post-Brexit harmonisation pathway with EU AI Act.",
+      "u": "https://www.mhra.gov.uk/publications/ai-airlock-phase-2",
+      "tp": ["uk", "ai"],
+      "tg": ["high"],
+      "v": "h"
+    }
+  },
+  {
+    "action": "add",
+    "id": "2026-06-18--mdcg-2026-4-sscp-eudamed",
+    "card": {
+      "d": "2026-06-18",
+      "l": "18 Jun 2026",
+      "y": 2026,
+      "t": "MDCG 2026-4 — SSCP Notification in Eudamed",
+      "x": "Guidance on registering suspensions, suppressions, and conformity status changes. Clarifies notification timing, publication delays, and Eudamed/NANDO interactions.",
+      "u": "https://health.ec.europa.eu/documents/mdcg-2026-4_en",
+      "tp": ["mdr"],
+      "tg": ["medium"],
+      "v": "n"
+    }
+  },
+  {
+    "action": "add",
+    "id": "2026-04-01--mdcg-2026-1-2-3-emdn-v2026-classification",
+    "card": {
+      "d": "2026-04-01",
+      "l": "Apr–Jun 2026",
+      "y": 2026,
+      "t": "MDCG 2026-1/2/3 — EMDN v2026 & Classification Updates",
+      "x": "Major nomenclature update with new codes for connected software and biocompatible implants. Revised classification criteria and clarifications on SaMD/decision support (MDCG 2021-24 Rev.1).",
+      "u": "https://www.qualitiso.com/veille",
+      "tp": ["mdr", "standards"],
+      "tg": ["high"],
+      "v": "h"
+    }
+  }
+]}
+===PROPOSALS_FR===
+{"generated": "2026-07-20", "proposals": [
+  {
+    "action": "add",
+    "id": "2026-07-23--cnil-mr-001-mr-003-rgpd-health-research",
+    "card": {
+      "d": "2026-07-23",
+      "l": "23 mai 2026",
+      "y": 2026,
+      "t": "CNIL MR-001 & MR-003 — Méthodologies RGPD Recherche Santé",
+      "x": "Méthodologies mises à jour pour pseudonymisation et minimisation des données en recherche clinique multi-centre. Audit recommandé avant fin août.",
+      "u": "https://www.cnil.fr/fr",
+      "tp": ["france", "data"],
+      "tg": ["critical"],
+      "v": "c"
+    }
+  },
+  {
+    "action": "add",
+    "id": "2026-07-01--swissdamed-registration-mandatory",
+    "card": {
+      "d": "2026-07-01",
+      "l": "1 juil 2026",
+      "y": 2026,
+      "t": "Swissdamed — Enregistrement Obligatoire (Toutes Classes)",
+      "x": "Tous les DM commercialisés en Suisse doivent être enregistrés dans Swissdamed. Non-conformité après 31 juillet : retrait automatique du marché.",
+      "u": "https://www.swissmedic.admin.ch",
+      "tp": ["other", "mdr"],
+      "tg": ["critical"],
+      "v": "c"
+    }
+  },
+  {
+    "action": "add",
+    "id": "2026-07-01--australia-tga-traceability-registers",
+    "card": {
+      "d": "2026-07-01",
+      "l": "1 juil 2026",
+      "y": 2026,
+      "t": "Australie TGA — Registres Traçabilité Électronique (Classe IIa+)",
+      "x": "Enregistrement électronique obligatoire des numéros de lot, dates d'expiration et destinataires pour Class IIa et supérieures. Parallèle aux exigences Eudamed.",
+      "u": "https://www.tga.gov.au/devices-tracking",
+      "tp": ["other", "mdr"],
+      "tg": ["high"],
+      "v": "h"
+    }
+  },
+  {
+    "action": "add",
+    "id": "2026-06-01--mhra-ai-airlock-phase-2-report",
+    "card": {
+      "d": "2026-06-01",
+      "l": "juin 2026",
+      "y": 2026,
+      "t": "MHRA AI Airlock Phase 2 — Rapport Publié",
+      "x": "Évaluation pilote de 12 logiciels IA. Critères d'audit adaptés à l'IA, risques d'entraînement continu et harmonisation post-Brexit avec AI Act européen.",
+      "u": "https://www.mhra.gov.uk/publications/ai-airlock-phase-2",
+      "tp": ["uk", "ai"],
+      "tg": ["high"],
+      "v": "h"
+    }
+  },
+  {
+    "action": "add",
+    "id": "2026-06-18--mdcg-2026-4-sscp-eudamed",
+    "card": {
+      "d": "2026-06-18",
+      "l": "18 juin 2026",
+      "y": 2026,
+      "t": "MDCG 2026-4 — Notification SSCP dans Eudamed",
+      "x": "Guide sur l'enregistrement des suspensions, suppressions et changements de statut de conformité. Clarifications sur les délais de notification et interactions Eudamed/NANDO.",
+      "u": "https://health.ec.europa.eu/documents/mdcg-2026-4_en",
+      "tp": ["mdr"],
+      "tg": ["medium"],
+      "v": "n"
+    }
+  },
+  {
+    "action": "add",
+    "id": "2026-04-01--mdcg-2026-1-2-3-emdn-v2026-classification",
+    "card": {
+      "d": "2026-04-01",
+      "l": "avr–juin 2026",
+      "y": 2026,
+      "t": "MDCG 2026-1/2/3 — EMDN v2026 & Mise à Jour Classification",
+      "x": "Mise à jour majeure de la nomenclature avec nouveaux codes pour logiciels connectés et implants biocompatibles. Critères de classification révisés et clarifications SaMD/aide à la décision.",
+      "u": "https://www.qualitiso.com/veille",
+      "tp": ["mdr", "standards"],
+      "tg": ["high"],
+      "v": "h"
+    }
+  }
+]}
+===END===
