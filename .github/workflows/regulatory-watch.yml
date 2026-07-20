@@ -17,6 +17,14 @@ on:
         description: "Sauter l'appel email+rapport, tester uniquement les propositions (test rapide)"
         type: boolean
         default: false
+      replay_content:
+        description: "Rejouer le dernier email+rapport committé (automation/state) au lieu d'appeler le modèle — 0 coût"
+        type: boolean
+        default: false
+      replay_proposals:
+        description: "Rejouer les dernières propositions committées (automation/state) au lieu d'appeler le modèle — 0 coût"
+        type: boolean
+        default: false
 
   # Cron désactivé pour l'instant — décommenter une fois les tests manuels validés.
   # schedule:
@@ -51,6 +59,8 @@ jobs:
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
           SKIP_FIXED_SOURCES: ${{ github.event.inputs.skip_fixed_sources || 'false' }}
           SKIP_CONTENT_CALL: ${{ github.event.inputs.skip_content_call || 'false' }}
+          REPLAY_CONTENT: ${{ github.event.inputs.replay_content || 'false' }}
+          REPLAY_PROPOSALS: ${{ github.event.inputs.replay_proposals || 'false' }}
         run: python automation/weekly_watch.py
 
       - name: Upload generated artifacts (dry-run inspection)

@@ -130,6 +130,21 @@ def skip_content_call() -> bool:
     return os.environ.get("SKIP_CONTENT_CALL", "").lower() == "true"
 
 
+def replay_content() -> bool:
+    """Test-only: reuse the last real content-call output committed at
+    automation/state/debug_last_content_output.txt instead of calling the
+    model again. Zero cost, zero wait — useful to iterate on everything
+    downstream (validation, write_outputs, email rendering) without re-running
+    the LLM. Requires that file to already exist in the checkout (it's
+    committed unconditionally by commit_state_for_qa, even in dry runs)."""
+    return os.environ.get("REPLAY_CONTENT", "").lower() == "true"
+
+
+def replay_proposals() -> bool:
+    """Same as replay_content(), for automation/state/debug_last_proposals_output.txt."""
+    return os.environ.get("REPLAY_PROPOSALS", "").lower() == "true"
+
+
 # ---------------------------------------------------------------------------
 # Step 1: config, recipients, existing data
 # ---------------------------------------------------------------------------
@@ -595,19 +610,25 @@ def write_outputs(proposals_en: dict, proposals_fr: dict, email_body_html: str, 
 
 
 def git_commit_and_push() -> None:
+    """Publish site-critical files (proposals.json/-fr.json) — gated behind
+    DRY_RUN, since these are what the public site and admin.html actually
+    read. Diagnostic/QA files (automation/state: emails, full report,
+    debug_last_*_output.txt) are committed separately by
+    commit_state_for_qa(), unconditionally, so they're available for visual
+    QA and REPLAY_* reruns even during a dry run."""
     if is_dry_run():
-        log("DRY_RUN actif : pas de commit/push.")
+        log("DRY_RUN actif : pas de commit/push des propositions (fichiers publics).")
         return
     date_slug = date.today().strftime("%Y-%m-%d")
     subprocess.run(["git", "config", "user.name", "regulatory-watch-bot"], cwd=REPO_ROOT, check=True)
     subprocess.run(["git", "config", "user.email", "actions@github.com"], cwd=REPO_ROOT, check=True)
     subprocess.run(
-        ["git", "add", "proposals.json", "proposals-fr.json", "automation/state"],
+        ["git", "add", "proposals.json", "proposals-fr.json"],
         cwd=REPO_ROOT, check=True,
     )
     result = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=REPO_ROOT)
     if result.returncode == 0:
-        log("Rien à committer (aucun changement).")
+        log("Rien à committer côté propositions (aucun changement).")
         return
     subprocess.run(
         ["git", "commit", "-m", f"Regulatory watch: proposals for {date_slug}"],
@@ -617,9 +638,45 @@ def git_commit_and_push() -> None:
     log("Changements poussés sur main.")
 
 
+def commit_state_for_qa() -> None:
+    """Always commit automation/state (emails, full report, debug dumps) —
+    regardless of DRY_RUN. These never touch the public site/admin data, so
+    there's no safety reason to gate them; keeping them in git (instead of
+    only in the ephemeral workflow artifact) is what makes REPLAY_CONTENT /
+    REPLAY_PROPOSALS possible on a fresh checkout, and lets you `git pull`
+    and open last_email.html / last_full_report.html locally without
+    downloading a zip each time."""
+    subprocess.run(["git", "config", "user.name", "regulatory-watch-bot"], cwd=REPO_ROOT, check=True)
+    subprocess.run(["git", "config", "user.email", "actions@github.com"], cwd=REPO_ROOT, check=True)
+    subprocess.run(["git", "add", "-f", "automation/state"], cwd=REPO_ROOT, check=True)
+    result = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=REPO_ROOT)
+    if result.returncode == 0:
+        log("Rien à committer côté état/diagnostic (aucun changement).")
+        return
+    date_slug = date.today().strftime("%Y-%m-%d")
+    subprocess.run(
+        ["git", "commit", "-m", f"Regulatory watch: état/diagnostic pour {date_slug}"],
+        cwd=REPO_ROOT, check=True,
+    )
+    subprocess.run(["git", "push"], cwd=REPO_ROOT, check=True)
+    log("État/diagnostic (automation/state) poussé sur main.")
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
+
+def safe_commit_state_for_qa() -> None:
+    """Best-effort wrapper around commit_state_for_qa(): runs from a `finally`
+    block, including after a failed run (fail() raises SystemExit), so debug
+    dumps get committed even on failure — that's exactly when REPLAY_CONTENT/
+    REPLAY_PROPOSALS are most useful (re-inspect a failing case without
+    spending tokens again). Never let a git hiccup here mask the real error."""
+    try:
+        commit_state_for_qa()
+    except Exception as e:  # noqa: BLE001
+        log(f"(non bloquant) Échec du commit de automation/state pour QA/replay : {e}")
+
 
 def main() -> None:
     log(f"Démarrage — dry_run={is_dry_run()}")
@@ -629,6 +686,15 @@ def main() -> None:
     last_email = load_last_email()
     client = get_litellm_client()
 
+    try:
+        _run(config, recipients, data_json, last_email, client)
+    finally:
+        safe_commit_state_for_qa()
+
+    log("Terminé avec succès.")
+
+
+def _run(config: dict, recipients: list, data_json: list, last_email: str, client: OpenAI) -> None:
     log(f"Modèle recherche: {config['research_model']} / rédaction: {config['writing_model']}")
 
     if skip_fixed_sources():
@@ -644,7 +710,18 @@ def main() -> None:
 
     research_blob = f"## Sources fixes\n{fixed_sources_blob}\n\n## Recherche Sonar\n{sonar_blob}"
 
-    if skip_content_call():
+    if replay_content():
+        cached = STATE_DIR / "debug_last_content_output.txt"
+        if not cached.exists():
+            fail(
+                "REPLAY_CONTENT=true mais automation/state/debug_last_content_output.txt "
+                "n'existe pas dans ce checkout — lance un run réel une fois (sans REPLAY_CONTENT) "
+                "pour le générer, il sera committé automatiquement, puis relance en replay."
+            )
+        log("Rédaction (email + rapport) REJOUÉE depuis le cache (REPLAY_CONTENT=true, aucun appel LLM).")
+        content_raw = cached.read_text(encoding="utf-8")
+        content_sections = split_content_sections(content_raw)
+    elif skip_content_call():
         log("Rédaction (email + rapport) SKIPPÉE (SKIP_CONTENT_CALL=true, test rapide sur les propositions).")
         content_sections = {
             "email_body": "<!-- SKIP_CONTENT_CALL actif : email non généré, test propositions uniquement -->",
@@ -664,18 +741,29 @@ def main() -> None:
         )
         content_sections = split_content_sections(content_raw)
 
-    log("Rédaction — appel au modèle (propositions)...")
-    proposals_user_content = (
-        f"## This week's full report (already written — source of truth, do not re-research)\n"
-        f"{content_sections['full_report'][:15000]}\n\n"
-        f"## Existing timeline milestones (data.json)\n{json.dumps(data_json, ensure_ascii=False)[:15000]}\n\n"
-        f"Today's date: {date.today().isoformat()}. Produce the two proposals JSON blocks in "
-        f"the exact required format."
-    )
-    proposals_raw = run_model_call(
-        client, config["writing_model"], PROPOSALS_SYSTEM_PROMPT, proposals_user_content,
-        "Rédaction (propositions)", max_tokens=5000,
-    )
+    if replay_proposals():
+        cached = STATE_DIR / "debug_last_proposals_output.txt"
+        if not cached.exists():
+            fail(
+                "REPLAY_PROPOSALS=true mais automation/state/debug_last_proposals_output.txt "
+                "n'existe pas dans ce checkout — lance un run réel une fois (sans REPLAY_PROPOSALS) "
+                "pour le générer, il sera committé automatiquement, puis relance en replay."
+            )
+        log("Rédaction (propositions) REJOUÉE depuis le cache (REPLAY_PROPOSALS=true, aucun appel LLM).")
+        proposals_raw = cached.read_text(encoding="utf-8")
+    else:
+        log("Rédaction — appel au modèle (propositions)...")
+        proposals_user_content = (
+            f"## This week's full report (already written — source of truth, do not re-research)\n"
+            f"{content_sections['full_report'][:15000]}\n\n"
+            f"## Existing timeline milestones (data.json)\n{json.dumps(data_json, ensure_ascii=False)[:15000]}\n\n"
+            f"Today's date: {date.today().isoformat()}. Produce the two proposals JSON blocks in "
+            f"the exact required format."
+        )
+        proposals_raw = run_model_call(
+            client, config["writing_model"], PROPOSALS_SYSTEM_PROMPT, proposals_user_content,
+            "Rédaction (propositions)", max_tokens=5000,
+        )
     proposals_sections = split_proposals_sections(proposals_raw)
 
     sections = {**content_sections, **proposals_sections}
@@ -693,8 +781,6 @@ def main() -> None:
     send_email(sections["email_body"], sections["full_report"], recipients)
     write_outputs(proposals_en, proposals_fr, sections["email_body"], sections["full_report"])
     git_commit_and_push()
-
-    log("Terminé avec succès.")
 
 
 if __name__ == "__main__":
