@@ -1,0 +1,297 @@
+===EMAIL_BODY===
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veille réglementaire — Theodo HealthTech</title>
+</head>
+<body style="margin:0; padding:0; font-family: Poppins, Arial, Helvetica, sans-serif; background-color:#f3f3f3;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#1c2837;">
+<tr>
+<td style="padding:24px; text-align:center;">
+<h1 style="margin:0; font-size:28px; color:#ff512c; letter-spacing:1px;">Theodo HealthTech</h1>
+<p style="margin:8px 0 0 0; font-size:14px; color:#ffffff; font-weight:500;">Veille réglementaire</p>
+<p style="margin:4px 0 0 0; font-size:12px; color:#e9ebee;">Logiciels de dispositifs médicaux et AI Act</p>
+<div style="margin-top:12px; display:inline-block; background-color:#ff512c; color:#ffffff; padding:6px 12px; border-radius:14px; font-size:11px; font-weight:600;">
+20 juillet 2026
+</div>
+</td>
+</tr>
+</table>
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#ffffff; margin-top:2px;">
+<tr>
+<td style="padding:32px 24px;">
+
+<h2 style="margin:0 0 16px 0; font-size:18px; color:#1c2837; border-bottom:3px solid #ff512c; padding-bottom:8px;">L'essentiel de la semaine</h2>
+<ul style="margin:0; padding-left:20px; color:#213045; line-height:1.8;">
+<li>CNIL : publication des nouvelles méthodologies de référence MR-001 et MR-003 (23 mai) — clarifications RGPD pour la recherche et les traitements en santé.</li>
+<li>Suisse & Australie : entrée en vigueur obligatoire de Swissdamed (1er juillet) et nouveaux registres australiens — impacts immédiats sur la traçabilité DM.</li>
+<li>UK MHRA : phase 2 d'AI Airlock — rapport publié en juin sur l'évaluation des logiciels IA en dispositifs médicaux.</li>
+<li>Normes & MDCG : MDCG 2026-4 sur la gestion des SSCP dans Eudamed (18 juin) ; actualisations EMDN v2026 et évolutions de classification (avril).</li>
+</ul>
+
+<div style="margin:24px 0; padding:16px; background-color:#ffe8d6; border-left:4px solid #ff512c; border-radius:8px;">
+<p style="margin:0; font-size:12px; color:#1c2837; font-weight:600;">Vigilance : délais Swissdamed et Australie actifs immédiatement.</p>
+</div>
+
+<h2 style="margin:32px 0 16px 0; font-size:18px; color:#1c2837; border-bottom:3px solid #ff512c; padding-bottom:8px;">UE et international</h2>
+
+<div style="margin:20px 0; padding:16px; background-color:#f3f3f3; border-radius:12px;">
+<h3 style="margin:0 0 8px 0; font-size:14px; color:#1c2837; font-weight:600;">
+CNIL — Méthodologies de référence MR-001 & MR-003
+</h3>
+<p style="margin:8px 0; font-size:13px; color:#213045; line-height:1.6;">
+Publiées le 23 mai 2026, ces méthodologies modernisent le cadre RGPD pour les recherches en santé et les traitements à grande échelle. Elles remplacent d'anciens guides et précisent les obligations relatives à la minimisation des données et aux droits des personnes.
+</p>
+<div style="margin:8px 0 0 0; font-size:12px;">
+<span style="display:inline-block; background-color:#e8850c; color:#ffffff; padding:4px 8px; border-radius:6px; margin-right:8px; font-weight:600;">MOYEN</span>
+<span style="display:inline-block; background-color:#213045; color:#ffffff; padding:4px 8px; border-radius:6px; font-weight:600;">EN VIGUEUR</span>
+</div>
+<p style="margin:10px 0 0 0; font-size:12px;"><a href="https://www.cnil.fr" style="color:#ff512c; text-decoration:none; font-weight:600;">Source : CNIL →</a></p>
+</div>
+
+<div style="margin:20px 0; padding:16px; background-color:#f3f3f3; border-radius:12px;">
+<h3 style="margin:0 0 8px 0; font-size:14px; color:#1c2837; font-weight:600;">
+Suisse — Swissdamed obligatoire depuis 1er juillet
+</h3>
+<p style="margin:8px 0; font-size:13px; color:#213045; line-height:1.6;">
+Swissmedic impose l'utilisation de la base de données nationale Swissdamed pour tous les fabricants. Critère : démarche obligatoire de traçabilité, alignée avec Eudamed. Impacte tous les acteurs commercialisant en Suisse.
+</p>
+<div style="margin:8px 0 0 0; font-size:12px;">
+<span style="display:inline-block; background-color:#e8850c; color:#ffffff; padding:4px 8px; border-radius:6px; margin-right:8px; font-weight:600;">CRITIQUE</span>
+<span style="display:inline-block; background-color:#213045; color:#ffffff; padding:4px 8px; border-radius:6px; font-weight:600;">EN VIGUEUR</span>
+</div>
+<p style="margin:10px 0 0 0; font-size:12px;"><a href="https://www.swissmedic.admin.ch" style="color:#ff512c; text-decoration:none; font-weight:600;">Source : Swissmedic →</a></p>
+</div>
+
+<div style="margin:20px 0; padding:16px; background-color:#f3f3f3; border-radius:12px;">
+<h3 style="margin:0 0 8px 0; font-size:14px; color:#1c2837; font-weight:600;">
+Australie — Registres de traçabilité en vigueur (1er juillet)
+</h3>
+<p style="margin:8px 0; font-size:13px; color:#213045; line-height:1.6;">
+Entrée en application des exigences australiennes de traçabilité DM. Les fabricants et distributeurs doivent enregistrer les numéros de lot, dates d'expiration et destinataires. Démarche parallèle au MDR européen.
+</p>
+<div style="margin:8px 0 0 0; font-size:12px;">
+<span style="display:inline-block; background-color:#e8850c; color:#ffffff; padding:4px 8px; border-radius:6px; margin-right:8px; font-weight:600;">ELEVE</span>
+<span style="display:inline-block; background-color:#213045; color:#ffffff; padding:4px 8px; border-radius:6px; font-weight:600;">EN VIGUEUR</span>
+</div>
+<p style="margin:10px 0 0 0; font-size:12px;"><a href="https://www.tga.gov.au" style="color:#ff512c; text-decoration:none; font-weight:600;">Source : TGA →</a></p>
+</div>
+
+<div style="margin:20px 0; padding:16px; background-color:#f3f3f3; border-radius:12px;">
+<h3 style="margin:0 0 8px 0; font-size:14px; color:#1c2837; font-weight:600;">
+UK MHRA — Rapport phase 2 AI Airlock
+</h3>
+<p style="margin:8px 0; font-size:13px; color:#213045; line-height:1.6;">
+Publié en juin 2026, ce rapport détaille les résultats du programme pilote d'évaluation des logiciels IA en tant que dispositifs médicaux. Synthèse : méthodologie d'audit, critères de conformité, et recommandations pour harmonisation post-Brexit.
+</p>
+<div style="margin:8px 0 0 0; font-size:12px;">
+<span style="display:inline-block; background-color:#e8850c; color:#ffffff; padding:4px 8px; border-radius:6px; margin-right:8px; font-weight:600;">MOYEN</span>
+<span style="display:inline-block; background-color:#213045; color:#ffffff; padding:4px 8px; border-radius:6px; font-weight:600;">EN COURS</span>
+</div>
+<p style="margin:10px 0 0 0; font-size:12px;"><a href="https://www.mhra.gov.uk" style="color:#ff512c; text-decoration:none; font-weight:600;">Source : MHRA →</a></p>
+</div>
+
+<div style="margin:20px 0; padding:16px; background-color:#f3f3f3; border-radius:12px;">
+<h3 style="margin:0 0 8px 0; font-size:14px; color:#1c2837; font-weight:600;">
+MDCG 2026-4 — Gestion des SSCP dans Eudamed
+</h3>
+<p style="margin:8px 0; font-size:13px; color:#213045; line-height:1.6;">
+Guide publié 18 juin sur l'enregistrement et la gestion des suppressions/suspensions de conformité progressive (SSCP) dans Eudamed. Clarifie les workflows de notification et les délais de publication.
+</p>
+<div style="margin:8px 0 0 0; font-size:12px;">
+<span style="display:inline-block; background-color:#e8850c; color:#ffffff; padding:4px 8px; border-radius:6px; margin-right:8px; font-weight:600;">MOYEN</span>
+<span style="display:inline-block; background-color:#213045; color:#ffffff; padding:4px 8px; border-radius:6px; font-weight:600;">FINAL</span>
+</div>
+<p style="margin:10px 0 0 0; font-size:12px;"><a href="https://health.ec.europa.eu/medical-devices-sector/new-regulations_en" style="color:#ff512c; text-decoration:none; font-weight:600;">Source : Commission EU →</a></p>
+</div>
+
+<div style="margin:20px 0; padding:16px; background-color:#f3f3f3; border-radius:12px;">
+<h3 style="margin:0 0 8px 0; font-size:14px; color:#1c2837; font-weight:600;">
+Normes & EMDN — Évolutions v2026
+</h3>
+<p style="margin:8px 0; font-size:13px; color:#213045; line-height:1.6;">
+MDCG 2026-1, 2, 3 publiés en avril : actualisations de la nomenclature EMDN 2026, y compris nouveaux codes DM et clarifications de classification. MDCG 2021-24 Rev.1 également mise à jour (avril).
+</p>
+<div style="margin:8px 0 0 0; font-size:12px;">
+<span style="display:inline-block; background-color:#e8850c; color:#ffffff; padding:4px 8px; border-radius:6px; margin-right:8px; font-weight:600;">MOYEN</span>
+<span style="display:inline-block; background-color:#213045; color:#ffffff; padding:4px 8px; border-radius:6px; font-weight:600;">EN VIGUEUR</span>
+</div>
+<p style="margin:10px 0 0 0; font-size:12px;"><a href="https://www.qualitiso.com/veille" style="color:#ff512c; text-decoration:none; font-weight:600;">Source : Qualitiso →</a></p>
+</div>
+
+<h2 style="margin:32px 0 16px 0; font-size:18px; color:#1c2837; border-bottom:3px solid #ff512c; padding-bottom:8px;">Hors UE</h2>
+<p style="margin:0; font-size:13px; color:#213045; line-height:1.6;">
+Aucune évolution notable hors UE cette semaine au-delà de Suisse et Australie (ciblées ci-dessus). Surveillance sur Canada, Japon, et Chine : pas de changement immédiat.
+</p>
+
+<h2 style="margin:32px 0 16px 0; font-size:18px; color:#1c2837; border-bottom:3px solid #ff512c; padding-bottom:8px;">Points de vigilance</h2>
+<ul style="margin:0; padding-left:20px; color:#213045; line-height:1.8; font-size:13px;">
+<li><strong>Swissdamed / Australie</strong> : démarches obligatoires en cours depuis 1er juillet — vérifier l'enregistrement des produits avant fin juillet (délai de grâce court).</li>
+<li><strong>RGPD & recherche en santé</strong> : nouvelles MR CNIL applicables immédiatement — auditer les traitements de données de recherche d'ici fin août.</li>
+<li><strong>Normes ISO 62304 Éd. 2</strong> : publication attendue début 2027 — commencer la veille dès septembre 2026.</li>
+</ul>
+
+</td>
+</tr>
+</table>
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#1c2837; margin-top:2px;">
+<tr>
+<td style="padding:24px; text-align:center; font-size:12px; color:#e9ebee;">
+<p style="margin:0 0 12px 0;">
+<strong style="color:#ff512c;">Rapport complet joint</strong> — analyse détaillée par région, deadlines précises et suivi normatif.
+</p>
+<p style="margin:8px 0;">
+<a href="https://theodo-group.github.io/Compliance-timeline/admin.html" style="color:#ff512c; text-decoration:none; font-weight:600;">Voir le tableau de bord de conformité →</a>
+</p>
+<p style="margin:12px 0 0 0; font-size:11px; color:#e9ebee;">
+Veille hebdomadaire produite par Theodo HealthTech. Non contractuelle. Consultation des sources primaires recommandée.
+</p>
+</td>
+</tr>
+</table>
+
+</body>
+</html>
+===FULL_REPORT===
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rapport complet — Veille MDSW UE, 20 juillet 2026</title>
+</head>
+<body style="margin:0; padding:0; font-family: Poppins, Arial, Helvetica, sans-serif; background-color:#f3f3f3;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#1c2837;">
+<tr>
+<td style="padding:24px; text-align:center;">
+<h1 style="margin:0; font-size:24px; color:#ff512c;">Rapport complet</h1>
+<p style="margin:8px 0 0 0; font-size:12px; color:#ffffff;">Veille reglementaire — 20 juillet 2026</p>
+</td>
+</tr>
+</table>
+
+<div style="padding:32px 24px; background-color:#ffffff; max-width:900px; margin:0 auto;">
+
+<h2 style="margin:0 0 20px 0; font-size:18px; color:#1c2837; border-bottom:3px solid #ff512c; padding-bottom:8px;">UE et international</h2>
+
+<h3 style="margin:24px 0 12px 0; font-size:15px; color:#1c2837; font-weight:600;">CNIL — Méthodologies MR-001 & MR-003 (23 mai 2026)</h3>
+<p style="margin:0 0 8px 0; font-size:13px; color:#213045; line-height:1.6;">
+Modernisation du cadre RGPD pour la recherche en santé. Les deux nouvelles méthodologies remplacent des guides antérieurs et précisent :
+</p>
+<ul style="margin:8px 0 0 0; padding-left:20px; font-size:13px; color:#213045; line-height:1.6;">
+<li>MR-001 : minimisation et finalité dans les recherches épidémiologiques et cliniques.</li>
+<li>MR-003 : critères de pseudonymisation durables et droits des données en recherche longitudinale.</li>
+</ul>
+<p style="margin:12px 0 0 0; font-size:12px; color:#ff512c; font-weight:600;">
+Impact : audit immédiat recommandé pour tout acteur effectuant de la recherche multi-centre ou utilisant des données de santé de grande ampleur. Délai conseillé : avant fin août.
+</p>
+<p style="margin:8px 0 0 0; font-size:12px;"><a href="https://www.cnil.fr/fr" style="color:#ff512c; text-decoration:none; font-weight:600;">Source : CNIL →</a></p>
+
+<h3 style="margin:24px 0 12px 0; font-size:15px; color:#1c2837; font-weight:600;">Suisse — Swissdamed en vigueur (1er juillet 2026)</h3>
+<p style="margin:0 0 8px 0; font-size:13px; color:#213045; line-height:1.6;">
+Entrée en application de l'obligation d'enregistrement dans Swissdamed. Concerne tous les DM commercialisés en Suisse, tout classe. Swissmedic n'accepte plus les enregistrements parallèles en papier.
+</p>
+<p style="margin:12px 0 0 0; font-size:12px; color:#ff512c; font-weight:600;">
+Action urgente : vérifier que tous les produits sont enregistrés. Non-conformité après 31 juillet entraine retrait du marché automatique. Délai pour régularisation : très court.
+</p>
+<p style="margin:8px 0 0 0; font-size:12px;"><a href="https://www.swissmedic.admin.ch" style="color:#ff512c; text-decoration:none; font-weight:600;">Source : Swissmedic →</a></p>
+
+<h3 style="margin:24px 0 12px 0; font-size:15px; color:#1c2837; font-weight:600;">Australie — Registres de traçabilité (1er juillet 2026)</h3>
+<p style="margin:0 0 8px 0; font-size:13px; color:#213045; line-height:1.6;">
+Nouvelle obligation TGA : enregistrement des numéros de lot, numéros de lot exportateur, dates d'expiration et destinataires finaux. Système électronique obligatoire. Applique à tous les DM classe IIa et supérieures.
+</p>
+<p style="margin:12px 0 0 0; font-size:12px; color:#ff512c; font-weight:600;">
+Impact : exigence parallèle à Eudamed. Les fabricants doivent intégrer ce registre dans leur système de traçabilité.
+</p>
+<p style="margin:8px 0 0 0; font-size:12px;"><a href="https://www.tga.gov.au/devices-tracking" style="color:#ff512c; text-decoration:none; font-weight:600;">Source : TGA →</a></p>
+
+<h3 style="margin:24px 0 12px 0; font-size:15px; color:#1c2837; font-weight:600;">UK MHRA — Rapport AI Airlock Phase 2 (juin 2026)</h3>
+<p style="margin:0 0 8px 0; font-size:13px; color:#213045; line-height:1.6;">
+Le programme pilote a testé l'évaluation de 12 logiciels IA. Le rapport synthétise : critères d'audit adapté à l'IA, risques liés au cycle d'entraînement continu, et préconisations pour une norme post-Brexit. Alignement futur avec l'AI Act européen discuté.
+</p>
+<p style="margin:8px 0 0 0; font-size:12px;"><a href="https://www.mhra.gov.uk/publications/ai-airlock-phase-2" style="color:#ff512c; text-decoration:none; font-weight:600;">Source : MHRA →</a></p>
+
+<h3 style="margin:24px 0 12px 0; font-size:15px; color:#1c2837; font-weight:600;">MDCG 2026-4 — SSCP dans Eudamed (18 juin 2026)</h3>
+<p style="margin:0 0 8px 0; font-size:13px; color:#213045; line-height:1.6;">
+Document de guidance sur l'enregistrement des suppressions, suspensions et changements de statut de conformité progressive. Précise : quand notifier (préalablement ou lors du changement), délais de publication, et interactions avec Eudamed et NANDO.
+</p>
+<p style="margin:8px 0 0 0; font-size:12px;"><a href="https://health.ec.europa.eu/documents/mdcg-2026-4_en" style="color:#ff512c; text-decoration:none; font-weight:600;">Source : Commission EU →</a></p>
+
+<h3 style="margin:24px 0 12px 0; font-size:15px; color:#1c2837; font-weight:600;">Normes harmonisées & EMDN v2026 (avril-juin 2026)</h3>
+<p style="margin:0 0 8px 0; font-size:13px; color:#213045; line-height:1.6;">
+MDCG 2026-1, 2, 3 publiés : mise à jour majeure de la nomenclature EMDN, ajout de codes pour de nouvelles catégories DM (ex. logiciels connectés, implants biocompatibles novotech), et révision des critères de classification. MDCG 2021-24 Rev.1 également mise à jour (avril 2026) avec clarifications sur les DM en tant que service (SaMD et logiciels d'aide à la décision).
+</p>
+<p style="margin:8px 0 0 0; font-size:12px;"><a href="https://www.qualitiso.com/veille" style="color:#ff512c; text-decoration:none; font-weight:600;">Source : Qualitiso →</a></p>
+
+<h2 style="margin:32px 0 20px 0; font-size:18px; color:#1c2837; border-bottom:3px solid #ff512c; padding-bottom:8px;">Royaume-Uni</h2>
+<p style="margin:0; font-size:13px; color:#213045;">
+Rapport MHRA AI Airlock et suivi UK DTPR (Device Type Registration) continue en parallèle de Swissdamed. Aucune autre évolution réglementaire majeure cette semaine.
+</p>
+
+<h2 style="margin:32px 0 20px 0; font-size:18px; color:#1c2837; border-bottom:3px solid #ff512c; padding-bottom:8px;">États-Unis & autres régions</h2>
+<p style="margin:0; font-size:13px; color:#213045;">
+Aucune évolution notable hors UE cette semaine (FDA 510(k) et PMN continuent sans changement immédiat).
+</p>
+
+<h2 style="margin:32px 0 20px 0; font-size:18px; color:#1c2837; border-bottom:3px solid #ff512c; padding-bottom:8px;">Annexe : Suivi des normes</h2>
+
+<table width="100%" cellpadding="8" cellspacing="0" style="border-collapse:collapse; margin:16px 0; font-size:12px;">
+<tr style="background-color:#e9ebee;">
+<th style="border:1px solid #213045; padding:8px; text-align:left; font-weight:600; color:#1c2837;">Source</th>
+<th style="border:1px solid #213045; padding:8px; text-align:left; font-weight:600; color:#1c2837;">Référence</th>
+<th style="border:1px solid #213045; padding:8px; text-align:left; font-weight:600; color:#1c2837;">Titre</th>
+<th style="border:1px solid #213045; padding:8px; text-align:left; font-weight:600; color:#1c2837;">Évolution cette semaine</th>
+</tr>
+<tr style="background-color:#ffffff;">
+<td style="border:1px solid #e9ebee; padding:8px;">EU Commission</td>
+<td style="border:1px solid #e9ebee; padding:8px;">MDCG 2026-1/2/3</td>
+<td style="border:1px solid #e9ebee; padding:8px;">EMDN v2026 & classification</td>
+<td style="border:1px solid #e9ebee; padding:8px;"><strong>Publié avril 2026</strong> — codes DM nouveaux, clarifications SaMD.</td>
+</tr>
+<tr style="background-color:#f3f3f3;">
+<td style="border:1px solid #e9ebee; padding:8px;">EU Commission</td>
+<td style="border:1px solid #e9ebee; padding:8px;">MDCG 2026-4</td>
+<td style="border:1px solid #e9ebee; padding:8px;">SSCP & Eudamed</td>
+<td style="border:1px solid #e9ebee; padding:8px;"><strong>Publié 18 juin</strong> — workflows de notification.</td>
+</tr>
+<tr style="background-color:#ffffff;">
+<td style="border:1px solid #e9ebee; padding:8px;">AFNOR / CNIL</td>
+<td style="border:1px solid #e9ebee; padding:8px;">MR-001 / MR-003</td>
+<td style="border:1px solid #e9ebee; padding:8px;">RGPD recherche & données santé</td>
+<td style="border:1px solid #e9ebee; padding:8px;"><strong>Publié 23 mai</strong> — méthodologies mise à jour.</td>
+</tr>
+<tr style="background-color:#f3f3f3;">
+<td style="border:1px solid #e9ebee; padding:8px;">AFNOR</td>
+<td style="border:1px solid #e9ebee; padding:8px;">NF EN 62304 Éd. 2</td>
+<td style="border:1px solid #e9ebee; padding:8px;">Cycle de vie logiciel DM</td>
+<td style="border:1px solid #e9ebee; padding:8px;">Aucun changement cette semaine — publication attendue début 2027.</td>
+</tr>
+<tr style="background-color:#ffffff;">
+<td style="border:1px solid #e9ebee; padding:8px;">ISO</td>
+<td style="border:1px solid #e9ebee; padding:8px;">ISO/TS 24971-2</td>
+<td style="border:1px solid #e9ebee; padding:8px;">Risk mgmt pour ML/DM</td>
+<td style="border:1px solid #e9ebee; padding:8px;">Aucun changement cette semaine — surveillance en continu.</td>
+</tr>
+<tr style="background-color:#f3f3f3;">
+<td style="border:1px solid #e9ebee; padding:8px;">Autres normes</td>
+<td style="border:1px solid #e9ebee; padding:8px;">ISO 13485, 14971, 62366, etc.</td>
+<td style="border:1px solid #e9ebee; padding:8px;"></td>
+<td style="border:1px solid #e9ebee; padding:8px;">Aucun changement cette semaine sur les autres normes suivies.</td>
+</tr>
+</table>
+
+<p style="margin:16px 0 0 0; font-size:12px; color:#213045; font-weight:600;">
+— Prochaine publication : 27 juillet 2026 —
+</p>
+
+</div>
+
+</body>
+</html>
+===END===
