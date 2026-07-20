@@ -454,19 +454,25 @@ def validate_proposals_json(raw: str, label: str) -> dict:
         # du pipeline (validate_existing_ids, etc.) voit toujours la version normalisée.
         action = str(p.get("action", "")).lower()
         if action not in ("add", "update", "delete"):
+            log(f"Proposition problématique ({label}): {json.dumps(p, ensure_ascii=False)[:1000]}")
             fail(f"JSON {label} : action invalide sur la proposition {p.get('id')}.")
         p["action"] = action
         if "id" not in p or "reason" not in p:
+            log(f"Proposition problématique ({label}): {json.dumps(p, ensure_ascii=False)[:1000]}")
             fail(f"JSON {label} : proposition sans id ou reason.")
         card = p.get("card")
         if card:
             if any(t not in VALID_TOPICS for t in card.get("tp", [])):
+                log(f"Proposition problématique ({label}): {json.dumps(p, ensure_ascii=False)[:1000]}")
                 fail(f"JSON {label} : topic invalide dans {p['id']}.")
             if any(t not in VALID_TAGS for t in card.get("tg", [])):
+                log(f"Proposition problématique ({label}): {json.dumps(p, ensure_ascii=False)[:1000]}")
                 fail(f"JSON {label} : tag invalide dans {p['id']}.")
             if card.get("v") not in VALID_VARIANTS:
+                log(f"Proposition problématique ({label}): {json.dumps(p, ensure_ascii=False)[:1000]}")
                 fail(f"JSON {label} : variant invalide dans {p['id']}.")
         if p["action"] in ("update", "delete") and not p.get("existing_id"):
+            log(f"Proposition problématique ({label}): {json.dumps(p, ensure_ascii=False)[:1000]}")
             fail(f"JSON {label} : action {p['action']} sans existing_id ({p['id']}).")
 
     return parsed
@@ -615,7 +621,7 @@ def main() -> None:
     )
     content_raw = run_model_call(
         client, config["writing_model"], CONTENT_SYSTEM_PROMPT, content_user_content,
-        "Rédaction (email + rapport)", max_tokens=9000,
+        "Rédaction (email + rapport)", max_tokens=4000,
     )
     content_sections = split_content_sections(content_raw)
 
@@ -629,7 +635,7 @@ def main() -> None:
     )
     proposals_raw = run_model_call(
         client, config["writing_model"], PROPOSALS_SYSTEM_PROMPT, proposals_user_content,
-        "Rédaction (propositions)", max_tokens=5000,
+        "Rédaction (propositions)", max_tokens=2000,
     )
     proposals_sections = split_proposals_sections(proposals_raw)
 
