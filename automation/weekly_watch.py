@@ -11,7 +11,7 @@ injectées par le workflow depuis les secrets GitHub.
 
 Étapes :
   1. Charger la config (modèles, destinataires) et les données existantes.
-  2. Recherche : fetch direct des sources fixes (Playwright) + requêtes
+  2. Recherche : fetch direct (HTTP simple) des sources fixes + requêtes
      Perplexity Sonar via LiteLLM pour la largeur de couverture.
   3. Rédaction : un appel à Claude (via LiteLLM) qui trie, rédige (règles
      éditoriales FR ci-dessous) et génère les propositions EN + FR.
@@ -233,9 +233,13 @@ WRITING_SYSTEM_PROMPT = f"""You are an expert QARA (Quality Assurance & Regulato
 specialised in Medical Device Software (MDSW) in the EU, writing for Theodo HealthTech.
 
 ## EDITORIAL MANDATE
-Audience: busy QARA leads and C-levels. Two-tier output:
+Audience: busy QARA leads and C-levels. Two-tier output, BOTH bounded — this is a weekly digest,
+not an exhaustive dump:
 1. Email body: a 2-minute read, 450-650 words (max 700), EU-first, only what moved this week.
-2. Full report: comprehensive, attached as HTML, unlimited length.
+2. Full report: attached as HTML, target 1200-2000 words total across all sections. Go deeper
+   than the email on items that moved, but do not pad with boilerplate or restate unchanged
+   background. If nothing material happened in a region/section this week, one line saying so
+   is enough — do not describe it at length anyway.
 
 Language: BOTH outputs are in FRENCH, native register (not translated English). Banned calques:
 "actionnable", "re-actionner", "En 60 secondes", "Sur le radar", "atteindre le seuil",
@@ -267,20 +271,24 @@ cut adjectives.
 7. Pied de page: navy, note that the full report is attached, link to
    https://theodo-group.github.io/Compliance-timeline/admin.html, disclaimer, Theodo HealthTech branding.
 
-## FULL REPORT STRUCTURE (attachment, allowed to be long)
-Same branding. Section 1 EU & International (full detail: newly issued, in the works,
-evolutions, opinion box). Section 2 UK. Section 3 US. Section 4 Other regions. Standards
-monitoring annex using this register (highlight rows that moved this week, mark the rest
-"no change this week"):
+## FULL REPORT STRUCTURE (attachment, bounded — see word target above)
+Same branding. Section 1 EU & International. Section 2 UK. Section 3 US. Section 4 Other
+regions — each section: only items with a genuine development this week, in enough detail to
+act on (what changed, why it matters, deadline if any, source link); skip or one-line anything
+unchanged. Standards monitoring annex using this register, but ONLY list rows that moved this
+week with what changed; for everything else, a single closing line: "Aucun changement cette
+semaine sur les autres normes suivies." (do not reprint the full register every week):
 {STANDARDS_REGISTER}
 
 ## PROPOSALS (timeline update)
 Compare your research to the existing milestones (JSON provided below) and produce ADD/UPDATE/DELETE
-proposals. Stable id format: "YYYY-MM-DD--lowercase-english-slug" (double dash, max 50 chars),
-identical between EN and FR. Valid topics: {VALID_TOPICS}. Valid tags: {VALID_TAGS}.
-Valid variants: {VALID_VARIANTS} (c=critical/navy, h=highlight/gold, n=normal).
-FR proposals: IDENTICAL id/action/existing_id/card.id/card.d/card.y/card.u/card.tp/card.tg/card.v;
-translate card.t, card.x, card.l only (reason stays in English).
+proposals — only for genuinely material developments this week (typically 2-8 items; skip
+cosmetic or non-material changes). Stable id format: "YYYY-MM-DD--lowercase-english-slug"
+(double dash, max 50 chars), identical between EN and FR. Valid topics: {VALID_TOPICS}.
+Valid tags: {VALID_TAGS}. Valid variants: {VALID_VARIANTS} (c=critical/navy, h=highlight/gold,
+n=normal). FR proposals: IDENTICAL id/action/existing_id/card.id/card.d/card.y/card.u/card.tp/
+card.tg/card.v; translate card.t, card.x, card.l only (reason stays in English). Keep "reason"
+and "x" (card description) concise — 1-2 sentences, not a paragraph.
 
 ## OUTPUT FORMAT — respect EXACTLY, nothing else before/after
 {EMAIL_MARKER}
@@ -530,7 +538,7 @@ def main() -> None:
 
     log(f"Modèle recherche: {config['research_model']} / rédaction: {config['writing_model']}")
 
-    log("Recherche — fetch des sources fixes (Playwright)...")
+    log("Recherche — fetch des sources fixes...")
     fixed_sources_blob = fetch_fixed_sources()
 
     log("Recherche — requêtes Perplexity Sonar...")
