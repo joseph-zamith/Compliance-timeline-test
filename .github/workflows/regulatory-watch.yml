@@ -31,10 +31,8 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install dependencies
-        run: |
-          pip install -r automation/requirements.txt
-          playwright install --with-deps chromium
+      - name: Install Python dependencies
+        run: pip install -r automation/requirements.txt
 
       - name: Run weekly regulatory watch
         env:

@@ -36,6 +36,8 @@ import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
 
+import requests
+from bs4 import BeautifulSoup
 from openai import OpenAI
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -156,27 +158,26 @@ def get_litellm_client() -> OpenAI:
 # ---------------------------------------------------------------------------
 
 def fetch_fixed_sources() -> str:
-    """Fetch the ~12 fixed regulatory-watch sources with a headless browser.
-    Uniform method for every source (some render client-side; a real browser
-    handles both cases without per-source special casing)."""
-    from playwright.sync_api import sync_playwright
-
+    """Fetch the ~12 fixed regulatory-watch sources with a plain HTTP request.
+    Confirmed during migration: all these sources are server-rendered (their
+    real content is present in the raw HTML), so no headless browser is
+    needed — a simple request + text extraction is enough and much faster."""
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; TheodoRegWatch/1.0)"}
     chunks = []
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        page = browser.new_page(user_agent="Mozilla/5.0 (compatible; TheodoRegWatch/1.0)")
-        for url in FIXED_SOURCES:
-            try:
-                page.goto(url, timeout=20000, wait_until="domcontentloaded")
-                page.wait_for_timeout(1500)  # let client-rendered content settle
-                text = page.inner_text("body")
-                text = re.sub(r"\n{3,}", "\n\n", text).strip()
-                # Cap per-source length to keep the writing-model prompt manageable.
-                chunks.append(f"--- SOURCE: {url} ---\n{text[:6000]}")
-            except Exception as e:  # noqa: BLE001 - one bad source must not kill the run
-                log(f"Fetch échoué pour {url}: {e}")
-                chunks.append(f"--- SOURCE: {url} ---\n(fetch échoué: {e})")
-        browser.close()
+    for url in FIXED_SOURCES:
+        try:
+            resp = requests.get(url, headers=headers, timeout=20)
+            resp.raise_for_status()
+            soup = BeautifulSoup(resp.text, "html.parser")
+            for tag in soup(["script", "style"]):
+                tag.decompose()
+            text = soup.get_text(separator="\n")
+            text = re.sub(r"\n{3,}", "\n\n", text).strip()
+            # Cap per-source length to keep the writing-model prompt manageable.
+            chunks.append(f"--- SOURCE: {url} ---\n{text[:6000]}")
+        except Exception as e:  # noqa: BLE001 - one bad source must not kill the run
+            log(f"Fetch échoué pour {url}: {e}")
+            chunks.append(f"--- SOURCE: {url} ---\n(fetch échoué: {e})")
     return "\n\n".join(chunks)
 
 
