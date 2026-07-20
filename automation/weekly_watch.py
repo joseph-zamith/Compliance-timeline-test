@@ -621,7 +621,7 @@ def main() -> None:
     )
     content_raw = run_model_call(
         client, config["writing_model"], CONTENT_SYSTEM_PROMPT, content_user_content,
-        "Rédaction (email + rapport)", max_tokens=4000,
+        "Rédaction (email + rapport)", max_tokens=9000,
     )
     content_sections = split_content_sections(content_raw)
 
@@ -635,7 +635,7 @@ def main() -> None:
     )
     proposals_raw = run_model_call(
         client, config["writing_model"], PROPOSALS_SYSTEM_PROMPT, proposals_user_content,
-        "Rédaction (propositions)", max_tokens=2000,
+        "Rédaction (propositions)", max_tokens=5000,
     )
     proposals_sections = split_proposals_sections(proposals_raw)
 
