@@ -358,8 +358,11 @@ genuinely moved this week, by their exact "reference" string, in standards_chang
 }}
 
 Guidance on "items": typically 4-10 items total across all regions combined (fewer on a quiet
-week, more on a busy one — do not force a count). Order does not matter, region field handles
-sorting. Every item needs a real, clickable source_url.
+week, more on a busy one — do not force a count). HARD CAP: never exceed 12 items, even in an
+exceptionally active week — this is a length constraint, not a quality target. If more than 12
+items are genuinely material, keep the 12 most impactful and drop the rest entirely (better to
+fully finish 12 substantive items than start a 13th and run out of room). Order does not matter,
+region field handles sorting. Every item needs a real, clickable source_url.
 
 ## OUTPUT FORMAT — respect EXACTLY, nothing else before/after, no markdown code fences
 Use ONLY these two markers, exactly as written: never invent your own extra marker.
@@ -377,7 +380,13 @@ already in the report below.
 
 ## RULES
 Only genuinely material developments (typically 2-8 items total; skip cosmetic or non-material
-changes — most weeks do NOT need 8). Stable id format: "YYYY-MM-DD--lowercase-english-slug"
+changes — most weeks do NOT need 8). HARD CAP: never exceed 10 proposals total, even in an
+exceptionally active week — this is a length constraint, not a quality target. If more than 10
+items are genuinely material, keep the 10 most impactful (biggest regulatory/business impact,
+nearest deadlines first) and drop the rest entirely rather than including them in shortened form.
+It is far better to fully complete 10 well-formed proposals than to start an 11th and run out of
+room. Keep "reason" and card "x" tight (1-2 short sentences, no padding) so the JSON stays compact
+regardless of item count. Stable id format: "YYYY-MM-DD--lowercase-english-slug"
 (double dash, max 50 chars), identical between EN and FR. Valid topics: {VALID_TOPICS}.
 Valid tags: {VALID_TAGS}. Valid variants: {VALID_VARIANTS} (c=critical/navy, h=highlight/gold,
 n=normal). Action value must be lowercase: "add", "update", or "delete" — never uppercase.
@@ -1109,7 +1118,7 @@ def _run(config: dict, recipients: list, data_json: list, last_email: str, clien
         )
         content_raw = run_model_call(
             client, config["writing_model"], CONTENT_SYSTEM_PROMPT, content_user_content,
-            "Rédaction (email + rapport)", max_tokens=6000,
+            "Rédaction (email + rapport)", max_tokens=10000,
         )
         content_json_raw = extract_content_json_raw(content_raw)
 
@@ -1140,7 +1149,7 @@ def _run(config: dict, recipients: list, data_json: list, last_email: str, clien
         )
         proposals_raw = run_model_call(
             client, config["writing_model"], PROPOSALS_SYSTEM_PROMPT, proposals_user_content,
-            "Rédaction (propositions)", max_tokens=5000,
+            "Rédaction (propositions)", max_tokens=16000,
         )
     proposals_sections = split_proposals_sections(proposals_raw)
 
