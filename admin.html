@@ -1368,11 +1368,18 @@ document.getElementById("proposals-section").addEventListener("click", e => {
 /* ===== Init: fetch data + decisions ===== */
 async function init() {
   try {
-    // Fetch data, proposals, and decisions in parallel
+    // Fetch data, proposals, and decisions in parallel. Include the token (if
+    // present) on the decisions.json call — unauthenticated GitHub API calls
+    // are capped at 60/hour per IP, easy to exhaust while testing (repeated
+    // reloads), which silently falls back to a possibly-stale localStorage
+    // copy and makes proposals look mis-filed between Pending/Archived.
+    const ghToken = getGitHubToken();
     const [dataResp, propResp, decResp] = await Promise.all([
       fetch("data.json"),
       fetch("proposals.json").catch(() => null),
-      fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DEC_PATH}`).catch(() => null),
+      fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DEC_PATH}`, {
+        headers: ghToken ? { "Authorization": `token ${ghToken}` } : {},
+      }).catch(() => null),
     ]);
 
     if (!dataResp.ok) throw new Error("Failed to load data.json");
