@@ -3,19 +3,41 @@
   "proposals": [
     {
       "action": "add",
-      "id": "2026-07-31--mdcg-2025-6-ai-mdr-final-guidance",
-      "reason": "MDCG 2025-6 final version published end July with decision matrix for AI classification (Annex III AI Act vs MDR). Immediate applicability Aug 2026; ANSM audits begin Sept 2026. Critical for SaMD IA portfolio.",
+      "id": "2026-06-18--iso-ts-24971-2-ml-risk-management-guidance",
+      "reason": "ISO/TS 24971-2 publiée; référence pour la gestion des risques IA/ML dans les DM. Les organismes notifiés demandent déjà la conformité; adaptation documentation risques requise avant fin Q3 2026.",
       "card": {
-        "id": "2026-07-31--mdcg-2025-6-ai-mdr-final-guidance",
-        "d": "2026-07-31",
-        "l": "31 Jul 2026",
+        "id": "2026-06-18--iso-ts-24971-2-ml-risk-management-guidance",
+        "d": "2026-06-18",
+        "l": "18 juin 2026",
         "y": 2026,
-        "t": "MDCG 2025-6 — Matrice de Classification IA vs MDR (Finale)",
-        "x": "Guidance finale avec matrice décisionnelle pour IA en diagnostic, prédiction risque, recommandation thérapie. Applicabilité immédiate août 2026; mises à jour AIPD et gouvernance données requises avant soumission EUDAMED septembre 2026.",
-        "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations_en",
+        "t": "ISO/TS 24971-2 — Guidance Gestion Risques ML/IA Publiée",
+        "x": "Spécification technique détaillant incertitude algorithmique, dérive données, validation clinique réelle pour SaMD. Référence immédiate pour documentation conformité MDR.",
+        "u": "https://www.qualitiso.com/veille/",
         "tp": [
-          "mdr",
-          "ai"
+          "ai",
+          "standards"
+        ],
+        "tg": [
+          "new",
+          "high"
+        ],
+        "v": "h"
+      }
+    },
+    {
+      "action": "add",
+      "id": "2026-06-18--mdcg-2026-4-sscp-eudamed-clinical-data",
+      "reason": "MDCG 2026-4 finalisé; précise règles saisie SSCP, validation, maintenance données dans EUDAMED. Fabricants doivent vérifier et corriger données essais avant fin août 2026 pour éviter suspension administrative.",
+      "card": {
+        "id": "2026-06-18--mdcg-2026-4-sscp-eudamed-clinical-data",
+        "d": "2026-06-18",
+        "l": "18 juin 2026",
+        "y": 2026,
+        "t": "MDCG 2026-4 — Gestion SSCP dans EUDAMED Finalisée",
+        "x": "Guidance final sur données essais cliniques (rôles sponsor/CRO/investigateur, flux certification) par classe risque. Délai conformité fin août 2026.",
+        "u": "https://www.qualitiso.com/veille/",
+        "tp": [
+          "mdr"
         ],
         "tg": [
           "critical",
@@ -26,16 +48,83 @@
     },
     {
       "action": "add",
-      "id": "2026-08-01--mdr-articles-52-4-61-6-implant-exemptions",
-      "reason": "MDR amendment (UE 2026/977) enters force 1 Aug 2026. Passive implants (dental, stents, catheters) gain technical file exemptions. Immediate eligibility review for affected portfolio.",
+      "id": "2026-06-18--eu-rep-symbol-transition-ec-rep-legacy",
+      "reason": "MDCG impose transition du marquage legacy « EC REP » vers « EU REP » sur tous labels, emballages, documentation. Affecte tous DM classe II/III; audit stocks et calendrier conformité requis.",
       "card": {
-        "id": "2026-08-01--mdr-articles-52-4-61-6-implant-exemptions",
-        "d": "2026-08-01",
-        "l": "1 Aug 2026",
+        "id": "2026-06-18--eu-rep-symbol-transition-ec-rep-legacy",
+        "d": "2026-06-18",
+        "l": "18 juin 2026",
         "y": 2026,
-        "t": "Amendement MDR — Articles 52.4 & 61.6 Exemptions Implants En Vigueur",
-        "x": "Implants passifs (dentaires, stents, certains cathéters) éligibles dossier technique réduit. Vérifier éligibilité portfolio; exigences sécurité de base demeurent. Non-conformité = refus marquage CE dès 1 août.",
-        "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
+        "t": "Transition Symbole EU REP — EC REP Déprécié",
+        "x": "Remplacement obligatoire du marquage legacy « EC REP » par « EU REP » sur étiquettes, emballages, DIM. Organismes notifiés vérifient conformité audits 2026–2027.",
+        "u": "https://www.qualitiso.com/veille/",
+        "tp": [
+          "mdr"
+        ],
+        "tg": [
+          "medium",
+          "in-force"
+        ],
+        "v": "n"
+      }
+    },
+    {
+      "action": "add",
+      "id": "2026-06-18--decision-2026-1231-harmonised-standards-mdr",
+      "reason": "Décision 2026/1231 ajoute normes harmonisées MDR classes II/III (imagerie, stérilisation, cybersécurité). Fabricants doivent vérifier applicabilité et mettre à jour matrices conformité avant fin Q3 2026.",
+      "card": {
+        "id": "2026-06-18--decision-2026-1231-harmonised-standards-mdr",
+        "d": "2026-06-18",
+        "l": "18 juin 2026",
+        "y": 2026,
+        "t": "Décision 2026/1231 — Nouvelles Normes Harmonisées MDR",
+        "x": "Ajouts catalogue normes harmonisées MDR (imagerie, stérilisation, cybersécurité). Présomption conformité; QARA doit évaluer applicabilité.",
+        "u": "https://www.qualitiso.com/veille/",
+        "tp": [
+          "mdr",
+          "standards"
+        ],
+        "tg": [
+          "medium",
+          "in-force"
+        ],
+        "v": "n"
+      }
+    },
+    {
+      "action": "add",
+      "id": "2026-04-28--mdcg-2021-24-rev-1-device-classification-update",
+      "reason": "MDCG 2021-24 Rev.1 (28 avril 2026) clarifie seuils classification; certains DM classe II peuvent basculer classe III. Audit et notification ANSM requise si changement détecté avant fin 2026.",
+      "card": {
+        "id": "2026-04-28--mdcg-2021-24-rev-1-device-classification-update",
+        "d": "2026-04-28",
+        "l": "28 avr 2026",
+        "y": 2026,
+        "t": "MDCG 2021-24 Rev.1 — Seuils Classification Clarifiés",
+        "x": "Révision clarifie instrumentation stérile, implants temporaires >24h, DM contrôlés logiciel. Reclassement potentiel classe II ↔ III; audit requis avant fin 2026.",
+        "u": "https://www.qualitiso.com/veille/",
+        "tp": [
+          "mdr"
+        ],
+        "tg": [
+          "medium",
+          "in-force"
+        ],
+        "v": "n"
+      }
+    },
+    {
+      "action": "add",
+      "id": "2026-09-30--emdn-v2026-product-nomenclature-codes-eudamed",
+      "reason": "Révision EMDN v2026 (MDCG 2026-1/2/3) harmonise codes produits IA/SaMD et implants. Fabricants doivent mettre à jour codes EUDAMED avant septembre 2026 (deadline ANSM); codes incorrects = rejet ou suspension.",
+      "card": {
+        "id": "2026-09-30--emdn-v2026-product-nomenclature-codes-eudamed",
+        "d": "2026-09-30",
+        "l": "30 sep 2026",
+        "y": 2026,
+        "t": "EMDN v2026 — Codes Nomenclature Produits Mis à Jour",
+        "x": "Révision aligne codes EMDN évolution catégories IA/SaMD et implants. Deadline septembre 2026 conformité EUDAMED; consultation ANSM conseillée pour DM hybrides/IA complexe.",
+        "u": "https://www.qualitiso.com/veille/",
         "tp": [
           "mdr"
         ],
@@ -47,42 +136,18 @@
       }
     },
     {
-      "action": "add",
-      "id": "2026-07-23--cnil-mr-001-mr-003-updated-aipd-mandatory",
-      "reason": "CNIL published modernised PIA/AIPD methodologies (MR-001, MR-003) on 23 May 2026, now integrating AI Act and cybersecurity requirements. AIPD mandatory for medical SaMD IA; CNIL audits begin Q3 2026.",
-      "card": {
-        "id": "2026-07-23--cnil-mr-001-mr-003-updated-aipd-mandatory",
-        "d": "2026-07-23",
-        "l": "23 Mai 2026",
-        "y": 2026,
-        "t": "CNIL — MR-001 & MR-003 Modernisées (AI Act + Cybersécurité)",
-        "x": "AIPD désormais obligatoire logiciels médicaux IA avant mise en marché. Méthodologies intègrent AI Act et cybersécurité CNIL 2024. Audits CNIL Q3 2026 secteur santé pour vérifier conformité.",
-        "u": "https://www.cnil.fr/fr",
-        "tp": [
-          "france",
-          "ai",
-          "data"
-        ],
-        "tg": [
-          "critical",
-          "in-force"
-        ],
-        "v": "c"
-      }
-    },
-    {
       "action": "update",
       "id": "2026-10-15--pren-18286-ai-act-qms-standard-revised",
       "existing_id": "2026-10-15--pren-18286-ai-act-qms-standard-revised",
-      "reason": "prEN 18286 first-draft election completed; final vote scheduled Aug 2026 with Q4 2026 publication target. Scope confirmed: data validation, ML audit, model traceability, algorithm governance aligned with ISO 13485 and MDR.",
+      "reason": "prEN 18286 confirmée publication Q4 2026 (décembre cible). Première édition sera norme harmonisée MDR pour QMS IA; organismes notifiés exigeront conformité Q1 2027.",
       "card": {
         "id": "2026-10-15--pren-18286-ai-act-qms-standard-revised",
-        "d": "2026-08-01",
-        "l": "Août 2026",
+        "d": "2026-12-31",
+        "l": "Q4 2026",
         "y": 2026,
-        "t": "prEN 18286 — Norme QMS IA Vote Final & Cible Publication Q4 2026",
-        "x": "Élection première mouture close. Vote final août 2026; publication Q4 2026. Couvre validation données, audit ML, traçabilité modèles, gouvernance. Adoption progressive Q1/Q2 2027 attendue logiciels médicaux IA marquage CE.",
-        "u": "https://www.afnor.org/actualites/",
+        "t": "prEN 18286 — Norme QMS IA Publication Cible (Décembre 2026)",
+        "x": "Première norme harmonisée QMS IA (intégration MDR + AI Act). Publication décembre 2026 prévue; adoption obligatoire Q1 2027 pour SaMD haut risque.",
+        "u": "https://www.qualitiso.com/veille/",
         "tp": [
           "ai",
           "standards"
@@ -96,24 +161,47 @@
     },
     {
       "action": "add",
-      "id": "2026-07-01--swissmedic-tga-udi-traceability-live",
-      "reason": "Swissmedic and TGA Australia activated mandatory UDI traceability registers on 1 July 2026 with divergent data requirements. Manufacturers with bilateral distribution must map UDI formats per jurisdiction; non-compliance blocks market access from Aug 2026.",
+      "id": "2026-02-01--mhra-ai-airlock-phase-2-report-samd-validation",
+      "reason": "Rapport MHRA AI Airlock Phase 2 (février 2026) détaille bonnes pratiques validation SaMD (8–10 produits). Souligne traçabilité données entraînement, validation population réelle, monitoring post-marché; aligne avec normes ISO/CEN.",
       "card": {
-        "id": "2026-07-01--swissmedic-tga-udi-traceability-live",
-        "d": "2026-07-01",
-        "l": "1 Jul 2026",
+        "id": "2026-02-01--mhra-ai-airlock-phase-2-report-samd-validation",
+        "d": "2026-02-01",
+        "l": "fév 2026",
         "y": 2026,
-        "t": "Swissmedic & TGA — Registres Traçabilité UDI Live (Standards Divergents)",
-        "x": "Swissmedic exige UDI complet, lot, série, expiration; TGA accepte UDI partiel sur demande. Fabricants distribution bilatérale doivent réconcilier formats données. Non-conformité déclenche suspensions marché août 2026 et après.",
+        "t": "MHRA AI Airlock Phase 2 — Bonnes Pratiques Validation SaMD",
+        "x": "Rapport pilote sur 8–10 SaMD (diagnostic cancer, prédiction sepsis). Résultats clés : traçabilité données critique; validation réalité-monde essentielle; monitoring post-approbation continu requis.",
+        "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
+        "tp": [
+          "uk",
+          "ai"
+        ],
+        "tg": [
+          "medium",
+          "in-force"
+        ],
+        "v": "n"
+      }
+    },
+    {
+      "action": "add",
+      "id": "2026-07-01--swissmedic-australia-tga-traceability-mandatory",
+      "reason": "Swissmedic (Suisse) et TGA (Australie) activent traçabilité obligatoire UDI (1er juillet 2026). CH modèle basé-risque; AU exhaustif. Fabricants export tous marchés doivent adapter mappings données, respecter deadlines immédiatement.",
+      "card": {
+        "id": "2026-07-01--swissmedic-australia-tga-traceability-mandatory",
+        "d": "2026-07-01",
+        "l": "1 jul 2026",
+        "y": 2026,
+        "t": "Swissmedic & Australie TGA — Traçabilité Obligatoire (UDI) Active",
+        "x": "Suisse (modèle basé-risque) et Australie (registry exhaustif) exigent traçabilité UDI-harmonisée 1er juillet 2026. Schéma données diverge; adaptation marché-spécifique requise.",
         "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
         "tp": [
           "other"
         ],
         "tg": [
-          "high",
+          "medium",
           "in-force"
         ],
-        "v": "h"
+        "v": "n"
       }
     }
   ]
