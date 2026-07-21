@@ -2,70 +2,53 @@
 {"generated": "2026-07-21", "proposals": [
   {
     "action": "add",
-    "id": "2026-07-21--iso-13485-a11-public-inquiry-launched",
-    "reason": "AFNOR announces public inquiry on ISO 13485:2016/A11 revision with major QMS changes for AI/cybersecurity management, digital traceability, and data governance. Publication Q4 2026, 18-month transition post-publication.",
+    "id": "2026-07-31--mdcg-2025-6-ai-mdr-final-guidance",
+    "reason": "MDCG 2025-6 final version published end July with decision matrix for AI classification (Annex III AI Act vs MDR). Immediate applicability Aug 2026; ANSM audits begin Sept 2026. Critical for SaMD IA portfolio.",
     "card": {
-      "id": "2026-07-21--iso-13485-a11-public-inquiry-launched",
-      "d": "2026-07-21",
-      "l": "21 Jul 2026",
-      "y": 2026,
-      "t": "ISO 13485:2016/A11 — Public Inquiry Launched",
-      "x": "AFNOR opens public inquiry on major QMS revision integrating AI/cybersecurity, digital traceability, and data governance. Inquiry closes end August 2026; publication targeted Q4 2026.",
-      "u": "https://www.afnor.org/actualites/",
-      "tp": ["standards"],
-      "tg": ["new", "high"],
-      "v": "h"
+      "id": "2026-07-31--mdcg-2025-6-ai-mdr-final-guidance", "d": "2026-07-31", "l": "31 Jul 2026",
+      "y": 2026, "t": "MDCG 2025-6 — AI vs MDR Classification Matrix (Final)", "x": "Final guidance published with decision matrix for AI in diagnosis, risk prediction, therapy recommendation. Immediate enforcement Aug 2026; AIPD and data governance updates required before EUDAMED submission Sept 2026.",
+      "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations_en", "tp": ["mdr", "ai"], "tg": ["critical", "in-force"], "v": "c"
     }
   },
   {
     "action": "add",
-    "id": "2026-07-21--mdcg-2025-6-ai-act-mdr-clarification-imminent",
-    "reason": "EU Commission preparing revised MDCG 2025-6 guidance clarifying AI Act vs MDR/IVDR interaction, particularly high-risk classification thresholds for SaMD with AI logic. Publication end July 2026.",
+    "id": "2026-08-01--mdr-articles-52-4-61-6-implant-exemptions",
+    "reason": "MDR amendment (UE 2026/977) enters force 1 Aug 2026. Passive implants (dental, stents, catheters) gain technical file exemptions. Immediate eligibility review for affected portfolio.",
     "card": {
-      "id": "2026-07-21--mdcg-2025-6-ai-act-mdr-clarification-imminent",
-      "d": "2026-07-21",
-      "l": "21 Jul 2026",
-      "y": 2026,
-      "t": "MDCG 2025-6 Revised — AI Act vs MDR/IVDR Clarification",
-      "x": "Revised guidance to clarify when SaMD with AI logic triggers high-risk classification (AI Act Annex III) vs standard MDR compliance. Publication expected end July 2026.",
-      "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations_en",
-      "tp": ["mdr", "ai"],
-      "tg": ["new", "critical"],
-      "v": "c"
+      "id": "2026-08-01--mdr-articles-52-4-61-6-implant-exemptions", "d": "2026-08-01", "l": "1 Aug 2026",
+      "y": 2026, "t": "MDR Amendment — Articles 52.4 & 61.6 Implant Exemptions In Force", "x": "Passive implants (dental, stents, catheters) and certain catheter types eligible for reduced technical file. Verify portfolio eligibility; basic safety requirements remain. Non-compliance = CE mark denial from 1 Aug.",
+      "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/", "tp": ["mdr"], "tg": ["high", "in-force"], "v": "h"
     }
   },
   {
     "action": "add",
-    "id": "2026-07-21--iso-ts-24971-2-ml-risk-management-finalized",
-    "reason": "ISO/TS 24971-2 on ML/AI risk management finalized after 2025 inquiry revision. Covers FMEA adaptation, performance metrics, data validation, and post-launch monitoring. Progressive adoption Q3/Q4 2026; de facto standard for notified bodies.",
+    "id": "2026-07-23--cnil-mr-001-mr-003-updated-aipd-mandatory",
+    "reason": "CNIL published modernised PIA/AIPD methodologies (MR-001, MR-003) on 23 May 2026, now integrating AI Act and cybersecurity requirements. AIPD mandatory for medical SaMD IA; CNIL audits begin Q3 2026.",
     "card": {
-      "id": "2026-07-21--iso-ts-24971-2-ml-risk-management-finalized",
-      "d": "2026-07-21",
-      "l": "21 Jul 2026",
-      "y": 2026,
-      "t": "ISO/TS 24971-2 — ML Risk Management Finalized",
-      "x": "Technical specification on ML/AI risk management finalized. Covers FMEA for data/model, performance metrics, validation, monitoring. Becomes de facto audit standard Q3/Q4 2026.",
-      "u": "https://www.qualitiso.com/veille/",
-      "tp": ["standards", "ai"],
-      "tg": ["new", "high"],
-      "v": "h"
+      "id": "2026-07-23--cnil-mr-001-mr-003-updated-aipd-mandatory", "d": "2026-07-23", "l": "23 May 2026",
+      "y": 2026, "t": "CNIL — MR-001 & MR-003 Modernised (AI Act + Cybersecurity)", "x": "AIPD now mandatory for medical SaMD IA before market launch. Updated methodologies integrate AI Act and CNIL cybersecurity 2024. CNIL Q3 2026 audits on healthcare sector for compliance.",
+      "u": "https://www.cnil.fr/fr", "tp": ["france", "ai", "data"], "tg": ["critical", "in-force"], "v": "c"
+    }
+  },
+  {
+    "action": "update",
+    "id": "2026-10-15--pren-18286-ai-act-qms-standard-revised",
+    "existing_id": "2026-10-15--pren-18286-ai-act-qms-standard-revised",
+    "reason": "prEN 18286 first-draft election completed; final vote scheduled Aug 2026 with Q4 2026 publication target. Scope confirmed: data validation, ML audit, model traceability, algorithm governance aligned with ISO 13485 and MDR.",
+    "card": {
+      "id": "2026-10-15--pren-18286-ai-act-qms-standard-revised", "d": "2026-08-01", "l": "Aug 2026",
+      "y": 2026, "t": "prEN 18286 — AI QMS Standard Final Vote & Publication Target Q4 2026", "x": "First-draft election closed. Final vote Aug 2026; publication Q4 2026. Covers data validation, ML audit, model traceability, governance. Phased adoption Q1/Q2 2027 expected for CE-marked AI SaMD.",
+      "u": "https://www.afnor.org/actualites/", "tp": ["ai", "standards"], "tg": ["high", "in-force"], "v": "h"
     }
   },
   {
     "action": "add",
-    "id": "2026-07-21--mhra-ai-airlock-phase-2-uk-2027-trajectory",
-    "reason": "MHRA Phase 2 AI Airlock report published: mandatory pre-submission AI dossier for high-risk SaMD (diagnostic, prediction, clinical decision) starting 2027. Aligns UK with FDA pre-cert approach.",
+    "id": "2026-07-01--swissmedic-tga-udi-traceability-live",
+    "reason": "Swissmedic and TGA Australia activated mandatory UDI traceability registers on 1 July 2026 with divergent data requirements. Manufacturers with bilateral distribution must map UDI formats per jurisdiction; non-compliance blocks market access from Aug 2026.",
     "card": {
-      "id": "2026-07-21--mhra-ai-airlock-phase-2-uk-2027-trajectory",
-      "d": "2026-07-21",
-      "l": "21 Jul 2026",
-      "y": 2026,
-      "t": "MHRA AI Airlock Phase 2 — Pre-Submission Required 2027",
-      "x": "MHRA publishes Phase 2 report: mandatory pre-submission AI dossier for high-risk SaMD from 2027. Shortens overall approval timeline; mirrors FDA pre-cert model.",
-      "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
-      "tp": ["uk", "ai"],
-      "tg": ["new", "high"],
-      "v": "h"
+      "id": "2026-07-01--swissmedic-tga-udi-traceability-live", "d": "2026-07-01", "l": "1 Jul 2026",
+      "y": 2026, "t": "Swissmedic & TGA — UDI Traceability Registers Live (Divergent Standards)", "x": "Swissmedic requires full UDI, lot, series, expiry; TGA accepts partial UDI on demand. Bilateral manufacturers must reconcile data formats. Non-compliance triggers market suspensions Aug 2026 onwards.",
+      "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/", "tp": ["other"], "tg": ["high", "in-force"], "v": "h"
     }
   }
 ]}
@@ -73,70 +56,53 @@
 {"generated": "2026-07-21", "proposals": [
   {
     "action": "add",
-    "id": "2026-07-21--iso-13485-a11-public-inquiry-launched",
-    "reason": "AFNOR annonce enquête publique sur révision ISO 13485:2016/A11 avec changements majeurs QMS pour gestion IA/cybersécurité, traçabilité numérique et gouvernance data. Publication Q4 2026, transition 18 mois après publication.",
+    "id": "2026-07-31--mdcg-2025-6-ai-mdr-final-guidance",
+    "reason": "MDCG 2025-6 final version published end July with decision matrix for AI classification (Annex III AI Act vs MDR). Immediate applicability Aug 2026; ANSM audits begin Sept 2026. Critical for SaMD IA portfolio.",
     "card": {
-      "id": "2026-07-21--iso-13485-a11-public-inquiry-launched",
-      "d": "2026-07-21",
-      "l": "21 Jul 2026",
-      "y": 2026,
-      "t": "ISO 13485:2016/A11 — Enquête Publique Lancée",
-      "x": "AFNOR ouvre enquête publique sur révision majeure QMS intégrant IA/cybersécurité, traçabilité numérique et gouvernance data. Clôture fin août 2026 ; publication ciblée Q4 2026.",
-      "u": "https://www.afnor.org/actualites/",
-      "tp": ["standards"],
-      "tg": ["new", "high"],
-      "v": "h"
+      "id": "2026-07-31--mdcg-2025-6-ai-mdr-final-guidance", "d": "2026-07-31", "l": "31 Jul 2026",
+      "y": 2026, "t": "MDCG 2025-6 — Matrice de Classification IA vs MDR (Finale)", "x": "Guidance finale avec matrice décisionnelle pour IA en diagnostic, prédiction risque, recommandation thérapie. Applicabilité immédiate août 2026; mises à jour AIPD et gouvernance données requises avant soumission EUDAMED septembre 2026.",
+      "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations_en", "tp": ["mdr", "ai"], "tg": ["critical", "in-force"], "v": "c"
     }
   },
   {
     "action": "add",
-    "id": "2026-07-21--mdcg-2025-6-ai-act-mdr-clarification-imminent",
-    "reason": "Commission européenne prépare révision MDCG 2025-6 clarifiant interaction AI Act vs MDR/IVDR, notamment seuils classification haut risque pour SaMD avec logique IA. Publication fin juillet 2026.",
+    "id": "2026-08-01--mdr-articles-52-4-61-6-implant-exemptions",
+    "reason": "MDR amendment (UE 2026/977) enters force 1 Aug 2026. Passive implants (dental, stents, catheters) gain technical file exemptions. Immediate eligibility review for affected portfolio.",
     "card": {
-      "id": "2026-07-21--mdcg-2025-6-ai-act-mdr-clarification-imminent",
-      "d": "2026-07-21",
-      "l": "21 Jul 2026",
-      "y": 2026,
-      "t": "MDCG 2025-6 Révisé — Clarification AI Act vs MDR/IVDR",
-      "x": "Guidance révisé pour clarifier quand SaMD avec logique IA déclenche classification haut risque (AI Act Annexe III) vs conformité MDR standard. Publication attendue fin juillet 2026.",
-      "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations_en",
-      "tp": ["mdr", "ai"],
-      "tg": ["new", "critical"],
-      "v": "c"
+      "id": "2026-08-01--mdr-articles-52-4-61-6-implant-exemptions", "d": "2026-08-01", "l": "1 Aug 2026",
+      "y": 2026, "t": "Amendement MDR — Articles 52.4 & 61.6 Exemptions Implants En Vigueur", "x": "Implants passifs (dentaires, stents, certains cathéters) éligibles dossier technique réduit. Vérifier éligibilité portfolio; exigences sécurité de base demeurent. Non-conformité = refus marquage CE dès 1 août.",
+      "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/", "tp": ["mdr"], "tg": ["high", "in-force"], "v": "h"
     }
   },
   {
     "action": "add",
-    "id": "2026-07-21--iso-ts-24971-2-ml-risk-management-finalized",
-    "reason": "ISO/TS 24971-2 sur gestion risques ML/IA finalisée après révision enquête 2025. Couvre FMEA adaptation, métriques performance, validation data, monitoring post-lancement. Adoption progressive Q3/Q4 2026 ; standard de facto pour organismes notifiés.",
+    "id": "2026-07-23--cnil-mr-001-mr-003-updated-aipd-mandatory",
+    "reason": "CNIL published modernised PIA/AIPD methodologies (MR-001, MR-003) on 23 May 2026, now integrating AI Act and cybersecurity requirements. AIPD mandatory for medical SaMD IA; CNIL audits begin Q3 2026.",
     "card": {
-      "id": "2026-07-21--iso-ts-24971-2-ml-risk-management-finalized",
-      "d": "2026-07-21",
-      "l": "21 Jul 2026",
-      "y": 2026,
-      "t": "ISO/TS 24971-2 — Gestion Risques ML Finalisée",
-      "x": "Spécification technique gestion risques ML/IA finalisée. Couvre FMEA données/modèle, métriques performance, validation, monitoring. Devient standard audit de facto Q3/Q4 2026.",
-      "u": "https://www.qualitiso.com/veille/",
-      "tp": ["standards", "ai"],
-      "tg": ["new", "high"],
-      "v": "h"
+      "id": "2026-07-23--cnil-mr-001-mr-003-updated-aipd-mandatory", "d": "2026-07-23", "l": "23 Mai 2026",
+      "y": 2026, "t": "CNIL — MR-001 & MR-003 Modernisées (AI Act + Cybersécurité)", "x": "AIPD désormais obligatoire logiciels médicaux IA avant mise en marché. Méthodologies intègrent AI Act et cybersécurité CNIL 2024. Audits CNIL Q3 2026 secteur santé pour vérifier conformité.",
+      "u": "https://www.cnil.fr/fr", "tp": ["france", "ai", "data"], "tg": ["critical", "in-force"], "v": "c"
+    }
+  },
+  {
+    "action": "update",
+    "id": "2026-10-15--pren-18286-ai-act-qms-standard-revised",
+    "existing_id": "2026-10-15--pren-18286-ai-act-qms-standard-revised",
+    "reason": "prEN 18286 first-draft election completed; final vote scheduled Aug 2026 with Q4 2026 publication target. Scope confirmed: data validation, ML audit, model traceability, algorithm governance aligned with ISO 13485 and MDR.",
+    "card": {
+      "id": "2026-10-15--pren-18286-ai-act-qms-standard-revised", "d": "2026-08-01", "l": "Août 2026",
+      "y": 2026, "t": "prEN 18286 — Norme QMS IA Vote Final & Cible Publication Q4 2026", "x": "Élection première mouture close. Vote final août 2026; publication Q4 2026. Couvre validation données, audit ML, traçabilité modèles, gouvernance. Adoption progressive Q1/Q2 2027 attendue logiciels médicaux IA marquage CE.",
+      "u": "https://www.afnor.org/actualites/", "tp": ["ai", "standards"], "tg": ["high", "in-force"], "v": "h"
     }
   },
   {
     "action": "add",
-    "id": "2026-07-21--mhra-ai-airlock-phase-2-uk-2027-trajectory",
-    "reason": "MHRA publie rapport Phase 2 AI Airlock : dossier IA pré-soumission obligatoire pour SaMD haut risque (diagnostic, prédiction, décision clinique) à partir 2027. Aligne RU sur approche FDA pre-cert.",
+    "id": "2026-07-01--swissmedic-tga-udi-traceability-live",
+    "reason": "Swissmedic and TGA Australia activated mandatory UDI traceability registers on 1 July 2026 with divergent data requirements. Manufacturers with bilateral distribution must map UDI formats per jurisdiction; non-compliance blocks market access from Aug 2026.",
     "card": {
-      "id": "2026-07-21--mhra-ai-airlock-phase-2-uk-2027-trajectory",
-      "d": "2026-07-21",
-      "l": "21 Jul 2026",
-      "y": 2026,
-      "t": "MHRA AI Airlock Phase 2 — Pré-Soumission Requise 2027",
-      "x": "MHRA publie rapport Phase 2 : dossier IA pré-soumission obligatoire pour SaMD haut risque à partir 2027. Raccourcit timeline approbation globale ; miroir modèle FDA pre-cert.",
-      "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
-      "tp": ["uk", "ai"],
-      "tg": ["new", "high"],
-      "v": "h"
+      "id": "2026-07-01--swissmedic-tga-udi-traceability-live", "d": "2026-07-01", "l": "1 Jul 2026",
+      "y": 2026, "t": "Swissmedic & TGA — Registres Traçabilité UDI Live (Standards Divergents)", "x": "Swissmedic exige UDI complet, lot, série, expiration; TGA accepte UDI partiel sur demande. Fabricants distribution bilatérale doivent réconcilier formats données. Non-conformité déclenche suspensions marché août 2026 et après.",
+      "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/", "tp": ["other"], "tg": ["high", "in-force"], "v": "h"
     }
   }
 ]}
