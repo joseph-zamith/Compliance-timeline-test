@@ -34,7 +34,7 @@ import re
 import subprocess
 import sys
 import time
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import httpx
@@ -68,37 +68,76 @@ FIXED_SOURCES = [
     "https://www.gov.uk/health-and-social-care/medicines-medical-devices-blood",
 ]
 
-EMAIL_MARKER = "===EMAIL_BODY==="
-REPORT_MARKER = "===FULL_REPORT==="
+CONTENT_MARKER = "===CONTENT==="
 PROPOSALS_EN_MARKER = "===PROPOSALS_EN==="
 PROPOSALS_FR_MARKER = "===PROPOSALS_FR==="
 END_MARKER = "===END==="
 
-STANDARDS_REGISTER = """
-| Source | Reference | Title | Watch for |
-|---|---|---|---|
-| EU Commission | EU 2017/745 | MDR | Simplification proposal (2025/0404) progress |
-| EU Commission | EU 2016/679 | GDPR | Changes (rare) |
-| EU Commission | EU 2024/1689 | AI Act | Application timeline; Digital Omnibus deferrals |
-| EU Commission | EU 2021/2226 + amendments | eIFU | Amendment scope |
-| AFNOR | NF EN ISO 13485:2016/A11 | QMS | Revision progress |
-| AFNOR | NF EN ISO 14971:2019/A11 | Risk management | Any revision signal |
-| AFNOR | NF EN 62304/A1 | Software lifecycle | Edition 2 progress (MAJOR when it lands) |
-| AFNOR | NF EN 62366/A1 | Usability | Changes (rare) |
-| IEC | IEC 82304-1 | Health software safety | Any announcement |
-| ISO | ISO 15223-1/-2, ISO 20417 | Labeling/symbols | Amendments, symbol transitions |
-| ISO | ISO/TR 24971 | Risk mgmt guidance | Changes |
-| ISO | ISO 27001/27701/27017/27018 | Info security | Changes |
-| ANS | HDS | Health data hosting | Referential evolution |
-| BSI | C5 | Cloud compliance | Changes |
-| ISO | ISO 14155 | Clinical investigation | Edition status |
-| EU Commission | MDCG 2019-11 | Software qualification | New revision |
-| EU Commission | MDCG 2025-6 | MDR/IVDR vs AI Act | Updates |
-| EU Commission | MDCG 2025-4 | MDSW on platforms | Updates |
-| EU Commission | MDCG 2019-16 | Cybersecurity | New revision |
-| IMDRF | SaMD WG / N12, N81, N88 | SaMD framework, ML | New or closing drafts |
-| CEN-CENELEC | prEN 18286 | AI Act QMS standard | Publication targeted Q4 2026 |
-"""
+# Structured (not markdown-string) so Python can render the annex table itself —
+# the model only needs to say which rows moved and why, never re-emit the whole
+# register as text (that was a major source of unnecessary output length).
+STANDARDS_REGISTER = [
+    {"source": "EU Commission", "reference": "EU 2017/745", "title": "MDR", "watch_for": "Simplification proposal (2025/0404) progress"},
+    {"source": "EU Commission", "reference": "EU 2016/679", "title": "GDPR", "watch_for": "Changes (rare)"},
+    {"source": "EU Commission", "reference": "EU 2024/1689", "title": "AI Act", "watch_for": "Application timeline; Digital Omnibus deferrals"},
+    {"source": "EU Commission", "reference": "EU 2021/2226 + amendments", "title": "eIFU", "watch_for": "Amendment scope"},
+    {"source": "AFNOR", "reference": "NF EN ISO 13485:2016/A11", "title": "QMS", "watch_for": "Revision progress"},
+    {"source": "AFNOR", "reference": "NF EN ISO 14971:2019/A11", "title": "Risk management", "watch_for": "Any revision signal"},
+    {"source": "AFNOR", "reference": "NF EN 62304/A1", "title": "Software lifecycle", "watch_for": "Edition 2 progress (MAJOR when it lands)"},
+    {"source": "AFNOR", "reference": "NF EN 62366/A1", "title": "Usability", "watch_for": "Changes (rare)"},
+    {"source": "IEC", "reference": "IEC 82304-1", "title": "Health software safety", "watch_for": "Any announcement"},
+    {"source": "ISO", "reference": "ISO 15223-1/-2, ISO 20417", "title": "Labeling/symbols", "watch_for": "Amendments, symbol transitions"},
+    {"source": "ISO", "reference": "ISO/TR 24971", "title": "Risk mgmt guidance", "watch_for": "Changes"},
+    {"source": "ISO", "reference": "ISO 27001/27701/27017/27018", "title": "Info security", "watch_for": "Changes"},
+    {"source": "ANS", "reference": "HDS", "title": "Health data hosting", "watch_for": "Referential evolution"},
+    {"source": "BSI", "reference": "C5", "title": "Cloud compliance", "watch_for": "Changes"},
+    {"source": "ISO", "reference": "ISO 14155", "title": "Clinical investigation", "watch_for": "Edition status"},
+    {"source": "EU Commission", "reference": "MDCG 2019-11", "title": "Software qualification", "watch_for": "New revision"},
+    {"source": "EU Commission", "reference": "MDCG 2025-6", "title": "MDR/IVDR vs AI Act", "watch_for": "Updates"},
+    {"source": "EU Commission", "reference": "MDCG 2025-4", "title": "MDSW on platforms", "watch_for": "Updates"},
+    {"source": "EU Commission", "reference": "MDCG 2019-16", "title": "Cybersecurity", "watch_for": "New revision"},
+    {"source": "IMDRF", "reference": "SaMD WG / N12, N81, N88", "title": "SaMD framework, ML", "watch_for": "New or closing drafts"},
+    {"source": "CEN-CENELEC", "reference": "prEN 18286", "title": "AI Act QMS standard", "watch_for": "Publication targeted Q4 2026"},
+]
+
+
+def _standards_register_for_prompt() -> str:
+    """Compact reference table given to the model so it can spot which rows
+    moved this week — NOT meant to be reproduced verbatim in the output."""
+    lines = ["| Reference | Title | Watch for |", "|---|---|---|"]
+    for row in STANDARDS_REGISTER:
+        lines.append(f"| {row['reference']} | {row['title']} | {row['watch_for']} |")
+    return "\n".join(lines)
+
+
+FR_MONTHS = [
+    "janvier", "février", "mars", "avril", "mai", "juin",
+    "juillet", "août", "septembre", "octobre", "novembre", "décembre",
+]
+
+
+def format_date_fr(d: date) -> str:
+    """French date formatting without relying on the runner's locale (which
+    would otherwise silently produce English month names, e.g. '21 July
+    2026', on a French-audience email)."""
+    return f"{d.day} {FR_MONTHS[d.month - 1]} {d.year}"
+
+
+def compute_week_label(today: date) -> str:
+    """Rolling 7-day window ending today, e.g. '15-21 juillet 2026'."""
+    start = today - timedelta(days=6)
+    if start.month == today.month:
+        return f"{start.day}-{today.day} {FR_MONTHS[today.month - 1]} {today.year}"
+    return f"{format_date_fr(start)} au {format_date_fr(today)}"
+
+
+PRIORITY_LABELS = {"critical": "CRITIQUE", "high": "ELEVE", "medium": "MOYEN"}
+PRIORITY_COLORS = {"critical": "#e8850c", "high": "#e8850c", "medium": "#ff9500"}
+STATUS_LABELS = {
+    "new": "NOUVEAU", "in-force": "EN VIGUEUR", "draft": "PROJET", "ongoing": "EN COURS",
+    "final": "FINAL", "withdrawn": "RETIRE",
+}
+REGION_LABELS = {"eu": "UE et international", "uk": "Royaume-Uni", "us": "Etats-Unis", "other": "Autres regions"}
 
 
 def log(msg: str) -> None:
@@ -267,22 +306,17 @@ def run_sonar_research(client: OpenAI, model: str) -> str:
 CONTENT_SYSTEM_PROMPT = f"""You are an expert QARA (Quality Assurance & Regulatory Affairs) consultant
 specialised in Medical Device Software (MDSW) in the EU, writing for Theodo HealthTech.
 
-## EDITORIAL MANDATE
-Audience: busy QARA leads and C-levels. Two-tier output — this is a weekly digest, not an
-exhaustive dump, but you have room to be substantive:
-1. Email body: a 2-3 minute read, 600-900 words, EU-first, only what moved this week.
-2. Full report: attached as HTML, target 2000-3000 words total across all sections. Go deeper
-   than the email on items that moved — enough detail to actually act on (what changed, why it
-   matters, concrete next step). Do not pad with boilerplate or restate unchanged background.
-   If nothing material happened in a region/section this week, one line saying so is enough —
-   do not describe it at length anyway. Prefer being thorough on real developments over being
-   artificially short.
+## YOUR JOB
+Produce ONLY structured content as JSON (schema below) — NEVER write any HTML. A separate
+system renders the branded email and report from your JSON. This means: no markup, no styling,
+just clear French editorial text. This also means your output is much smaller than before —
+write substantively (real sentences, real detail), you are not being asked to compress.
 
-Soft technical guardrail: your total output for this call (email HTML + report HTML combined)
-should stay under roughly 12000 tokens so the call completes reliably. This is generous room —
-you should comfortably fit the targets above without rushing. If you are running unusually long
-for some reason, trim length on less important items first rather than cutting a major item
-short.
+## EDITORIAL MANDATE
+Audience: busy QARA leads and C-levels. This is a weekly digest, not an exhaustive dump, but be
+substantive on anything that genuinely moved. EU first; other regions only if genuinely major
+(else skip or one line). Never repeat last week's items without a material development since —
+read the previous edition below first.
 
 CRITICAL — temporal accuracy: today's date is given below. Before describing any item, compare
 its date/deadline to today. If the date is in the FUTURE, describe it as upcoming/scheduled
@@ -291,54 +325,46 @@ vigueur", "a été publié") just because it's in this week's source material. S
 (including the existing timeline milestones) legitimately includes future-dated items; your job
 is to report their status accurately, not to imply they already happened.
 
-Language: BOTH outputs are in FRENCH, native register (not translated English). Banned calques:
-"actionnable", "re-actionner", "En 60 secondes", "Sur le radar", "atteindre le seuil",
-"reprise du stock" (write "rattrapage / enregistrement du stock existant"). Preferred section
-headers: "L'essentiel de la semaine", "UE et international", "Hors UE", "Points de vigilance",
-"NOTRE AVIS", "Annexe : suivi des normes". No em dashes anywhere, ever.
+Language: FRENCH, native register (not translated English). Banned calques: "actionnable",
+"re-actionner", "En 60 secondes", "Sur le radar", "atteindre le seuil", "reprise du stock"
+(write "rattrapage / enregistrement du stock existant"). No em dashes anywhere, ever. Tone:
+factual, action-oriented, cut adjectives.
 
-Principles: EU first. Rest of world only if genuinely major (else one line). Never repeat last
-week's items without a material development since — read the previous edition below first.
+## STANDARDS REGISTER (for reference — do not reproduce this table; only report rows that
+genuinely moved this week, by their exact "reference" string, in standards_changed)
+{_standards_register_for_prompt()}
 
-## STYLE (both email and report)
-Brand: dark navy #1c2837 / #213045; accent orange #ff512c; HIGH #e8850c; light greys
-#e9ebee / #f3f3f3; font Poppins with Arial/Helvetica fallback; rounded corners (12-16px),
-subtle shadows. Inline CSS only, table-based layout, no CSS classes (email-client compatible).
-Every item MUST carry a clickable <a href="url"> source link. Tone: factual, action-oriented,
-cut adjectives.
+## JSON SCHEMA — every field below is required unless marked optional
+{{
+  "essentiel": ["3-5 short one-line highlights of the week, or one honest line if quiet"],
+  "priority_banner": "one line, ONLY if a genuine new/imminent CRITIQUE or ELEVE deadline exists, else null",
+  "items": [
+    {{
+      "region": "eu | uk | us | other",
+      "title": "short headline, no HTML",
+      "summary": "1-2 sentences for the email — what changed, so what",
+      "detail": "fuller paragraph(s) for the report — what changed, why it matters, concrete next step for a QARA lead. Can be 3-6 sentences, real substance.",
+      "priority": "critical | high | medium",
+      "status": "new | in-force | draft | ongoing | final | withdrawn",
+      "source_label": "short source name, e.g. CNIL",
+      "source_url": "https://..."
+    }}
+  ],
+  "hors_ue_note": "one short paragraph on non-EU/UK/US developments if genuinely major, else 'Aucune evolution notable hors UE cette semaine.'",
+  "points_vigilance": ["max 3 one-liners: standing items with a deadline within ~60 days"],
+  "standards_changed": [
+    {{"reference": "must exactly match a 'reference' from the register above", "note": "what changed this week, 1 sentence"}}
+  ]
+}}
 
-## EMAIL BODY STRUCTURE
-1. En-tête compact: navy bg, "Theodo HealthTech" in orange, "Veille reglementaire" in white,
-   subtitle "Logiciels de dispositifs medicaux et AI Act", date range badge.
-2. "L'essentiel de la semaine": 3-5 one-line bullets, or one honest line if the week was quiet.
-3. Priority banner (conditional): only if a genuine new/imminent deadline or CRITIQUE/ELEVE item.
-4. "UE et international": up to 6 items, bold headline + 1-2 sentences + status tag + source link.
-   Status tags: NOUVEAU, EN VIGUEUR, PROJET, EN COURS, FINAL, RETIRE, INCHANGE.
-   Priority tags: CRITIQUE, ELEVE, MOYEN.
-5. "Hors UE": one compact block, max 3 items, one line each, or "Aucune evolution notable
-   hors UE cette semaine."
-6. "Points de vigilance": max 3 one-liners, standing items with a deadline within ~60 days.
-7. Pied de page: navy, note that the full report is attached, link to
-   https://theodo-group.github.io/Compliance-timeline/admin.html, disclaimer, Theodo HealthTech branding.
+Guidance on "items": typically 4-10 items total across all regions combined (fewer on a quiet
+week, more on a busy one — do not force a count). Order does not matter, region field handles
+sorting. Every item needs a real, clickable source_url.
 
-## FULL REPORT STRUCTURE (attachment, bounded — see word target above)
-Same branding. Section 1 EU & International. Section 2 UK. Section 3 US. Section 4 Other
-regions — each section: only items with a genuine development this week, in enough detail to
-act on (what changed, why it matters, deadline if any, source link); skip or one-line anything
-unchanged. Standards monitoring annex using this register, but ONLY list rows that moved this
-week with what changed; for everything else, a single closing line: "Aucun changement cette
-semaine sur les autres normes suivies." (do not reprint the full register every week):
-{STANDARDS_REGISTER}
-
-## OUTPUT FORMAT — respect EXACTLY, nothing else before/after
-Use ONLY these three markers, exactly as written, nothing else: never invent your own extra
-marker (e.g. do not write "===END_EMAIL===" or "===END_REPORT===" or anything similar) — the
-HTML for each section ends the instant the next marker below appears, that is the only signal
-needed.
-{EMAIL_MARKER}
-<the email body HTML>
-{REPORT_MARKER}
-<the full report HTML>
+## OUTPUT FORMAT — respect EXACTLY, nothing else before/after, no markdown code fences
+Use ONLY these two markers, exactly as written: never invent your own extra marker.
+{CONTENT_MARKER}
+<the JSON object, nothing else>
 {END_MARKER}
 """
 
@@ -496,17 +522,18 @@ def _strip_stray_markers(text: str) -> str:
     return re.sub(r"(?m)^\s*={3,}[A-Za-z0-9_ ]+={3,}\s*$\n?", "", text).strip()
 
 
-def split_content_sections(raw: str) -> dict:
+def extract_content_json_raw(raw: str) -> str:
+    """Pull the JSON text out from between the markers. Content itself is
+    validated/parsed separately by validate_content_json()."""
     save_debug_output(raw, "content")
-    pattern = re.escape(EMAIL_MARKER) + r"(.*?)" + re.escape(REPORT_MARKER) + r"(.*?)" + re.escape(END_MARKER)
+    pattern = re.escape(CONTENT_MARKER) + r"(.*?)" + re.escape(END_MARKER)
     m = re.search(pattern, raw, re.DOTALL)
     if not m:
         _fail_missing_markers(
-            raw, [EMAIL_MARKER, REPORT_MARKER, END_MARKER],
-            "debug_last_content_output.txt", "email + rapport",
+            raw, [CONTENT_MARKER, END_MARKER],
+            "debug_last_content_output.txt", "contenu (JSON)",
         )
-    email_body, full_report = (_strip_stray_markers(s) for s in m.groups())
-    return {"email_body": email_body, "full_report": full_report}
+    return _strip_stray_markers(m.group(1))
 
 
 def split_proposals_sections(raw: str) -> dict:
@@ -525,6 +552,104 @@ def split_proposals_sections(raw: str) -> dict:
 # ---------------------------------------------------------------------------
 # Step 4: strict validation — never push something that could break the site
 # ---------------------------------------------------------------------------
+
+VALID_REGIONS = ["eu", "uk", "us", "other"]
+VALID_PRIORITIES = ["critical", "high", "medium"]
+VALID_STATUSES = ["new", "in-force", "draft", "ongoing", "final", "withdrawn"]
+
+
+def validate_content_json(raw: str) -> dict:
+    """Structural validation for the content JSON (email/report source
+    material). Less safety-critical than proposals (nothing here writes to
+    the public data files), but still fails loudly rather than rendering a
+    broken email/report from malformed data."""
+    try:
+        parsed = json.loads(raw)
+    except json.JSONDecodeError as e:
+        fail(f"JSON contenu invalide ({e}). Voir automation/state/debug_last_content_output.txt.")
+
+    if not isinstance(parsed, dict):
+        fail("JSON contenu : structure racine invalide (attendu un objet).")
+
+    parsed.setdefault("essentiel", [])
+    parsed.setdefault("priority_banner", None)
+    parsed.setdefault("items", [])
+    parsed.setdefault("hors_ue_note", "Aucune evolution notable hors UE cette semaine.")
+    parsed.setdefault("points_vigilance", [])
+    parsed.setdefault("standards_changed", [])
+
+    if not isinstance(parsed["items"], list):
+        fail("JSON contenu : 'items' doit être une liste.")
+
+    valid_reference_set = {row["reference"] for row in STANDARDS_REGISTER}
+
+    for item in parsed["items"]:
+        log_item = lambda: log(f"Item problématique: {json.dumps(item, ensure_ascii=False)[:800]}")  # noqa: E731
+        if item.get("region") not in VALID_REGIONS:
+            log_item()
+            fail(f"JSON contenu : region invalide ({item.get('region')!r}) sur un item.")
+        if not item.get("title") or not item.get("summary"):
+            log_item()
+            fail("JSON contenu : item sans title ou summary.")
+        # Filet de sécurité : "detail" est censé être la version longue pour le
+        # rapport — si le modèle l'a omis (redondant avec summary à ses yeux),
+        # on retombe sur summary plutôt que d'échouer sur un champ cosmétique.
+        if not item.get("detail"):
+            item["detail"] = item["summary"]
+        item["priority"] = str(item.get("priority", "medium")).lower()
+        if item["priority"] not in VALID_PRIORITIES:
+            item["priority"] = "medium"
+        item["status"] = str(item.get("status", "ongoing")).lower()
+        if item["status"] not in VALID_STATUSES:
+            item["status"] = "ongoing"
+        if not item.get("source_url"):
+            log_item()
+            fail("JSON contenu : item sans source_url.")
+
+    for row in parsed["standards_changed"]:
+        if row.get("reference") not in valid_reference_set:
+            log(f"Standards_changed ignoré (reference inconnue): {json.dumps(row, ensure_ascii=False)[:300]}")
+    parsed["standards_changed"] = [
+        row for row in parsed["standards_changed"] if row.get("reference") in valid_reference_set
+    ]
+
+    return parsed
+
+
+def build_content_digest(content: dict) -> str:
+    """Plain-text digest of the validated content JSON, fed to the proposals
+    call as "this week's report" instead of raw HTML. Cheaper and cleaner
+    than re-sending the rendered report."""
+    lines = []
+    if content.get("essentiel"):
+        lines.append("## Essentiel de la semaine")
+        for line in content["essentiel"]:
+            lines.append(f"- {line}")
+        lines.append("")
+    if content.get("priority_banner"):
+        lines.append(f"## Alerte prioritaire\n{content['priority_banner']}\n")
+    lines.append("## Items")
+    for item in content.get("items", []):
+        lines.append(
+            f"- [{item.get('region')}] {item.get('title')} "
+            f"(priorité={item.get('priority')}, statut={item.get('status')})\n"
+            f"  {item.get('detail') or item.get('summary')}\n"
+            f"  Source: {item.get('source_label') or item.get('source_url')} — {item.get('source_url')}"
+        )
+    lines.append("")
+    if content.get("hors_ue_note"):
+        lines.append(f"## Hors UE\n{content['hors_ue_note']}\n")
+    if content.get("points_vigilance"):
+        lines.append("## Points de vigilance")
+        for p in content["points_vigilance"]:
+            lines.append(f"- {p}")
+        lines.append("")
+    if content.get("standards_changed"):
+        lines.append("## Normes modifiées")
+        for row in content["standards_changed"]:
+            lines.append(f"- {row.get('reference')}: {row.get('note')}")
+    return "\n".join(lines)
+
 
 def validate_proposals_json(raw: str, label: str) -> dict:
     try:
@@ -601,6 +726,194 @@ def validate_unique_ids(proposals: dict, label: str) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Step 4b: render branded HTML from the validated content JSON — this is now
+# entirely Python's job, not the model's. It only ever produces the same
+# fixed markup, so there is no risk of malformed HTML, invented markers, or
+# runaway length: the model supplies text, this code supplies structure.
+# Badges use display:inline-block (not flex) for Outlook compatibility.
+# ---------------------------------------------------------------------------
+
+def _esc(s: str) -> str:
+    return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def _badge(text: str, bg: str) -> str:
+    return (
+        f'<span style="display:inline-block; background-color:{bg}; color:#ffffff; '
+        f'padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; margin-right:6px;">'
+        f'{_esc(text)}</span>'
+    )
+
+
+def _source_link(item: dict) -> str:
+    label = _esc(item.get("source_label") or "Source")
+    url = item.get("source_url", "")
+    return f'<a href="{_esc(url)}" style="color:#ff512c; text-decoration:none;">Source: {label}</a>'
+
+
+def render_email_html(content: dict, week_label: str) -> str:
+    essentiel = content.get("essentiel") or ["Aucune évolution notable cette semaine."]
+    essentiel_html = "".join(f"<li>{_esc(b)}</li>" for b in essentiel)
+
+    banner_html = ""
+    if content.get("priority_banner"):
+        banner_html = (
+            '<div style="background-color:#fff3e0; border-left:4px solid #e8850c; padding:12px 16px; '
+            'border-radius:8px; margin-bottom:24px;">'
+            f'<p style="color:#1c2837; font-size:12px; font-weight:600; margin:0;">'
+            f'{_esc(content["priority_banner"])}</p></div>'
+        )
+
+    eu_items = [it for it in content.get("items", []) if it.get("region") == "eu"][:6]
+    items_html = ""
+    for it in eu_items:
+        items_html += (
+            '<div style="margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid #e9ebee;">'
+            f'<h3 style="color:#ff512c; font-size:13px; font-weight:700; margin:0 0 8px 0;">{_esc(it["title"])}</h3>'
+            f'<p style="color:#1c2837; font-size:12px; margin:0 0 8px 0;">{_esc(it["summary"])}</p>'
+            f'<div>{_badge(PRIORITY_LABELS.get(it["priority"], "MOYEN"), PRIORITY_COLORS.get(it["priority"], "#ff9500"))}'
+            f'{_badge(STATUS_LABELS.get(it["status"], "EN COURS"), "#213045")}</div>'
+            f'<p style="margin:8px 0 0 0; font-size:11px;">{_source_link(it)}</p>'
+            '</div>'
+        )
+
+    vigilance = content.get("points_vigilance") or []
+    vigilance_html = "".join(f"<li>{_esc(v)}</li>" for v in vigilance)
+    vigilance_section = ""
+    if vigilance_html:
+        vigilance_section = (
+            '<h2 style="color:#1c2837; font-size:16px; font-weight:700; margin:24px 0 16px 0; '
+            'border-bottom:2px solid #ff512c; padding-bottom:8px;">Points de vigilance</h2>'
+            f'<ul style="color:#1c2837; font-size:12px; line-height:1.8; margin:0; padding-left:20px;">{vigilance_html}</ul>'
+        )
+
+    return f"""<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veille reglementaire - Semaine du {_esc(week_label)}</title>
+</head>
+<body style="margin:0; padding:0; font-family:Poppins,Arial,Helvetica,sans-serif; background-color:#f3f3f3;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f3f3f3;">
+<tr><td align="center" style="padding:20px 0;">
+<table width="600" cellpadding="0" cellspacing="0" style="background-color:#1c2837; border-radius:12px; margin-bottom:20px;">
+<tr><td style="padding:24px 20px;">
+<h1 style="color:#ff512c; font-size:24px; margin:0 0 4px 0; font-weight:700;">Theodo HealthTech</h1>
+<p style="color:#ffffff; font-size:14px; margin:0 0 12px 0;">Veille reglementaire</p>
+<p style="color:#e9ebee; font-size:12px; margin:0;">Logiciels de dispositifs medicaux et AI Act</p>
+<div style="background-color:#213045; display:inline-block; padding:4px 12px; border-radius:12px; margin-top:8px;">
+<span style="color:#ff512c; font-size:11px; font-weight:600;">{_esc(week_label)}</span>
+</div>
+</td></tr>
+</table>
+<table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+<tr><td style="padding:24px;">
+<h2 style="color:#1c2837; font-size:16px; font-weight:700; margin:0 0 16px 0; border-bottom:2px solid #ff512c; padding-bottom:8px;">L'essentiel de la semaine</h2>
+<ul style="color:#1c2837; font-size:13px; line-height:1.8; margin:0 0 24px 0; padding-left:20px;">{essentiel_html}</ul>
+{banner_html}
+<h2 style="color:#1c2837; font-size:16px; font-weight:700; margin:0 0 16px 0; border-bottom:2px solid #ff512c; padding-bottom:8px;">UE et international</h2>
+{items_html or '<p style="font-size:12px; color:#1c2837;">Aucune evolution notable cette semaine.</p>'}
+<h2 style="color:#1c2837; font-size:16px; font-weight:700; margin:24px 0 16px 0; border-bottom:2px solid #ff512c; padding-bottom:8px;">Hors UE</h2>
+<p style="font-size:12px; color:#1c2837; margin:0 0 24px 0;">{_esc(content.get("hors_ue_note", ""))}</p>
+{vigilance_section}
+</td></tr>
+</table>
+<table width="600" cellpadding="0" cellspacing="0" style="background-color:#1c2837; border-radius:12px; margin-top:20px;">
+<tr><td style="padding:20px; text-align:center;">
+<p style="color:#e9ebee; font-size:11px; margin:0 0 8px 0;">Le rapport complet est joint en piece jointe.<br>
+<a href="https://theodo-group.github.io/Compliance-timeline/admin.html" style="color:#ff512c; text-decoration:none; font-weight:600;">Consultez la feuille de route complete</a></p>
+<p style="color:#b0b5ba; font-size:10px; margin:8px 0 0 0;">Cet email ne constitue pas un conseil juridique. Verifiez auprès de votre counsel avant action.</p>
+<p style="color:#ff512c; font-weight:600; font-size:11px; margin:8px 0 0 0;">Theodo HealthTech</p>
+</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>"""
+
+
+def render_report_html(content: dict, week_label: str) -> str:
+    def region_section(region_key: str, heading: str) -> str:
+        items = [it for it in content.get("items", []) if it.get("region") == region_key]
+        if not items:
+            return f'<h3 style="color:#ff512c; font-size:15px; font-weight:700; margin:24px 0 12px 0;">{heading}</h3><p style="font-size:13px; color:#666;">Aucune evolution notable cette semaine.</p>'
+        html = f'<h3 style="color:#ff512c; font-size:15px; font-weight:700; margin:24px 0 12px 0;">{heading}</h3>'
+        for it in items:
+            html += (
+                f'<h4 style="color:#1c2837; font-size:14px; font-weight:700; margin:16px 0 8px 0;">{_esc(it["title"])}</h4>'
+                f'<p style="font-size:13px; line-height:1.7; margin:0 0 8px 0;">{_esc(it["detail"])}</p>'
+                f'<div>{_badge(PRIORITY_LABELS.get(it["priority"], "MOYEN"), PRIORITY_COLORS.get(it["priority"], "#ff9500"))}'
+                f'{_badge(STATUS_LABELS.get(it["status"], "EN COURS"), "#213045")}</div>'
+                f'<p style="font-size:12px; margin:8px 0 0 0;">{_source_link(it)}</p>'
+            )
+        return html
+
+    changed_map = {row["reference"]: row["note"] for row in content.get("standards_changed", [])}
+    annex_rows = ""
+    unchanged_refs = []
+    for row in STANDARDS_REGISTER:
+        ref = row["reference"]
+        if ref in changed_map:
+            annex_rows += (
+                '<tr style="border-bottom:1px solid #ddd; background-color:#fff3e0;">'
+                f'<td style="padding:8px; font-size:12px;">{_esc(row["source"])}</td>'
+                f'<td style="padding:8px; font-size:12px;">{_esc(ref)}</td>'
+                f'<td style="padding:8px; font-size:12px;">{_esc(row["title"])}</td>'
+                f'<td style="padding:8px; font-size:12px; font-weight:600;">{_esc(changed_map[ref])}</td>'
+                '</tr>'
+            )
+        else:
+            unchanged_refs.append(ref)
+
+    unchanged_line = ""
+    if unchanged_refs:
+        unchanged_line = (
+            f'<p style="font-size:11px; color:#b0b5ba; margin-top:16px;">Aucun changement cette semaine sur '
+            f'les autres normes suivies ({_esc(", ".join(unchanged_refs))}).</p>'
+        )
+
+    return f"""<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rapport complet - Veille QARA {_esc(week_label)}</title>
+</head>
+<body style="font-family:Poppins,Arial,Helvetica,sans-serif; margin:0; padding:20px; background-color:#f3f3f3; color:#1c2837;">
+<div style="max-width:900px; margin:0 auto; background-color:#ffffff; padding:40px; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.1);">
+<div style="border-bottom:3px solid #ff512c; padding-bottom:16px; margin-bottom:32px;">
+<h1 style="color:#ff512c; font-size:28px; margin:0 0 8px 0;">Rapport de Veille Reglementaire</h1>
+<p style="color:#666; font-size:13px; margin:0;">Logiciels de dispositifs medicaux, IA et conformite reglementaire<br>Semaine du {_esc(week_label)} | Theodo HealthTech</p>
+</div>
+<h2 style="color:#1c2837; font-size:20px; font-weight:700; margin:32px 0 20px 0; border-left:4px solid #ff512c; padding-left:12px;">1. UE et international</h2>
+{region_section("eu", "Union europeenne")}
+<h2 style="color:#1c2837; font-size:20px; font-weight:700; margin:32px 0 20px 0; border-left:4px solid #ff512c; padding-left:12px;">2. Royaume-Uni</h2>
+{region_section("uk", "Royaume-Uni")}
+<h2 style="color:#1c2837; font-size:20px; font-weight:700; margin:32px 0 20px 0; border-left:4px solid #ff512c; padding-left:12px;">3. Etats-Unis</h2>
+{region_section("us", "Etats-Unis")}
+<h2 style="color:#1c2837; font-size:20px; font-weight:700; margin:32px 0 20px 0; border-left:4px solid #ff512c; padding-left:12px;">4. Autres regions</h2>
+{region_section("other", "Autres regions")}
+<h2 style="color:#1c2837; font-size:20px; font-weight:700; margin:32px 0 20px 0; border-left:4px solid #ff512c; padding-left:12px;">5. Annexe : suivi des normes</h2>
+<table style="width:100%; border-collapse:collapse; font-size:12px; line-height:1.6;">
+<tr style="background-color:#f3f3f3; border-bottom:1px solid #ddd;">
+<td style="padding:8px; font-weight:600; color:#1c2837;">Source</td>
+<td style="padding:8px; font-weight:600; color:#1c2837;">Reference</td>
+<td style="padding:8px; font-weight:600; color:#1c2837;">Titre</td>
+<td style="padding:8px; font-weight:600; color:#1c2837;">Changement cette semaine</td>
+</tr>
+{annex_rows or '<tr><td colspan="4" style="padding:8px; font-size:12px;">Aucun changement cette semaine.</td></tr>'}
+</table>
+{unchanged_line}
+<p style="font-size:11px; color:#b0b5ba; margin-top:24px; padding-top:16px; border-top:1px solid #e9ebee;">
+Ce rapport ne constitue pas un conseil juridique. Consultez votre counsel avant action. Theodo HealthTech.
+</p>
+</div>
+</body>
+</html>"""
+
+
+# ---------------------------------------------------------------------------
 # Step 5: send email
 # ---------------------------------------------------------------------------
 
@@ -619,7 +932,7 @@ def send_email(email_body_html: str, full_report_html: str, recipients: list) ->
     if not is_dry_run() and (not gmail_address or not gmail_password):
         fail("GMAIL_ADDRESS / GMAIL_APP_PASSWORD manquant (secrets GitHub Actions).")
 
-    today_str = date.today().strftime("%d %B %Y")
+    today_str = format_date_fr(date.today())
     outer = MIMEMultipart("mixed")
     outer["To"] = ", ".join(recipients)
     outer["Subject"] = f"Veille reglementaire (focus UE) - Logiciels DM & AI Act - {today_str}"
@@ -778,27 +1091,32 @@ def _run(config: dict, recipients: list, data_json: list, last_email: str, clien
                 "pour le générer, il sera committé automatiquement, puis relance en replay."
             )
         log("Rédaction (email + rapport) REJOUÉE depuis le cache (REPLAY_CONTENT=true, aucun appel LLM).")
-        content_raw = cached.read_text(encoding="utf-8")
-        content_sections = split_content_sections(content_raw)
+        content_json_raw = extract_content_json_raw(cached.read_text(encoding="utf-8"))
     elif skip_content_call():
         log("Rédaction (email + rapport) SKIPPÉE (SKIP_CONTENT_CALL=true, test rapide sur les propositions).")
-        content_sections = {
-            "email_body": "<!-- SKIP_CONTENT_CALL actif : email non généré, test propositions uniquement -->",
-            "full_report": research_blob[:15000],
-        }
+        content_json_raw = json.dumps({
+            "essentiel": ["(SKIP_CONTENT_CALL actif — pas de contenu réel généré)"],
+            "priority_banner": None, "items": [], "points_vigilance": [],
+            "standards_changed": [],
+        })
     else:
         log("Rédaction — appel au modèle (email + rapport)...")
         content_user_content = (
             f"## Previous edition (do not repeat unchanged items)\n{last_email[:6000]}\n\n"
             f"## Fixed-source research\n{research_blob[:18000]}\n\n"
-            f"Today's date: {date.today().isoformat()}. Produce the two sections (email body, "
-            f"full report) in the exact required format. Remember the hard token budget."
+            f"Today's date: {date.today().isoformat()}. Produce the JSON content object in the "
+            f"exact required format."
         )
         content_raw = run_model_call(
             client, config["writing_model"], CONTENT_SYSTEM_PROMPT, content_user_content,
-            "Rédaction (email + rapport)", max_tokens=12000,
+            "Rédaction (email + rapport)", max_tokens=6000,
         )
-        content_sections = split_content_sections(content_raw)
+        content_json_raw = extract_content_json_raw(content_raw)
+
+    content = validate_content_json(content_json_raw)
+    week_label = compute_week_label(date.today())
+    email_body_html = render_email_html(content, week_label)
+    full_report_html = render_report_html(content, week_label)
 
     if replay_proposals():
         cached = STATE_DIR / "debug_last_proposals_output.txt"
@@ -812,9 +1130,10 @@ def _run(config: dict, recipients: list, data_json: list, last_email: str, clien
         proposals_raw = cached.read_text(encoding="utf-8")
     else:
         log("Rédaction — appel au modèle (propositions)...")
+        content_digest = build_content_digest(content)
         proposals_user_content = (
-            f"## This week's full report (already written — source of truth, do not re-research)\n"
-            f"{content_sections['full_report'][:15000]}\n\n"
+            f"## This week's content (already written — source of truth, do not re-research)\n"
+            f"{content_digest[:15000]}\n\n"
             f"## Existing timeline milestones (data.json)\n{json.dumps(data_json, ensure_ascii=False)[:15000]}\n\n"
             f"Today's date: {date.today().isoformat()}. Produce the two proposals JSON blocks in "
             f"the exact required format."
@@ -825,11 +1144,9 @@ def _run(config: dict, recipients: list, data_json: list, last_email: str, clien
         )
     proposals_sections = split_proposals_sections(proposals_raw)
 
-    sections = {**content_sections, **proposals_sections}
-
     log("Validation du JSON produit...")
-    proposals_en = validate_proposals_json(sections["proposals_en_raw"], "EN")
-    proposals_fr = validate_proposals_json(sections["proposals_fr_raw"], "FR")
+    proposals_en = validate_proposals_json(proposals_sections["proposals_en_raw"], "EN")
+    proposals_fr = validate_proposals_json(proposals_sections["proposals_fr_raw"], "FR")
     validate_unique_ids(proposals_en, "EN")
     validate_unique_ids(proposals_fr, "FR")
     validate_id_parity(proposals_en, proposals_fr)
@@ -837,8 +1154,8 @@ def _run(config: dict, recipients: list, data_json: list, last_email: str, clien
     validate_existing_ids(proposals_fr, data_json)
     log("JSON valide.")
 
-    send_email(sections["email_body"], sections["full_report"], recipients)
-    write_outputs(proposals_en, proposals_fr, sections["email_body"], sections["full_report"])
+    send_email(email_body_html, full_report_html, recipients)
+    write_outputs(proposals_en, proposals_fr, email_body_html, full_report_html)
     git_commit_and_push()
 
 
