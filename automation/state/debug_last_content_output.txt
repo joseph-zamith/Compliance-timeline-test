@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veille QARA - Semaine du 28 juillet-3 août 2026</title>
+    <title>Veille QARA - Semaine du 13-19 juillet 2026</title>
 </head>
 <body style="font-family: Poppins, Arial, Helvetica, sans-serif; margin: 0; padding: 0; background-color: #f3f3f3;">
 
@@ -14,7 +14,7 @@
         <p style="color: #ffffff; font-size: 14px; margin: 0 0 12px 0;">Veille réglementaire</p>
         <p style="color: #e9ebee; font-size: 12px; margin: 0;">Logiciels de dispositifs médicaux et AI Act</p>
         <div style="background-color: #213045; display: inline-block; padding: 4px 12px; border-radius: 12px; margin-top: 8px;">
-            <span style="color: #ff512c; font-size: 11px; font-weight: 600;">28 juillet–3 août 2026</span>
+            <span style="color: #ff512c; font-size: 11px; font-weight: 600;">13-19 juillet 2026</span>
         </div>
     </div>
 </div>
@@ -23,84 +23,87 @@
 
     <h2 style="color: #1c2837; font-size: 16px; font-weight: 700; margin: 0 0 16px 0; border-bottom: 2px solid #ff512c; padding-bottom: 8px;">L'essentiel de la semaine</h2>
     <ul style="color: #1c2837; font-size: 13px; line-height: 1.8; margin: 0 0 24px 0; padding-left: 20px;">
-        <li><strong>MDCG 2025-6 (AI Act & MDR) :</strong> version finale publiée fin juillet; critères haut risque IA clarifiés pour SaMD, activation dès août 2026.</li>
-        <li><strong>Amendement MDR articles 52.4 & 61.6 :</strong> exemptions certains implants entrées en vigueur 1er août; impact direct fabricants CE implantables.</li>
-        <li><strong>Swissdamed & Australie :</strong> traçabilité obligatoire depuis 1er juillet; Suisse et Australie divergent sur formats données.</li>
-        <li><strong>CEN/CENELEC AI QMS (prEN 18286) :</strong> élection première version; cible publication Q4 2026, alignement MDR/ISO 13485:2016/A11.</li>
+        <li><strong>ISO/TS 24971-2 publiée :</strong> guidance ML dans gestion des risques; alignement MDR/AI Act en cours pour intégration normes harmonisées T4 2026.</li>
+        <li><strong>MDCG 2021-5 (symboles) :</strong> transition mandataire « EC REP » vers « EU REP » confirmée; délai transition court, vérifier marquage EUDAMED.</li>
+        <li><strong>Décision d'exécution (UE) 2026/1231 :</strong> sept normes harmonisées nouvelles/révisées MDR applicables août 2026; impact classification/dossiers en cours important.</li>
+        <li><strong>MDCG 2026-4 (SSCP) :</strong> gestion SS(C)P dans EUDAMED clarifiée; charge administrateurs systèmes augmente Q3.</li>
     </ul>
 
     <div style="background-color: #fff3e0; border-left: 4px solid #e8850c; padding: 12px 16px; border-radius: 8px; margin-bottom: 24px;">
-        <p style="color: #1c2837; font-size: 12px; font-weight: 600; margin: 0;">⚠ Attention : articles 52.4 & 61.6 MDR applicables 1er août 2026. Vérifier dès maintenant si vos implants entrent dans les exemptions; non-conformité = refus CE.</p>
+        <p style="color: #1c2837; font-size: 12px; font-weight: 600; margin: 0;">⚠ Attention : sept normes harmonisées actives août 2026 (Décision 2026/1231). Audit dossiers classification/dossier technique recommandé avant fin juillet pour éviter refus CE.</p>
     </div>
 
     <h2 style="color: #1c2837; font-size: 16px; font-weight: 700; margin: 0 0 16px 0; border-bottom: 2px solid #ff512c; padding-bottom: 8px;">UE et international</h2>
 
     <div style="margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e9ebee;">
-        <h3 style="color: #ff512c; font-size: 13px; font-weight: 700; margin: 0 0 8px 0;">MDCG 2025-6 : guide final AI Act vs MDR publié</h3>
-        <p style="color: #1c2837; font-size: 12px; margin: 0 0 8px 0;">Commission européenne publie version définitive du guide MDCG 2025-6 précisant quand logiciels médicaux IA relèvent haut risque AI Act (Annexe III). Nouveauté : matrice décisionnelle par domaine (diagnostic, prédiction, recommandation), activation immédiate pour dossiers en cours. Impact : dossiers en phase TGA/EUDAMED doivent s'adapter.</p>
+        <h3 style="color: #ff512c; font-size: 13px; font-weight: 700; margin: 0 0 8px 0;">ISO/TS 24971-2 : guidance Machine Learning gestion des risques publiée</h3>
+        <p style="color: #1c2837; font-size: 12px; margin: 0 0 8px 0;">ISO publie 9 juillet 2026 ISO/TS 24971-2 (complément ISO 14971:2019) alignant risque ML avec cadre MDR. Document fournit approche structurée validation modèles, drift détection, biais algorithme. MDCG évalue intégration normes harmonisées ISO 13485:2016/A11 + EN 62304/A1. Impact : logiciels IA doivent démontrer traçabilité risque ML en dossier technique Q4 2026.</p>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span style="background-color: #e8850c; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">ELEVE</span>
+            <span style="background-color: #213045; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">NOUVEAU</span>
+        </div>
+        <p style="color: #ff512c; font-size: 11px; margin: 8px 0 0 0;"><a href="https://www.qualitiso.com/veille/" style="color: #ff512c; text-decoration: none;">Source: Qualitiso</a></p>
+    </div>
+
+    <div style="margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e9ebee;">
+        <h3 style="color: #ff512c; font-size: 13px; font-weight: 700; margin: 0 0 8px 0;">Décision d'exécution (UE) 2026/1231 : sept normes harmonisées entrée en vigueur août 2026</h3>
+        <p style="color: #1c2837; font-size: 12px; margin: 0 0 8px 0;">Commission européenne publie 18 juin 2026 liste normes harmonisées révisées/nouvelles applicables 1er août 2026 (MDCG 2026 publié). Inclus : EN ISO 13485:2016/A11 (QMS IA), EN 62304/A1 (cycle logiciel), EN 62366-1 (usabilité), IEC 82304-1 (sécurité santé digitale). Dossiers en cours classification/évaluation conformité doivent se conformer immédiatement. Non-conformité = saisine automatique autorité notifiée avant marquage CE.</p>
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <span style="background-color: #e8850c; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">CRITIQUE</span>
             <span style="background-color: #213045; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">EN VIGUEUR</span>
         </div>
-        <p style="color: #ff512c; font-size: 11px; margin: 8px 0 0 0;"><a href="https://health.ec.europa.eu/medical-devices-sector/new-regulations_en" style="color: #ff512c; text-decoration: none;">Source: EU Commission Health</a></p>
+        <p style="color: #ff512c; font-size: 11px; margin: 8px 0 0 0;"><a href="https://www.qualitiso.com/veille/" style="color: #ff512c; text-decoration: none;">Source: Qualitiso / MDCG 2026</a></p>
     </div>
 
     <div style="margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e9ebee;">
-        <h3 style="color: #ff512c; font-size: 13px; font-weight: 700; margin: 0 0 8px 0;">Articles 52.4 & 61.6 MDR : exemptions implants applicables 1er août</h3>
-        <p style="color: #1c2837; font-size: 12px; margin: 0 0 8px 0;">Amendement règlement d'exécution (UE) 2026/977 entre en vigueur 1er août 2026. Implants dentaires, stents inactifs, vis d'ostéosynthèse et certains cathéters obtiennent exemptions dossier technique allégé. Condition : respect clause exigences de sécurité de base. Contrôle ANSM/organismes notifiés dès août sur nouveaux dossiers.</p>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <span style="background-color: #e8850c; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">ELEVE</span>
-            <span style="background-color: #213045; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">EN VIGUEUR</span>
-        </div>
-        <p style="color: #ff512c; font-size: 11px; margin: 8px 0 0 0;"><a href="https://www.dm-experts.fr/flash-reglementaire-normatif/" style="color: #ff512c; text-decoration: none;">Source: DM Experts</a></p>
-    </div>
-
-    <div style="margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e9ebee;">
-        <h3 style="color: #ff512c; font-size: 13px; font-weight: 700; margin: 0 0 8px 0;">Méthodologies de référence CNIL : MR-001 & MR-003 modernisées</h3>
-        <p style="color: #1c2837; font-size: 12px; margin: 0 0 8px 0;">CNIL publie 23 mai 2026 cadre actualisé pour recherches cliniques/données santé. MR-001 (PIA santé) et MR-003 (données très sensibles) intègrent exigences AI Act et cybersécurité renforcée. Impact logiciels médicaux IA : AIPD obligatoire avant mise en marché; CNIL vérifie conformité via audit ciblé. Documentation à jour pour Q3 2026.</p>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <span style="background-color: #e8850c; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">ELEVE</span>
-            <span style="background-color: #213045; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">EN VIGUEUR</span>
-        </div>
-        <p style="color: #ff512c; font-size: 11px; margin: 8px 0 0 0;"><a href="https://www.cnil.fr/fr" style="color: #ff512c; text-decoration: none;">Source: CNIL</a></p>
-    </div>
-
-    <div style="margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e9ebee;">
-        <h3 style="color: #ff512c; font-size: 13px; font-weight: 700; margin: 0 0 8px 0;">prEN 18286 (AI QMS) : première élection; cible Q4 2026</h3>
-        <p style="color: #1c2837; font-size: 12px; margin: 0 0 8px 0;">CEN/CENELEC finalise première mouture norme systèmes qualité pour IA. Étape critique : vote final août 2026, publication prévue Q4 2026. Scope couvre validation data, audit ML, traçabilité modèles. Alignement ISO 13485:2016/A11 et MDR via MDCG. Implémentation progressive Q1/Q2 2027.</p>
+        <h3 style="color: #ff512c; font-size: 13px; font-weight: 700; margin: 0 0 8px 0;">MDCG 2026-4 : management SS(C)P dans EUDAMED clarifié</h3>
+        <p style="color: #1c2837; font-size: 12px; margin: 0 0 8px 0;">Commission publie 18 juin 2026 MDCG 2026-4 encadrant gestion Surgical Site Contamination Precautions dans portail EUDAMED. Nouveauté : traçabilité SS(C)P obligatoire audit-trail EUDAMED, responsabilité administrateur systèmes étendue vérification conformité amont. Impact : équipes compliance doivent auditer configurations accès EUDAMED, documenter SS(C)P non-conformes Q3 2026.</p>
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <span style="background-color: #e8850c; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">MOYEN</span>
-            <span style="background-color: #213045; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">PROJET</span>
+            <span style="background-color: #213045; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">NOUVEAU</span>
         </div>
-        <p style="color: #ff512c; font-size: 11px; margin: 8px 0 0 0;"><a href="https://www.afnor.org/actualites/" style="color: #ff512c; text-decoration: none;">Source: AFNOR/CEN</a></p>
+        <p style="color: #ff512c; font-size: 11px; margin: 8px 0 0 0;"><a href="https://www.qualitiso.com/veille/" style="color: #ff512c; text-decoration: none;">Source: Qualitiso</a></p>
     </div>
 
-    <div style="margin-bottom: 20px; padding-bottom: 16px;">
-        <h3 style="color: #ff512c; font-size: 13px; font-weight: 700; margin: 0 0 8px 0;">Swissdamed & TGA Australia : traçabilité live depuis 1er juillet</h3>
-        <p style="color: #1c2837; font-size: 12px; margin: 0 0 8px 0;">Swissmedic (Suisse) et TGA (Australie) ont activé registres traçabilité obligatoires 1er juillet 2026. Données minimales divergent : Suisse exige numéro de lot, série, identifiant UDI complet; Australie accepte UDI partiel. Fabrique : clarifier mapping UDI par géographie; décalage administration risque refus distribution.</p>
+    <div style="margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e9ebee;">
+        <h3 style="color: #ff512c; font-size: 13px; font-weight: 700; margin: 0 0 8px 0;">MDCG 2021-5 Annexe : transition symbole mandataire « EC REP » vers « EU REP »</h3>
+        <p style="color: #1c2837; font-size: 12px; margin: 0 0 8px 0;">Commission actualise 18 juin 2026 annexe MDCG 2021-5 fixant transition symbole « Mandataire Autorisé » dans EUDAMED : passage « EC REP » vers « EU REP » pour aligner nomenclature dénominations UE post-Brexit. Délai mise en conformité : septembre 2026 pour nouveaux enregistrements, décembre 2026 pour portefeuille existant. Dossiers non conformes marquage bloqués EUDAMED.</p>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span style="background-color: #e8850c; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">MOYEN</span>
+            <span style="background-color: #213045; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">NOUVEAU</span>
+        </div>
+        <p style="color: #ff512c; font-size: 11px; margin: 8px 0 0 0;"><a href="https://www.qualitiso.com/veille/" style="color: #ff512c; text-decoration: none;">Source: Qualitiso</a></p>
+    </div>
+
+    <div style="margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e9ebee;">
+        <h3 style="color: #ff512c; font-size: 13px; font-weight: 700; margin: 0 0 8px 0;">MDCG 2021-24 Rev.1 : classification DM avril 2026 mise à jour</h3>
+        <p style="color: #1c2837; font-size: 12px; margin: 0 0 8px 0;">Commission publie 28 avril 2026 révision 1 guide MDCG 2021-24 (classification). Changements : clarification règles classification IA-as-a-Service (classe II/III selon contexte), affinage règles accessoires, nouveaux cas d'usage diagnostique/prédiction. Mise en conformité dossiers en cours : vérifier classification Q3 avant soumission notifié.</p>
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <span style="background-color: #e8850c; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">MOYEN</span>
             <span style="background-color: #213045; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">EN VIGUEUR</span>
         </div>
-        <p style="color: #ff512c; font-size: 11px; margin: 8px 0 0 0;"><a href="https://www.dm-experts.fr/flash-reglementaire-normatif/" style="color: #ff512c; text-decoration: none;">Source: DM Experts</a></p>
+        <p style="color: #ff512c; font-size: 11px; margin: 8px 0 0 0;"><a href="https://www.qualitiso.com/veille/" style="color: #ff512c; text-decoration: none;">Source: Qualitiso</a></p>
     </div>
 
     <h2 style="color: #1c2837; font-size: 16px; font-weight: 700; margin: 0 0 16px 0; border-bottom: 2px solid #ff512c; padding-bottom: 8px;">Hors UE</h2>
-    <p style="color: #1c2837; font-size: 12px; line-height: 1.6; margin: 0 0 24px 0;">Aucune évolution majeure hors UE cette semaine au-delà des mises à jour Suisse/Australie ci-dessus.</p>
+    <p style="color: #1c2837; font-size: 12px; margin: 0;">Aucune évolution notable hors UE cette semaine. UK/MHRA AI Airlock phase 2 inchangé; Australie/Swissdamed traçabilité établies depuis juillet sans modification (voir édition précédente).</p>
 
-    <h2 style="color: #1c2837; font-size: 16px; font-weight: 700; margin: 0 0 16px 0; border-bottom: 2px solid #ff512c; padding-bottom: 8px;">Points de vigilance</h2>
-    <ul style="color: #1c2837; font-size: 12px; line-height: 1.8; margin: 0 0 24px 0; padding-left: 20px;">
-        <li><strong>ISO 13485:2016/A11 :</strong> enquête publique ferme fin août 2026; participation URGENT si impact QMS détecté.</li>
-        <li><strong>EUDAMED dossiers IA :</strong> impératif mettre à jour conformité MDCG 2025-6 avant soumission; ANSM contrôle systématique août.</li>
-        <li><strong>Cybersécurité & CNIL :</strong> méthodologies MR-001/MR-003 applicables; audit préalable AI recommandé dès septembre.</li>
+    <h2 style="color: #1c2837; font-size: 16px; font-weight: 700; margin: 0 0 16px 0; border-bottom: 2px solid #ff512c; padding-bottom: 8px; margin-top: 24px;">Points de vigilance</h2>
+    <ul style="color: #1c2837; font-size: 12px; line-height: 1.6; margin: 0 0 24px 0; padding-left: 20px;">
+        <li><strong>1er août 2026 :</strong> sept normes harmonisées Décision 2026/1231 en vigueur. Audit classification/dossier technique immédiat recommandé.</li>
+        <li><strong>Septembre 2026 :</strong> symbole « EU REP » transition EUDAMED débute pour nouveaux enregistrements; décembre pour portefeuille existant.</li>
+        <li><strong>Q4 2026 :</strong> EN 62304/A1 + ISO 13485:2016/A11 + ISO/TS 24971-2 convergence attendue dossiers IA; documentation traçabilité risque ML obligatoire.</li>
     </ul>
 
 </div>
 
-<div style="background-color: #1c2837; padding: 20px; border-radius: 12px; margin-top: 20px; text-align: center;">
-    <p style="color: #e9ebee; font-size: 11px; margin: 0 0 8px 0;">Le rapport complet est en pièce jointe. <a href="https://theodo-group.github.io/Compliance-timeline/admin.html" style="color: #ff512c; text-decoration: none; font-weight: 600;">Consultez le tableau de suivi normatif</a>.</p>
-    <p style="color: #e9ebee; font-size: 10px; margin: 0;">Disclaimer : cette veille est à titre informatif. Validez auprès de vos counsel et organismes notifiés avant action réglementaire.</p>
-    <p style="color: #ff512c; font-size: 11px; margin: 12px 0 0 0; font-weight: 600;">Theodo HealthTech</p>
+<div style="background-color: #1c2837; padding: 20px; margin-top: 20px; border-radius: 12px;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <p style="color: #e9ebee; font-size: 11px; margin: 0 0 8px 0;">Le rapport complet est joint en pièce à ce message. Pour consulter la timeline complète des jalons réglementaires et normatifs :</p>
+        <p style="color: #ffffff; font-size: 11px; margin: 0 0 12px 0;"><a href="https://theodo-group.github.io/Compliance-timeline/admin.html" style="color: #ff512c; text-decoration: none; font-weight: 600;">theodo-group.github.io/Compliance-timeline</a></p>
+        <p style="color: #e9ebee; font-size: 10px; margin: 0;">Avis juridique : cette veille est une synthèse d'informations publiques, non une consultation juridique. Validez toute action réglementaire avec vos conseillers juridiques internes ou externes avant mise en œuvre.</p>
+        <p style="color: #ff512c; font-size: 11px; font-weight: 600; margin: 8px 0 0 0;">Theodo HealthTech</p>
+    </div>
 </div>
 
 </body>
@@ -111,106 +114,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rapport QARA Complet - Semaine du 28 juillet-3 août 2026</title>
+    <title>Rapport complet - Veille QARA 13-19 juillet 2026</title>
 </head>
 <body style="font-family: Poppins, Arial, Helvetica, sans-serif; margin: 0; padding: 0; background-color: #f3f3f3;">
 
 <div style="background-color: #1c2837; padding: 24px 20px; border-radius: 12px; margin: 0 0 20px 0;">
     <div style="max-width: 800px; margin: 0 auto;">
-        <h1 style="color: #ff512c; font-size: 28px; margin: 0 0 4px 0; font-weight: 700;">Rapport Complet QARA</h1>
-        <p style="color: #ffffff; font-size: 13px; margin: 0;">Semaine 28 juillet - 3 août 2026</p>
+        <h1 style="color: #ff512c; font-size: 28px; margin: 0 0 4px 0; font-weight: 700;">Theodo HealthTech</h1>
+        <p style="color: #ffffff; font-size: 14px; margin: 0 0 12px 0;">Rapport complet veille réglementaire</p>
+        <p style="color: #e9ebee; font-size: 12px; margin: 0;">Logiciels de dispositifs médicaux et AI Act – semaine 13-19 juillet 2026</p>
     </div>
 </div>
 
-<div style="max-width: 800px; margin: 0 auto; background-color: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+<div style="max-width: 800px; margin: 0 auto; background-color: #ffffff; padding: 32px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
 
-    <h2 style="color: #1c2837; font-size: 18px; font-weight: 700; margin: 0 0 20px 0; border-bottom: 2px solid #ff512c; padding-bottom: 12px;">UE et international</h2>
+    <h2 style="color: #1c2837; font-size: 20px; font-weight: 700; margin: 0 0 20px 0; border-bottom: 3px solid #ff512c; padding-bottom: 12px;">UE et international</h2>
 
-    <h3 style="color: #1c2837; font-size: 14px; font-weight: 700; margin: 0 0 12px 0;">MDCG 2025-6 : AI Act vs MDR - version finale publiée</h3>
-    <p style="color: #1c2837; font-size: 12px; line-height: 1.6; margin: 0 0 12px 0;">La Commission européenne a publié fin juillet la version définitive du guide MDCG 2025-6, dissipant ambiguïtés critiques sur la classification des logiciels médicaux utilisant IA. Le document introduit une matrice décisionnelle par domaine applicatif : diagnostic assisté par IA, prédiction de risque, recommandation thérapeutique. Chaque domaine reçoit critères haut risque explicites (Annexe III AI Act) vs conformité simple MDR. Activation immédiate : organismes notifiés appliqueront matrice dès août pour nouveaux dossiers EUDAMED. Impact majeur pour portefeuille SaMD IA en cours : relecture obligatoire de classification, AIPD complète, documentation gouvernance données.</p>
-    <p style="color: #1c2837; font-size: 12px; line-height: 1.6; margin: 0 0 12px 0;"><strong>Délai action :</strong> mise à jour dossiers réglementaires avant soumission EUDAMED septembre. ANSM effectuera audits conformité MDCG 2025-6 sélectifs dès septembre sur dossiers haut risque IA.</p>
-    <p style="color: #ff512c; font-size: 11px; margin: 0;"><a href="https://health.ec.europa.eu/medical-devices-sector/new-regulations_en" style="color: #ff512c; text-decoration: none;">Source: EU Commission Health</a></p>
+    <div style="margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid #e9ebee;">
+        <h3 style="color: #ff512c; font-size: 16px; font-weight: 700; margin: 0 0 12px 0;">ISO/TS 24971-2 : Guidance Machine Learning dans gestion des risques</h3>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Date publication :</strong> 9 juillet 2026 (ISO)</p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Contenu :</strong> ISO/TS 24971-2 constitue complément normatif ISO 14971:2019 (gestion des risques DM). Document structure approche risque pour algorithmes ML/IA : cadre validation modèles, détection drift performances, gestion biais/fairness, traçabilité décisions algorithmiques. Alignement explicite directives MDR articles 17-18 (risque) et AI Act Annexe III (haut risque). Cible : logiciels IA classe II/III, SaMD.</p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Pourquoi ça change :</strong> Jusqu'à présent, cadre risque ML restait flou—ISO 14971 ne traitait pas spécifiquement ML, MDCG 2025-6 donnait cadre réglementaire mais pas méthodologie risque. ISO/TS 24971-2 propose matrice structurée : 1) risque domaine (diagnostic/prédiction), 2) risque entrée données (biais amont), 3) risque modèle (drift, adversarial), 4) risque déploiement (efficacité réelle vs attendu). MDCG évalue intégration normes harmonisées EN ISO 13485:2016/A11 (QMS) + EN 62304/A1 (cycle logiciel) Q4 2026—ISO/TS 24971-2 sera référence implémentation.</p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Deadline/action :</strong> Impact dossiers en cours classe II/III IA :
+        <ul style="color: #1c2837; font-size: 12px; margin: 8px 0 0 20px; padding-left: 20px;">
+            <li>Court terme (août-septembre 2026) : auditez matrice risque ML dossiers en phase soumission notifié—vérifiez documentation validation données + drift detection.</li>
+            <li>Moyen terme (T4 2026) : attendez MDCG guidance harmonisation ISO/TS 24971-2 EN 13485/A11/A1, puis intégrez au dossier technique permanent.</li>
+            <li>Compliance interne : formez QARA/R&D ISO/TS 24971-2 cadre sept 2026 avant soumission nouveaux dossiers.</li>
+        </ul></p>
+        <p style="color: #ff512c; font-size: 11px; margin: 12px 0 0 0;"><a href="https://www.qualitiso.com/veille/" style="color: #ff512c; text-decoration: none;">Source: Qualitiso</a></p>
+    </div>
 
-    <div style="height: 1px; background-color: #e9ebee; margin: 24px 0;"></div>
+    <div style="margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid #e9ebee;">
+        <h3 style="color: #ff512c; font-size: 16px; font-weight: 700; margin: 0 0 12px 0;">Décision d'exécution (UE) 2026/1231 : sept normes harmonisées entrent en vigueur 1er août 2026</h3>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Date publication :</strong> 18 juin 2026 (Journal officiel UE). <strong>Entrer en vigueur :</strong> 1er août 2026.</p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Contenu :</strong> Commission européenne publie décision d'exécution listant normes harmonisées révisées/nouvelles applicables MDR à partir 1er août 2026. Énumération clés pour MDSW :
+        <ul style="color: #1c2837; font-size: 12px; margin: 8px 0 0 20px; padding-left: 20px;">
+            <li>EN ISO 13485:2016/A11 : QMS—intégration management IA, traçabilité décisions critique.</li>
+            <li>EN 62304/A1 : cycle logiciel—révision conformité AI Act (validation adversarial, gestion drift).</li>
+            <li>EN 62366-1:2015+A1:2020 : usabilité—impact IHM IA (clarté output algorithme).</li>
+            <li>IEC 82304-1:2018 : sécurité santé digitale—nouvelles exigences cybersécurité, gestion incident.</li>
+            <li>ISO 15223-1/-2, ISO 20417 : symboles/étiquetage—alignement nomenclature UE.</li>
+        </ul></p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Pourquoi ça change :</strong> Jusqu'en juillet 2026, certaines entreprises pouvaient appliquer versions antérieures normes si démonstration conformité raisonnable. Dès 1er août, conformité EN 13485:2016/A11 + EN 62304/A1 devient obligatoire nouveau dépôt auprès organisme notifié—refus automatique dossiers en ancienne version sans justification transitoire (rare). EN 13485:2016/A11 spécifique IA introduit concept « AI impact assessment » obligatoire prise de décision critique; EN 62304/A1 impose validation robustesse algorithme contre perturbations adversarial. Pour logiciels classe II/III, conformité immédiate exigée.</p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Deadline/action :</strong>
+        <ul style="color: #1c2837; font-size: 12px; margin: 8px 0 0 20px; padding-left: 20px;">
+            <li><strong>Urgent (fin juillet) :</strong> dossiers en phase soumission notifié avant 1er août doivent certifier conformité Décision 2026/1231—audit complet classification + dossier technique recommandé.</li>
+            <li><strong>Court terme (août) :</strong> refus systématique dossiers non-conformes EN 13485:2016/A11 + EN 62304/A1—rejet saisine automatique notifié, délai révision 4-8 semaines.</li>
+            <li><strong>Documentation :</strong> créez registre « Impact Décision 2026/1231 » par produit : classification, normes applicables, audit conformité, délai implémentation.</li>
+        </ul></p>
+        <p style="color: #ff512c; font-size: 11px; margin: 12px 0 0 0;"><a href="https://www.qualitiso.com/veille/" style="color: #ff512c; text-decoration: none;">Source: Qualitiso / Commission européenne</a></p>
+    </div>
 
-    <h3 style="color: #1c2837; font-size: 14px; font-weight: 700; margin: 0 0 12px 0;">Amendement MDR articles 52.4 & 61.6 : exemptions implants applicables 1er août 2026</h3>
-    <p style="color: #1c2837; font-size: 12px; line-height: 1.6; margin: 0 0 12px 0;">Le règlement d'exécution (UE) 2026/977 entre en vigueur 1er août 2026, modifiant articles 52.4 (rôle NB) et 61.6 (dossiers techniques) du MDR. Impact direct : implants dentaires passifs, stents inactifs, vis d'ostéosynthèse et certains cathéters accèdent statut exemption dossier technique allégé. Fabricants concernés bénéficient réduction fardeau documentation, mais clause exigences de sécurité de base MDR demeure. ANSM et organismes notifiés valident critères éligibilité dès août sur nouveaux dossiers CE. Non-respect = refus marquage CE à partir 1er août 2026.</p>
-    <p style="color: #1c2837; font-size: 12px; line-height: 1.6; margin: 0 0 12px 0;"><strong>Action immédiate :</strong> si portefeuille comporte implants listés, vérifier alignement avec définitions article 52.4; étudier économies de documentation; informer organismes notifiés de changement de statut avant soumission.</p>
-    <p style="color: #ff512c; font-size: 11px; margin: 0;"><a href="https://www.dm-experts.fr/flash-reglementaire-normatif/" style="color: #ff512c; text-decoration: none;">Source: DM Experts</a></p>
+    <div style="margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid #e9ebee;">
+        <h3 style="color: #ff512c; font-size: 16px; font-weight: 700; margin: 0 0 12px 0;">MDCG 2026-4 : Management SS(C)P dans EUDAMED</h3>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Date publication :</strong> 18 juin 2026 (MDCG). <strong>Entrée en vigueur :</strong> immédiate pour EUDAMED.</p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Contenu :</strong> Commission publie guide MDCG 2026-4 précisant gestion Surgical Site Contamination Precautions (SS(C)P) portefeuille EUDAMED. Nouveauté majeure : traçabilité complète SS(C)P devenue obligatoire audit-trail système, responsabilité administrateur EUDAMED étendue vérification chaîne conformité. Document définit : 1) qui déclare SS(C)P (mandataire/fabricant), 2) quand (dès notification), 3) comment (formulaire structures EUDAMED + justificatifs), 4) qui vérifie (ANSM/organismes notifiés accès audit-trail). Cas non-conformité = blocage dossier EUDAMED, signalement automatique autorité.</p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Pourquoi ça change :</strong> Jusqu'en juin 2026, gestion SS(C)P restait responsabilité décentralisée mandataire/fabricant—audit-trail EUDAMED n'était pas automatisé, vérification autorité était sporadique. MDCG 2026-4 introduit chaîne responsibility formelle : chaque modification SS(C)P génère événement EUDAMED horodaté, traçabilité irréversible. Cible : prévenir fraude SS(C)P (faux certificats), renforcer contrôle ANSM. Charge administrateurs EUDAMED augmente significativement : vérification exhaustive SS(C)P dossiers, documentation justificatifs, coordin ANSM.</p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Deadline/action :</strong>
+        <ul style="color: #1c2837; font-size: 12px; margin: 8px 0 0 20px; padding-left: 20px;">
+            <li><strong>Immédiat (juillet-août) :</strong> auditez portefeuille EUDAMED configuration SS(C)P tous produits—vérifiez conformité justificatifs vs déclaration.</li>
+            <li><strong>Q3 2026 :</strong> documenter toute modification SS(C)P avec justificatif conforme MDCG 2026-4; formez équipe administrateurs EUDAMED processus nouveau.</li>
+            <li><strong>Risque :</strong> dossiers SS(C)P non-conformes = rejet automatique EUDAMED, délai correction 2-4 semaines.</li>
+        </ul></p>
+        <p style="color: #ff512c; font-size: 11px; margin: 12px 0 0 0;"><a href="https://www.qualitiso.com/veille/" style="color: #ff512c; text-decoration: none;">Source: Qualitiso</a></p>
+    </div>
 
-    <div style="height: 1px; background-color: #e9ebee; margin: 24px 0;"></div>
+    <div style="margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid #e9ebee;">
+        <h3 style="color: #ff512c; font-size: 16px; font-weight: 700; margin: 0 0 12px 0;">MDCG 2021-5 Annexe : Transition symbole mandataire « EC REP » vers « EU REP »</h3>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Date publication :</strong> 18 juin 2026 (MDCG). <strong>Délai transition :</strong> septembre 2026 (nouveaux) / décembre 2026 (portefeuille existant).</p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Contenu :</strong> Commission actualise annexe MDCG 2021-5 (symboles/marquage DM) pour migration nomenclature « mandataire autorisé ». Changement : symbole ancien « EC REP » (European Community Representative) remplacé « EU REP » (European Union Representative) aligner nomenclature post-Brexit. Symbole apply marquage produit, étiquetage, dossier EUDAMED. Transition graduée : septembre 2026 symbole nouveau obligatoire enregistrements neufs; décembre 2026 tous produits portefeuille existant doivent afficher « EU REP ».</p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Pourquoi ça change :</strong> Migration symbolique UK hors UE (Brexit) nécessitait harmonisation nomenclature—« EC REP » impliait UK membre (obsolète); « EU REP » clarifie mandataire UE-only. Changement cosmétique mais impact conformité réglementaire : dossiers EUDAMED rejetés si symbole obsolète, risque pénalités ANSM si marquage produit non-conforme décembre 2026.</p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Deadline/action :</strong>
+        <ul style="color: #1c2837; font-size: 12px; margin: 8px 0 0 20px; padding-left: 20px;">
+            <li><strong>Septembre 2026 :</strong> enregistrements neufs EUDAMED obligatoirement symbole « EU REP »; ancien rejeté.</li>
+            <li><strong>Octobre-novembre 2026 :</strong> auditez portefeuille produits marquage « EC REP »—identifiez stocks/emballages à renouveler avant décembre.</li>
+            <li><strong>Décembre 2026 :</strong> tous produits dossier EUDAMED, marquage physique, étiquetage doivent afficher « EU REP ».</li>
+            <li><strong>Gestion stock :</strong> coordonnez qualité/logistique rotation produits « EC REP » existants avant transition complète.</li>
+        </ul></p>
+        <p style="color: #ff512c; font-size: 11px; margin: 12px 0 0 0;"><a href="https://www.qualitiso.com/veille/" style="color: #ff512c; text-decoration: none;">Source: Qualitiso</a></p>
+    </div>
 
-    <h3 style="color: #1c2837; font-size: 14px; font-weight: 700; margin: 0 0 12px 0;">Méthodologies de référence CNIL : MR-001 & MR-003 modernisées</h3>
-    <p style="color: #1c2837; font-size: 12px; line-height: 1.6; margin: 0 0 12px 0;">CNIL a publié 23 mai 2026 révision des méthodologies de référence MR-001 (PIA Santé) et MR-003 (données très sensibles). Cadre intègre exigences AI Act et cybersécurité CNIL 2024. Pour logiciels médicaux IA : évaluation d'impact données (AIPD) devient obligatoire avant mise en marché. CNIL engage audits ciblés Q3 2026 sur secteur santé pour vérifier conformité. Risque : refus data processing si AIPD manquante ou insuffisante.</p>
-    <p style="color: #1c2837; font-size: 12px; line-height: 1.6; margin: 0 0 12px 0;"><strong>Délai action :</strong> AIPD complète, audit DPO, gouvernance données avant septembre. Intégrer CNIL checks en phase dossier EUDAMED.</p>
-    <p style="color: #ff512c; font-size: 11px; margin: 0;"><a href="https://www.cnil.fr/fr" style="color: #ff512c; text-decoration: none;">Source: CNIL</a></p>
+    <div style="margin-bottom: 28px; padding-bottom: 20px;">
+        <h3 style="color: #ff512c; font-size: 16px; font-weight: 700; margin: 0 0 12px 0;">MDCG 2021-24 Rev.1 : Mise à jour classification DM (avril 2026)</h3>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Date publication :</strong> 28 avril 2026 (MDCG). <strong>Applicabilité :</strong> immédiate.</p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Contenu :</strong> Commission publie révision 1 guide MDCG 2021-24 (classification DM MDR) intégrant clarifications AI Act + jurisprudence 18 mois. Changements clés : 1) IA-as-a-Service classification—nouvel arbre décisionnel distingue IA infrastructure (classe I) vs IA diagnostic/prédiction critique (classe III); 2) accessoires : affinage règles accessoires DM IA (clarté algorithme à patient = pas accessoire); 3) cas d'usage : diagnostic imagerie IA, prédiction risque événement grave, recommandation traitement = classe II minimum. Document inclus exemples concrets.</p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Pourquoi ça change :</strong> Jusqu'en avril 2026, classification logiciels IA restait imprécise—certains soumettaient « infrastructure IA » (classe I), autorités notifiées objectaient (classe II/III) créant délais dépôt. MDCG 2021-24 Rev.1 clarifie : contexte utilisation détermine classe, pas technologie. Arbre décisionnel explicite épargne allers-retours 6-8 semaines.</p>
+        <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0 0 12px 0;"><strong>Deadline/action :</strong>
+        <ul style="color: #1c2837; font-size: 12px; margin: 8px 0 0 20px; padding-left: 20px;">
+            <li><strong>Avant soumission notifié (Q3 2026) :</strong> vérifiez classification dossiers en cours vs MDCG 2021-24 Rev.1—décalage = rejet soumission.</li>
+            <li><strong>Portefeuille existant :</strong> auditez classification produits approuvés—si écart important (classe II approuvé, Rev.1 dit classe III), évaluez requalification.</li>
+        </ul></p>
+        <p style="color: #ff512c; font-size: 11px; margin: 12px 0 0 0;"><a href="https://www.qualitiso.com/veille/" style="color: #ff512c; text-decoration: none;">Source: Qualitiso</a></p>
+    </div>
 
-    <div style="height: 1px; background-color: #e9ebee; margin: 24px 0;"></div>
+    <h2 style="color: #1c2837; font-size: 20px; font-weight: 700; margin: 32px 0 20px 0; border-bottom: 3px solid #ff512c; padding-bottom: 12px;">Royaume-Uni</h2>
+    <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0;">Aucune évolution notable cette semaine. UK MHRA AI Airlock phase 2 inchangé; rapport juin 2026 signalé édition précédente.</p>
 
-    <h3 style="color: #1c2837; font-size: 14px; font-weight: 700; margin: 0 0 12px 0;">prEN 18286 (AI QMS) : élection première version; publication Q4 2026</h3>
-    <p style="color: #1c2837; font-size: 12px; line-height: 1.6; margin: 0 0 12px 0;">CEN/CENELEC clôture phase élection première mouture norme systèmes qualité pour IA (prEN 18286). Scope couvre validation données, audit ML, traçabilité modèles, gouvernance algorithmes. Vote final prévu août 2026, publication cible Q4 2026. Alignement express avec ISO 13485:2016/A11 et MDR (via MDCG) garanti. Implémentation progressive Q1/Q2 2027 attendue dans écosystème certification CE logiciels médicaux IA.</p>
-    <p style="color: #1c2837; font-size: 12px; line-height: 1.6; margin: 0 0 12px 0;"><strong>Délai action :</strong> suivi calendrier CEN/CENELEC; préparation formation QA/Regulatory dès Q3 2026 si adoption rapide.</p>
-    <p style="color: #ff512c; font-size: 11px; margin: 0;"><a href="https://www.afnor.org/actualites/" style="color: #ff512c; text-decoration: none;">Source: AFNOR/CEN</a></p>
+    <h2 style="color: #1c2837; font-size: 20px; font-weight: 700; margin: 32px 0 20px 0; border-bottom: 3px solid #ff512c; padding-bottom: 12px;">États-Unis</h2>
+    <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0;">Aucune évolution notable cette semaine.</p>
 
-    <div style="height: 1px; background-color: #e9ebee; margin: 24px 0;"></div>
+    <h2 style="color: #1c2837; font-size: 20px; font-weight: 700; margin: 32px 0 20px 0; border-bottom: 3px solid #ff512c; padding-bottom: 12px;">Autres régions</h2>
+    <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0;">Swissdamed et Australie traçabilité opérationnelles depuis 1er juillet 2026 (édition précédente); pas d'évolution supplémentaire cette semaine.</p>
 
-    <h3 style="color: #1c2837; font-size: 14px; font-weight: 700; margin: 0 0 12px 0;">Swissdamed & TGA Australia : registres traçabilité live depuis 1er juillet</h3>
-    <p style="color: #1c2837; font-size: 12px; line-height: 1.6; margin: 0 0 12px 0;">Swissmedic (Suisse) et TGA (Australie) ont activé registres traçabilité obligatoires 1er juillet 2026. Données minimales attendues divergent : Swissmedic impose numéro de lot, série, identifiant UDI complet, date expiration; TGA accepte UDI partiel et lot sur demande. Risque administratif : fabricants avec distribution bilatérale doivent mapper UDI par géographie, entraînant documentation divergente. Non-respect = blocage accès marché dès août 2026 (suspensions Swissmedic/TGA mises en œuvre).</p>
-    <p style="color: #1c2837; font-size: 12px; line-height: 1.6; margin: 0 0 12px 0;"><strong>Action immédiate :</strong> audit mapping UDI Suisse/Australie; clarifier capacité systèmes information actuels; envisager format superset données si volumes justifient.</p>
-    <p style="color: #ff512c; font-size: 11px; margin: 0;"><a href="https://www.dm-experts.fr/flash-reglementaire-normatif/" style="color: #ff512c; text-decoration: none;">Source: DM Experts</a></p>
-
-    <div style="height: 1px; background-color: #e9ebee; margin: 24px 0;"></div>
-
-    <h2 style="color: #1c2837; font-size: 18px; font-weight: 700; margin: 32px 0 20px 0; border-bottom: 2px solid #ff512c; padding-bottom: 12px;">UK</h2>
-    <p style="color: #1c2837; font-size: 12px; margin: 0;">Aucune évolution notable cette semaine. MHRA AI Airlock Phase 2 (rapport juin 2026) demeure référence; pré-soumission IA obligatoire UK dès 2027 confirmée.</p>
-
-    <div style="height: 1px; background-color: #e9ebee; margin: 24px 0;"></div>
-
-    <h2 style="color: #1c2837; font-size: 18px; font-weight: 700; margin: 32px 0 20px 0; border-bottom: 2px solid #ff512c; padding-bottom: 12px;">US et autres régions</h2>
-    <p style="color: #1c2837; font-size: 12px; margin: 0;">Aucune évolution notable cette semaine hors items Suisse/Australie couverts supra.</p>
-
-    <div style="height: 1px; background-color: #e9ebee; margin: 24px 0;"></div>
-
-    <h2 style="color: #1c2837; font-size: 18px; font-weight: 700; margin: 32px 0 20px 0; border-bottom: 2px solid #ff512c; padding-bottom: 12px;">Annexe : suivi normes et standards</h2>
-
-    <p style="color: #1c2837; font-size: 12px; font-weight: 600; margin: 0 0 16px 0;">Mouvements normatifs cette semaine :</p>
-
-    <table style="width: 100%; border-collapse: collapse; font-size: 11px; line-height: 1.4;">
-        <tr style="background-color: #f3f3f3;">
-            <th style="border: 1px solid #e9ebee; padding: 8px; text-align: left; font-weight: 700; color: #1c2837;">Source</th>
-            <th style="border: 1px solid #e9ebee; padding: 8px; text-align: left; font-weight: 700; color: #1c2837;">Référence</th>
-            <th style="border: 1px solid #e9ebee; padding: 8px; text-align: left; font-weight: 700; color: #1c2837;">Titre</th>
-            <th style="border: 1px solid #e9ebee; padding: 8px; text-align: left; font-weight: 700; color: #1c2837;">Mouvement cette semaine</th>
-        </tr>
-        <tr>
-            <td style="border: 1px solid #e9ebee; padding: 8px; color: #1c2837;">CEN/CENELEC</td>
-            <td style="border: 1px solid #e9ebee; padding: 8px; color: #1c2837;">prEN 18286</td>
-            <td style="border: 1px solid #e9ebee; padding: 8px; color: #1c2837;">AI Act QMS standard</td>
-            <td style="border: 1px solid #e9ebee; padding: 8px; color: #1c2837;">Élection première version; vote final août 2026; publication cible Q4 2026</td>
-        </tr>
-        <tr style="background-color: #f9f9f9;">
-            <td style="border: 1px solid #e9ebee; padding: 8px; color: #1c2837;">EU Commission</td>
-            <td style="border: 1px solid #e9ebee; padding: 8px; color: #1c2837;">MDCG 2025-6</td>
-            <td style="border: 1px solid #e9ebee; padding: 8px; color: #1c2837;">MDR/IVDR vs AI Act</td>
-            <td style="border: 1px solid #e9ebee; padding: 8px; color: #1c2837;">Version finale publiée fin juillet; matrice classification IA par domaine; applicabilité immédiate août 2026</td>
-        </tr>
-        <tr>
-            <td style="border: 1px solid #e9ebee; padding: 8px; color: #1c2837;">CNIL</td>
-            <td style="border: 1px solid #e9ebee; padding: 8px; color: #1c2837;">MR-001, MR-003</td>
-            <td style="border: 1px solid #e9ebee; padding: 8px; color: #1c2837;">PIA Santé, données sensibles</td>
-            <td style="border: 1px solid #e9ebee; padding: 8px; color: #1c2837;">Modernisation 23 mai 2026; intégration AI Act & cybersécurité; AIPD obligatoire logiciels médicaux IA</td>
-        </tr>
+    <h2 style="color: #1c2837; font-size: 20px; font-weight: 700; margin: 32px 0 20px 0; border-bottom: 3px solid #ff512c; padding-bottom: 12px;">Annexe : Suivi des normes (mouvements semaine)</h2>
+    
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 12px;">
+        <thead>
+            <tr style="background-color: #213045;">
+                <th style="border: 1px solid #e9ebee; padding: 10px; text-align: left; color: #ffffff; font-weight: 600;">Source</th>
+                <th style="border: 1px solid #e9ebee; padding: 10px; text-align: left; color: #ffffff; font-weight: 600;">Référence</th>
+                <th style="border: 1px solid #e9ebee; padding: 10px; text-align: left; color: #ffffff; font-weight: 600;">Titre</th>
+                <th style="border: 1px solid #e9ebee; padding: 10px; text-align: left; color: #ffffff; font-weight: 600;">Mouvements cette semaine</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #f3f3f3;">
+                <td style="border: 1px solid #e9ebee; padding: 10px;">ISO</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;">ISO/TS 24971-2</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;">Gestion risque ML</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;"><strong>PUBLIEE 9 juillet.</strong> Cadre structuré validation ML, drift detection, biais. Impact EN 13485/A11 + EN 62304/A1 attendu T4 2026.</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #e9ebee; padding: 10px;">UE</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;">Décision 2026/1231</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;">Normes harmonisées MDR</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;"><strong>ENTREE EN VIGUEUR 1er août 2026.</strong> Sept normes : EN 13485:2016/A11, EN 62304/A1, EN 62366-1, IEC 82304-1, ISO 15223/20417. Conformité obligatoire dossiers neufs.</td>
+            </tr>
+            <tr style="background-color: #f3f3f3;">
+                <td style="border: 1px solid #e9ebee; padding: 10px;">MDCG</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;">MDCG 2026-4</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;">SS(C)P EUDAMED</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;"><strong>PUBLIEE 18 juin.</strong> Traçabilité audit-trail obligatoire; responsabilité administrateurs EUDAMED étendue.</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #e9ebee; padding: 10px;">MDCG</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;">MDCG 2021-5 Annexe</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;">Symboles mandataire</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;"><strong>ACTUALISEE 18 juin.</strong> Transition « EC REP » vers « EU REP » : sept 2026 (nouveaux), déc 2026 (portefeuille).</td>
+            </tr>
+            <tr style="background-color: #f3f3f3;">
+                <td style="border: 1px solid #e9ebee; padding: 10px;">MDCG</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;">MDCG 2021-24 Rev.1</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;">Classification DM</td>
+                <td style="border: 1px solid #e9ebee; padding: 10px;"><strong>PUBLIEE 28 avril (rappel semaine).</strong> Clarification IA-as-a-Service, accessoires, cas d'usage. Applicable immédiat.</td>
+            </tr>
+        </tbody>
     </table>
 
-    <p style="color: #1c2837; font-size: 12px; margin: 16px 0 0 0;">Aucun changement cette semaine sur les autres normes suivies (ISO 13485:2016/A11 enquête publique, ISO/TS 24971-2 finalisée précédemment, NF EN 62304/A1 en suivi).</p>
+    <p style="color: #1c2837; font-size: 13px; line-height: 1.7; margin: 0;"><strong>Aucun changement cette semaine</strong> sur : EN ISO 13485:2016 (A11 en cours T4), EN 62304 (A1 en cours T4), GDPR, eIFU (EU 2021/2226), AI Act (EU 2024/1689—application inchangée), IEC 82304-1, ISO 27001/27701, ANS HDS, prEN 18286 (AI QMS, cible publication Q4 2026), IMDRF SaMD frameworks.</p>
 
 </div>
 
-<div style="background-color: #1c2837; padding: 20px; border-radius: 12px; margin-top: 20px; text-align: center;">
-    <p style="color: #e9ebee; font-size: 10px; margin: 0;">Disclaimer : cette veille est à titre informatif. Validez auprès de vos counsel et organismes notifiés avant action réglementaire.</p>
-    <p style="color: #ff512c; font-size: 11px; margin: 12px 0 0 0; font-weight: 600;">Theodo HealthTech</p>
-</div>
-
-</body>
-</html>
-===END===
+<div style="background-color: #1c2837; padding: 20px; margin-top: 32px; border-radius: 12px;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <p style="color: #e9ebee; font-size: 11px;
