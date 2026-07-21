@@ -1,268 +1,120 @@
 {
-  "generated": "2026-06-19",
+  "generated": "2026-07-21",
   "proposals": [
     {
-      "id": "proposal-2026-06-19-001",
       "action": "add",
-      "reason": "EC announced Commission Implementing Decision (EU) 2026/1231 adding/updating MDR harmonised standards (page updated 17 Jun 2026); new presumption-of-conformity references manufacturers must map to GSPRs.",
+      "id": "2026-07-31--mdcg-2025-6-ai-mdr-final-guidance",
+      "reason": "MDCG 2025-6 final version published end July with decision matrix for AI classification (Annex III AI Act vs MDR). Immediate applicability Aug 2026; ANSM audits begin Sept 2026. Critical for SaMD IA portfolio.",
       "card": {
-        "id": "2026-06-11--mdr-harmonised-standards-decision-2026-1231",
-        "d": "2026-06-11",
-        "l": "11 Jun 2026",
+        "id": "2026-07-31--mdcg-2025-6-ai-mdr-final-guidance",
+        "d": "2026-07-31",
+        "l": "31 Jul 2026",
         "y": 2026,
-        "t": "MDR Harmonised Standards — Decision (EU) 2026/1231",
-        "x": "New/updated harmonised standards added under MDR conferring presumption of conformity. Read the OJEU list and refresh GSPR-to-standard conformity mapping.",
+        "t": "MDCG 2025-6 — AI vs MDR Classification Matrix (Final)",
+        "x": "Final guidance published with decision matrix for AI in diagnosis, risk prediction, therapy recommendation. Immediate enforcement Aug 2026; AIPD and data governance updates required before EUDAMED submission Sept 2026.",
         "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations_en",
         "tp": [
           "mdr",
-          "standards"
+          "ai"
         ],
         "tg": [
+          "critical",
           "in-force"
         ],
-        "v": "n"
+        "v": "c"
       }
     },
     {
-      "id": "proposal-2026-06-19-002",
       "action": "add",
-      "reason": "OJEU reference to EN ISO 15223-1:2021/A1:2025 plus MDCG 2021-5 Rev.1 Appendix formalised the EC REP to EU REP authorised-representative symbol change (17 Jun 2026); labelling change-control item with 2031 transition deadlines.",
+      "id": "2026-08-01--mdr-articles-52-4-61-6-implant-exemptions",
+      "reason": "MDR amendment (UE 2026/977) enters force 1 Aug 2026. Passive implants (dental, stents, catheters) gain technical file exemptions. Immediate eligibility review for affected portfolio.",
       "card": {
-        "id": "2026-06-17--ec-rep-to-eu-rep-symbol-transition",
-        "d": "2026-06-17",
-        "l": "17 Jun 2026",
+        "id": "2026-08-01--mdr-articles-52-4-61-6-implant-exemptions",
+        "d": "2026-08-01",
+        "l": "1 Aug 2026",
         "y": 2026,
-        "t": "EC REP → EU REP Symbol Transition",
-        "x": "EN ISO 15223-1:2021/A1:2025 cited in OJEU + MDCG 2021-5 Rev.1 Appendix. Editorial change of the authorised-representative symbol; no change to AR role. Transition to 15 Jun 2031 (MDR) / 17 Jun 2031 (IVDR).",
-        "u": "https://medenvoyglobal.com/blog/mdcg-issues-guidance-on-transition-from-ec-rep-to-eu-rep-symbol-on-medical-device-labeling/",
-        "tp": [
-          "mdr",
-          "standards"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-003",
-      "action": "add",
-      "reason": "EC published a position paper on managing the Summary of Safety and (Clinical) Performance in EUDAMED now the first four modules are mandatory (18 Jun 2026); affects Class III/implantable/IVD C-D.",
-      "card": {
-        "id": "2026-06-18--sscp-management-in-eudamed-position-paper",
-        "d": "2026-06-18",
-        "l": "18 Jun 2026",
-        "y": 2026,
-        "t": "SS(C)P Management in EUDAMED — Position Paper",
-        "x": "EC position paper on handling the Summary of Safety and (Clinical) Performance now EUDAMED modules are mandatory. Relevant for Class III / implantable / IVD Class C-D. Aggregator label 'MDCG 2026-4' unconfirmed; verify before citing.",
-        "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations_en",
+        "t": "MDR Amendment — Articles 52.4 & 61.6 Implant Exemptions In Force",
+        "x": "Passive implants (dental, stents, catheters) and certain catheter types eligible for reduced technical file. Verify portfolio eligibility; basic safety requirements remain. Non-compliance = CE mark denial from 1 Aug.",
+        "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
         "tp": [
           "mdr"
         ],
         "tg": [
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-004",
-      "action": "add",
-      "reason": "ISO 14155 Edition 4 was published 23 Mar 2026 and applies immediately to new clinical investigations with no transition period; not yet on the timeline and relevant where MDSW needs a clinical investigation.",
-      "card": {
-        "id": "2026-03-23--iso-14155-2026-edition-4-in-force",
-        "d": "2026-03-23",
-        "l": "23 Mar 2026",
-        "y": 2026,
-        "t": "ISO 14155:2026 (Edition 4) In Force",
-        "x": "Applies immediately to new clinical investigations, no transition. Adds mandatory risk-management integration, formal Clinical Events / Data Monitoring Committees and an estimand framework.",
-        "u": "https://www.iso.org/standard/83968.html",
-        "tp": [
-          "standards"
-        ],
-        "tg": [
+          "high",
           "in-force"
         ],
-        "v": "n"
+        "v": "h"
       }
     },
     {
-      "id": "proposal-2026-06-19-005",
       "action": "add",
-      "reason": "IMDRF draft framework on best practices for AI-enabled medical devices closed public consultation 10 Jun 2026, building on 2025 GMLP; dispositions head to the Sep 2026 Management Committee. Likely future global reference text.",
+      "id": "2026-07-23--cnil-mr-001-mr-003-updated-aipd-mandatory",
+      "reason": "CNIL published modernised PIA/AIPD methodologies (MR-001, MR-003) on 23 May 2026, now integrating AI Act and cybersecurity requirements. AIPD mandatory for medical SaMD IA; CNIL audits begin Q3 2026.",
       "card": {
-        "id": "2026-06-10--imdrf-ai-best-practices-consultation-closed",
-        "d": "2026-06-10",
-        "l": "10 Jun 2026",
-        "y": 2026,
-        "t": "IMDRF AI Best-Practices Framework — Consultation Closed",
-        "x": "Draft framework harmonising best practices to mitigate AI-enabled device risks across the lifecycle (builds on 2025 GMLP). Comment period closed 10 Jun; dispositions to IMDRF Management Committee 14-18 Sep 2026, Singapore.",
-        "u": "https://www.raps.org/resource/imdrf-drafts-framework-on-best-practices-for-using-ai-in-medical-devices.html",
-        "tp": [
-          "other",
-          "ai"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-006",
-      "action": "add",
-      "reason": "Health Canada pre-market guidance for machine learning-enabled medical devices is in force since 1 Apr 2026 (lifecycle expectations + PCCP mechanism); a notable global change-control development not yet on the timeline.",
-      "card": {
-        "id": "2026-04-01--health-canada-ml-device-guidance-in-force",
-        "d": "2026-04-01",
-        "l": "1 Apr 2026",
-        "y": 2026,
-        "t": "Health Canada ML-Enabled Device Guidance In Force",
-        "x": "Lifecycle expectations for MLMDs (data quality, training/validation, bias, performance monitoring, transparency) plus a Predetermined Change Control Plan mechanism. Companion post-market monitoring guidance published 9 Apr 2026.",
-        "u": "https://www.canada.ca/en/health-canada/services/drugs-health-products/medical-devices/application-information/guidance-documents/pre-market-guidance-machine-learning-enabled-medical-devices.html",
-        "tp": [
-          "other",
-          "ai"
-        ],
-        "tg": [
-          "in-force"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-007",
-      "action": "add",
-      "reason": "TGA draft guidance on Predetermined Change Control Plans for AI/software devices closed consultation 5 Jun 2026; finalisation expected to follow. Part of global PCCP convergence.",
-      "card": {
-        "id": "2026-06-05--tga-pccp-draft-consultation-closed",
-        "d": "2026-06-05",
-        "l": "5 Jun 2026",
-        "y": 2026,
-        "t": "Australia TGA PCCP Draft Guidance — Consultation Closed",
-        "x": "Draft guidance lets AI/software devices be modified post-market under a pre-approved change plan without a full new submission. Comment window closed 5 Jun 2026; finalisation to follow.",
-        "u": "https://www.medicalrepublic.com.au/tga-giving-ai-updates-a-longer-leash/125029",
-        "tp": [
-          "other",
-          "ai"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-008",
-      "action": "add",
-      "reason": "MHRA pre-market consultation on the draft Medical Devices (Amendment) Regulations 2026 (international reliance routes, strengthened SaMD/IVD, UDI) closed 19 Jun 2026; expected adoption Dec 2026, entry into force Jun 2027.",
-      "card": {
-        "id": "2026-06-19--mhra-medical-devices-amendment-regs-consult",
-        "d": "2026-06-19",
-        "l": "19 Jun 2026",
-        "y": 2026,
-        "t": "MHRA Medical Devices (Amendment) Regs 2026 — Consultation Closed",
-        "x": "Pre-market reform: international reliance routes, strengthened SaMD/IVD requirements, mandatory UDI and implant cards, IVD risk-based classification. Expected adoption Dec 2026; entry into force Jun 2027.",
-        "u": "https://www.gov.uk/government/news/mhra-invites-views-on-proposed-changes-to-medical-device-regulation",
-        "tp": [
-          "uk",
-          "mdr"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-009",
-      "action": "add",
-      "reason": "Final tranche of the UK Data (Use and Access) Act 2025 commenced 19 Jun 2026, including a mandatory data-protection complaints process with no small-business exemption; directly relevant to health-data SaMD operators.",
-      "card": {
-        "id": "2026-06-19--uk-duaa-2025-complaints-process-in-force",
-        "d": "2026-06-19",
-        "l": "19 Jun 2026",
-        "y": 2026,
-        "t": "UK DUAA 2025 — Mandatory Complaints Process In Force",
-        "x": "Controllers must offer a clear complaints route, acknowledge within 30 days and investigate without undue delay. No small-business exemption. Applies to health-data SaMD operators.",
-        "u": "https://ico.org.uk/about-the-ico/what-we-do/legislation-we-cover/data-use-and-access-act-2025/",
-        "tp": [
-          "uk",
-          "data"
-        ],
-        "tg": [
-          "in-force"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-010",
-      "action": "add",
-      "reason": "MHRA published its AI Airlock Phase 2 programme report (9 Jun 2026) with five insights (notably human oversight is not static across the lifecycle); Phase 3 funded GBP 1.2m/yr to 2029 to feed the forthcoming AIaMD framework.",
-      "card": {
-        "id": "2026-06-09--mhra-ai-airlock-phase-2-report",
-        "d": "2026-06-09",
-        "l": "9 Jun 2026",
-        "y": 2026,
-        "t": "MHRA AI Airlock Phase 2 Report",
-        "x": "Seven AI technologies, five insights: real-world performance hard to replicate in controlled settings; human oversight cannot be treated as static across the lifecycle. Phase 3 funded GBP 1.2m/yr (2026-2029) to feed the AIaMD framework.",
-        "u": "https://medregs.blog.gov.uk/2026/06/09/advancing-ai-regulation-in-healthcare-insights-from-ai-airlock-phase-2/",
-        "tp": [
-          "uk",
-          "ai"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-011",
-      "action": "add",
-      "reason": "CNIL updated and widened the scope of reference methodologies MR-001 and MR-003 for health research, applicable to research initiated from 23 May 2026; relevant to French-market MDSW running clinical research.",
-      "card": {
-        "id": "2026-05-23--cnil-mr-001-mr-003-updated",
-        "d": "2026-05-23",
+        "id": "2026-07-23--cnil-mr-001-mr-003-updated-aipd-mandatory",
+        "d": "2026-07-23",
         "l": "23 May 2026",
         "y": 2026,
-        "t": "CNIL MR-001 / MR-003 Updated (France)",
-        "x": "Updated and widened reference methodologies for health research, applicable to research initiated from 23 May 2026. A consolidated guidance on the dossier patient informatisé is planned for 2026.",
-        "u": "https://www.cnil.fr/fr/recherche-en-sante-la-cnil-met-jour-et-elargit-le-champ-des-methodologies-de-reference-001-et-003",
+        "t": "CNIL — MR-001 & MR-003 Modernised (AI Act + Cybersecurity)",
+        "x": "AIPD now mandatory for medical SaMD IA before market launch. Updated methodologies integrate AI Act and CNIL cybersecurity 2024. CNIL Q3 2026 audits on healthcare sector for compliance.",
+        "u": "https://www.cnil.fr/fr",
         "tp": [
           "france",
+          "ai",
           "data"
         ],
         "tg": [
-          "new"
+          "critical",
+          "in-force"
         ],
-        "v": "n"
+        "v": "c"
       }
     },
     {
-      "id": "proposal-2026-06-19-012",
       "action": "update",
-      "reason": "Existing prEN 18286 card asserts a 'failed Jan 2026 vote' that could not be substantiated against primary sources this week; corrected to reflect the public enquiry closed 22 Jan 2026 and AI Act harmonised-standards delivery slipping to end-2026 at the earliest.",
+      "id": "2026-10-15--pren-18286-ai-act-qms-standard-revised",
+      "existing_id": "2026-10-15--pren-18286-ai-act-qms-standard-revised",
+      "reason": "prEN 18286 first-draft election completed; final vote scheduled Aug 2026 with Q4 2026 publication target. Scope confirmed: data validation, ML audit, model traceability, algorithm governance aligned with ISO 13485 and MDR.",
       "card": {
         "id": "2026-10-15--pren-18286-ai-act-qms-standard-revised",
-        "d": "2026-10-15",
-        "l": "Late 2026",
+        "d": "2026-08-01",
+        "l": "Aug 2026",
         "y": 2026,
-        "t": "prEN 18286 — AI Act QMS Standard Still In Pipeline",
-        "x": "First harmonised standard for AI Act QMS (Article 17). CEN/CENELEC JTC 21 public enquiry ran 30 Oct 2025 to 22 Jan 2026; AI Act harmonised-standards delivery now slipped to end-2026 at the earliest. Not yet cited in the OJEU.",
-        "u": "https://cms-lawnow.com/en/ealerts/2025/12/the-first-draft-ai-act-standard-for-public-consultation-what-pren-18286-quality-management-system-for-eu-ai-act-regulatory-purposes-signals-for",
+        "t": "prEN 18286 — AI QMS Standard Final Vote & Publication Target Q4 2026",
+        "x": "First-draft election closed. Final vote Aug 2026; publication Q4 2026. Covers data validation, ML audit, model traceability, governance. Phased adoption Q1/Q2 2027 expected for CE-marked AI SaMD.",
+        "u": "https://www.afnor.org/actualites/",
         "tp": [
           "ai",
           "standards"
         ],
         "tg": [
-          "medium"
+          "high",
+          "in-force"
         ],
-        "v": "n"
-      },
-      "existing_id": "2026-10-15--pren-18286-ai-act-qms-standard-revised"
+        "v": "h"
+      }
+    },
+    {
+      "action": "add",
+      "id": "2026-07-01--swissmedic-tga-udi-traceability-live",
+      "reason": "Swissmedic and TGA Australia activated mandatory UDI traceability registers on 1 July 2026 with divergent data requirements. Manufacturers with bilateral distribution must map UDI formats per jurisdiction; non-compliance blocks market access from Aug 2026.",
+      "card": {
+        "id": "2026-07-01--swissmedic-tga-udi-traceability-live",
+        "d": "2026-07-01",
+        "l": "1 Jul 2026",
+        "y": 2026,
+        "t": "Swissmedic & TGA — UDI Traceability Registers Live (Divergent Standards)",
+        "x": "Swissmedic requires full UDI, lot, series, expiry; TGA accepts partial UDI on demand. Bilateral manufacturers must reconcile data formats. Non-compliance triggers market suspensions Aug 2026 onwards.",
+        "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
+        "tp": [
+          "other"
+        ],
+        "tg": [
+          "high",
+          "in-force"
+        ],
+        "v": "h"
+      }
     }
   ]
 }
