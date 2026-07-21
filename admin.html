@@ -673,6 +673,22 @@
     </div>
   </div>
 
+  <!-- Manual trigger for the weekly automation workflow -->
+  <div class="proposal-card" id="run-now-card">
+    <div class="proposal-top">
+      <span class="proposal-title">Lancer la veille maintenant</span>
+      <span id="run-now-status" class="gh-token-status"></span>
+    </div>
+    <div class="proposal-desc">Déclenche immédiatement le job GitHub Actions, sans attendre le vendredi. Nécessite le token GitHub ci-dessus.</div>
+    <div style="display:flex; align-items:center; gap:12px; margin-top:12px; flex-wrap:wrap;">
+      <label style="display:flex; align-items:center; gap:6px; font-size:0.8rem; color:var(--ink-tertiary);">
+        <input type="checkbox" id="run-now-dry-run">
+        Mode test (dry-run — n'envoie rien, ne publie rien)
+      </label>
+      <button class="btn btn-approve" id="btn-run-now">Lancer maintenant</button>
+    </div>
+  </div>
+
   <!-- Proposals Section (dynamically populated) -->
   <div id="proposals-section"></div>
 
@@ -790,7 +806,46 @@ async function loadModelConfig() {
   }
 }
 
+/* ===== Manual "run now" trigger via workflow_dispatch ===== */
+async function triggerWorkflowRun() {
+  const token = getGitHubToken();
+  const status = document.getElementById("run-now-status");
+  if (!token) {
+    alert("Entre ton token GitHub (en haut à droite) avant de lancer le workflow.");
+    return;
+  }
+  const dryRun = document.getElementById("run-now-dry-run").checked;
+  const confirmMsg = dryRun
+    ? "Lancer un run de test (dry-run) — rien ne sera envoyé ni publié. Confirmer ?"
+    : "Lancer un run RÉEL — un email sera envoyé aux destinataires et les propositions seront poussées sur le repo si tout est valide. Confirmer ?";
+  if (!confirm(confirmMsg)) return;
+
+  if (status) { status.textContent = "Déclenchement..."; status.className = "gh-token-status none"; }
+  try {
+    const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/regulatory-watch.yml/dispatches`, {
+      method: "POST",
+      headers: { "Authorization": `token ${token}`, "Content-Type": "application/json", "Accept": "application/vnd.github+json" },
+      body: JSON.stringify({ ref: "main", inputs: { dry_run: dryRun ? "true" : "false" } }),
+    });
+    if (resp.status === 204) {
+      if (status) { status.textContent = "Déclenché"; status.className = "gh-token-status ok"; }
+      showToast("Workflow déclenché — voir l'onglet Actions sur GitHub");
+    } else {
+      const err = await resp.json().catch(() => ({}));
+      console.error("Workflow dispatch failed:", resp.status, err);
+      if (status) { status.textContent = "Échec"; status.className = "gh-token-status none"; }
+      alert(`Échec du déclenchement (HTTP ${resp.status}). Vérifie que le token a bien le scope "repo" (ou "workflow" pour un token fin) sur ce repo.`);
+    }
+  } catch(e) {
+    console.error("Workflow dispatch error:", e);
+    if (status) { status.textContent = "Erreur"; status.className = "gh-token-status none"; }
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  const runNowBtn = document.getElementById("btn-run-now");
+  if (runNowBtn) runNowBtn.addEventListener("click", triggerWorkflowRun);
+
   const researchSelect = document.getElementById("research-model-select");
   const writingSelect = document.getElementById("writing-model-select");
   if (researchSelect) researchSelect.addEventListener("change", () => {
