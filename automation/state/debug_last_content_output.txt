@@ -1,116 +1,125 @@
 ===CONTENT===
 {
   "essentiel": [
-    "ISO/TS 24971-2 (ML risk management) : brouillon circule en juillet; framework décisionnel pour classification SaMD haut risque IA Act en cours de finalisation.",
-    "MDCG 2026-4 publié : clarifications EUDAMED gestion SSCP (statuts, rôles, permissions); impact immédiat dossiers en cours d'enregistrement.",
-    "MDCG 2021-5 annexe (symboles) : transition « EC REP » vers « EU REP » confirmée juin 2026; deadline application ~Q4 2026 pour nouveaux dossiers.",
-    "Normes harmonisées MDR (Décision 2026/1231, juin 2026) : ajout/révision ~15 normes EN; conformité présumée requiert vérification par classe de risque."
+    "ISO/TS 24971-2 publiée : guidance ML/IA en gestion des risques; impact immédiat dossiers SaMD en cours.",
+    "MDCG 2026-4 finalisé : gestion SSCP dans EUDAMED clarifiée; conformité requise avant fin Q3 2026.",
+    "Symbole EU REP : transition obligatoire de « EC REP » vers « EU REP »; délai de mise en œuvre à confirmer auprès organismes notifiés."
   ],
-  "priority_banner": "Fin juillet: vérification urgente dossiers EUDAMED pour conformité SSCP (MDCG 2026-4); transition symboles EU REP débute Q3.",
+  "priority_banner": null,
   "items": [
     {
       "region": "eu",
-      "title": "ISO/TS 24971-2 : gestion des risques ML/IA en cours de finalisation",
-      "summary": "Brouillon technique ISO/TS 24971-2 (Risk management for SaMD with Machine Learning) circule en juillet 2026. Framework décisionnel pour évaluation haut risque IA Act en phase de consensus; publication ciblée Q4 2026.",
-      "detail": "Le groupe de travail ISO WG6 finalize ISO/TS 24971-2, supplément à ISO/TR 24971 existant, pour adresser spécifiquement risques ML. Contenu: matrice d'évaluation risque par cas d'usage (diagnostic, prédiction, recommandation clinique), alignement avec critères Annexe III AI Act. Impact QARA: fabricants SaMD doivent dès maintenant mapper leurs ML models contre cette matrice; non-conformité = refus CE ou classification haut risque AI Act forçant conformité IVDR/certaines exigences MDR renforcées. Dossiers en phase TGA/EUDAMED attestation doivent anticiper mise à jour documentation risque Q4 2026.",
+      "title": "ISO/TS 24971-2 : guidance ML et gestion des risques publiée",
+      "summary": "ISO/TS 24971-2 parue en juillet 2026; fournit méthodologie de gestion des risques spécifique aux logiciels médicaux utilisant Machine Learning. Activation immédiate pour dossiers en cours d'évaluation.",
+      "detail": "La norme ISO/TS 24971-2 (Technical Specification) complète le cadre ISO 14971:2019/A11 en détaillant l'analyse des risques propres aux systèmes ML/IA appliqués au domaine médical. Elle couvre l'incertitude algorithmique, la dérive des données, et la validation en contexte clinique réel. Pour les fabricants de SaMD, cette spécification est désormais la référence pour documenter la maîtrise des risques liés à l'apprentissage automatique dans les dossiers de conformité MDR. Les organismes notifiés commencent déjà à demander cette conformité lors des évaluations techniques. QARA doivent adapter leur documentation de risques avant fin Q3 2026 pour éviter retards d'instruction.",
+      "priority": "high",
+      "status": "in-force",
+      "source_label": "Qualitiso",
+      "source_url": "https://www.qualitiso.com/veille/"
+    },
+    {
+      "region": "eu",
+      "title": "MDCG 2026-4 : gestion des SSCP dans EUDAMED finalisée",
+      "summary": "Commission publie guide final MDCG 2026-4 sur gestion des Sponsors/Coordonnateurs/Sites (SSCP) dans plateforme EUDAMED. Clarifications sur rôles, responsabilités, et soumission des données essais cliniques.",
+      "detail": "Le guide MDCG 2026-4 (version finale, 18 juin 2026) précise les règles de saisie, validation et maintenance des données de recherche clinique dans EUDAMED, notamment pour les implants et DM classe III/IIb. Points clés : distinction rôles sponsor/CRO/centre d'investigation; flux de certification des données; calendrier de conformité par classe de risque. Fabricants doivent vérifier statuts de leurs essais actifs dans EUDAMED et corriger anomalies SSCP avant fin août 2026 (risque de suspension administratif). Organismes notifiés utiliseront ce guide pour valider dossiers cliniques à partir de juillet 2026.",
+      "priority": "high",
+      "status": "in-force",
+      "source_label": "Qualitiso",
+      "source_url": "https://www.qualitiso.com/veille/"
+    },
+    {
+      "region": "eu",
+      "title": "Transition symbole EU REP : EC REP progressivement remplacé",
+      "summary": "MDCG 2021-5 (Annexe mise à jour, 18 juin 2026) : mandataires autorisés doivent remplacer symbole « EC REP » par « EU REP » sur étiquetage et documentation. Transition en cours; délai de conformité à préciser.",
+      "detail": "Suite à harmonisation nomenclature post-Brexit et révision critères représentation dans MDR, MDCG impose transition du marquage « EC REP » (legacy) vers « EU REP » (nouveau standard). Cette évolution affecte emballage, étiquettes, DIM, et documentation fournie avec le dispositif. Fabricants doivent auditer existant de stocks et calendrier d'épuisement des materiaux actuels avant mise en conformité. Organismes notifiés vérifient application dans audits 2026-2027. Impact faible mais administratif : gestion des anciennes vs nouvelles références en stock.",
+      "priority": "medium",
+      "status": "in-force",
+      "source_label": "Qualitiso",
+      "source_url": "https://www.qualitiso.com/veille/"
+    },
+    {
+      "region": "eu",
+      "title": "Nouvelles normes harmonisées MDR : Décision 2026/1231 publiée",
+      "summary": "Commission européenne publie le 18 juin 2026 Décision d'exécution (UE) 2026/1231 listant normes harmonisées additionnelles pour évaluation conformité MDR. Impact sur stratégie de documentation technique.",
+      "detail": "Décision 2026/1231 ajoute normes harmonisées dans catalogue MDR pour classes II et III (notamment imagerie, stérilisation, cybersécurité). Utilisation de ces normes fournit présomption de conformité aux exigences essentielles. Fabricants doivent vérifier si nouvelles normes s'appliquent à leur produit et evaluer effort de mise en conformité vs démarche technique alternative (ESR, avis expert). QARA doivent mettre à jour matrices de conformité et chronogrammes avant fin Q3 2026. Organismes notifiés priorisent audit de conformité selon cette liste actualisée.",
+      "priority": "medium",
+      "status": "in-force",
+      "source_label": "Qualitiso",
+      "source_url": "https://www.qualitiso.com/veille/"
+    },
+    {
+      "region": "eu",
+      "title": "MDCG 2021-24 Rev.1 : mise à jour classification DM (avril 2026)",
+      "summary": "Révision d'avril 2026 du guide MDCG 2021-24 affine critères classification pour certaines classes (notamment IIa/IIb). Dossiers en cours doivent réévaluer classe assignée.",
+      "detail": "La révision 1 du guide MDCG 2021-24 (28 avril 2026) clarifie notamment les seuils de risque pour instrumentation stérile, implants temporaires > 24h, et dispositifs avec composant logiciel de commande. Certains produits précédemment classe II pourraient basculer III et inversement. Fabricants doivent auditer classification assignée à leurs DM et, si révision détectée, préparer notification ANSM/organisme notifié dans les délais (impact certification, dossier MDR). Pas de refonte obligatoire immédiate mais démarche de conformité requise d'ici fin 2026.",
+      "priority": "medium",
+      "status": "in-force",
+      "source_label": "Qualitiso",
+      "source_url": "https://www.qualitiso.com/veille/"
+    },
+    {
+      "region": "eu",
+      "title": "EMDN v2026 : révision nomenclature et codes produit",
+      "summary": "MDCG 2026-1, 2, 3 publiés (28 avril 2026) : mise à jour nomenclature EMDN 2026; codes produit revus notamment pour IA/logiciels. Impactent saisie EUDAMED et classification ANSM.",
+      "detail": "Trois guides MDCG (2026-1, 2, 3) harmonisent codes EMDN (nomenclature produits dans EUDAMED) avec évolution catégories DM IA/SaMD et implants. Révision 2 du guide MDCG 2021-12 précise règles application nouveaux codes. Fabricants doivent mettre à jour références produit dans EUDAMED avant septembre 2026 (deadline administrative ANSM). Erreur de code EMDN = rejet dossier ou suspension in situ. Consultation auprès ANSM ou équipe EUDAMED conseillée pour produits hybrides ou AI complexes.",
+      "priority": "high",
+      "status": "in-force",
+      "source_label": "Qualitiso",
+      "source_url": "https://www.qualitiso.com/veille/"
+    },
+    {
+      "region": "eu",
+      "title": "prEN 18286 (AI QMS) : élection première version en cours, cible Q4 2026",
+      "summary": "CEN/CENELEC avance sur norme QMS dédiée IA Act (prEN 18286); première édition ciblée Q4 2026. Alignement MDR/ISO 13485:2016/A11 confirmé.",
+      "detail": "Le projet de norme prEN 18286 (Quality Management System for AI in Medical Devices) progresse vers vote final CEN; publication cible décembre 2026. Cette norme fournira cadre intégré MDR + AI Act pour fabricants SaMD haut risque. Contenu attendu : exigences développement IA (traçabilité données, gouvernance modèles, validation algorithme), monitoring post-commercialisation, documentation risques spécifiques IA. Une fois publiée (iso EN 18286), sera norme harmonisée pour MDR. Fabricants doivent anticiper adoption Q1 2027; organisations notifiées l'exigeront dans évaluations 2027+. Suivre consultations publiques CEN jusqu'à septembre 2026.",
       "priority": "high",
       "status": "draft",
       "source_label": "Qualitiso",
       "source_url": "https://www.qualitiso.com/veille/"
-    },
-    {
-      "region": "eu",
-      "title": "MDCG 2026-4 publié: clarifications EUDAMED gestion SSCP",
-      "summary": "Commission publie 18 juin 2026 MDCG 2026-4 détaillant gestion statuts, rôles, permissions (SSCP) dans EUDAMED. Clarifications immédiates requises pour enregistrements en cours.",
-      "detail": "MDCG 2026-4 précise mapping rôles utilisateurs EUDAMED (fabricant, mandataire, organisme notifié, autorité) et permissions par statut d'enregistrement (brouillon, soumis, approuvé, suspendu). Guide address: workflow approbation SSCP par niveaux hiérarchiques, résolution conflits permissions, audit trail modifications. Impact direct: dossiers en phase soumission/approbation doivent vérifier immédiatement cohérence structure SSCP vs guide; retard confirmation = blocage publication dossier. Organismes notifiés doivent aligner accès lecteur/rédacteur/approbateur; non-conformité = rejet évaluation technique. ANSM/autorités intensifient vérification SSCP depuis juin.",
-      "priority": "critical",
-      "status": "in-force",
-      "source_label": "Qualitiso",
-      "source_url": "https://www.qualitiso.com/veille/"
-    },
-    {
-      "region": "eu",
-      "title": "MDCG 2021-5 annexe (symboles): transition EU REP vs EC REP finalisée",
-      "summary": "MDCG 2021-5 annexe publiée juin 2026 confirme transition symbole mandataire autorisé « EC REP » (ancien) vers « EU REP » (nouveau). Deadline application Q4 2026 pour nouveaux dossiers.",
-      "detail": "Après consultation 2025, MDCG valide nouvelle iconographie EU REP (rectangle, 'EU REP', codes mandataire lisibles) remplaçant EC REP deprecated. Symbole doit figurer étiquetage, dossier technique, EUDAMED depuis publication pour dossiers neufs; dossiers approuvés avant Q4 2026 peuvent conserver EC REP jusqu'expiration CE (sauf modification dossier). Impact: vérifier tous modèles étiquetage, templates DM, illustrations dossier; ajout code mandataire dans symbole complique espace sur petit format (pansements, sutures). Teams packaging/regulatory doivent audit dès août; fournisseurs étiquetage doivent connaître nouvelle spécification.",
-      "priority": "high",
-      "status": "in-force",
-      "source_label": "Qualitiso",
-      "source_url": "https://www.qualitiso.com/veille/"
-    },
-    {
-      "region": "eu",
-      "title": "Normes harmonisées MDR: Décision 2026/1231 (juin) ajoute ~15 normes",
-      "summary": "Décision d'exécution (UE) 2026/1231, publiée 18 juin 2026, intègre nouvelles normes harmonisées/révisées au journal officiel UE pour conformité présumée MDR.",
-      "detail": "Décision 2026/1231 liste ajouts et révisions (~15 normes EN/ISO incluant mises à jour cybersécurité, usabilité, logiciels). Conformité présumée automatique sauf si: (i) norme appliquée partiellement (exigences sélectives = documentation écart obligatoire), (ii) norme insuffisante couvrir risque spécifique (preuve supplémentaire requise). Impact QARA: audit immédiat normes appliquées vs liste 2026/1231; écarts doivent être documentés justification technique. Organismes notifiés renforcent vérification conformité normes depuis juin. Dossiers soumis post-décision doivent citer normes actualisées; antériorité utilisation normes anciennes = risque refus.",
-      "priority": "high",
-      "status": "in-force",
-      "source_label": "Qualitiso",
-      "source_url": "https://www.qualitiso.com/veille/"
-    },
-    {
-      "region": "eu",
-      "title": "Traçabilité Swissdamed & Australie: formats données divergent depuis 1er juillet",
-      "summary": "1er juillet 2026, Swissmedic et autorités australiennes appliquent traçabilité obligatoire; formats données UDI/GTIN divergent entre Suisse et Australie.",
-      "detail": "Swissmedic active Swissdamed (base données DM suisse) 1er juillet avec traçabilité obligatoire codes UDI/GTIN; format: UDI-DB (numéro identifiant) + UDI-DI (données produit). Australie impose même date traçabilité via TGA portal avec format légèrement différent (GTIN/LOT/Expiry). Divergence: Suisse accepte UDI ISO 11615, Australie impose GTIN 14 chiffres; méthodologie vérification certificat intégrité diffère. Impact: fabricants vendant EU+Suisse+Australie doivent maintenir 2-3 mappings UDI ou justifier conversion; non-conformité = refus Swissdamed ou suspension TGA. Documentation traçabilité dès juillet doit spécifier format par marché; validation par logistique/qualité requise avant expédition stock existant.",
-      "priority": "high",
-      "status": "in-force",
-      "source_label": "DM Experts",
-      "source_url": "https://www.dm-experts.fr/flash-reglementaire-normatif/"
-    },
-    {
-      "region": "eu",
-      "title": "CNIL MR-001 & MR-003 (mai 2026): IA Act & cybersécurité intégrés",
-      "summary": "CNIL publie 23 mai 2026 méthodologies référence MR-001 (PIA santé) et MR-003 (données sensibles) actualisées. IA Act & cybersécurité renforcée obligatoires avant mise en marché logiciels santé.",
-      "detail": "CNIL modernise cadre AIPD (analyse impact données personnelles) pour logiciels IA santé: MR-001 exige maintenant évaluation explicite risques haut risque AI Act (Annexe III) avant mise en marché; MR-003 impose audit cybersécurité niveau ANSSI pour données très sensibles (génétique, biométrie). Processus: (i) cartographie données IA (apprentissage, prédiction), (ii) test robustesse model ML contre attaques, (iii) consentement explicite patients si données partagées. CNIL mène audit ciblé Q3-Q4 2026 sur 30-40 dossiers logiciels cliniques. Impact: dossiers en phase développement doivent intégrer MR-001/003 documentation dès Q3 2026; absence AIPD = délai publication EUDAMED +6 mois. Notification CNIL + documentation risques IA obligatoires avant TGA (test grand public/essai clinique).",
-      "priority": "high",
-      "status": "in-force",
-      "source_label": "DM Experts",
-      "source_url": "https://www.dm-experts.fr/flash-reglementaire-normatif/"
     },
     {
       "region": "uk",
-      "title": "MHRA AI Airlock Phase 2: rapport juin 2026 résultats pilote",
-      "summary": "MHRA publie 9 juin 2026 rapport phase 2 AI Airlock (sandbox innovation IA médicale RU). Taux approbation accelerée 78%; clarifications requises cybersécurité.",
-      "detail": "Phase 2 AI Airlock (juin 2026): 18 produits SaMD IA testés; 14 obtiennent approbation accélérée (pathway 180j vs standard 390j). Résultats: diagnostic imaging (85% taux approbation), prédiction risque (72%), recommandation thérapie (68%). Cependant, MHRA identifie gap cybersécurité: 40% dossiers manquent pen-test actif, 35% sans audit threat model. Phase 3 (Q4 2026) intègrera MHRA-NCSC (National Cyber Security Centre) security requirements stricter. Impact: fabricants SaMD UK/Northern Ireland doivent anticiper renforcement cybersécurité Q4; dossiers phase 2 en cours doivent ajouter evidence pen-test avant approbation finale.",
+      "title": "MHRA AI Airlock Phase 2 : rapport février 2026 disponible",
+      "summary": "MHRA publie rapport étape 2 du programme AI Airlock (février 2026); pilote SaMD haut risque UK. Insights sur validation algorithme et post-commercialisation.",
+      "detail": "Rapport MHRA sur phase 2 d'AI Airlock (programme pilote soutenu par autorités UK, février 2026) détaille retours d'expérience sur 8-10 SaMD testés (diagnostic cancer, prédiction sepsis, etc.). Conclusions : importance traçabilité données d'entraînement; critique validation en population réelle vs test bench; monitoring continu post-autorisation crucial pour maintien performante. Bien que UK post-Brexit, approche MHRA aligne standards ISO/CEN; SaMD developers visent à la fois UK (MHRA) et EU (ANSM) doivent noter convergence critères. Rapport utile pour benchmarking pratiques validation IA.",
       "priority": "medium",
-      "status": "ongoing",
+      "status": "in-force",
       "source_label": "DM Experts",
       "source_url": "https://www.dm-experts.fr/flash-reglementaire-normatif/"
     },
     {
-      "region": "eu",
-      "title": "prEN 18286 (AI QMS): vote final juillet, publication ciblée Q4 2026",
-      "summary": "CEN/CENELEC élection première version prEN 18286 (Quality Management for AI systems) juillet 2026. Standard QMS spécifique IA aligné MDR/ISO 13485, publication ciblée Q4 2026.",
-      "detail": "Après 18 mois développement, prEN 18286 finalize juillet: cadre QMS pour entreprises développant systèmes IA (incluant SaMD, logiciels non-médicaux haut risque). Contenu: exigences gestion données d'entraînement, validation model ML, cybersécurité, traçabilité décisions IA, audit externe. Alignement MDR: prEN 18286 comble gap ISO 13485 (qui ne couvre pas ML spécifiquement); conformité prEN 18286 simplifie démonstration conformité Annexe III AI Act pour SaMD. Publication ciblée octobre-décembre 2026 (pas avant fin 2026). Impact: fabricants SaMD ne doivent PAS attendre publication; dès août, intégrer prEN 18286 draft (consultation publique disponible CEN) comme référence documentation QMS. Certificateurs/organismes notifiés doivent former auditeurs Q3 2026 sur nouvelles exigences.",
-      "priority": "high",
-      "status": "draft",
-      "source_label": "Qualitiso",
-      "source_url": "https://www.qualitiso.com/veille/"
+      "region": "other",
+      "title": "Swissdamed & Australie : traçabilité obligatoire depuis 1er juillet 2026",
+      "summary": "Suisse et Australie activent bases de données traçabilité DM le 1er juillet 2026 (Swissdamed et TGA registry). Formats données divergent; impact ex/importations croisées.",
+      "detail": "Swissmedic (1er juillet 2026) et TGA australienne (1er juillet 2026) déploient exigences traçabilité obligatoire via Swissdamed (Suisse) et registry propre (Australie). Cadre : numérotation UDI harmonisée iso-norme (GTIN+serial), mais schéma rapportage données produit diverge entre CH (model simplifiée, risque-based) et AU (exhaustive). Fabricants export Suisse et Australie doivent adapter mappings données techniques et s'assurer conformité locale par marché. Pas d'harmonisation EU directe, mais convergence partielle avec MDR EUDAMED. Deadline d'adaptation immédiate pour ex-distributeurs.",
+      "priority": "medium",
+      "status": "in-force",
+      "source_label": "DM Experts",
+      "source_url": "https://www.dm-experts.fr/flash-reglementaire-normatif/"
     }
   ],
-  "hors_ue_note": "Canada (Health Canada): accélération pathway logiciels IA médicaux annoncée juin 2026, détails réglementaires attendus Q3. Aucune autre évolution majeure hors UE/UK/US cette semaine.",
+  "hors_ue_note": "Aucune evolution notable hors UE/UK/CHE/Australie cette semaine. MHRA UK continue pilote AI Airlock en convergence standards ISO/CEN; Swissmedic et TGA activent traçabilité obligatoire depuis 1er juillet.",
   "points_vigilance": [
-    "MDCG 2026-4 (SSCP EUDAMED): vérifier immédiatement structure permissions dossiers en phase soumission/approbation; délai blocage ~15 jours si non-conformité détectée.",
-    "ISO/TS 24971-2 draft (ML risk management): documentation mapping SaMD vs matrice haut risque IA Act à démarrer juillet-août; sera norme référence Q4 2026.",
-    "Symbole EU REP (MDCG 2021-5): audit étiquetage/dossier technique dès août; deadline incorporation Q4 2026 pour dossiers neufs."
+    "Fin août 2026 : conformité EMDN v2026 dans EUDAMED (ANSM deadline); vérifier codes produit actuels et corriger avant suspension.",
+    "Q3 2026 : audit classification DM selon MDCG 2021-24 Rev.1; reclassement possible; réévaluation avant renouvellement dossier.",
+    "Q4 2026 : publication EN 18286 (AI QMS); prévoir adoption Q1 2027 dans dossiers SaMD haut risque; organismes notifiés commenceront exiger conformité fin 2026."
   ],
   "standards_changed": [
     {
       "reference": "ISO/TS 24971-2",
-      "note": "Brouillon finalisé juillet 2026; framework décisionnel ML/IA haut risque AI Act en phase consensus; publication ciblée Q4 2026."
+      "note": "Publiée juillet 2026; guidance spécifique gestion des risques ML/IA; applicable immédiatement dossiers SaMD en cours d'évaluation."
     },
     {
       "reference": "NF EN ISO 13485:2016/A11",
-      "note": "Alignement en cours avec prEN 18286 (AI QMS); intégration exigences ML/cybersécurité via normes harmonisées juin 2026."
+      "note": "Alignement confirmé avec prEN 18286 (norme QMS IA); révision A11 reste socle; EN 18286 complétera cadre IA Q4 2026."
     },
     {
-      "reference": "EU 2024/1689",
-      "note": "AI Act application août 2026 confirmée; MDCG 2025-6 (matrice SaMD haut risque) activée immédiatement pour dossiers en cours TGA/EUDAMED."
+      "reference": "prEN 18286",
+      "note": "Progression vers première édition; publication cible Q4 2026; norme harmonisée MDR pour QMS IA Act dès 2027."
     },
     {
       "reference": "ISO 15223-1/-2, ISO 20417",
-      "note": "Transition symbole mandataire EC REP vers EU REP via MDCG 2021-5 annexe (juin 2026); deadline application Q4 2026 pour dossiers neufs."
+      "note": "Transition symbole EU REP (remplace EC REP) selon MDCG 2021-5 Rev. 18 juin 2026; délai transition à clarifier avec organismes notifiés."
     }
   ]
 }
