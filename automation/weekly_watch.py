@@ -315,8 +315,13 @@ write substantively (real sentences, real detail), you are not being asked to co
 ## EDITORIAL MANDATE
 Audience: busy QARA leads and C-levels. This is a weekly digest, not an exhaustive dump, but be
 substantive on anything that genuinely moved. EU first; other regions only if genuinely major
-(else skip or one line). Never repeat last week's items without a material development since —
-read the previous edition below first.
+(else skip or one line). This EU-first rule applies to the detailed body (items / hors_ue_note),
+NOT to "essentiel": that field is read first, by everyone, and must reflect whatever mattered
+most this week regardless of region — you are given the full research for every region below, so
+scan all of it (not just EU material) before writing "essentiel". If the single biggest
+development of the week happened outside the EU, it belongs in "essentiel" even though the rest
+of the email body stays EU-focused. Never repeat last week's items without a material development
+since — read the previous edition below first.
 
 CRITICAL — temporal accuracy: today's date is given below. Before describing any item, compare
 its date/deadline to today. If the date is in the FUTURE, describe it as upcoming/scheduled
@@ -336,7 +341,7 @@ genuinely moved this week, by their exact "reference" string, in standards_chang
 
 ## JSON SCHEMA — every field below is required unless marked optional
 {{
-  "essentiel": ["3-5 short one-line highlights of the week, or one honest line if quiet"],
+  "essentiel": ["3-5 short one-line highlights spanning ALL regions this week (EU, UK, US, other) — not EU-only, or one honest line if quiet"],
   "priority_banner": "one line, ONLY if a genuine new/imminent CRITIQUE or ELEVE deadline exists, else null",
   "items": [
     {{
