@@ -268,22 +268,28 @@ CONTENT_SYSTEM_PROMPT = f"""You are an expert QARA (Quality Assurance & Regulato
 specialised in Medical Device Software (MDSW) in the EU, writing for Theodo HealthTech.
 
 ## EDITORIAL MANDATE
-Audience: busy QARA leads and C-levels. Two-tier output, BOTH bounded — this is a weekly digest,
-not an exhaustive dump:
-1. Email body: a 2-minute read, 450-650 words (max 700), EU-first, only what moved this week.
-2. Full report: attached as HTML, target 1200-2000 words total across all sections. Go deeper
-   than the email on items that moved, but do not pad with boilerplate or restate unchanged
-   background. If nothing material happened in a region/section this week, one line saying so
-   is enough — do not describe it at length anyway.
+Audience: busy QARA leads and C-levels. Two-tier output — this is a weekly digest, not an
+exhaustive dump, but you have room to be substantive:
+1. Email body: a 2-3 minute read, 600-900 words, EU-first, only what moved this week.
+2. Full report: attached as HTML, target 2000-3000 words total across all sections. Go deeper
+   than the email on items that moved — enough detail to actually act on (what changed, why it
+   matters, concrete next step). Do not pad with boilerplate or restate unchanged background.
+   If nothing material happened in a region/section this week, one line saying so is enough —
+   do not describe it at length anyway. Prefer being thorough on real developments over being
+   artificially short.
 
-HARD TECHNICAL CONSTRAINT — this is not a style preference, it is a system limit: your total
-output for this call (email HTML + report HTML combined) is capped at roughly 9000 tokens. If
-you go over, the call is cut off mid-output and the ENTIRE run fails (nothing gets sent, nothing
-gets published). It is always better to under-deliver (shorter items, fewer words per item,
-drop a minor item) than to risk running out of budget. Write tightly from the start — 1-2
-sentences per item, no throat-clearing, no restating the item you just covered in the email
-inside the report. If you notice you are already past 1500 words combined and not yet at the
-proposals-adjacent sections, start compressing aggressively.
+Soft technical guardrail: your total output for this call (email HTML + report HTML combined)
+should stay under roughly 12000 tokens so the call completes reliably. This is generous room —
+you should comfortably fit the targets above without rushing. If you are running unusually long
+for some reason, trim length on less important items first rather than cutting a major item
+short.
+
+CRITICAL — temporal accuracy: today's date is given below. Before describing any item, compare
+its date/deadline to today. If the date is in the FUTURE, describe it as upcoming/scheduled
+("entrera en vigueur le...", "sera publié le...") — never as already done ("est entré en
+vigueur", "a été publié") just because it's in this week's source material. Source material
+(including the existing timeline milestones) legitimately includes future-dated items; your job
+is to report their status accurately, not to imply they already happened.
 
 Language: BOTH outputs are in FRENCH, native register (not translated English). Banned calques:
 "actionnable", "re-actionner", "En 60 secondes", "Sur le radar", "atteindre le seuil",
@@ -790,7 +796,7 @@ def _run(config: dict, recipients: list, data_json: list, last_email: str, clien
         )
         content_raw = run_model_call(
             client, config["writing_model"], CONTENT_SYSTEM_PROMPT, content_user_content,
-            "Rédaction (email + rapport)", max_tokens=9000,
+            "Rédaction (email + rapport)", max_tokens=12000,
         )
         content_sections = split_content_sections(content_raw)
 
