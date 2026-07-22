@@ -2,92 +2,90 @@
   "generated": "2026-07-22",
   "proposals": [
     {
-      "action": "update",
-      "id": "proposal-2026-07-22--2026-05-06--mdr-ivdr-simplification-feedback-deadline",
-      "existing_id": "2026-05-06--mdr-ivdr-simplification-feedback-deadline",
-      "reason": "MDR/IVDR revision package published Dec 2025 clarifies software classification, MDR takes precedence over AI Act for integrated AI, new cyber notification regime added.",
+      "action": "add",
+      "id": "proposal-2026-07-22--2026-07-01--swissmedic-tga-device-traceability-mandatory",
+      "reason": "Swissmedic Swissdamed and TGA Device ID became mandatory on 1 July 2026, requiring immediate compliance for manufacturers targeting Swiss and Australian markets.",
       "card": {
-        "id": "2026-05-06--mdr-ivdr-simplification-feedback-deadline",
-        "d": "2026-05-06",
-        "l": "6 May 2026",
+        "id": "2026-07-01--swissmedic-tga-device-traceability-mandatory",
+        "d": "2026-07-01",
+        "l": "1 Jul 2026",
         "y": 2026,
-        "t": "MDR/IVDR Simplification — Feedback Deadline",
-        "x": "Proposal clarifies Annex VIII/Rule 11 software classification, MDR/IVDR takes precedence over AI Act for integrated AI (delays AI Act to Aug 2028), adds 30-day cyber incident notification via EUDAMED.",
-        "u": "https://www.osborneclarke.com/insights/revised-eu-medtech-regulations-proposal-sharpens-software-and-cybersecurity-rules-digital",
+        "t": "Swissmedic & TGA — Device Traceability Mandatory",
+        "x": "Swissdamed (Switzerland) and Device ID (Australia) systems now mandatory for all device registrations and market surveillance.",
+        "u": "https://www.dm-experts.fr/2026/07/1%e1%b5%89%ca%b3-juillet-jalon-important-pour-la-tracabilite-des-dispositifs-medicaux-en-suisse-et-en-australie/",
         "tp": [
-          "mdr",
-          "ai",
-          "cyber"
+          "other"
         ],
         "tg": [
-          "critical"
+          "in-force",
+          "medium"
         ],
-        "v": "c"
-      }
-    },
-    {
-      "action": "update",
-      "id": "proposal-2026-07-22--2026-05-28--eudamed-first-4-modules-mandatory",
-      "existing_id": "2026-05-28--eudamed-first-4-modules-mandatory",
-      "reason": "Status confirmed as in-force with no extensions announced; existing devices registration deadline 28 Nov 2026 reaffirmed.",
-      "card": {
-        "id": "2026-05-28--eudamed-first-4-modules-mandatory",
-        "d": "2026-05-28",
-        "l": "28 May 2026",
-        "y": 2026,
-        "t": "EUDAMED — First 4 Modules Mandatory",
-        "x": "Four modules now mandatory: new devices must be registered before market entry; existing devices (on market before 28 May 2026) must register by 28 Nov 2026.",
-        "u": "https://health.ec.europa.eu/medical-devices-eudamed/overview_en",
-        "tp": [
-          "mdr"
-        ],
-        "tg": [
-          "critical",
-          "in-force"
-        ],
-        "v": "c"
+        "v": "n"
       }
     },
     {
       "action": "add",
-      "id": "proposal-2026-07-22--2026-07-22--eu-health-cyber-action-plan",
-      "reason": "New EU cybersecurity action plan for health sector published, establishes European center within ENISA, reinforces NIS2/MDR alignment.",
+      "id": "proposal-2026-07-22--2026-05-23--cnil-mr-001-mr-003-published",
+      "reason": "New CNIL methodologies MR-001 and MR-003 published, establishing updated legal frameworks for clinical research data processing in France.",
       "card": {
-        "id": "2026-07-22--eu-health-cyber-action-plan",
-        "d": "2026-07-22",
-        "l": "22 Jul 2026",
+        "id": "2026-05-23--cnil-mr-001-mr-003-published",
+        "d": "2026-05-23",
+        "l": "23 May 2026",
         "y": 2026,
-        "t": "EU Health Cybersecurity Action Plan",
-        "x": "Five-axis plan (prevent, detect, respond, recover, deter) establishes European health cyber center at ENISA; aligns NIS2, CRA, and MDR for medical device manufacturers.",
-        "u": "https://uk.news.yahoo.com/commission-presents-plan-boost-cybersecurity-140258191.html",
+        "t": "CNIL — MR-001 & MR-003 Methodologies Published",
+        "x": "Updated reference methodologies for biomedical research, observational studies, and clinical trials involving personal data in France.",
+        "u": "https://www.dm-experts.fr/2026/07/methodologies-de-reference-cnil-publication-des-nouvelles-mr-001-et-mr-003/",
         "tp": [
-          "cyber",
-          "mdr"
+          "france",
+          "data"
         ],
         "tg": [
-          "high",
-          "new"
+          "in-force",
+          "high"
         ],
         "v": "h"
       }
     },
     {
-      "action": "update",
-      "id": "proposal-2026-07-22--2026-05-22--iec-62304-ed-2-approval-phase-begins",
-      "existing_id": "2026-05-22--iec-62304-ed-2-approval-phase-begins",
-      "reason": "Approval vote underway since 22 May 2026, publication date confirmed as 12 Aug 2026.",
+      "action": "add",
+      "id": "proposal-2026-07-22--2026-06-09--mhra-ai-airlock-phase-2-report",
+      "reason": "MHRA published Phase 2 AI Airlock report documenting evaluation criteria and methodologies for medical AI products in the UK sandbox.",
       "card": {
-        "id": "2026-05-22--iec-62304-ed-2-approval-phase-begins",
-        "d": "2026-05-22",
-        "l": "22 May 2026",
+        "id": "2026-06-09--mhra-ai-airlock-phase-2-report",
+        "d": "2026-06-09",
+        "l": "9 Jun 2026",
         "y": 2026,
-        "t": "IEC 62304 Ed.2 — Approval Phase Begins",
-        "x": "Approval vote started 22 May 2026. Two Software Process Accuracy Levels replace three safety classes; scope expanded to all health software; AI/ML planning added. Publication 12 Aug 2026.",
-        "u": "https://www.linkedin.com/pulse/iec-62304-edition-2-whats-new-medical-device-software-development",
+        "t": "MHRA — AI Airlock Phase 2 Report Published",
+        "x": "Evaluation findings from AI sandbox provide insight into UK regulatory expectations for algorithm validation and AI safety.",
+        "u": "https://www.dm-experts.fr/2026/07/mhra-rapport-sur-la-phase-2-de-ai-airlock/",
         "tp": [
-          "standards"
+          "uk",
+          "ai"
         ],
         "tg": [
+          "new",
+          "medium"
+        ],
+        "v": "n"
+      }
+    },
+    {
+      "action": "add",
+      "id": "proposal-2026-07-22--2026-07-15--mdcg-2026-4-manufacturer-ssp-sscp-upload",
+      "reason": "MDCG 2026-4 clarifies that manufacturers alone are responsible for uploading SSP and SSCP summaries into EUDAMED, removing notified body involvement.",
+      "card": {
+        "id": "2026-07-15--mdcg-2026-4-manufacturer-ssp-sscp-upload",
+        "d": "2026-07-15",
+        "l": "15 Jul 2026",
+        "y": 2026,
+        "t": "MDCG 2026-4 — Manufacturers Upload SSP/SSCP",
+        "x": "Manufacturers now exclusively responsible for uploading all SSP and SSCP summaries in EUDAMED; notified body role removed.",
+        "u": "https://www.dm-experts.fr/2026/07/eudamed-le-mdcg-2026-4-confie-aux-fabricants-le-chargement-de-tous-les-resumes-ssp-et-sscp/",
+        "tp": [
+          "mdr"
+        ],
+        "tg": [
+          "new",
           "high"
         ],
         "v": "h"
@@ -95,22 +93,69 @@
     },
     {
       "action": "update",
-      "id": "proposal-2026-07-22--2026-08-02--ai-act-most-provisions-apply",
-      "existing_id": "2026-08-02--ai-act-most-provisions-apply",
-      "reason": "AI Act Digital Omnibus formally adopted; high-risk AI obligations for medical devices delayed to 2 Aug 2028.",
+      "id": "proposal-2026-07-22--2026-10-15--pren-18286-ai-act-qms-standard-revised",
+      "existing_id": "2026-10-15--pren-18286-ai-act-qms-standard-revised",
+      "reason": "Publication timeline for prEN 18286 (AI Act QMS standard) refined to Q4 2026, aiming to provide harmonised framework for Article 17 compliance.",
       "card": {
-        "id": "2026-08-02--ai-act-most-provisions-apply",
-        "d": "2026-08-02",
-        "l": "Aug 2026",
+        "id": "2026-10-15--pren-18286-ai-act-qms-standard-revised",
+        "d": "2026-10-01",
+        "l": "Q4 2026",
         "y": 2026,
-        "t": "AI Act — Most Provisions Apply",
-        "x": "Digital Omnibus adopted: high-risk AI obligations for medical devices delayed to Aug 2028. MDCG 2025-6 / AIB 2025-1 joint guidance remains reference for MDR/AI Act articulation.",
-        "u": "https://www.scimedconsult.com/regulatory-intelligence/july-2026",
+        "t": "prEN 18286 — AI Act QMS Standard Publication Expected",
+        "x": "First harmonised standard for AI Act QMS (Article 17). Failed Jan 2026 vote; under revision. Target publication Q4 2026 to support presumption of conformity.",
+        "u": "https://cms-lawnow.com/en/ealerts/2025/12/the-first-draft-ai-act-standard-for-public-consultation-what-pren-18286-quality-management-system-for-eu-ai-act-regulatory-purposes-signals-for",
         "tp": [
           "ai",
+          "standards"
+        ],
+        "tg": [
+          "medium",
+          "draft"
+        ],
+        "v": "n"
+      }
+    },
+    {
+      "action": "add",
+      "id": "proposal-2026-07-22--2026-07-20--enisa-sbom-cybersecurity-report",
+      "reason": "ENISA published comprehensive report on SBOM application to medical devices, providing guidance ahead of CRA enforcement between 2027-2028.",
+      "card": {
+        "id": "2026-07-20--enisa-sbom-cybersecurity-report",
+        "d": "2026-07-20",
+        "l": "20 Jul 2026",
+        "y": 2026,
+        "t": "ENISA — SBOM & Cybersecurity Report Published",
+        "x": "Comprehensive analysis of Software Bill of Materials application to medical devices, with guidance for CRA compliance preparation.",
+        "u": "https://www.dm-experts.fr/2026/07/enisa-etat-des-lieux-en-matiere-de-nomenclature-logicielle-sbom-et-de-cybersecurite/",
+        "tp": [
+          "cyber",
           "mdr"
         ],
         "tg": [
+          "new",
+          "medium"
+        ],
+        "v": "n"
+      }
+    },
+    {
+      "action": "update",
+      "id": "proposal-2026-07-22--2026-11-28--eudamed-existing-devices-registration-deadline",
+      "existing_id": "2026-11-28--eudamed-existing-devices-registration-deadline",
+      "reason": "Clarified Master UDI-DI specifications and registration requirements for legacy devices ahead of 27 November 2026 deadline.",
+      "card": {
+        "id": "2026-11-28--eudamed-existing-devices-registration-deadline",
+        "d": "2026-11-27",
+        "l": "27 Nov 2026",
+        "y": 2026,
+        "t": "EUDAMED — Existing Devices Registration Deadline",
+        "x": "All legacy devices must complete Actor, UDI, Device, and Certificates modules registration including Master UDI-DI by this date.",
+        "u": "https://health.ec.europa.eu/latest-updates/eudamed-four-first-modules-will-be-mandatory-use-28-may-2026-2025-11-27_en",
+        "tp": [
+          "mdr"
+        ],
+        "tg": [
+          "critical",
           "high"
         ],
         "v": "c"
