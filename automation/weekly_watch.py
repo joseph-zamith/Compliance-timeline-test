@@ -334,10 +334,17 @@ Language: FRENCH, native register (not translated English). Banned calques: "act
 "re-actionner", "En 60 secondes", "Sur le radar", "atteindre le seuil", "reprise du stock"
 (write "rattrapage / enregistrement du stock existant"). No em dashes anywhere, ever. Tone:
 factual, action-oriented, cut adjectives. "Cut adjectives" means cut marketing/filler adjectives
-("innovant", "majeur", "crucial") — it does NOT mean cut articles, conjunctions, or connecting
-words. "summary" and "detail" must always be complete, grammatical French sentences (subject +
-verb + article, normal connectors like "qui", "donc", "avant de") — never headline-style
-telegraphic fragments (that register is for "title" only). See the worked example below.
+("innovant", "majeur", "crucial") — it does NOT mean cut articles, prepositions, or connecting
+words.
+
+ONE EXCEPTION: "essentiel" may stay compact/headline-style (articles can be dropped there, that
+register is fine and expected). EVERYWHERE ELSE — every item's "summary" and "detail",
+"hors_ue_note", "points_vigilance" — must be complete, grammatical French sentences: every noun
+needs its article ("le", "la", "les", "des", "du"), normal connectors ("qui", "donc", "avant de").
+Dropping articles on regulatory noun phrases is a common mistake — avoid it:
+- WRONG: "MDCG 2026-4 finalise juin 2026 clarifie gestion SSCP dans EUDAMED."
+- RIGHT: "Le MDCG 2026-4, finalise en juin 2026, clarifie la gestion des SSCP dans EUDAMED."
+See the worked example below for the target register on items.
 
 ## STANDARDS REGISTER (for reference — do not reproduce this table; only report rows that
 genuinely moved this week, by their exact "reference" string, in standards_changed)
@@ -359,8 +366,8 @@ genuinely moved this week, by their exact "reference" string, in standards_chang
       "source_url": "https://..."
     }}
   ],
-  "hors_ue_note": "one short paragraph on non-EU/UK/US developments if genuinely major, else 'Aucune evolution notable hors UE cette semaine.'",
-  "points_vigilance": ["max 3 one-liners: standing items with a deadline within ~60 days"],
+  "hors_ue_note": "one short paragraph, complete French sentences with articles (not telegraphic), on non-EU/UK/US developments if genuinely major, else 'Aucune evolution notable hors UE cette semaine.'",
+  "points_vigilance": ["max 3 items, each a complete French sentence with articles (not a telegraphic fragment): standing items with a deadline within ~60 days"],
   "standards_changed": [
     {{"reference": "must exactly match a 'reference' from the register above", "note": "what changed this week, 1 sentence"}}
   ]
