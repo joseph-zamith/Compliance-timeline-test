@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "key": "proposition-mdr-ivdr-precisions-sur-la-classification-logicielle-et-l-interface-",
+    "title": "Proposition MDR/IVDR : précisions sur la classification logicielle et l'interface avec l'AI Act",
+    "last_status": "draft",
+    "source_url": "https://www.osborneclarke.com/insights/revised-eu-medtech-regulations-proposal-sharpens-software-and-cybersecurity-rules-digital",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "eudamed-quatre-premiers-modules-obligatoires-depuis-le-28-mai-2026",
+    "title": "EUDAMED : quatre premiers modules obligatoires depuis le 28 mai 2026",
+    "last_status": "in-force",
+    "source_url": "https://health.ec.europa.eu/medical-devices-eudamed/overview_en",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "commission-ue-nouveau-plan-d-action-cybersecurite-pour-le-secteur-sante",
+    "title": "Commission UE : nouveau plan d'action cybersécurité pour le secteur santé",
+    "last_status": "new",
+    "source_url": "https://uk.news.yahoo.com/commission-presents-plan-boost-cybersecurity-140258191.html",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "iec-62304-edition-2-vote-d-approbation-entame-publication-prevue-en-aout-2026",
+    "title": "IEC 62304 édition 2 : vote d'approbation entamé, publication prévue en août 2026",
+    "last_status": "draft",
+    "source_url": "https://www.linkedin.com/pulse/iec-62304-edition-2-whats-new-medical-device-software-development",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "ai-act-digital-omnibus-report-de-l-echeance-ia-haut-risque-pour-dispositifs-medi",
+    "title": "AI Act Digital Omnibus : report de l'échéance IA haut risque pour dispositifs médicaux au 2 août 2028",
+    "last_status": "in-force",
+    "source_url": "https://www.scimedconsult.com/regulatory-intelligence/july-2026",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "imdrf-framework-sur-la-gestion-du-cycle-de-vie-des-ia-projet-d-avril-2026-pas-de",
+    "title": "IMDRF : framework sur la gestion du cycle de vie des IA (projet d'avril 2026, pas de nouvelle publication cette semaine)",
+    "last_status": "draft",
+    "source_url": "https://www.linkedin.com/posts/imdrf_imdrf-final-document-n88-good-machine-learning-activity-7186000000000000000",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  }
+]
