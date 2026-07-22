@@ -34,7 +34,9 @@
     "2026-02-02--fda-qmsr-in-force": "You can now use your ISO13485 QMS for the FDA :)",
     "2026-07-09--iso-ts-24971-2-published": "English comment"
   },
-  "comments_fr": {},
+  "comments_fr": {
+    "2026-07-09--iso-ts-24971-2-published": "commentaire en français"
+  },
   "tag_overrides": {
     "2026-04-16--cnil-has-ai-healthcare-guide-consultation-closed": "medium",
     "2026-05-06--mdr-ivdr-simplification-feedback-deadline": "medium",
