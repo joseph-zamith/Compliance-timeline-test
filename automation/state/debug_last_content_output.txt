@@ -1,19 +1,18 @@
 ===CONTENT===
 {
   "essentiel": [
-    "Le MDCG 2026-4, publié le 18 juin, clarifie la gestion des SSCP dans EUDAMED avec des échéances concrètes pour les fabricants.",
-    "La CNIL a modernisé les MR-001 et MR-003 le 23 mai, impactant les recherches en santé impliquant des données personnelles.",
-    "Le 1er juillet marque l'entrée en application de Swissdamed (Suisse) et des nouvelles exigences de traçabilité TGA (Australie).",
+    "ISO/TS 24971-2 publiée le 9 juillet : première norme dédiée à la gestion des risques pour les DM à base de machine learning.",
     "Le règlement d'exécution (UE) 2026/977 modifie les règles d'évaluation de conformité par les organismes notifiés, impactant leurs processus d'audit.",
-    "ISO/TS 24971-2 publiée le 9 juillet : première norme dédiée à la gestion des risques pour les DM à base de machine learning."
+    "La CNIL a modernisé les MR-001 et MR-003 le 23 mai, impactant les recherches en santé impliquant des données personnelles.",
+    "MHRA publie son rapport sur la phase 2 de AI Airlock le 9 juin, offrant un retour d'expérience sur l'évaluation accélérée des DM IA au Royaume-Uni."
   ],
-  "priority_banner": "Le MDCG 2026-4 fixe des échéances pour la gestion des SSCP dans EUDAMED — les fabricants doivent revoir leurs processus de déclaration avant le troisième trimestre 2026.",
+  "priority_banner": null,
   "items": [
     {
       "region": "eu",
-      "title": "MDCG 2026-4 : clarification de la gestion des SSCP dans EUDAMED",
-      "summary": "Le guide MDCG 2026-4, publié le 18 juin, précise les modalités de gestion des incidents graves et des actions de sécurité corrective de terrain (SSCP) dans EUDAMED.",
-      "detail": "Ce document introduit des exigences détaillées sur les délais de déclaration et les formats de données attendus pour les rapports d'incidents. Les fabricants doivent revoir leurs procédures de vigilance et vérifier la compatibilité de leurs systèmes internes avec les nouvelles fonctionnalités EUDAMED. Une période de transition court jusqu'au troisième trimestre 2026, date à laquelle les nouvelles modalités deviendront obligatoires. Les équipes QARA doivent anticiper la mise à jour des processus de déclaration et former les équipes concernées avant cette échéance.",
+      "title": "ISO/TS 24971-2 : première norme sur la gestion des risques pour les DM à base de machine learning",
+      "summary": "L'ISO a publié le 9 juillet 2026 la spécification technique ISO/TS 24971-2, première norme dédiée à la gestion des risques pour les dispositifs médicaux intégrant du machine learning.",
+      "detail": "Cette spécification technique complète l'ISO 14971 en fournissant des lignes directrices spécifiques pour identifier, analyser et maîtriser les risques propres aux systèmes d'apprentissage automatique dans les dispositifs médicaux. Elle aborde notamment la gestion des biais algorithmiques, la robustesse des modèles, la traçabilité des données d'entraînement et la surveillance continue post-déploiement. Les fabricants développant des DM IA doivent intégrer ces recommandations dans leur processus de gestion des risques avant tout nouveau dépôt de dossier technique, car les organismes notifiés commencent à s'y référer dès maintenant.",
       "priority": "high",
       "status": "new",
       "source_label": "Qualitiso",
@@ -21,29 +20,9 @@
     },
     {
       "region": "eu",
-      "title": "MDCG 2026-5 : attribution des identifiants UDI entre fabricants et distributeurs",
-      "summary": "Le MDCG 2026-5, publié le 22 juillet, clarifie les règles d'attribution des identifiants UDI dans les cas de distribution avec reconditionnement ou étiquetage personnalisé.",
-      "detail": "Le guide traite des situations où un distributeur modifie l'étiquetage d'un dispositif sans en changer la fonction médicale. Il précise que le distributeur peut devenir responsable de l'UDI secondaire uniquement sous certaines conditions strictes, notamment l'absence de modification de la classification ou de la destination du dispositif. Les fabricants doivent revoir leurs accords contractuels avec les distributeurs pour s'assurer que les responsabilités UDI sont clairement définies et conformes au cadre réglementaire. Ce guide évite des erreurs fréquentes constatées lors des audits d'organismes notifiés.",
-      "priority": "medium",
-      "status": "new",
-      "source_label": "Qualitiso",
-      "source_url": "https://www.qualitiso.com/veille/"
-    },
-    {
-      "region": "eu",
-      "title": "Décision d'exécution (UE) 2026/1231 : nouvelles normes harmonisées pour le MDR",
-      "summary": "La Commission européenne a publié le 18 juin la décision d'exécution (UE) 2026/1231, ajoutant plusieurs normes harmonisées à la liste officielle pour le règlement MDR.",
-      "detail": "Cette décision élargit le corpus de normes dont la conformité confère une présomption de conformité aux exigences essentielles du MDR. Les fabricants doivent consulter la liste mise à jour pour vérifier si leurs dispositifs relèvent de normes nouvellement harmonisées, ce qui peut simplifier la démonstration de conformité lors des audits. L'application de ces normes reste volontaire, mais leur usage est fortement recommandé pour faciliter l'évaluation par les organismes notifiés. Les équipes techniques doivent se procurer les versions harmonisées et planifier leur intégration dans les dossiers techniques avant le prochain cycle d'audit.",
-      "priority": "medium",
-      "status": "in-force",
-      "source_label": "Qualitiso",
-      "source_url": "https://www.qualitiso.com/veille/"
-    },
-    {
-      "region": "eu",
-      "title": "Règlement d'exécution (UE) 2026/977 : nouvelles règles pour les organismes notifiés",
-      "summary": "Le règlement d'exécution (UE) 2026/977, publié le 6 mai, modifie les exigences d'évaluation de la conformité par les organismes notifiés, notamment les processus d'audit et de surveillance.",
-      "detail": "Ce règlement introduit des critères de compétence renforcés pour les auditeurs des organismes notifiés et précise les modalités de surveillance post-certification. Les fabricants peuvent s'attendre à des audits plus détaillés sur les processus de gestion des risques et de vigilance, en particulier pour les dispositifs de classe III et les dispositifs implantables. Les organismes notifiés devront revoir leurs procédures internes d'ici la fin du troisième trimestre 2026. Les équipes QARA doivent anticiper ces changements en renforçant la documentation de leurs systèmes qualité et en préparant des réponses aux questions d'audit plus approfondies.",
+      "title": "Règlement d'exécution (UE) 2026/977 : nouvelles règles pour l'évaluation de conformité par les organismes notifiés",
+      "summary": "Le règlement d'exécution (UE) 2026/977, publié le 6 mai 2026, modifie les règles d'évaluation de conformité appliquées par les organismes notifiés dans le cadre du MDR.",
+      "detail": "Ce règlement introduit de nouvelles exigences pour les audits de certification, notamment sur la profondeur de l'examen de la documentation technique pour les dispositifs de classe IIb et III intégrant des algorithmes. Les organismes notifiés doivent désormais documenter explicitement leur évaluation de la robustesse des systèmes qualité face aux évolutions logicielles et aux mises à jour continues. Les fabricants actuellement en cours de certification ou préparant un renouvellement doivent anticiper des demandes d'informations complémentaires sur la gestion du cycle de vie logiciel et la surveillance post-commercialisation. Le règlement s'applique immédiatement aux nouvelles demandes de certification déposées après sa publication.",
       "priority": "high",
       "status": "in-force",
       "source_label": "DM Experts",
@@ -51,69 +30,9 @@
     },
     {
       "region": "eu",
-      "title": "Modifications du MDR : exemptions pour certains dispositifs implantables",
-      "summary": "Le 1er juillet, des modifications des articles 52.4 et 61.6 du MDR sont entrées en vigueur, élargissant les exemptions pour certains dispositifs médicaux implantables.",
-      "detail": "Ces modifications permettent à certains dispositifs implantables de classe IIa de bénéficier d'exemptions sur les exigences d'enregistrement dans EUDAMED, sous réserve de conditions spécifiques liées à leur durée d'implantation et à leur risque clinique. Les fabricants concernés doivent vérifier si leurs dispositifs remplissent les critères d'exemption et mettre à jour leurs dossiers techniques en conséquence. Cette mesure vise à alléger les charges administratives pour les dispositifs à faible risque, mais ne dispense pas des obligations de vigilance et de traçabilité. Les équipes réglementaires doivent consulter les orientations des organismes notifiés pour confirmer l'éligibilité de leurs produits.",
-      "priority": "medium",
-      "status": "in-force",
-      "source_label": "Qualitiso",
-      "source_url": "https://www.qualitiso.com/veille/"
-    },
-    {
-      "region": "eu",
-      "title": "MDCG 2021-24 Rev.1 : évolutions de classification des dispositifs médicaux",
-      "summary": "La révision 1 du guide MDCG 2021-24, publiée le 28 avril, apporte des précisions sur la classification des dispositifs médicaux selon les règles du MDR.",
-      "detail": "Cette mise à jour clarifie l'application des règles de classification pour les dispositifs combinant plusieurs fonctions ou intégrant des logiciels. Elle introduit des exemples pratiques pour les situations ambiguës, notamment pour les dispositifs connectés et les plateformes numériques. Les fabricants dont les dispositifs relèvent de la règle 11 (logiciels) ou de la règle 15 (dispositifs combinés) doivent revoir leur classification à la lumière de ces nouvelles orientations. Toute requalification d'un dispositif nécessite une mise à jour du dossier technique et une notification à l'organisme notifié avant le prochain audit de surveillance.",
-      "priority": "medium",
-      "status": "final",
-      "source_label": "Qualitiso",
-      "source_url": "https://www.qualitiso.com/veille/"
-    },
-    {
-      "region": "eu",
-      "title": "MDCG 2021-5 – Annexe : transition du symbole de mandataire autorisé",
-      "summary": "Le 18 juin, le MDCG a publié une annexe au guide MDCG 2021-5 précisant la transition du symbole 'EC REP' vers 'EU REP' pour le mandataire autorisé.",
-      "detail": "Cette annexe rappelle que le symbole 'EC REP' reste valide jusqu'au 31 décembre 2027, date après laquelle seul le symbole 'EU REP' sera accepté sur les étiquetages. Les fabricants doivent planifier la mise à jour de leurs étiquettes et notices d'utilisation avant cette échéance. Les stocks existants portant l'ancien symbole peuvent être écoulés jusqu'à épuisement, mais les nouvelles productions doivent progressivement adopter le nouveau symbole. Cette transition nécessite une coordination entre les équipes réglementaires, les services d'impression et les départements logistiques pour éviter toute non-conformité à partir de 2028.",
-      "priority": "medium",
-      "status": "ongoing",
-      "source_label": "Qualitiso",
-      "source_url": "https://www.qualitiso.com/veille/"
-    },
-    {
-      "region": "eu",
-      "title": "CNIL : nouvelles méthodologies de référence MR-001 et MR-003",
-      "summary": "La CNIL a publié le 23 mai les nouvelles méthodologies de référence MR-001 et MR-003, modernisant le cadre juridique des recherches dans le domaine de la santé.",
-      "detail": "Ces méthodologies remplacent les anciennes MR-001 et MR-003, simplifiant les démarches pour les promoteurs de recherches impliquant des données de santé. Elles précisent les obligations en matière de consentement, de sécurité des données et de droits des personnes. Les fabricants de dispositifs médicaux menant des investigations cliniques ou des études post-marché doivent revoir leurs protocoles de recherche pour s'assurer de leur conformité avec ces nouvelles références. L'application de ces méthodologies dispense de l'autorisation préalable de la CNIL, à condition de respecter strictement leurs exigences. Les équipes QARA doivent coordonner avec les départements juridiques et cliniques pour mettre à jour les procédures avant le lancement de nouvelles études.",
-      "priority": "high",
-      "status": "in-force",
-      "source_label": "DM Experts",
-      "source_url": "https://www.dm-experts.fr/flash-reglementaire-normatif/"
-    },
-    {
-      "region": "eu",
-      "title": "ISO/TS 24971-2 : gestion des risques pour les dispositifs à base de machine learning",
-      "summary": "L'ISO a publié le 9 juillet la spécification technique ISO/TS 24971-2, première norme dédiée à la gestion des risques pour les dispositifs médicaux intégrant du machine learning.",
-      "detail": "Cette spécification complète l'ISO 14971 en proposant une méthodologie adaptée aux risques spécifiques du machine learning : biais algorithmiques, dégradation des performances au fil du temps, risques liés aux données d'entraînement. Elle introduit des exigences sur la validation continue des modèles en conditions réelles et sur la traçabilité des évolutions algorithmiques. Les fabricants de dispositifs intégrant de l'IA doivent intégrer cette spécification dans leurs processus de gestion des risques et prévoir des cycles de réévaluation réguliers post-commercialisation. L'application de cette norme facilitera la démonstration de conformité lors des évaluations par les organismes notifiés et les évaluations AI Act à partir de 2027.",
-      "priority": "critical",
-      "status": "new",
-      "source_label": "Qualitiso",
-      "source_url": "https://www.qualitiso.com/veille/"
-    },
-    {
-      "region": "other",
-      "title": "Swissdamed obligatoire en Suisse dès le 1er juillet 2026",
-      "summary": "Swissmedic a confirmé le 1er juillet l'entrée en application obligatoire de la base de données Swissdamed pour tous les dispositifs médicaux commercialisés en Suisse.",
-      "detail": "Les fabricants et mandataires doivent désormais enregistrer tous leurs dispositifs dans Swissdamed avant leur mise sur le marché suisse. Cette base de données assure la traçabilité et la surveillance du marché. Les dispositifs déjà commercialisés doivent être enregistrés avant le 31 décembre 2026. Les fabricants européens exportant vers la Suisse doivent coordonner avec leurs mandataires locaux pour garantir la conformité des enregistrements et éviter toute interruption de commercialisation. Cette exigence s'ajoute aux obligations EUDAMED pour le marché européen.",
-      "priority": "medium",
-      "status": "in-force",
-      "source_label": "DM Experts",
-      "source_url": "https://www.dm-experts.fr/flash-reglementaire-normatif/"
-    },
-    {
-      "region": "other",
-      "title": "Australie : nouvelles exigences de traçabilité TGA au 1er juillet 2026",
-      "summary": "La TGA (Therapeutic Goods Administration) australienne a rappelé le 1er juillet l'entrée en vigueur de nouvelles exigences de traçabilité pour les dispositifs médicaux.",
-      "detail": "Ces exigences imposent l'enregistrement des identifiants UDI dans la base de données australienne des dispositifs médicaux (ARTG) et renforcent les obligations de déclaration d'incidents. Les fabricants exportant vers l'Australie doivent mettre à jour leurs enregistrements ARTG et vérifier la conformité de leurs systèmes UDI avec les formats australiens. Les sponsors locaux doivent également renforcer leurs processus de vigilance pour répondre aux nouveaux délais de déclaration. Cette mesure s'inscrit dans l'alignement progressif de la réglementation australienne sur les standards internationaux.",
+      "title": "CNIL : nouvelles méthodologies de référence MR-001 et MR-003 pour les recherches en santé",
+      "summary": "La CNIL a modernisé le 23 mai 2026 les méthodologies de référence MR-001 et MR-003, qui encadrent le traitement des données personnelles dans les recherches en santé.",
+      "detail": "Ces nouvelles méthodologies clarifient les conditions de réutilisation des données de santé pour les recherches impliquant des dispositifs médicaux numériques, notamment en précisant les exigences de consentement, d'information des personnes et de durée de conservation. Les fabricants menant des études cliniques ou des recherches observationnelles impliquant des données à caractère personnel doivent vérifier la conformité de leurs protocoles avec ces référentiels mis à jour, en particulier sur les modalités de pseudonymisation et les mesures de sécurité techniques. Les dossiers de recherche déposés après le 23 mai doivent obligatoirement respecter ces nouvelles méthodologies.",
       "priority": "medium",
       "status": "in-force",
       "source_label": "DM Experts",
@@ -122,23 +41,33 @@
     {
       "region": "uk",
       "title": "MHRA : rapport sur la phase 2 de AI Airlock",
-      "summary": "La MHRA a publié le 9 juin son rapport sur la phase 2 du programme AI Airlock, visant à accélérer l'accès au marché britannique pour les dispositifs médicaux intégrant de l'IA.",
-      "detail": "Ce rapport détaille les enseignements de la phase pilote menée avec plusieurs fabricants de dispositifs IA. Le programme AI Airlock propose un cadre d'évaluation adaptatif, permettant une validation progressive des performances algorithmiques en conditions réelles. La MHRA envisage de généraliser cette approche à partir de 2027, sous réserve de consultations avec l'industrie. Les fabricants développant des dispositifs IA destinés au marché britannique peuvent envisager de participer aux phases suivantes du programme pour bénéficier d'un accompagnement réglementaire précoce et accélérer leur mise sur le marché.",
+      "summary": "La MHRA a publié le 9 juin 2026 son rapport d'évaluation de la phase 2 du programme AI Airlock, qui teste une voie accélérée pour l'évaluation des dispositifs médicaux intégrant de l'intelligence artificielle.",
+      "detail": "Le rapport détaille les enseignements tirés de l'évaluation de dix dispositifs médicaux IA dans le cadre du programme pilote AI Airlock. La MHRA identifie les défis récurrents rencontrés par les fabricants : documentation insuffisante de la validation clinique, manque de transparence sur les données d'entraînement, et absence de plan de surveillance continue des performances algorithmiques. Bien que ce programme soit spécifique au Royaume-Uni, les critères d'évaluation retenus par la MHRA convergent avec les attentes émergentes des organismes notifiés européens et offrent un aperçu des exigences futures. Les fabricants ciblant le marché britannique peuvent utiliser ce rapport pour anticiper les points de vigilance lors de leurs dépôts.",
       "priority": "medium",
-      "status": "ongoing",
+      "status": "final",
+      "source_label": "DM Experts",
+      "source_url": "https://www.dm-experts.fr/flash-reglementaire-normatif/"
+    },
+    {
+      "region": "other",
+      "title": "Swissdamed et TGA : nouvelles exigences de traçabilité entrées en vigueur le 1er juillet",
+      "summary": "Le 1er juillet 2026 marque l'entrée en application de Swissdamed en Suisse et de nouvelles exigences de traçabilité pour les dispositifs médicaux en Australie.",
+      "detail": "Swissmedic rend obligatoire l'utilisation de la base de données Swissdamed pour l'enregistrement et la traçabilité des dispositifs médicaux commercialisés en Suisse. Parallèlement, la TGA (Therapeutic Goods Administration) australienne impose de nouvelles obligations de traçabilité pour les dispositifs de classe II et supérieure, incluant l'enregistrement dans le système ARTG et la déclaration des événements indésirables dans un délai réduit. Les fabricants exportant vers ces marchés doivent s'assurer que leurs systèmes de vigilance et leurs processus de déclaration sont conformes à ces nouveaux cadres, sous peine de suspension de commercialisation.",
+      "priority": "medium",
+      "status": "in-force",
       "source_label": "DM Experts",
       "source_url": "https://www.dm-experts.fr/flash-reglementaire-normatif/"
     }
   ],
   "points_vigilance": [
-    "La transition du symbole 'EC REP' vers 'EU REP' doit être achevée avant le 31 décembre 2027 — les fabricants doivent planifier la mise à jour progressive de leurs étiquetages et écouler les stocks avant cette date.",
-    "Le règlement d'exécution (UE) 2026/977 impose aux organismes notifiés de revoir leurs procédures d'audit d'ici la fin du troisième trimestre 2026 — les fabricants doivent anticiper des audits plus approfondis et renforcer leur documentation qualité.",
-    "Les dispositifs déjà commercialisés en Suisse doivent être enregistrés dans Swissdamed avant le 31 décembre 2026 — les fabricants exportant vers la Suisse doivent coordonner avec leurs mandataires locaux pour éviter toute interruption de commercialisation."
+    "Le MDCG 2026-4, publié le 18 juin, fixe des échéances pour la gestion des SSCP dans EUDAMED — les fabricants doivent revoir leurs processus de déclaration avant le troisième trimestre 2026.",
+    "La transition du symbole de mandataire autorisé de « EC REP » vers « EU REP » (MDCG 2021-5 annexe) doit être effective sur tous les étiquetages avant la fin du troisième trimestre 2026.",
+    "Les fabricants de dispositifs implantables concernés par les modifications des articles 52.4 et 61.6 du MDR (publiées le 1er juillet) doivent vérifier l'impact sur leurs exemptions et mettre à jour leur documentation technique en conséquence."
   ],
   "standards_changed": [
     {
       "reference": "ISO/TR 24971",
-      "note": "L'ISO/TS 24971-2, publiée le 9 juillet, complète l'ISO 14971 avec une méthodologie dédiée aux dispositifs à base de machine learning."
+      "note": "Publication de l'ISO/TS 24971-2 le 9 juillet 2026, première spécification technique dédiée à la gestion des risques pour les dispositifs médicaux à base de machine learning, complétant l'ISO 14971."
     }
   ]
 }
