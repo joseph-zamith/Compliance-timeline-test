@@ -1,1 +1,90 @@
-[]
+[
+  {
+    "key": "swissmedic-et-tga-tracabilite-obligatoire-au-1er-juillet-2026",
+    "title": "Swissmedic et TGA : traçabilité obligatoire au 1er juillet 2026",
+    "last_status": "in-force",
+    "source_url": "https://www.dm-experts.fr/2026/07/1%e1%b5%89%ca%b3-juillet-jalon-important-pour-la-tracabilite-des-dispositifs-medicaux-en-suisse-et-en-australie/",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "cnil-publication-des-nouvelles-mr-001-et-mr-003",
+    "title": "CNIL : publication des nouvelles MR-001 et MR-003",
+    "last_status": "in-force",
+    "source_url": "https://www.dm-experts.fr/2026/07/methodologies-de-reference-cnil-publication-des-nouvelles-mr-001-et-mr-003/",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "mhra-rapport-phase-2-ai-airlock-publie",
+    "title": "MHRA : rapport phase 2 AI Airlock publié",
+    "last_status": "final",
+    "source_url": "https://www.dm-experts.fr/2026/07/mhra-rapport-sur-la-phase-2-de-ai-airlock/",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "mdcg-2026-4-fabricants-chargent-resumes-ssp-et-sscp-dans-eudamed",
+    "title": "MDCG 2026-4 : fabricants chargent résumés SSP et SSCP dans EUDAMED",
+    "last_status": "new",
+    "source_url": "https://www.dm-experts.fr/2026/07/eudamed-le-mdcg-2026-4-confie-aux-fabricants-le-chargement-de-tous-les-resumes-ssp-et-sscp/",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "pren-18286-norme-qms-ai-act-attendue-q4-2026",
+    "title": "prEN 18286 : norme QMS AI Act attendue Q4 2026",
+    "last_status": "draft",
+    "source_url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "master-udi-di-specifications-enregistrement-se-precisent",
+    "title": "Master UDI-DI : spécifications enregistrement se précisent",
+    "last_status": "ongoing",
+    "source_url": "https://www.dm-experts.fr/2026/07/master-udi-di-specifications-et-enregistrements-se-precisent/",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "commission-europeenne-publications-evaluations-cliniques-communes",
+    "title": "Commission européenne : publications évaluations cliniques communes",
+    "last_status": "new",
+    "source_url": "https://www.dm-experts.fr/2026/07/union-europeenne-publications-sur-les-evaluations-cliniques-communes/",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "team-nb-medtech-europe-retours-simplification-mdr-ivdr",
+    "title": "Team-NB & MedTech Europe : retours simplification MDR/IVDR",
+    "last_status": "ongoing",
+    "source_url": "https://www.dm-experts.fr/2026/07/team-nb-medtech-europe-proposition-de-simplification-des-reglements-suite-des-retours/",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "enisa-etat-des-lieux-nomenclature-logicielle-sbom-et-cybersecurite",
+    "title": "ENISA : état des lieux nomenclature logicielle (SBOM) et cybersécurité",
+    "last_status": "new",
+    "source_url": "https://www.dm-experts.fr/2026/07/enisa-etat-des-lieux-en-matiere-de-nomenclature-logicielle-sbom-et-de-cybersecurite/",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "mdsap-premier-rapport-annuel-avancees-2025-publie",
+    "title": "MDSAP : premier rapport annuel avancées 2025 publié",
+    "last_status": "final",
+    "source_url": "https://www.dm-experts.fr/2026/07/mdsap-1er-rapport-annuel-sur-les-avancees-de-2025/",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  },
+  {
+    "key": "ansm-dispositifs-annexe-xvi-et-dispositions-transitoires",
+    "title": "ANSM : dispositifs annexe XVI et dispositions transitoires",
+    "last_status": "new",
+    "source_url": "https://www.dm-experts.fr/2026/07/ansm-dispositifs-sans-finalite-medicale-annexe-xvi-et-dispositions-transitoires/",
+    "first_seen": "2026-07-22",
+    "last_seen": "2026-07-22"
+  }
+]
