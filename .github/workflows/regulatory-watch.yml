@@ -40,7 +40,9 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # ~25 petits appels LLM (triage + 1/item + propositions + 1/carte FR) +
+    # 12 fetches + 8 Sonar : 15 min était trop juste dans le pire cas.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 

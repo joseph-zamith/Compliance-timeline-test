@@ -13,8 +13,16 @@ injectées par le workflow depuis les secrets GitHub.
   1. Charger la config (modèles, destinataires) et les données existantes.
   2. Recherche : fetch direct (HTTP simple) des sources fixes + requêtes
      Perplexity Sonar via LiteLLM pour la largeur de couverture.
-  3. Rédaction : un appel à Claude (via LiteLLM) qui trie, rédige (règles
-     éditoriales FR ci-dessous) et génère les propositions EN + FR.
+  3. Rédaction découpée en petits appels — le gateway coupe toute requête à
+     300 s exactement (mesuré, voir automation/tools/gateway_cap_probe.py),
+     parfois en le déguisant en finish_reason="stop", donc aucun appel ne doit
+     générer plus de quelques milliers de tokens :
+       a. triage (Sonnet) : sélection des items + faits clés, sans prose ;
+       b. rédaction par item (Haiku) : summary/detail, ~300 tokens par appel,
+          retry unitaire, repli sur les faits clés si échec (le run continue) ;
+       c. propositions EN (Sonnet), puis traduction FR par carte (Haiku) —
+          la version FR est construite par copie de l'EN, donc la parité
+          des ids/champs est garantie par construction.
   4. Validation stricte du JSON produit — on n'écrit/pousse RIEN si c'est
      invalide, pour ne jamais casser le site public.
   5. Envoi du mail (corps concis + rapport complet en pièce jointe).
@@ -197,10 +205,21 @@ def load_json(path: Path, default=None):
 
 
 def load_config() -> dict:
+    """Un modèle par étape du pipeline. Les étapes de décision (triage,
+    propositions) restent sur Sonnet ; les étapes mécaniques (prose d'un item
+    à partir de faits déjà choisis, traduction de 3 champs) descendent sur
+    Haiku (~3x moins cher, ~2x plus rapide). `writing_model` sert de fallback
+    pour compat avec l'ancien config.json à deux champs."""
     cfg = load_json(AUTOMATION_DIR / "config.json", {})
+    writing_default = cfg.get("writing_model", "vercel/anthropic-claude-sonnet-4.5")
+    haiku_default = "vercel/anthropic-claude-haiku-4.5"
     return {
         "research_model": cfg.get("research_model", "vercel/perplexity-sonar"),
-        "writing_model": cfg.get("writing_model", "vercel/anthropic-claude-sonnet-4.5"),
+        "writing_model": writing_default,
+        "triage_model": cfg.get("triage_model", writing_default),
+        "item_model": cfg.get("item_model", haiku_default),
+        "proposals_model": cfg.get("proposals_model", writing_default),
+        "translate_model": cfg.get("translate_model", haiku_default),
     }
 
 
@@ -212,11 +231,93 @@ def load_recipients() -> list:
     return recipients
 
 
-def load_last_email() -> str:
-    path = STATE_DIR / "last_email.html"
-    if path.exists():
-        return path.read_text(encoding="utf-8")
-    return "(aucune édition précédente — première exécution)"
+# ---------------------------------------------------------------------------
+# Persistent anti-repetition archive (known_topics.json)
+#
+# Replaces comparing against last_email.html (one HTML snapshot, mostly
+# markup, only one week deep — weak signal) with a structured, ever-growing
+# registry of every topic the pipeline has ever reported, updated (not
+# overwritten) on every successful run. Far more reliable for the model to
+# parse, and it remembers further back than one week.
+# ---------------------------------------------------------------------------
+
+KNOWN_TOPICS_PATH = STATE_DIR / "known_topics.json"
+
+
+def _topic_key(title: str) -> str:
+    """Normalise a title into a stable matching key — lowercase, accents and
+    punctuation stripped, whitespace collapsed. Approximate on purpose: exact
+    fuzzy matching isn't worth the complexity here, this only needs to catch
+    the same topic reworded slightly week to week."""
+    import unicodedata
+    normalized = unicodedata.normalize("NFKD", title or "")
+    ascii_only = normalized.encode("ascii", "ignore").decode("ascii").lower()
+    slug = re.sub(r"[^a-z0-9]+", "-", ascii_only).strip("-")
+    return slug[:80]
+
+
+def load_known_topics() -> list:
+    if KNOWN_TOPICS_PATH.exists():
+        try:
+            return json.loads(KNOWN_TOPICS_PATH.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            log("(non bloquant) known_topics.json illisible — anti-répétition redémarre à vide pour ce run.")
+    return []
+
+
+def build_known_topics_digest(topics: list, limit: int = 150) -> str:
+    """Compact one-liner-per-topic digest for the content prompt — title,
+    last known status, and when it was last reported. Capped to the most
+    recently-seen N topics so this can't grow unbounded over months/years."""
+    if not topics:
+        return "(aucune édition précédente — première exécution)"
+    ordered = sorted(topics, key=lambda t: t.get("last_seen", ""), reverse=True)[:limit]
+    lines = [
+        f"- {t.get('title')} (statut: {t.get('last_status', '?')}, vu le {t.get('last_seen', '?')})"
+        for t in ordered
+    ]
+    return "\n".join(lines)
+
+
+def merge_known_topics(topics: list, items: list, today_str: str) -> list:
+    """Fold this run's items into the persistent registry: update the
+    matching entry's last_status/last_seen if the topic was already known,
+    else append it as new. Never deletes — the registry only ever grows.
+
+    Matches on title-key first, falling back to source_url — a topic whose
+    title gets reworded slightly week to week (very possible, titles are
+    freshly generated each run, not pulled from a fixed canonical source)
+    will still often share the same source_url, catching what the title-only
+    match would miss."""
+    by_key = {t["key"]: t for t in topics if "key" in t}
+    by_url = {t["source_url"]: t for t in topics if t.get("source_url")}
+    for item in items:
+        key = _topic_key(item.get("title", ""))
+        url = item.get("source_url", "")
+        if not key:
+            continue
+        existing = by_key.get(key) or (by_url.get(url) if url else None)
+        if existing:
+            existing["last_status"] = item.get("status", existing.get("last_status"))
+            existing["last_seen"] = today_str
+            if url:
+                existing["source_url"] = url
+                by_url[url] = existing
+            by_key[key] = existing
+        else:
+            new_entry = {
+                "key": key,
+                "title": item.get("title", ""),
+                "last_status": item.get("status", "ongoing"),
+                "source_url": url,
+                "first_seen": today_str,
+                "last_seen": today_str,
+            }
+            by_key[key] = new_entry
+            if url:
+                by_url[url] = new_entry
+            topics.append(new_entry)
+    return topics
 
 
 def get_litellm_client() -> OpenAI:
@@ -283,7 +384,7 @@ def fetch_fixed_sources() -> str:
             text = re.sub(r"\n{3,}", "\n\n", text).strip()
             # Cap per-source length to keep the writing-model prompt manageable — a
             # smaller prompt also reduces the model's tendency to try to cover
-            # everything at length (see CONTENT_SYSTEM_PROMPT hard length budget).
+            # everything at length (see TRIAGE_SYSTEM_PROMPT hard item cap).
             chunk = f"--- SOURCE: {url} ---\n{text[:2500]}"
             if links_blob:
                 chunk += (
@@ -332,17 +433,24 @@ def run_sonar_research(client: OpenAI, model: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Step 3: writing — one call to the writing model, structured output
+# Step 3: writing — split into many small calls, each far under the gateway's
+# 300s duration cap: triage (selection + key facts, no prose), then one tiny
+# prose call per item, then proposals EN, then one tiny translation call per
+# proposal card. A cut chunk retries alone; a definitively failed chunk falls
+# back gracefully instead of killing the run.
 # ---------------------------------------------------------------------------
 
-CONTENT_SYSTEM_PROMPT = f"""You are an expert QARA (Quality Assurance & Regulatory Affairs) consultant
-specialised in Medical Device Software (MDSW) in the EU, writing for Theodo HealthTech.
+TRIAGE_SYSTEM_PROMPT = f"""You are an expert QARA (Quality Assurance & Regulatory Affairs) consultant
+specialised in Medical Device Software (MDSW) in the EU, working for Theodo HealthTech.
 
-## YOUR JOB
-Produce ONLY structured content as JSON (schema below) — NEVER write any HTML. A separate
-system renders the branded email and report from your JSON. This means: no markup, no styling,
-just clear French editorial text. This also means your output is much smaller than before —
-write substantively (real sentences, real detail), you are not being asked to compress.
+## YOUR JOB — TRIAGE ONLY, NO PROSE
+You are the FIRST stage of a pipeline: you SELECT and STRUCTURE this week's material
+developments; a separate stage writes the editorial prose from your output, one item at a
+time, WITHOUT seeing the research. So produce ONLY the JSON skeleton below — no HTML, no
+summary sentences, no editorial prose. For each item, give factual "key_facts" bullets
+(exact dates, actors, references, deadlines, what precisely changed, concrete next step if
+obvious) precise and self-sufficient enough that a writer who has never seen the research
+can write the item from them alone.
 
 ## EDITORIAL MANDATE
 Audience: busy QARA leads and C-levels. This is a weekly digest, not an exhaustive dump, but be
@@ -352,10 +460,12 @@ NOT to "essentiel": that field is read first, by everyone, and must reflect what
 most this week regardless of region — you are given the full research for every region below, so
 scan all of it (not just EU material) before writing "essentiel". If the single biggest
 development of the week happened outside the EU, it belongs in "essentiel" even though the rest
-of the email body stays EU-focused. Never repeat last week's items without a material development
-since — read the previous edition below first.
+of the email body stays EU-focused. Never repeat a previously-reported topic without a material
+development since — the structured archive of previously reported topics is given below, check it
+before writing (it goes back further than just last week, so check it rather than assuming
+something is new just because you haven't personally seen it this run).
 
-STANDING ITEM WITH NO CHANGE THIS WEEK: if a topic already covered in a previous edition has no
+STANDING ITEM WITH NO CHANGE THIS WEEK: if a topic already in the previously-reported archive has no
 material development since, DO NOT create an item for it and do not mention it in "essentiel" —
 leave it out of the body entirely. It is only eligible for a one-liner in "points_vigilance", and
 only if its next deadline falls within roughly 60 days. Silence on an unchanged topic is correct,
@@ -375,21 +485,13 @@ vigueur", "a été publié") just because it's in this week's source material. S
 (including the existing timeline milestones) legitimately includes future-dated items; your job
 is to report their status accurately, not to imply they already happened.
 
-Language: FRENCH, native register (not translated English). Banned calques: "actionnable",
-"re-actionner", "En 60 secondes", "Sur le radar", "atteindre le seuil", "reprise du stock"
-(write "rattrapage / enregistrement du stock existant"). No em dashes anywhere, ever. Tone:
-factual, action-oriented, cut adjectives. "Cut adjectives" means cut marketing/filler adjectives
-("innovant", "majeur", "crucial") — it does NOT mean cut articles, prepositions, or connecting
-words.
-
-ONE EXCEPTION: "essentiel" may stay compact/headline-style (articles can be dropped there, that
-register is fine and expected). EVERYWHERE ELSE — every item's "summary" and "detail",
-"points_vigilance" — must be complete, grammatical French sentences: every noun
-needs its article ("le", "la", "les", "des", "du"), normal connectors ("qui", "donc", "avant de").
-Dropping articles on regulatory noun phrases is a common mistake — avoid it:
-- WRONG: "MDCG 2026-4 finalise juin 2026 clarifie gestion SSCP dans EUDAMED."
-- RIGHT: "Le MDCG 2026-4, finalise en juin 2026, clarifie la gestion des SSCP dans EUDAMED."
-See the worked example below for the target register on items.
+Language: the reader-facing fields you write ("essentiel", "points_vigilance", "title") are in
+FRENCH, native register (not translated English). Banned calques: "actionnable", "re-actionner",
+"En 60 secondes", "Sur le radar", "atteindre le seuil", "reprise du stock" (write "rattrapage /
+enregistrement du stock existant"). No em dashes anywhere, ever. "essentiel" may stay
+compact/headline-style; "points_vigilance" must be complete French sentences with their
+articles. "key_facts" are working notes for the next stage, not reader-facing: any language,
+but every fact must be dated and attributed.
 
 ## STANDARDS REGISTER (for reference — do not reproduce this table; only report rows that
 genuinely moved this week, by their exact "reference" string, in standards_changed)
@@ -402,9 +504,8 @@ genuinely moved this week, by their exact "reference" string, in standards_chang
   "items": [
     {{
       "region": "eu | uk | us | other",
-      "title": "short headline, no HTML",
-      "summary": "1-2 sentences for the email — what changed, so what",
-      "detail": "fuller paragraph(s) for the report — what changed, why it matters, concrete next step for a QARA lead. Can be 3-6 sentences, real substance.",
+      "title": "short French headline, no HTML",
+      "key_facts": ["3-6 factual bullets: what exactly changed, exact dates, actors, references, deadlines, concrete next step if obvious — self-sufficient, the writer sees ONLY these"],
       "priority": "critical | high | medium",
       "status": "new | in-force | draft | ongoing | final | withdrawn",
       "source_label": "short source name, e.g. CNIL",
@@ -417,13 +518,17 @@ genuinely moved this week, by their exact "reference" string, in standards_chang
   ]
 }}
 
-## EXAMPLE ITEM — this is the register/register-completeness to match for every item's
-"summary"/"detail" (complete sentences, tight, no filler — not a headline, not a wall of text)
+## EXAMPLE ITEM — this is the key_facts precision to match (dated, attributed, self-sufficient)
 {{
   "region": "eu",
   "title": "MDCG 2025-9 : nouvelles lignes directrices sur les logiciels autonomes",
-  "summary": "La Commission europeenne a publie une nouvelle version de MDCG 2025-9 sur la qualification des logiciels autonomes comme dispositifs medicaux.",
-  "detail": "Le guide introduit une grille d'analyse par cas d'usage, plutot que par la seule finalite declaree par l'editeur. Les dossiers combinant plusieurs fonctions devront reexaminer leur classification avant tout depot au troisieme trimestre.",
+  "key_facts": [
+    "European Commission published a revised MDCG 2025-9 on 15 July 2026 (source: MDCG page)",
+    "Scope: qualification of standalone software as medical devices under MDR",
+    "New: use-case-based analysis grid replaces qualification by declared intended purpose alone",
+    "Impact: files combining several functions must re-examine classification",
+    "Deadline pressure: re-examination needed before any Q3 2026 submission"
+  ],
   "priority": "high",
   "status": "new",
   "source_label": "MDCG",
@@ -431,20 +536,56 @@ genuinely moved this week, by their exact "reference" string, in standards_chang
 }}
 
 Guidance on "items": typically 4-10 items total across all regions combined (fewer on a quiet
-week, more on a busy one — do not force a count). HARD CAP: never exceed 12 items, even in an
-exceptionally active week — this is a length constraint, not a quality target. If more than 12
-items are genuinely material, keep the 12 most impactful and drop the rest entirely (better to
-fully finish 12 substantive items than start a 13th and run out of room). Order does not matter,
-region field handles sorting. Every item needs a real, clickable source_url — when the source
-material includes a "Liens specifiques trouves sur cette page" list, use the specific article
-link from it, not the source's generic homepage/listing URL (that generic URL is only a fallback
-for items where no specific link matches).
+week, more on a busy one — do not force a count). HARD CAP: never exceed 20 items — beyond
+that, keep the 20 most impactful. This cap is editorial (email readability), not technical:
+each item costs you only a few key_facts lines, so never shorten key_facts to fit more items
+in. Order does not matter, the region field handles sorting. Every item needs a real,
+clickable source_url — when the source material includes a "Liens specifiques trouves sur
+cette page" list, use the specific article link from it, not the source's generic
+homepage/listing URL (that generic URL is only a fallback for items where no specific link
+matches).
 
-## OUTPUT FORMAT — respect EXACTLY, nothing else before/after, no markdown code fences
-Use ONLY these two markers, exactly as written: never invent your own extra marker.
-{CONTENT_MARKER}
-<the JSON object, nothing else>
-{END_MARKER}
+## OUTPUT FORMAT
+Output the JSON object and NOTHING else — no markers, no markdown code fences, no text
+before the opening brace or after the closing brace.
+"""
+
+ITEM_WRITE_SYSTEM_PROMPT = """You are an expert QARA (Quality Assurance & Regulatory Affairs)
+consultant writing Theodo HealthTech's weekly regulatory digest (audience: busy QARA leads and
+C-levels). You receive ONE item as JSON: region, title, priority, status, source, and factual
+"key_facts" bullets selected by an editor. Write the French prose for this single item.
+
+## RULES
+- FRENCH, native register (not translated English). Banned calques: "actionnable",
+  "re-actionner", "atteindre le seuil", "reprise du stock". No em dashes anywhere, ever.
+- Complete, grammatical sentences: every noun needs its article ("le", "la", "les", "des",
+  "du"), normal connectors ("qui", "donc", "avant de"). Dropping articles on regulatory noun
+  phrases is a common mistake — avoid it:
+  WRONG: "MDCG 2026-4 finalise juin 2026 clarifie gestion SSCP dans EUDAMED."
+  RIGHT: "Le MDCG 2026-4, finalise en juin 2026, clarifie la gestion des SSCP dans EUDAMED."
+- Tone: factual, action-oriented. Cut marketing/filler adjectives ("innovant", "majeur",
+  "crucial") — do NOT cut articles, prepositions, or connecting words.
+- Temporal accuracy: compare every date in key_facts to today's date (given in the input).
+  A FUTURE date is described as upcoming ("entrera en vigueur le...", "sera publié le..."),
+  never as already done.
+- Use ONLY the facts provided — never invent numbers, dates, or details absent from key_facts.
+
+## OUTPUT — a single JSON object, nothing else, no markdown code fences
+{"summary": "1-2 sentences for the email — what changed, so what",
+ "detail": "3-6 sentences for the report — what changed, why it matters, concrete next step for a QARA lead"}
+"""
+
+TRANSLATE_SYSTEM_PROMPT = """You translate regulatory timeline card fields from English to
+French. Input: a JSON object {"t": "...", "x": "...", "l": "..."} (title, one-sentence
+description, short date label).
+
+Rules: native French register, no calques, no em dashes. Keep acronyms and references (MDCG,
+EUDAMED, MDR, prEN 18286...) unchanged. "l" is a short date label — French format with the
+month in lowercase: "23 May 2026" -> "23 mai 2026", "Aug 2026" -> "août 2026", "Q4 2026" ->
+"T4 2026".
+
+OUTPUT: the same JSON object with the three field values translated, nothing else, no markdown
+code fences.
 """
 
 PROPOSALS_SYSTEM_PROMPT = f"""You are an expert QARA (Quality Assurance & Regulatory Affairs) consultant
@@ -477,9 +618,9 @@ feels redundant with "card":
   already present in the existing timeline milestones given below. "reason" explains what
   changed / why it's being removed.
 
-FR proposals: IDENTICAL id/action/existing_id/card.id/card.d/card.y/card.u/card.tp/card.tg/card.v;
-translate card.t, card.x, card.l only (reason stays in English). Keep "reason" and "x" (card
-description) concise — 1-2 sentences, not a paragraph.
+Produce ENGLISH ONLY — the French version is generated separately by a translation stage,
+never by you. Keep "reason" and "x" (card description) concise — 1-2 sentences, not a
+paragraph.
 
 ## EXAMPLE — every field shown here is mandatory on every proposal, copy this exact shape
 {{
@@ -509,33 +650,35 @@ description) concise — 1-2 sentences, not a paragraph.
   ]
 }}
 
-## OUTPUT FORMAT — respect EXACTLY, nothing else before/after
-Use ONLY these three markers, exactly as written, nothing else: never invent your own extra
-marker — the JSON for each block ends the instant the next marker below appears, that is the
-only signal needed.
-{PROPOSALS_EN_MARKER}
-{{"generated": "YYYY-MM-DD", "proposals": [...]}}
-{PROPOSALS_FR_MARKER}
-{{"generated": "YYYY-MM-DD", "proposals": [...]}}
-{END_MARKER}
+## OUTPUT FORMAT
+Output a single JSON object {{"generated": "YYYY-MM-DD", "proposals": [...]}} and NOTHING
+else — no markers, no markdown code fences, no text before or after the JSON.
 """
+
+
+class ChunkCallError(Exception):
+    """Un petit appel LLM a échoué (timeout, coupure, JSON invalide) après
+    épuisement de ses retries. C'est l'APPELANT qui décide de la suite : fail()
+    dur pour les étapes indispensables (triage, propositions EN), repli
+    gracieux pour les étapes par morceau (prose d'un item, traduction d'une
+    carte) — un morceau perdu ne doit jamais tuer tout le run."""
 
 
 def run_model_call(
     client: OpenAI, model: str, system_prompt: str, user_content: str, label: str,
     max_tokens: int = 16000,
-) -> str:
-    """Shared streaming call used for both the content call (email+report) and
-    the proposals call. Splitting these into two smaller requests (instead of
-    one call producing all four sections) keeps each call's total generation
-    time comfortably under the gateway's apparent hard cap on request
-    duration — the cause of the earlier finish_reason=None cutoffs.
+) -> tuple:
+    """Shared low-level streaming call. Returns (content, finish_reason);
+    raises ChunkCallError on a stalled stream instead of exiting, so callers
+    (call_json) can retry just this chunk.
 
     max_tokens is deliberately kept much lower than the model's real ceiling:
     it acts as a hard, deterministic backstop so a call that ignores the
     length guidance in the prompt fails fast and clearly (finish_reason=
-    "length", caught below) instead of silently running into the gateway's
-    duration cutoff."""
+    "length") instead of silently running into the gateway's 300s duration
+    cutoff (measured — see automation/tools/gateway_cap_probe.py; note the
+    gateway sometimes disguises that cutoff as finish_reason="stop", so JSON
+    validity downstream is the only reliable truncation detector)."""
     # Streaming : le flux avance token par token. Le timeout "read" configuré
     # sur le client (voir get_litellm_client) protège contre un vrai blocage
     # sans jamais couper un rapport long qui progresse normalement.
@@ -567,16 +710,57 @@ def run_model_call(
                 log(f"  ... {label} toujours en cours, {total_chars} caractères reçus jusqu'ici.")
                 last_progress_log = now
     except httpx.ReadTimeout:
-        fail(f"Modèle bloqué ({label}) : aucune donnée reçue pendant plus de 90s.")
+        raise ChunkCallError(f"Modèle bloqué ({label}) : aucune donnée reçue pendant plus de 90s.")
 
     content = "".join(chunks)
     log(f"{label} terminé — finish_reason={finish_reason}, longueur={len(content)} caractères.")
     if finish_reason == "length":
         log(
             f"  ATTENTION ({label}) : coupé par max_tokens={max_tokens}, pas par le modèle "
-            f"lui-même — le contenu est probablement incomplet (pas de marqueur de fin)."
+            f"lui-même — le contenu est probablement incomplet."
         )
-    return content
+    return content, finish_reason
+
+
+def _strip_code_fences(text: str) -> str:
+    """Le modèle emballe parfois sa sortie dans ```json ... ``` malgré
+    l'interdiction explicite — on retire la fence plutôt que d'échouer."""
+    text = text.strip()
+    m = re.match(r"^```(?:json)?\s*(.*?)\s*```$", text, re.DOTALL)
+    return m.group(1) if m else text
+
+
+def call_json(
+    client: OpenAI, model: str, system_prompt: str, user_content: str, label: str,
+    max_tokens: int, retries: int = 2,
+):
+    """Petit appel LLM à sortie JSON directe (sans marqueurs), avec retries.
+
+    C'est la brique de base du pipeline découpé : chaque appel génère peu de
+    tokens (donc passe loin sous le cap de 300s du gateway), et un appel coupé
+    ou mal formé se retry SEUL — on ne re-paye jamais les autres morceaux.
+    Considère comme échec : flux bloqué, finish_reason=length, JSON invalide
+    (seul détecteur fiable d'une coupure gateway déguisée en "stop"), erreur
+    API (429/5xx). Lève ChunkCallError après épuisement des retries."""
+    last_error = ""
+    for attempt in range(1, retries + 2):
+        try:
+            raw, finish_reason = run_model_call(
+                client, model, system_prompt, user_content,
+                f"{label} (essai {attempt})", max_tokens=max_tokens,
+            )
+            if finish_reason == "length":
+                raise ChunkCallError(f"coupé par max_tokens={max_tokens}")
+            return json.loads(_strip_stray_markers(_strip_code_fences(raw)))
+        except (ChunkCallError, json.JSONDecodeError) as e:
+            last_error = f"{type(e).__name__}: {e}"
+        except Exception as e:  # noqa: BLE001 — erreurs API/réseau (429, 5xx...)
+            last_error = f"{type(e).__name__}: {e}"
+        if attempt <= retries:
+            wait = 2 if attempt == 1 else 5
+            log(f"  {label}: échec essai {attempt} ({last_error[:200]}) — nouvel essai dans {wait}s.")
+            time.sleep(wait)
+    raise ChunkCallError(f"{label}: échec après {retries + 1} essais — {last_error[:300]}")
 
 
 def save_debug_output(raw: str, kind: str) -> None:
@@ -632,6 +816,107 @@ def split_proposals_sections(raw: str) -> dict:
         )
     proposals_en_raw, proposals_fr_raw = (_strip_stray_markers(s) for s in m.groups())
     return {"proposals_en_raw": proposals_en_raw, "proposals_fr_raw": proposals_fr_raw}
+
+
+MAX_ITEMS = 20  # garde-fou éditorial (lisibilité email), plus une contrainte technique
+
+
+def run_triage(client: OpenAI, model: str, user_content: str) -> dict:
+    """Étape 3a : sélection des items + faits clés, sans prose. Indispensable :
+    sans triage il n'y a pas de run, donc échec = fail() dur."""
+    try:
+        triage = call_json(client, model, TRIAGE_SYSTEM_PROMPT, user_content, "Triage", max_tokens=6000)
+    except ChunkCallError as e:
+        fail(f"Triage impossible : {e}")
+    if not isinstance(triage, dict):
+        fail("Triage : structure racine invalide (attendu un objet JSON).")
+    items = triage.get("items") or []
+    if len(items) > MAX_ITEMS:
+        log(f"Triage : {len(items)} items dépassent le cap de {MAX_ITEMS} — seuls les {MAX_ITEMS} premiers sont gardés.")
+        triage["items"] = items[:MAX_ITEMS]
+    return triage
+
+
+def write_item_prose(client: OpenAI, model: str, items: list, today_str: str) -> None:
+    """Étape 3b : un petit appel par item (~300 tokens de sortie, ~10s), qui
+    transforme les key_facts en summary/detail. Un item qui échoue après
+    retries est publié en repli sur ses faits bruts (avec warning) plutôt que
+    de faire échouer le run — c'est tout l'intérêt du découpage."""
+    total = len(items)
+    for i, item in enumerate(items, start=1):
+        payload = {
+            k: item.get(k)
+            for k in ("region", "title", "priority", "status", "source_label", "source_url", "key_facts")
+        }
+        user_content = (
+            f"{json.dumps(payload, ensure_ascii=False)}\n"
+            f"Today's date: {today_str}."
+        )
+        title_short = str(item.get("title", ""))[:60]
+        try:
+            written = call_json(
+                client, model, ITEM_WRITE_SYSTEM_PROMPT, user_content,
+                f"Item {i}/{total} « {title_short} »", max_tokens=700,
+            )
+            summary = str(written.get("summary") or "").strip()
+            detail = str(written.get("detail") or "").strip()
+            if not summary:
+                raise ChunkCallError("summary vide dans la réponse")
+            item["summary"] = summary
+            item["detail"] = detail or summary
+        except ChunkCallError as e:
+            facts = [str(f).strip() for f in (item.get("key_facts") or []) if str(f).strip()]
+            fallback = " ".join(facts) or str(item.get("title", ""))
+            item["summary"] = " ".join(facts[:2]) or fallback
+            item["detail"] = fallback
+            log(f"  ATTENTION: rédaction échouée pour « {title_short} » ({e}) — repli sur les faits bruts.")
+        # Notes de travail internes : jamais rendues dans l'email/rapport.
+        item.pop("key_facts", None)
+
+
+def prefix_proposal_ids(proposals: dict, today_str: str) -> None:
+    """Ids de proposition uniques par lot hebdomadaire : proposal-{date}--{slug}.
+
+    Sans ce préfixe, l'id d'une proposition est l'id de la carte elle-même :
+    une proposition re-générée une semaine suivante sur la même carte porte
+    alors le même id qu'une proposition déjà présente dans
+    decisions.json.approved_proposals/rejected_proposals — et le site public la
+    fusionnerait (ou l'enterrerait) automatiquement, SANS repasser par la revue
+    humaine du back office. card.id et existing_id, eux, restent stables.
+    Idempotent : un id déjà préfixé (replay d'un cache) n'est pas re-préfixé."""
+    for p in proposals["proposals"]:
+        pid = str(p["id"])
+        if not pid.startswith("proposal-"):
+            p["id"] = f"proposal-{today_str}--{pid}"
+
+
+def translate_proposals_fr(client: OpenAI, model: str, proposals_en: dict) -> dict:
+    """Étape 3d : version FR construite par COPIE de l'EN — id, action,
+    existing_id, card.id/d/y/u/tp/tg/v et reason sont identiques par
+    construction (la parité EN/FR n'est plus une promesse du modèle, c'est un
+    invariant du code). Seuls card.t/x/l sont traduits, par un mini-appel par
+    carte ; une traduction qui échoue garde le texte EN (dégradé acceptable,
+    l'admin peut éditer) plutôt que de faire échouer le run."""
+    import copy
+    proposals_fr = copy.deepcopy(proposals_en)
+    with_card = [p for p in proposals_fr["proposals"] if p.get("card")]
+    total = len(with_card)
+    for i, p in enumerate(with_card, start=1):
+        card = p["card"]
+        payload = {"t": card.get("t", ""), "x": card.get("x", ""), "l": card.get("l", "")}
+        try:
+            out = call_json(
+                client, model, TRANSLATE_SYSTEM_PROMPT,
+                json.dumps(payload, ensure_ascii=False),
+                f"Traduction FR {i}/{total}", max_tokens=300,
+            )
+            for field in ("t", "x", "l"):
+                value = str(out.get(field) or "").strip()
+                if value:
+                    card[field] = value
+        except ChunkCallError as e:
+            log(f"  ATTENTION: traduction FR échouée pour {p['id']} ({e}) — texte EN conservé.")
+    return proposals_fr
 
 
 # ---------------------------------------------------------------------------
@@ -1168,19 +1453,23 @@ def main() -> None:
     config = load_config()
     recipients = load_recipients()
     data_json = load_json(REPO_ROOT / "data.json", [])
-    last_email = load_last_email()
+    known_topics = load_known_topics()
     client = get_litellm_client()
 
     try:
-        _run(config, recipients, data_json, last_email, client)
+        _run(config, recipients, data_json, known_topics, client)
     finally:
         safe_commit_state_for_qa()
 
     log("Terminé avec succès.")
 
 
-def _run(config: dict, recipients: list, data_json: list, last_email: str, client: OpenAI) -> None:
-    log(f"Modèle recherche: {config['research_model']} / rédaction: {config['writing_model']}")
+def _run(config: dict, recipients: list, data_json: list, known_topics: list, client: OpenAI) -> None:
+    log(
+        f"Modèles — recherche: {config['research_model']} / triage: {config['triage_model']} / "
+        f"items: {config['item_model']} / propositions: {config['proposals_model']} / "
+        f"traduction: {config['translate_model']}"
+    )
 
     if skip_fixed_sources():
         log("Recherche — fetch des sources fixes SKIPPÉ (SKIP_FIXED_SOURCES=true, test rapide).")
@@ -1220,23 +1509,35 @@ def _run(config: dict, recipients: list, data_json: list, last_email: str, clien
             "standards_changed": [],
         })
     else:
-        log("Rédaction — appel au modèle (email + rapport)...")
-        content_user_content = (
-            f"## Previous edition (do not repeat unchanged items)\n{last_email[:6000]}\n\n"
+        log("Rédaction — triage (sélection des items + faits clés, sans prose)...")
+        known_topics_digest = build_known_topics_digest(known_topics)
+        triage_user_content = (
+            f"## Previously reported topics (structured archive — do not repeat unless something "
+            f"genuinely changed since)\n{known_topics_digest}\n\n"
             f"## Fixed-source research\n{research_blob}\n\n"
-            f"Today's date: {date.today().isoformat()}. Produce the JSON content object in the "
+            f"Today's date: {date.today().isoformat()}. Produce the triage JSON object in the "
             f"exact required format."
         )
-        content_raw = run_model_call(
-            client, config["writing_model"], CONTENT_SYSTEM_PROMPT, content_user_content,
-            "Rédaction (email + rapport)", max_tokens=10000,
-        )
-        content_json_raw = extract_content_json_raw(content_raw)
+        triage = run_triage(client, config["triage_model"], triage_user_content)
+        items = triage.get("items") or []
+        log(f"Triage terminé — {len(items)} item(s) retenu(s). Rédaction de la prose, item par item...")
+        write_item_prose(client, config["item_model"], items, date.today().isoformat())
+        content_json_raw = json.dumps(triage, ensure_ascii=False)
+        # Cache replay conservé au format historique à marqueurs, pour que
+        # REPLAY_CONTENT relise l'assemblage final via le même chemin qu'avant.
+        save_debug_output(f"{CONTENT_MARKER}\n{content_json_raw}\n{END_MARKER}", "content")
 
     content = validate_content_json(content_json_raw)
     week_label = compute_week_label(date.today())
     email_body_html = render_email_html(content, week_label)
     full_report_html = render_report_html(content, week_label)
+
+    # Fold this run's items into the persistent anti-repetition archive and
+    # write it back — grows every run, never overwritten, so next week's
+    # comparison isn't limited to a single previous edition.
+    known_topics = merge_known_topics(known_topics, content.get("items", []), date.today().isoformat())
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    KNOWN_TOPICS_PATH.write_text(json.dumps(known_topics, ensure_ascii=False, indent=2), encoding="utf-8")
 
     if replay_proposals():
         cached = STATE_DIR / "debug_last_proposals_output.txt"
@@ -1247,26 +1548,45 @@ def _run(config: dict, recipients: list, data_json: list, last_email: str, clien
                 "pour le générer, il sera committé automatiquement, puis relance en replay."
             )
         log("Rédaction (propositions) REJOUÉE depuis le cache (REPLAY_PROPOSALS=true, aucun appel LLM).")
-        proposals_raw = cached.read_text(encoding="utf-8")
+        proposals_sections = split_proposals_sections(cached.read_text(encoding="utf-8"))
+        proposals_en = validate_proposals_json(proposals_sections["proposals_en_raw"], "EN")
+        proposals_fr = validate_proposals_json(proposals_sections["proposals_fr_raw"], "FR")
     else:
-        log("Rédaction — appel au modèle (propositions)...")
+        log("Rédaction — appel au modèle (propositions EN)...")
         content_digest = build_content_digest(content)
         proposals_user_content = (
             f"## This week's content (already written — source of truth, do not re-research)\n"
             f"{content_digest[:15000]}\n\n"
-            f"## Existing timeline milestones (data.json)\n{json.dumps(data_json, ensure_ascii=False)[:15000]}\n\n"
-            f"Today's date: {date.today().isoformat()}. Produce the two proposals JSON blocks in "
+            f"## Existing timeline milestones (data.json)\n{json.dumps(data_json, ensure_ascii=False)}\n\n"
+            f"Today's date: {date.today().isoformat()}. Produce the proposals JSON object in "
             f"the exact required format."
         )
-        proposals_raw = run_model_call(
-            client, config["writing_model"], PROPOSALS_SYSTEM_PROMPT, proposals_user_content,
-            "Rédaction (propositions)", max_tokens=16000,
+        try:
+            proposals_en_parsed = call_json(
+                client, config["proposals_model"], PROPOSALS_SYSTEM_PROMPT, proposals_user_content,
+                "Propositions EN", max_tokens=8000,
+            )
+        except ChunkCallError as e:
+            fail(f"Propositions EN impossibles : {e}")
+        proposals_en = validate_proposals_json(json.dumps(proposals_en_parsed, ensure_ascii=False), "EN")
+        # Jamais laissé à la main du modèle — c'est une donnée du run, pas du contenu.
+        proposals_en["generated"] = date.today().isoformat()
+        prefix_proposal_ids(proposals_en, date.today().isoformat())
+        log("Traduction FR des propositions, carte par carte...")
+        proposals_fr = translate_proposals_fr(client, config["translate_model"], proposals_en)
+        # Cache replay au format historique 3 marqueurs (état FINAL : ids déjà
+        # préfixés, FR déjà traduite) — REPLAY_PROPOSALS le relit tel quel.
+        save_debug_output(
+            f"{PROPOSALS_EN_MARKER}\n{json.dumps(proposals_en, ensure_ascii=False)}\n"
+            f"{PROPOSALS_FR_MARKER}\n{json.dumps(proposals_fr, ensure_ascii=False)}\n{END_MARKER}",
+            "proposals",
         )
-    proposals_sections = split_proposals_sections(proposals_raw)
 
     log("Validation du JSON produit...")
-    proposals_en = validate_proposals_json(proposals_sections["proposals_en_raw"], "EN")
-    proposals_fr = validate_proposals_json(proposals_sections["proposals_fr_raw"], "FR")
+    # Idempotent — ne re-préfixe pas ce qui l'est déjà ; couvre le replay d'un
+    # cache antérieur au préfixage.
+    prefix_proposal_ids(proposals_en, date.today().isoformat())
+    prefix_proposal_ids(proposals_fr, date.today().isoformat())
     validate_unique_ids(proposals_en, "EN")
     validate_unique_ids(proposals_fr, "FR")
     validate_id_parity(proposals_en, proposals_fr)
