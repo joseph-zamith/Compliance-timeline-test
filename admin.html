@@ -801,7 +801,13 @@ async function pushModelConfig() {
 
 async function loadModelConfig() {
   try {
-    const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CONFIG_PATH}`);
+    // Authentifié si possible : sans token on partage le rate-limit anonyme
+    // (60 req/h par IP) et un échec ici laisse modelConfigSha à null, ce qui
+    // fait échouer la sauvegarde en 422 (même bug déjà corrigé pour decisions).
+    const cfgHeaders = {};
+    const cfgToken = getGitHubToken();
+    if (cfgToken) cfgHeaders["Authorization"] = `token ${cfgToken}`;
+    const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CONFIG_PATH}`, { headers: cfgHeaders });
     if (resp.ok) {
       const ghFile = await resp.json();
       modelConfigSha = ghFile.sha;
