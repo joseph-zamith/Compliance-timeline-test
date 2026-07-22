@@ -706,9 +706,11 @@ async function init() {
   try {
     const cacheBust = "?t=" + Date.now();
     const [dataResp, propResp, decResp] = await Promise.all([
-      fetch("data-fr.json"),
-      fetch("proposals-fr.json").catch(() => fetch("proposals.json")).catch(() => null),
-      fetch("decisions.json" + cacheBust).catch(() => null),
+      fetch("data-fr.json" + cacheBust, { cache: "no-store" }),
+      fetch("proposals-fr.json" + cacheBust, { cache: "no-store" })
+        .catch(() => fetch("proposals.json" + cacheBust, { cache: "no-store" }))
+        .catch(() => null),
+      fetch("decisions.json" + cacheBust, { cache: "no-store" }).catch(() => null),
     ]);
 
     if (!dataResp.ok) throw new Error("data-fr.json failed");

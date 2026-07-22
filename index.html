@@ -711,9 +711,9 @@ async function init() {
     // Fetch all data sources in parallel (cache-bust decisions.json)
     const cacheBust = "?t=" + Date.now();
     const [dataResp, propResp, decResp] = await Promise.all([
-      fetch("data.json"),
-      fetch("proposals.json").catch(() => null),
-      fetch("decisions.json" + cacheBust).catch(() => null),
+      fetch("data.json" + cacheBust, { cache: "no-store" }),
+      fetch("proposals.json" + cacheBust, { cache: "no-store" }).catch(() => null),
+      fetch("decisions.json" + cacheBust, { cache: "no-store" }).catch(() => null),
     ]);
 
     if (!dataResp.ok) throw new Error("data.json failed");
