@@ -333,7 +333,11 @@ is to report their status accurately, not to imply they already happened.
 Language: FRENCH, native register (not translated English). Banned calques: "actionnable",
 "re-actionner", "En 60 secondes", "Sur le radar", "atteindre le seuil", "reprise du stock"
 (write "rattrapage / enregistrement du stock existant"). No em dashes anywhere, ever. Tone:
-factual, action-oriented, cut adjectives.
+factual, action-oriented, cut adjectives. "Cut adjectives" means cut marketing/filler adjectives
+("innovant", "majeur", "crucial") — it does NOT mean cut articles, conjunctions, or connecting
+words. "summary" and "detail" must always be complete, grammatical French sentences (subject +
+verb + article, normal connectors like "qui", "donc", "avant de") — never headline-style
+telegraphic fragments (that register is for "title" only). See the worked example below.
 
 ## STANDARDS REGISTER (for reference — do not reproduce this table; only report rows that
 genuinely moved this week, by their exact "reference" string, in standards_changed)
@@ -360,6 +364,19 @@ genuinely moved this week, by their exact "reference" string, in standards_chang
   "standards_changed": [
     {{"reference": "must exactly match a 'reference' from the register above", "note": "what changed this week, 1 sentence"}}
   ]
+}}
+
+## EXAMPLE ITEM — this is the register/register-completeness to match for every item's
+"summary"/"detail" (complete sentences, tight, no filler — not a headline, not a wall of text)
+{{
+  "region": "eu",
+  "title": "MDCG 2025-9 : nouvelles lignes directrices sur les logiciels autonomes",
+  "summary": "La Commission europeenne a publie une nouvelle version de MDCG 2025-9 sur la qualification des logiciels autonomes comme dispositifs medicaux.",
+  "detail": "Le guide introduit une grille d'analyse par cas d'usage, plutot que par la seule finalite declaree par l'editeur. Les dossiers combinant plusieurs fonctions devront reexaminer leur classification avant tout depot au troisieme trimestre.",
+  "priority": "high",
+  "status": "new",
+  "source_label": "MDCG",
+  "source_url": "https://health.ec.europa.eu/example-mdcg-2025-9"
 }}
 
 Guidance on "items": typically 4-10 items total across all regions combined (fewer on a quiet
