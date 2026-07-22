@@ -1193,6 +1193,13 @@ def _run(config: dict, recipients: list, data_json: list, last_email: str, clien
     sonar_blob = run_sonar_research(client, config["research_model"])
     log(f"Recherche Sonar terminée — {len(sonar_blob)} caractères récupérés sur {len(SONAR_QUERIES)} requêtes.")
 
+    # No artificial cap here: input size was never the real constraint (Sonar
+    # runs ~13k chars total, fixed sources max out around 30k — both trivial
+    # for a model's context window). The old `[:18000]` cut on the
+    # concatenation used to silently drop the entire "Recherche Sonar" section
+    # (Sources fixes came first and could alone exceed 18k), which is the bug
+    # Joseph found. Output length is controlled directly in the prompt (hard
+    # item caps, length guidance), not by starving the input.
     research_blob = f"## Sources fixes\n{fixed_sources_blob}\n\n## Recherche Sonar\n{sonar_blob}"
 
     if replay_content():
@@ -1216,7 +1223,7 @@ def _run(config: dict, recipients: list, data_json: list, last_email: str, clien
         log("Rédaction — appel au modèle (email + rapport)...")
         content_user_content = (
             f"## Previous edition (do not repeat unchanged items)\n{last_email[:6000]}\n\n"
-            f"## Fixed-source research\n{research_blob[:18000]}\n\n"
+            f"## Fixed-source research\n{research_blob}\n\n"
             f"Today's date: {date.today().isoformat()}. Produce the JSON content object in the "
             f"exact required format."
         )
