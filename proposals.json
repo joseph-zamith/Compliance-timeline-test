@@ -2,160 +2,118 @@
   "generated": "2026-07-22",
   "proposals": [
     {
-      "action": "add",
-      "id": "2026-07-22--mdcg-2026-5-udi-di-attribution-clarified",
-      "reason": "New guidance clarifies UDI-DI attribution between manufacturers and distributors, resolving frequent ambiguity ahead of Q3 EUDAMED submissions.",
+      "action": "update",
+      "id": "proposal-2026-07-22--2026-05-06--mdr-ivdr-simplification-feedback-deadline",
+      "existing_id": "2026-05-06--mdr-ivdr-simplification-feedback-deadline",
+      "reason": "MDR/IVDR revision package published Dec 2025 clarifies software classification, MDR takes precedence over AI Act for integrated AI, new cyber notification regime added.",
       "card": {
-        "id": "2026-07-22--mdcg-2026-5-udi-di-attribution-clarified",
-        "d": "2026-07-22",
-        "l": "22 Jul 2026",
+        "id": "2026-05-06--mdr-ivdr-simplification-feedback-deadline",
+        "d": "2026-05-06",
+        "l": "6 May 2026",
         "y": 2026,
-        "t": "MDCG 2026-5: UDI-DI Attribution Clarified",
-        "x": "Specifies when distributors must obtain their own UDI-DI versus retaining the manufacturer's, especially for repackaging/relabelling.",
-        "u": "https://www.qualitiso.com/mdcg-2026-5-attribution-des-identifiants-iud-entre-fabricants-et-distributeurs/",
+        "t": "MDR/IVDR Simplification — Feedback Deadline",
+        "x": "Proposal clarifies Annex VIII/Rule 11 software classification, MDR/IVDR takes precedence over AI Act for integrated AI (delays AI Act to Aug 2028), adds 30-day cyber incident notification via EUDAMED.",
+        "u": "https://www.osborneclarke.com/insights/revised-eu-medtech-regulations-proposal-sharpens-software-and-cybersecurity-rules-digital",
+        "tp": [
+          "mdr",
+          "ai",
+          "cyber"
+        ],
+        "tg": [
+          "critical"
+        ],
+        "v": "c"
+      }
+    },
+    {
+      "action": "update",
+      "id": "proposal-2026-07-22--2026-05-28--eudamed-first-4-modules-mandatory",
+      "existing_id": "2026-05-28--eudamed-first-4-modules-mandatory",
+      "reason": "Status confirmed as in-force with no extensions announced; existing devices registration deadline 28 Nov 2026 reaffirmed.",
+      "card": {
+        "id": "2026-05-28--eudamed-first-4-modules-mandatory",
+        "d": "2026-05-28",
+        "l": "28 May 2026",
+        "y": 2026,
+        "t": "EUDAMED — First 4 Modules Mandatory",
+        "x": "Four modules now mandatory: new devices must be registered before market entry; existing devices (on market before 28 May 2026) must register by 28 Nov 2026.",
+        "u": "https://health.ec.europa.eu/medical-devices-eudamed/overview_en",
         "tp": [
           "mdr"
         ],
         "tg": [
-          "new",
+          "critical",
+          "in-force"
+        ],
+        "v": "c"
+      }
+    },
+    {
+      "action": "add",
+      "id": "proposal-2026-07-22--2026-07-22--eu-health-cyber-action-plan",
+      "reason": "New EU cybersecurity action plan for health sector published, establishes European center within ENISA, reinforces NIS2/MDR alignment.",
+      "card": {
+        "id": "2026-07-22--eu-health-cyber-action-plan",
+        "d": "2026-07-22",
+        "l": "22 Jul 2026",
+        "y": 2026,
+        "t": "EU Health Cybersecurity Action Plan",
+        "x": "Five-axis plan (prevent, detect, respond, recover, deter) establishes European health cyber center at ENISA; aligns NIS2, CRA, and MDR for medical device manufacturers.",
+        "u": "https://uk.news.yahoo.com/commission-presents-plan-boost-cybersecurity-140258191.html",
+        "tp": [
+          "cyber",
+          "mdr"
+        ],
+        "tg": [
+          "high",
+          "new"
+        ],
+        "v": "h"
+      }
+    },
+    {
+      "action": "update",
+      "id": "proposal-2026-07-22--2026-05-22--iec-62304-ed-2-approval-phase-begins",
+      "existing_id": "2026-05-22--iec-62304-ed-2-approval-phase-begins",
+      "reason": "Approval vote underway since 22 May 2026, publication date confirmed as 12 Aug 2026.",
+      "card": {
+        "id": "2026-05-22--iec-62304-ed-2-approval-phase-begins",
+        "d": "2026-05-22",
+        "l": "22 May 2026",
+        "y": 2026,
+        "t": "IEC 62304 Ed.2 — Approval Phase Begins",
+        "x": "Approval vote started 22 May 2026. Two Software Process Accuracy Levels replace three safety classes; scope expanded to all health software; AI/ML planning added. Publication 12 Aug 2026.",
+        "u": "https://www.linkedin.com/pulse/iec-62304-edition-2-whats-new-medical-device-software-development",
+        "tp": [
+          "standards"
+        ],
+        "tg": [
           "high"
         ],
         "v": "h"
       }
     },
     {
-      "action": "add",
-      "id": "2026-06-18--mdcg-2026-4-manufacturers-upload-all-summaries",
-      "reason": "MDCG 2026-4 finalizes that manufacturers must upload all SSP/SSCP summaries in EUDAMED, reversing previous NB involvement.",
+      "action": "update",
+      "id": "proposal-2026-07-22--2026-08-02--ai-act-most-provisions-apply",
+      "existing_id": "2026-08-02--ai-act-most-provisions-apply",
+      "reason": "AI Act Digital Omnibus formally adopted; high-risk AI obligations for medical devices delayed to 2 Aug 2028.",
       "card": {
-        "id": "2026-06-18--mdcg-2026-4-manufacturers-upload-all-summaries",
-        "d": "2026-06-18",
-        "l": "18 Jun 2026",
+        "id": "2026-08-02--ai-act-most-provisions-apply",
+        "d": "2026-08-02",
+        "l": "Aug 2026",
         "y": 2026,
-        "t": "MDCG 2026-4: Manufacturers Upload All SSP/SSCP Summaries",
-        "x": "All SSP and SSCP summaries must now be uploaded by manufacturers, regardless of certification type, to accelerate EUDAMED compliance.",
-        "u": "https://www.dm-experts.fr/2026/07/eudamed-le-mdcg-2026-4-confie-aux-fabricants-le-chargement-de-tous-les-resumes-ssp-et-sscp/",
+        "t": "AI Act — Most Provisions Apply",
+        "x": "Digital Omnibus adopted: high-risk AI obligations for medical devices delayed to Aug 2028. MDCG 2025-6 / AIB 2025-1 joint guidance remains reference for MDR/AI Act articulation.",
+        "u": "https://www.scimedconsult.com/regulatory-intelligence/july-2026",
         "tp": [
+          "ai",
           "mdr"
         ],
         "tg": [
-          "high",
-          "in-force"
+          "high"
         ],
-        "v": "h"
-      }
-    },
-    {
-      "action": "add",
-      "id": "2026-06-18--eu-2026-1231-new-harmonised-standards-mdr",
-      "reason": "New harmonised MDR standards published (biocompatibility, sterilization), presuming conformity with essential requirements.",
-      "card": {
-        "id": "2026-06-18--eu-2026-1231-new-harmonised-standards-mdr",
-        "d": "2026-06-18",
-        "l": "18 Jun 2026",
-        "y": 2026,
-        "t": "New Harmonised Standards for MDR (Decision 2026/1231)",
-        "x": "Expands the list of harmonised standards for biocompatibility and sterilization, facilitating presumption of conformity.",
-        "u": "https://www.qualitiso.com/nouvelles-normes-harmonisees-rdm-decision-execution-ue-2026-1231/",
-        "tp": [
-          "mdr",
-          "standards"
-        ],
-        "tg": [
-          "medium",
-          "in-force"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "action": "add",
-      "id": "2026-07-22--enisa-sbom-medical-device-cybersecurity-report",
-      "reason": "ENISA report analyzes current SBOM practices and identifies obstacles, recommending harmonization (SPDX, CycloneDX) for NIS2/MDR compliance.",
-      "card": {
-        "id": "2026-07-22--enisa-sbom-medical-device-cybersecurity-report",
-        "d": "2026-07-22",
-        "l": "22 Jul 2026",
-        "y": 2026,
-        "t": "ENISA: SBOM and Medical Device Cybersecurity Report",
-        "x": "Recommends harmonized SBOM formats and integration into technical documentation ahead of MDCG 2019-16 cybersecurity revisions.",
-        "u": "https://www.dm-experts.fr/2026/07/enisa-etat-des-lieux-en-matiere-de-nomenclature-logicielle-sbom-et-de-cybersecurite/",
-        "tp": [
-          "cyber",
-          "mdr"
-        ],
-        "tg": [
-          "medium",
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "action": "add",
-      "id": "2026-06-18--mdr-implantable-exemptions-articles-52-4-61-6",
-      "reason": "MDR modification exempts certain low-risk implantable devices from disproportionate administrative burdens (articles 52.4 and 61.6).",
-      "card": {
-        "id": "2026-06-18--mdr-implantable-exemptions-articles-52-4-61-6",
-        "d": "2026-06-18",
-        "l": "18 Jun 2026",
-        "y": 2026,
-        "t": "MDR Exemptions for Certain Implantable Devices (Art. 52.4, 61.6)",
-        "x": "Exempts low-risk implantables (e.g., sutures, dental implants) from certain requirements; verify eligibility before Q3 EUDAMED submissions.",
-        "u": "https://www.qualitiso.com/modifications-du-mdr-concernant-les-exemptions-pour-certains-dm-implantables-articles-52-4-et-61-6/",
-        "tp": [
-          "mdr"
-        ],
-        "tg": [
-          "medium",
-          "in-force"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "action": "add",
-      "id": "2026-07-22--imdrf-mdsap-annual-report-2025",
-      "reason": "IMDRF's first annual MDSAP 2025 report consolidates audit experience and identifies frequent gaps (risk management, software validation).",
-      "card": {
-        "id": "2026-07-22--imdrf-mdsap-annual-report-2025",
-        "d": "2026-07-22",
-        "l": "Jul 2026",
-        "y": 2026,
-        "t": "IMDRF MDSAP Annual Report 2025",
-        "x": "First annual report identifies common audit gaps (risk management, software validation) useful for multi-jurisdictional market access.",
-        "u": "https://www.dm-experts.fr/2026/07/mdsap-1er-rapport-annuel-sur-les-avancees-de-2025/",
-        "tp": [
-          "other",
-          "standards"
-        ],
-        "tg": [
-          "medium",
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "action": "add",
-      "id": "2026-12-31--ec-rep-to-eu-rep-symbol-transition-deadline",
-      "reason": "Transition from 'EC REP' to 'EU REP' symbol (MDCG 2021-5 Annex published 18 Jun) must be completed on all labelling by this date.",
-      "card": {
-        "id": "2026-12-31--ec-rep-to-eu-rep-symbol-transition-deadline",
-        "d": "2026-12-31",
-        "l": "31 Dec 2026",
-        "y": 2026,
-        "t": "'EC REP' to 'EU REP' Symbol Transition Deadline",
-        "x": "All labelling must display 'EU REP' instead of 'EC REP' for authorised representatives by year-end 2026.",
-        "u": "https://www.qualitiso.com/mdcg-2026-5-attribution-des-identifiants-iud-entre-fabricants-et-distributeurs/",
-        "tp": [
-          "mdr"
-        ],
-        "tg": [
-          "medium",
-          "in-force"
-        ],
-        "v": "n"
+        "v": "c"
       }
     }
   ]
