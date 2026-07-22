@@ -3,64 +3,41 @@
   "proposals": [
     {
       "action": "add",
-      "id": "2026-09-30--mdcg-2026-4-sscp-declaration-eudamed",
-      "reason": "New MDCG guidance sets concrete Q3 2026 deadlines for SSCP reporting in EUDAMED, impacting manufacturer vigilance processes.",
+      "id": "2026-07-09--iso-ts-24971-2-published",
+      "reason": "First dedicated standard for ML-based device risk management, directly affecting technical files.",
       "card": {
-        "id": "2026-09-30--mdcg-2026-4-sscp-declaration-eudamed",
-        "d": "2026-09-30",
-        "l": "30 Sep 2026",
-        "y": 2026,
-        "t": "MDCG 2026-4: SSCP Reporting Requirements in EUDAMED",
-        "x": "New mandatory requirements for incident reporting formats and timelines in EUDAMED. Manufacturers must update vigilance procedures before Q3 2026.",
-        "u": "https://www.qualitiso.com/veille/",
-        "tp": [
-          "mdr"
-        ],
-        "tg": [
-          "high",
-          "new"
-        ],
-        "v": "h"
-      }
-    },
-    {
-      "action": "add",
-      "id": "2026-07-09--iso-ts-24971-2-ml-risk-management",
-      "reason": "First standard dedicated to ML risk management, critical for AI-based medical devices ahead of AI Act enforcement.",
-      "card": {
-        "id": "2026-07-09--iso-ts-24971-2-ml-risk-management",
+        "id": "2026-07-09--iso-ts-24971-2-published",
         "d": "2026-07-09",
         "l": "9 Jul 2026",
         "y": 2026,
-        "t": "ISO/TS 24971-2: Machine Learning Risk Management",
-        "x": "First standard for ML-specific risks: algorithmic bias, performance degradation, training data issues. Requires continuous post-market validation.",
+        "t": "ISO/TS 24971-2 Published",
+        "x": "First technical specification for risk management of ML-based medical devices. Covers algorithmic bias, model robustness, training data traceability, and post-deployment monitoring.",
         "u": "https://www.qualitiso.com/veille/",
         "tp": [
           "ai",
           "standards"
         ],
         "tg": [
-          "critical",
-          "new"
+          "new",
+          "high"
         ],
-        "v": "c"
+        "v": "h"
       }
     },
     {
-      "action": "update",
-      "id": "2026-07-01--australia-tga-udi-required-class-iib-iii",
-      "existing_id": "2026-07-01--australia-tga-udi-required-class-iib-iii",
-      "reason": "Expanded to include all device classes with new traceability obligations and incident reporting deadlines.",
+      "action": "add",
+      "id": "2026-07-01--eu-2026-977-notified-body-rules",
+      "reason": "Regulation immediately affects certification audits for Class IIb/III devices with algorithms.",
       "card": {
-        "id": "2026-07-01--australia-tga-udi-required-class-iib-iii",
+        "id": "2026-07-01--eu-2026-977-notified-body-rules",
         "d": "2026-07-01",
         "l": "1 Jul 2026",
         "y": 2026,
-        "t": "Australia TGA — UDI & Enhanced Traceability",
-        "x": "UDI registration in ARTG now mandatory with strengthened incident reporting deadlines. Applies to all device classes.",
+        "t": "EU 2026/977 — NB Conformity Assessment Rules",
+        "x": "New audit requirements for Class IIb/III devices with algorithms. NBs must explicitly document evaluation of software lifecycle and post-market surveillance robustness.",
         "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
         "tp": [
-          "other"
+          "mdr"
         ],
         "tg": [
           "in-force",
@@ -71,18 +48,19 @@
     },
     {
       "action": "add",
-      "id": "2026-07-01--switzerland-swissdamed-mandatory",
-      "reason": "New Swiss registration requirement affects EU manufacturers exporting to Switzerland, with year-end deadline for existing devices.",
+      "id": "2026-05-23--cnil-mr-001-mr-003-updated",
+      "reason": "Updated methodologies affect clinical trial and observational study protocols using personal data.",
       "card": {
-        "id": "2026-07-01--switzerland-swissdamed-mandatory",
-        "d": "2026-07-01",
-        "l": "1 Jul 2026",
+        "id": "2026-05-23--cnil-mr-001-mr-003-updated",
+        "d": "2026-05-23",
+        "l": "23 May 2026",
         "y": 2026,
-        "t": "Switzerland: Swissdamed Registration Mandatory",
-        "x": "All devices must be registered before market entry. Existing devices must register by 31 Dec 2026. Coordinate with Swiss authorized representatives.",
+        "t": "CNIL — MR-001 & MR-003 Updated",
+        "x": "Clarified requirements for health data reuse in research: consent, information, retention periods, pseudonymization, and technical security measures. Mandatory for submissions after 23 May.",
         "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
         "tp": [
-          "other"
+          "france",
+          "data"
         ],
         "tg": [
           "in-force",
@@ -93,89 +71,45 @@
     },
     {
       "action": "add",
-      "id": "2026-09-30--eu-reg-977-notified-body-audit-rules",
-      "reason": "New regulation changes NB audit procedures, requiring manufacturers to strengthen QMS documentation by Q3 2026.",
+      "id": "2026-06-09--mhra-ai-airlock-phase-2-report",
+      "reason": "Report identifies recurring gaps in AI device submissions, useful for both UK and EU manufacturers.",
       "card": {
-        "id": "2026-09-30--eu-reg-977-notified-body-audit-rules",
-        "d": "2026-09-30",
-        "l": "30 Sep 2026",
+        "id": "2026-06-09--mhra-ai-airlock-phase-2-report",
+        "d": "2026-06-09",
+        "l": "9 Jun 2026",
         "y": 2026,
-        "t": "Regulation (EU) 2026/977: Enhanced NB Audit Rules",
-        "x": "Stricter auditor competence criteria and post-certification surveillance. Expect more detailed audits on risk management and vigilance for Class III devices.",
+        "t": "MHRA AI Airlock Phase 2 Report",
+        "x": "Evaluation of ten AI devices reveals common gaps: insufficient clinical validation, lack of training data transparency, and absence of continuous performance monitoring plans.",
         "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
         "tp": [
-          "mdr"
+          "uk",
+          "ai"
         ],
         "tg": [
-          "high",
-          "in-force"
-        ],
-        "v": "h"
-      }
-    },
-    {
-      "action": "add",
-      "id": "2026-05-23--cnil-mr-001-mr-003-updated",
-      "reason": "Updated CNIL methodologies simplify clinical research data procedures, affecting ongoing and new investigations.",
-      "card": {
-        "id": "2026-05-23--cnil-mr-001-mr-003-updated",
-        "d": "2026-05-23",
-        "l": "23 May 2026",
-        "y": 2026,
-        "t": "CNIL: Updated MR-001 & MR-003 Methodologies",
-        "x": "Simplified procedures for health data research. Compliance exempts from CNIL prior authorization. Review clinical investigation protocols before new studies.",
-        "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
-        "tp": [
-          "france",
-          "data"
-        ],
-        "tg": [
-          "high",
-          "in-force"
-        ],
-        "v": "h"
-      }
-    },
-    {
-      "action": "add",
-      "id": "2026-06-18--mdcg-2026-5-udi-manufacturer-distributor",
-      "reason": "New guidance clarifies distributor UDI responsibilities when modifying labeling, affecting contractual arrangements.",
-      "card": {
-        "id": "2026-06-18--mdcg-2026-5-udi-manufacturer-distributor",
-        "d": "2026-06-18",
-        "l": "18 Jun 2026",
-        "y": 2026,
-        "t": "MDCG 2026-5: UDI Attribution Between Manufacturers & Distributors",
-        "x": "Clarifies when distributors become responsible for secondary UDI after label modifications. Review distributor contracts to define UDI responsibilities.",
-        "u": "https://www.qualitiso.com/veille/",
-        "tp": [
-          "mdr"
-        ],
-        "tg": [
-          "medium",
-          "new"
+          "new",
+          "medium"
         ],
         "v": "n"
       }
     },
     {
       "action": "add",
-      "id": "2026-06-15--mdcg-2021-24-rev1-classification",
-      "reason": "Revised classification guidance adds practical examples for software and combined devices, may trigger reclassification reviews.",
+      "id": "2026-07-01--swissdamed-tga-traceability",
+      "reason": "Mandatory traceability requirements now in force for Swiss and Australian markets.",
       "card": {
-        "id": "2026-06-15--mdcg-2021-24-rev1-classification",
-        "d": "2026-06-15",
-        "l": "15 Jun 2026",
+        "id": "2026-07-01--swissdamed-tga-traceability",
+        "d": "2026-07-01",
+        "l": "1 Jul 2026",
         "y": 2026,
-        "t": "MDCG 2021-24 Rev.1: Updated Device Classification Guidance",
-        "x": "New practical examples for Rule 11 (software) and Rule 15 (combined devices). Review classification for connected devices and digital platforms.",
-        "u": "https://www.qualitiso.com/veille/",
+        "t": "Swissdamed & TGA Traceability In Force",
+        "x": "Swissmedic mandates Swissdamed database for all devices. TGA requires ARTG registration and faster adverse event reporting for Class II+ devices. Both now enforceable.",
+        "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
         "tp": [
-          "mdr"
+          "other"
         ],
         "tg": [
-          "medium",
-          "in-force"
+          "in-force",
+          "medium"
         ],
         "v": "n"
       }
