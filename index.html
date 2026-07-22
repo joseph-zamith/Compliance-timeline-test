@@ -766,16 +766,29 @@ async function init() {
       if (cid) cardAddedDates[cid] = approvalDates[p.id] || proposalsGenDate || new Date().toISOString().slice(0,10);
     });
 
-    // Apply tag overrides
+    // Apply tag overrides. Stored per-card as {priority, status} so a manual
+    // fix to one slot never wipes out the other (an older format stored a
+    // single tag and replaced the whole tg array with it — handled below for
+    // back-compat with any decisions.json written before this change).
     const tagOverrides = dec.tag_overrides || {};
+    const PRIORITY_TAGS = ["critical", "high", "medium"];
+    const STATUS_TAGS = ["new", "in-force", "draft", "proposed"];
     M.forEach(m => {
       const o = tagOverrides[cardId(m)];
-      if (o) {
-        m.tg = [o];
-        if (o === "critical") m.v = "c";
-        else if (o === "high") m.v = "h";
-        else m.v = "n";
+      if (!o) return;
+      let priority = m.tg.find(t => PRIORITY_TAGS.includes(t)) || null;
+      let status = m.tg.find(t => STATUS_TAGS.includes(t)) || null;
+      if (typeof o === "string") {
+        if (PRIORITY_TAGS.includes(o)) priority = o;
+        else if (STATUS_TAGS.includes(o)) status = o;
+      } else if (typeof o === "object") {
+        if (o.priority) priority = o.priority;
+        if (o.status) status = o.status;
       }
+      m.tg = [priority, status].filter(Boolean);
+      if (priority === "critical") m.v = "c";
+      else if (priority === "high") m.v = "h";
+      else m.v = "n";
     });
   } catch(e) {
     console.error("Failed to load timeline data:", e);

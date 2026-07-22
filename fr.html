@@ -760,14 +760,24 @@ async function init() {
     });
 
     const tagOverrides = dec.tag_overrides || {};
+    const PRIORITY_TAGS = ["critical", "high", "medium"];
+    const STATUS_TAGS = ["new", "in-force", "draft", "proposed"];
     M.forEach(m => {
       const o = tagOverrides[cardId(m)];
-      if (o) {
-        m.tg = [o];
-        if (o === "critical") m.v = "c";
-        else if (o === "high") m.v = "h";
-        else m.v = "n";
+      if (!o) return;
+      let priority = m.tg.find(t => PRIORITY_TAGS.includes(t)) || null;
+      let status = m.tg.find(t => STATUS_TAGS.includes(t)) || null;
+      if (typeof o === "string") {
+        if (PRIORITY_TAGS.includes(o)) priority = o;
+        else if (STATUS_TAGS.includes(o)) status = o;
+      } else if (typeof o === "object") {
+        if (o.priority) priority = o.priority;
+        if (o.status) status = o.status;
       }
+      m.tg = [priority, status].filter(Boolean);
+      if (priority === "critical") m.v = "c";
+      else if (priority === "high") m.v = "h";
+      else m.v = "n";
     });
   } catch(e) {
     console.error("Failed to load timeline data:", e);

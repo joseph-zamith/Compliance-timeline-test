@@ -310,8 +310,24 @@
   .tag-editable {
     cursor: pointer;
     position: relative;
+    margin-right: 4px;
   }
   .tag-editable:hover > .ms-tag { opacity: 0.8; }
+  .tag-editable-empty {
+    display: inline-block;
+    font-size: 10px;
+    color: var(--ink-muted);
+    border: 1px dashed var(--surface-3);
+    border-radius: 4px;
+    padding: 1px 6px;
+    opacity: 0.7;
+  }
+  .tag-editable-empty:hover { opacity: 1; }
+  .tag-dropdown .ms-tag.tag-auto {
+    background: var(--surface-2);
+    color: var(--ink-muted);
+    font-style: italic;
+  }
   .tag-dropdown {
     position: absolute;
     top: 100%;
@@ -726,7 +742,7 @@ let allProposals = [];
 function cardId(m){ return m.id || m.d+"__"+m.t.slice(0,40).replace(/\W+/g,"_"); }
 
 const TL={mdr:"EU MDR/IVDR",ai:"AI Act",standards:"Standards",cyber:"Cybersecurity",france:"France",uk:"UK",us:"US (FDA)",other:"Other Regions",data:"Data / EHDS"};
-const TG={critical:"CRITICAL",high:"HIGH",medium:"MEDIUM","new":"NEW","in-force":"IN FORCE"};
+const TG={critical:"CRITICAL",high:"HIGH",medium:"MEDIUM","new":"NEW","in-force":"IN FORCE","draft":"DRAFT","proposed":"PROPOSED"};
 
 /* ===== decisions.json — shared state via GitHub repo ===== */
 // TEMPORAIRE — pointe vers le repo de test pendant la migration.
@@ -963,11 +979,42 @@ function saveComment(cid, text, lang){
   else delete decisions[key][cid];
   pushDecisions();
 }
+const PRIORITY_TAGS = ["critical", "high", "medium"];
+const STATUS_TAGS = ["new", "in-force", "draft", "proposed"];
+
 function getTagOverrides(){ return decisions.tag_overrides || {}; }
-function saveTagOverride(cid, tag){
+
+// Override storage is {priority: tag|null, status: tag|null} per card, so a
+// manual correction to one slot never wipes out the other (the old version
+// stored a single tag and replaced the whole tg array with it — that's why
+// picking a tag by hand used to collapse e.g. ["critical","in-force"] down
+// to just one badge). `category` is "priority" or "status"; `tag` can be
+// null to clear that slot back to automatic.
+function saveTagOverride(cid, category, tag){
   if (!decisions.tag_overrides) decisions.tag_overrides = {};
-  decisions.tag_overrides[cid] = tag;
+  const existing = decisions.tag_overrides[cid];
+  // Migrate a legacy single-string override transparently.
+  const obj = (existing && typeof existing === "object" && !Array.isArray(existing)) ? { ...existing } : {};
+  if (tag) obj[category] = tag; else delete obj[category];
+  decisions.tag_overrides[cid] = obj;
   pushDecisions();
+}
+
+// Resolve the effective (priority, status) pair for a card: base tags from
+// m.tg, with any manual override applied per-slot. Handles legacy overrides
+// (a plain string) by routing it to whichever slot it belongs to.
+function effectiveTags(m, cid){
+  let priority = m.tg.find(t => PRIORITY_TAGS.includes(t)) || null;
+  let status = m.tg.find(t => STATUS_TAGS.includes(t)) || null;
+  const o = getTagOverrides()[cid];
+  if (typeof o === "string") {
+    if (PRIORITY_TAGS.includes(o)) priority = o;
+    else if (STATUS_TAGS.includes(o)) status = o;
+  } else if (o && typeof o === "object") {
+    if (o.priority) priority = o.priority;
+    if (o.status) status = o.status;
+  }
+  return { priority, status };
 }
 
 // GitHub token persistence
@@ -1158,9 +1205,14 @@ function buildTable(){
     if (addedCardIds.has(id)) indicator = `<span class="indicator-new">NEW</span>`;
     else if (updatedCardIds.has(id)) indicator = `<span class="indicator-updated">UPDATED</span>`;
 
-    const overriddenTag = getTagOverrides()[id];
-    const displayTag = overriddenTag || m.tg[0] || "medium";
-    html+=`<td><span class="cell-title"><span class="tag-editable" data-tag-id="${id}" data-current-tag="${displayTag}"><span class="ms-tag tag-${displayTag}">${TG[displayTag]||displayTag}</span></span> ${m.t}${indicator}</span></td>`;
+    const { priority, status } = effectiveTags(m, id);
+    const priorityHtml = priority
+      ? `<span class="tag-editable" data-tag-id="${id}" data-tag-category="priority" data-current-tag="${priority}"><span class="ms-tag tag-${priority}">${TG[priority]||priority}</span></span>`
+      : `<span class="tag-editable tag-editable-empty" data-tag-id="${id}" data-tag-category="priority" data-current-tag="">+ priorite</span>`;
+    const statusHtml = status
+      ? `<span class="tag-editable" data-tag-id="${id}" data-tag-category="status" data-current-tag="${status}"><span class="ms-tag tag-${status}">${TG[status]||status}</span></span>`
+      : `<span class="tag-editable tag-editable-empty" data-tag-id="${id}" data-tag-category="status" data-current-tag="">+ statut</span>`;
+    html+=`<td><span class="cell-title">${priorityHtml}${statusHtml} ${m.t}${indicator}</span></td>`;
     const commentEn = (getComments("en")[id] || "").replace(/"/g,'&quot;');
     const commentFr = (getComments("fr")[id] || "").replace(/"/g,'&quot;');
     html+=`<td class="cell-comment"><div class="comment-pair"><input type="text" class="comment-input" data-comment-id="${id}" data-comment-lang="en" value="${commentEn}" placeholder="Add an EN comment..."><input type="text" class="comment-input" data-comment-id="${id}" data-comment-lang="fr" value="${commentFr}" placeholder="Commentaire en FR..."></div></td>`;
@@ -1195,34 +1247,44 @@ document.getElementById("tbody").addEventListener("keydown", e => {
   }
 });
 
-// Tag editor
+// Tag editor — two independent slots (priority, status), each with its own
+// dropdown scoped to just that category's tags, plus an "Automatique" option
+// to clear a manual override and fall back to whatever the pipeline set.
 let openDropdown = null;
-const ALL_TAGS = ["critical","high","medium","new","in-force","draft","proposed"];
 
 document.getElementById("tbody").addEventListener("click", e => {
   const editable = e.target.closest(".tag-editable");
   if (!editable) {
-    // Click outside — close any open dropdown
     if (openDropdown) { openDropdown.remove(); openDropdown = null; }
     return;
   }
 
-  // Close existing dropdown
   if (openDropdown) { openDropdown.remove(); openDropdown = null; }
 
   const cardId = editable.dataset.tagId;
+  const category = editable.dataset.tagCategory; // "priority" or "status"
   const currentTag = editable.dataset.currentTag;
+  const options = category === "priority" ? PRIORITY_TAGS : STATUS_TAGS;
 
-  // Create dropdown
   const dd = document.createElement("div");
   dd.className = "tag-dropdown";
-  ALL_TAGS.forEach(tag => {
+
+  const autoOpt = document.createElement("span");
+  autoOpt.className = "ms-tag tag-auto";
+  autoOpt.textContent = "Automatique";
+  autoOpt.dataset.tag = "";
+  autoOpt.dataset.cardId = cardId;
+  autoOpt.dataset.category = category;
+  dd.appendChild(autoOpt);
+
+  options.forEach(tag => {
     if (tag === currentTag) return;
     const opt = document.createElement("span");
     opt.className = `ms-tag tag-${tag}`;
     opt.textContent = TG[tag] || tag;
     opt.dataset.tag = tag;
     opt.dataset.cardId = cardId;
+    opt.dataset.category = category;
     dd.appendChild(opt);
   });
   editable.style.position = "relative";
@@ -1234,7 +1296,7 @@ document.getElementById("tbody").addEventListener("click", e => {
   const opt = e.target.closest(".tag-dropdown .ms-tag");
   if (!opt) return;
   e.stopPropagation();
-  saveTagOverride(opt.dataset.cardId, opt.dataset.tag);
+  saveTagOverride(opt.dataset.cardId, opt.dataset.category, opt.dataset.tag || null);
   if (openDropdown) { openDropdown.remove(); openDropdown = null; }
   buildTable();
 });
