@@ -1,0 +1,24 @@
+## Essentiel de la semaine
+- MDCG 2025-6 sur les logiciels a ete publie et entre en application progressive.
+- L'AI Act : les articles 52 et 61 relatifs aux obligations de transparence entrent en vigueur le 2 aout 2026.
+
+## Alerte prioritaire
+Echeance a surveiller : entree en vigueur AI Act (articles 52.4 et 61.6) le 2 aout 2026.
+
+## Items
+- [eu] Publication du guide MDCG 2025-6 (priorité=high, statut=new)
+  Ce guide precise les criteres de qualification des logiciels comme dispositifs medicaux au sens du MDR, avec des exemples concrets pour les DM numeriques et l'IA embarquee.
+  Source: Commission europeenne — https://health.ec.europa.eu/example
+- [us] FDA - mise a jour guidance logiciels (priorité=medium, statut=draft)
+  La FDA a mis a jour sa guidance sur le software as a medical device.
+  Source: FDA — https://fda.gov/example
+
+## Hors UE
+Rien de notable hors UE/US/UK cette semaine.
+
+## Points de vigilance
+- Verifier l'impact du guide MDCG 2025-6 sur les classifications existantes.
+- Anticiper les obligations de transparence AI Act avant le 2 aout 2026.
+
+## Normes modifiées
+- NF EN ISO 13485:2016/A11: Revision en cours de finalisation.
