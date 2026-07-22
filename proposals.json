@@ -1,17 +1,17 @@
 {
-  "generated": "2026-07-21",
+  "generated": "2026-07-22",
   "proposals": [
     {
       "action": "add",
-      "id": "2026-07-20--iso-ts-24971-2-published",
-      "reason": "ISO/TS 24971-2 published July 2026 with ML/AI risk management guidance; immediate impact on SaMD dossiers in development and notified body assessment criteria.",
+      "id": "2026-06-01--iso-ts-24971-2-ml-ia-risk-management",
+      "reason": "ISO/TS 24971-2 now in force (July 2026); introduces structured ML/AI risk assessment framework mandatory for SaMD compliance reports before notified body submission.",
       "card": {
-        "id": "2026-07-20--iso-ts-24971-2-published",
-        "d": "2026-07-20",
-        "l": "Jul 2026",
+        "id": "2026-06-01--iso-ts-24971-2-ml-ia-risk-management",
+        "d": "2026-06-01",
+        "l": "1 Jun 2026",
         "y": 2026,
-        "t": "ISO/TS 24971-2 Published — ML/AI Risk Management Guidance",
-        "x": "Technical specification extends ISO/TS 24971 to cover training data, model validation, drift, and explainability; manufacturers must revise technical files to reflect ML-specific risk analysis requirements.",
+        "t": "ISO/TS 24971-2 — ML/AI Risk Management in Force",
+        "x": "Structured guidance on training data quality, algorithmic drift, model interpretability, and robustness validation. MDR compliance dossiers must demonstrate alignment to avoid notified body RFIs.",
         "u": "https://www.qualitiso.com/veille/",
         "tp": [
           "mdr",
@@ -19,209 +19,120 @@
           "standards"
         ],
         "tg": [
-          "critical",
-          "in-force"
+          "in-force",
+          "high"
         ],
-        "v": "c"
+        "v": "h"
       }
     },
     {
       "action": "add",
-      "id": "2026-07-21--mdcg-2026-4-sscp-eudamed-finalized",
-      "reason": "MDCG 2026-4 finalizes SSCP role/responsibility management in EUDAMED; conformity required by end Q3 2026 for all active trial sponsors.",
+      "id": "2026-06-01--mdcg-2026-4-sscp-eudamed-clinical-trials",
+      "reason": "MDCG 2026-4 guidance published (June 2026); defines SSCP roles, responsibilities, and EUDAMED registration procedures with Q3 2026 compliance deadline for new clinical trials.",
       "card": {
-        "id": "2026-07-21--mdcg-2026-4-sscp-eudamed-finalized",
-        "d": "2026-07-21",
-        "l": "Jul 2026",
+        "id": "2026-06-4--mdcg-2026-4-sscp-eudamed-clinical-trials",
+        "d": "2026-06-01",
+        "l": "1 Jun 2026",
         "y": 2026,
-        "t": "MDCG 2026-4 — SSCP Management in EUDAMED Finalised",
-        "x": "Clarifies access rights, data validation workflow, EUDAMED identifier assignment, and synchronisation with investigator/site registries; deadline Q3 2026.",
+        "t": "MDCG 2026-4 — SSCP Management in EUDAMED",
+        "x": "Consolidated guidance on sponsor and investigator SSCP validation procedures. Conformity required by end Q3 2026 for any new MDR clinical trial launch.",
         "u": "https://www.qualitiso.com/veille/",
         "tp": [
           "mdr"
         ],
         "tg": [
-          "high",
-          "in-force"
+          "in-force",
+          "high"
         ],
         "v": "h"
       }
     },
     {
       "action": "add",
-      "id": "2026-05-23--cnil-mr-001-mr-003-health-data-methodologies",
-      "reason": "CNIL methodologies MR-001 and MR-003 published 23 May 2026 modernise health data governance framework; immediate impact on all projects hosting health data in France.",
+      "id": "2026-05-01--cnil-mr-001-mr-003-health-data-security",
+      "reason": "CNIL methodologies MR-001 and MR-003 applied since May 2026; require authentication, access control, audit trails, encryption, and incident response. Health SaMD and cloud infrastructure must align before audit.",
       "card": {
-        "id": "2026-05-23--cnil-mr-001-mr-003-health-data-methodologies",
-        "d": "2026-05-23",
-        "l": "23 May 2026",
+        "id": "2026-05-01--cnil-mr-001-mr-003-health-data-security",
+        "d": "2026-05-01",
+        "l": "1 May 2026",
         "y": 2026,
-        "t": "CNIL Methodologies MR-001 & MR-003 — Health Data Framework Updated",
-        "x": "Replace legacy MR with GDPR post-2018 requirements: quarterly audit, encryption by design, dynamic consent management, MFA, network isolation, 10+ year secure archival.",
+        "t": "CNIL MR-001 & MR-003 — Health Data Security Modernization",
+        "x": "Authentication, authorization, audit logging (MR-001) and encryption, network segmentation, incident management (MR-003) now mandatory. e-health projects must audit HDS/C5 alignment immediately.",
         "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
         "tp": [
-          "data",
-          "france"
+          "france",
+          "data"
         ],
         "tg": [
-          "critical",
-          "in-force"
+          "in-force",
+          "high"
         ],
-        "v": "c"
+        "v": "h"
       }
     },
     {
       "action": "add",
-      "id": "2026-07-21--swissdamed-mandatory-july-1",
-      "reason": "Swissdamed (Swiss EUDAMED equivalent) mandatory 1 July 2026; existing stock registration required before deadline with double-submission burden for EU+CH distribution.",
+      "id": "2026-07-01--swissdamed-mandatory-medical-device-registry",
+      "reason": "Swissdamed mandatory since 1 July 2026; replaces paper registry with IT-based system. Retroactive submissions accepted until October 2026 for already-commercialized devices.",
       "card": {
-        "id": "2026-07-21--swissdamed-mandatory-july-1",
+        "id": "2026-07-01--swissdamed-mandatory-medical-device-registry",
         "d": "2026-07-01",
         "l": "1 Jul 2026",
         "y": 2026,
-        "t": "Swissdamed — Mandatory Device Traceability (Switzerland)",
-        "x": "Centralised registry for all devices marketed in Switzerland; mandatory registration of existing stock, technical data submission, and authorized representative qualification.",
+        "t": "Swissdamed — Mandatory Medical Device Registry (Switzerland)",
+        "x": "All devices marketed in Switzerland must be registered in Swissdamed before launch. Includes manufacturer, distributor, classification, and conformity documentation. Retroactive catch-up until October 2026.",
         "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
         "tp": [
           "other"
         ],
         "tg": [
-          "high",
-          "in-force"
+          "in-force",
+          "high"
         ],
         "v": "h"
       }
     },
     {
       "action": "add",
-      "id": "2026-06-09--mhra-ai-airlock-phase-2-report",
-      "reason": "MHRA AI Airlock Phase 2 report published 9 June 2026 establishes objective evaluation criteria for medical AI/ML; expected to influence MDCG and ISO/TS 24971-2 harmonisation.",
+      "id": "2026-06-09--mhra-ai-airlock-phase-2-evaluation-framework",
+      "reason": "MHRA AI Airlock phase 2 report published 9 June 2026; establishes UK AI qualification model (training, adversarial robustness, transparency, audit). Offers insight into agile AI assessment pathway alternative to rigid EU MDR approach.",
       "card": {
-        "id": "2026-06-09--mhra-ai-airlock-phase-2-report",
+        "id": "2026-06-09--mhra-ai-airlock-phase-2-evaluation-framework",
         "d": "2026-06-09",
         "l": "9 Jun 2026",
         "y": 2026,
-        "t": "MHRA AI Airlock Phase 2 — Medical AI Evaluation Framework Published",
-        "x": "Consolidates pilot feedback; defines objective criteria for training data validation, robustness testing, explainability, and cybersecurity audit across use-case types.",
+        "t": "MHRA AI Airlock Phase 2 — AI Evaluation Framework Published",
+        "x": "Details qualification process: training data validation, adversarial robustness, model transparency, independent audit. Sandbox available. Multi-market strategy (UK pilot then EU) now viable for SaMD.",
         "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
         "tp": [
           "uk",
           "ai"
         ],
         "tg": [
-          "high",
-          "in-force"
-        ],
-        "v": "h"
-      }
-    },
-    {
-      "action": "add",
-      "id": "2026-07-21--eu-2026-1231-harmonised-standards-mdr",
-      "reason": "Decision (EU) 2026/1231 adds new harmonised standards for specific device categories; manufacturers must verify applicability and update technical files accordingly.",
-      "card": {
-        "id": "2026-07-21--eu-2026-1231-harmonised-standards-mdr",
-        "d": "2026-07-21",
-        "l": "Jul 2026",
-        "y": 2026,
-        "t": "Decision (EU) 2026/1231 — New Harmonised MDR Standards Published",
-        "x": "Adds harmonised standards for software and implantable devices; presumption of conformity applies if standards followed; verify applicability to product class/type.",
-        "u": "https://www.qualitiso.com/veille/",
-        "tp": [
-          "mdr",
-          "standards"
-        ],
-        "tg": [
-          "medium",
-          "in-force"
+          "new",
+          "medium"
         ],
         "v": "n"
       }
     },
     {
       "action": "add",
-      "id": "2026-07-21--eu-rep-symbol-transition-from-ec-rep",
-      "reason": "Transition from EC REP to EU REP symbol for authorised representatives; applies to labelling and documentation with expected 12–18 month tolerance period.",
+      "id": "2026-07-22--mdr-articles-52-4-61-6-implant-exemptions-clarification",
+      "reason": "MDR articles 52.4 and 61.6 revisions underway to clarify exemptions for passive implants. No publication date confirmed; manufacturers should anticipate changes to conformity file scope.",
       "card": {
-        "id": "2026-07-21--eu-rep-symbol-transition-from-ec-rep",
-        "d": "2026-07-21",
-        "l": "Jul 2026",
+        "id": "2026-07-22--mdr-articles-52-4-61-6-implant-exemptions-clarification",
+        "d": "2026-07-22",
+        "l": "22 Jul 2026",
         "y": 2026,
-        "t": "EU REP Symbol — Transition from EC REP Identifier",
-        "x": "Authorised representative identifier updated from EC REP to EU REP on labels and packaging; coordinate with notified body and suppliers on transition timeline.",
+        "t": "MDR Articles 52.4 & 61.6 — Implant Exemptions Under Review",
+        "x": "Clarification in progress on exemptions for passive implants (e.g. simple vascular clips). Dossiers in evaluation should verify if product qualifies under revised criteria. Monitor Commission calendar.",
         "u": "https://www.qualitiso.com/veille/",
         "tp": [
           "mdr"
         ],
         "tg": [
           "medium",
-          "in-force"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "action": "add",
-      "id": "2026-07-21--regulation-eu-2026-977-notified-body-audit-obligations",
-      "reason": "Regulation (EU) 2026/977 strengthens notified body audit requirements; enhanced documentation and traceability criteria may shorten audit cycles.",
-      "card": {
-        "id": "2026-07-21--regulation-eu-2026-977-notified-body-audit-obligations",
-        "d": "2026-07-21",
-        "l": "Jul 2026",
-        "y": 2026,
-        "t": "Regulation (EU) 2026/977 — Enhanced Notified Body Audit Rules",
-        "x": "Tighter audit criteria on risk documentation, component traceability, harmonised standards compliance, and change management; anticipate accelerated audit schedules.",
-        "u": "https://www.qualitiso.com/veille/",
-        "tp": [
-          "mdr"
-        ],
-        "tg": [
-          "medium",
-          "in-force"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "action": "add",
-      "id": "2026-07-21--mdcg-2026-1-2-3-emdn-v2026-codification",
-      "reason": "MDCG guides 2026-1/2/3 release EMDN v2026 codes for software, AI/ML, and e-health devices; deadline for code mapping and EUDAMED/vigilance updates likely Q4 2026.",
-      "card": {
-        "id": "2026-07-21--mdcg-2026-1-2-3-emdn-v2026-codification",
-        "d": "2026-07-21",
-        "l": "Jul 2026",
-        "y": 2026,
-        "t": "MDCG Guides 2026-1/2/3 — EMDN v2026 Nomenclature Codification",
-        "x": "New/revised EMDN codes for medical software, AI/ML, e-health; audit existing product codes, update EUDAMED and vigilance registries before Q4 2026 harmonisation deadline.",
-        "u": "https://www.qualitiso.com/veille/",
-        "tp": [
-          "mdr"
-        ],
-        "tg": [
-          "medium",
-          "in-force"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "action": "add",
-      "id": "2026-07-21--mdr-article-52-4-61-6-implant-exemptions-effective",
-      "reason": "MDR Article 52.4 and 61.6 exemptions for implants take effect 1 July 2026; manufacturers may qualify for reduced clinical trial requirements if criteria met.",
-      "card": {
-        "id": "2026-07-21--mdr-article-52-4-61-6-implant-exemptions-effective",
-        "d": "2026-07-01",
-        "l": "1 Jul 2026",
-        "y": 2026,
-        "t": "MDR Articles 52.4 & 61.6 — Revised Implant Clinical Trial Exemptions",
-        "x": "Refined exemption conditions for implants with established biocompatibility and sufficient historical data; verify eligibility with notified body to potentially streamline dossier.",
-        "u": "https://www.qualitiso.com/veille/",
-        "tp": [
-          "mdr"
-        ],
-        "tg": [
-          "medium",
-          "in-force"
+          "draft"
         ],
         "v": "n"
       }
