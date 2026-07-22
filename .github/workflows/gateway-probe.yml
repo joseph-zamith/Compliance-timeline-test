@@ -1,0 +1,30 @@
+name: Gateway cap probe (debug)
+
+# Sonde temporaire pour identifier le cap du gateway LiteLLM (durée vs tokens).
+# À supprimer une fois le diagnostic posé.
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "Modèle à sonder"
+        type: choice
+        default: vercel/anthropic-claude-sonnet-4.5
+        options:
+          - vercel/anthropic-claude-sonnet-4.5
+          - vercel/anthropic-claude-haiku-4.5
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run probe (stdlib only, no deps)
+        env:
+          LITELLM_API_KEY: ${{ secrets.LITELLM_API_KEY }}
+        run: python3 automation/tools/gateway_cap_probe.py "${{ github.event.inputs.model }}"
