@@ -1,4 +1,4 @@
 {
   "research_model": "vercel/perplexity-sonar-pro",
-  "writing_model": "vercel/anthropic-claude-haiku-4.5"
+  "writing_model": "vercel/anthropic-claude-sonnet-4.5"
 }
