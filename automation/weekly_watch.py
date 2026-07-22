@@ -608,6 +608,18 @@ regardless of item count. Stable id format: "YYYY-MM-DD--lowercase-english-slug"
 Valid tags: {VALID_TAGS}. Valid variants: {VALID_VARIANTS} (c=critical/navy, h=highlight/gold,
 n=normal). Action value must be lowercase: "add", "update", or "delete" — never uppercase.
 
+CHOOSING THE ACTION — the timeline is a CHRONOLOGY, not a status board: each card is a
+milestone that happened (or is scheduled) at its date. Use "update" ONLY to correct or refresh
+the SAME milestone: status/tag change (e.g. draft -> in-force once its date has passed), date
+shift, corrected or added deadline, tightened wording. NEVER repurpose an existing card to
+describe a NEW development: if something new happened (new publication, new decision, new
+package), propose "add" with its own date and leave the old milestone intact. Litmus test: if
+your new "x" description contradicts or replaces the SUBJECT of the old one instead of refining
+it, it must be an "add". One development = one proposal: never fold several distinct
+developments into a single card's description. When updating, preserve the informative content
+of the existing description (module lists, references, requirements like SRN) and change only
+what actually changed — extend, don't erase.
+
 EVERY proposal object, whatever the action, MUST have BOTH a top-level "id" field AND a
 top-level "reason" field — these two are never optional, never skip either one even when it
 feels redundant with "card":
