@@ -36,6 +36,7 @@ import sys
 import time
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import urljoin, urlparse
 
 import httpx
 import requests
@@ -253,6 +254,29 @@ def fetch_fixed_sources() -> str:
             resp = requests.get(url, headers=headers, timeout=30)
             resp.raise_for_status()
             soup = BeautifulSoup(resp.text, "html.parser")
+
+            # Extract real article links BEFORE stripping tags for the text
+            # dump below. Without this, the model only ever sees this page's
+            # own URL in its context and cites that generic landing page for
+            # every item sourced from it, instead of the specific article —
+            # confirmed in practice (every item from a given fixed source
+            # pointing to the same "/veille/" listing URL).
+            source_domain = urlparse(url).netloc
+            seen_links = set()
+            links = []
+            for a in soup.find_all("a", href=True):
+                label = a.get_text(strip=True)
+                if not label or len(label) < 12:
+                    continue  # skips nav items like "Accueil", icons, etc.
+                href = urljoin(url, a["href"])
+                if not href.startswith("http") or urlparse(href).netloc != source_domain:
+                    continue  # keep only specific pages on this same source
+                if href in seen_links:
+                    continue
+                seen_links.add(href)
+                links.append(f"- {label[:120]} -> {href}")
+            links_blob = "\n".join(links[:30])
+
             for tag in soup(["script", "style"]):
                 tag.decompose()
             text = soup.get_text(separator="\n")
@@ -260,7 +284,15 @@ def fetch_fixed_sources() -> str:
             # Cap per-source length to keep the writing-model prompt manageable — a
             # smaller prompt also reduces the model's tendency to try to cover
             # everything at length (see CONTENT_SYSTEM_PROMPT hard length budget).
-            chunks.append(f"--- SOURCE: {url} ---\n{text[:2500]}")
+            chunk = f"--- SOURCE: {url} ---\n{text[:2500]}"
+            if links_blob:
+                chunk += (
+                    f"\n\nLiens specifiques trouves sur cette page (utilise le lien le "
+                    f"plus pertinent pour chaque item ci-dessus ; ne cite l'URL de la "
+                    f"page elle-meme ({url}) qu'en dernier recours, si aucun lien "
+                    f"specifique ne correspond) :\n{links_blob}"
+                )
+            chunks.append(chunk)
         except Exception as e:  # noqa: BLE001 - one bad source must not kill the run
             log(f"Fetch échoué pour {url}: {e}")
             chunks.append(f"--- SOURCE: {url} ---\n(fetch échoué: {e})")
@@ -403,7 +435,10 @@ week, more on a busy one — do not force a count). HARD CAP: never exceed 12 it
 exceptionally active week — this is a length constraint, not a quality target. If more than 12
 items are genuinely material, keep the 12 most impactful and drop the rest entirely (better to
 fully finish 12 substantive items than start a 13th and run out of room). Order does not matter,
-region field handles sorting. Every item needs a real, clickable source_url.
+region field handles sorting. Every item needs a real, clickable source_url — when the source
+material includes a "Liens specifiques trouves sur cette page" list, use the specific article
+link from it, not the source's generic homepage/listing URL (that generic URL is only a fallback
+for items where no specific link matches).
 
 ## OUTPUT FORMAT — respect EXACTLY, nothing else before/after, no markdown code fences
 Use ONLY these two markers, exactly as written: never invent your own extra marker.
