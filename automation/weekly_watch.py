@@ -315,13 +315,26 @@ write substantively (real sentences, real detail), you are not being asked to co
 ## EDITORIAL MANDATE
 Audience: busy QARA leads and C-levels. This is a weekly digest, not an exhaustive dump, but be
 substantive on anything that genuinely moved. EU first; other regions only if genuinely major
-(else skip or one line). This EU-first rule applies to the detailed body (items / hors_ue_note),
+(else skip or one line). This EU-first rule applies to the detailed body (the "items" list),
 NOT to "essentiel": that field is read first, by everyone, and must reflect whatever mattered
 most this week regardless of region — you are given the full research for every region below, so
 scan all of it (not just EU material) before writing "essentiel". If the single biggest
 development of the week happened outside the EU, it belongs in "essentiel" even though the rest
 of the email body stays EU-focused. Never repeat last week's items without a material development
 since — read the previous edition below first.
+
+STANDING ITEM WITH NO CHANGE THIS WEEK: if a topic already covered in a previous edition has no
+material development since, DO NOT create an item for it and do not mention it in "essentiel" —
+leave it out of the body entirely. It is only eligible for a one-liner in "points_vigilance", and
+only if its next deadline falls within roughly 60 days. Silence on an unchanged topic is correct,
+not a gap to fill.
+
+REGION TAGGING — "eu" is broader than EU institutions: international/global standards bodies
+(IMDRF, ISO, IEC) whose work feeds directly into EU compliance (e.g. MDR-referenced harmonized
+standards, IMDRF guidance that shapes MDCG documents) belong in region "eu", framed through "what
+this means for an EU manufacturer" — not in "uk"/"us"/"other". Reserve "uk"/"us"/"other" for
+genuinely country-specific regulatory action (MHRA, FDA, TGA, etc.) that does not automatically
+apply in the EU.
 
 CRITICAL — temporal accuracy: today's date is given below. Before describing any item, compare
 its date/deadline to today. If the date is in the FUTURE, describe it as upcoming/scheduled
@@ -339,7 +352,7 @@ words.
 
 ONE EXCEPTION: "essentiel" may stay compact/headline-style (articles can be dropped there, that
 register is fine and expected). EVERYWHERE ELSE — every item's "summary" and "detail",
-"hors_ue_note", "points_vigilance" — must be complete, grammatical French sentences: every noun
+"points_vigilance" — must be complete, grammatical French sentences: every noun
 needs its article ("le", "la", "les", "des", "du"), normal connectors ("qui", "donc", "avant de").
 Dropping articles on regulatory noun phrases is a common mistake — avoid it:
 - WRONG: "MDCG 2026-4 finalise juin 2026 clarifie gestion SSCP dans EUDAMED."
@@ -366,7 +379,6 @@ genuinely moved this week, by their exact "reference" string, in standards_chang
       "source_url": "https://..."
     }}
   ],
-  "hors_ue_note": "one short paragraph, complete French sentences with articles (not telegraphic), on non-EU/UK/US developments if genuinely major, else 'Aucune evolution notable hors UE cette semaine.'",
   "points_vigilance": ["max 3 items, each a complete French sentence with articles (not a telegraphic fragment): standing items with a deadline within ~60 days"],
   "standards_changed": [
     {{"reference": "must exactly match a 'reference' from the register above", "note": "what changed this week, 1 sentence"}}
@@ -612,7 +624,6 @@ def validate_content_json(raw: str) -> dict:
     parsed.setdefault("essentiel", [])
     parsed.setdefault("priority_banner", None)
     parsed.setdefault("items", [])
-    parsed.setdefault("hors_ue_note", "Aucune evolution notable hors UE cette semaine.")
     parsed.setdefault("points_vigilance", [])
     parsed.setdefault("standards_changed", [])
 
@@ -675,8 +686,6 @@ def build_content_digest(content: dict) -> str:
             f"  Source: {item.get('source_label') or item.get('source_url')} — {item.get('source_url')}"
         )
     lines.append("")
-    if content.get("hors_ue_note"):
-        lines.append(f"## Hors UE\n{content['hors_ue_note']}\n")
     if content.get("points_vigilance"):
         lines.append("## Points de vigilance")
         for p in content["points_vigilance"]:
@@ -789,17 +798,34 @@ def _source_link(item: dict) -> str:
     return f'<a href="{_esc(url)}" style="color:#ff512c; text-decoration:none;">Source: {label}</a>'
 
 
+PRIORITY_RANK = {"critical": 0, "high": 1, "medium": 2}
+
+
+def _hors_ue_items(content: dict, limit: int = 3) -> list:
+    """Up to `limit` non-EU items (uk/us/other), most urgent first — mirrors
+    the legacy rule: "Hors UE" is a short, linked afterthought list, not a
+    freeform summary paragraph. Built from the same "items" the model already
+    produces, so every entry keeps its real source link."""
+    non_eu = [it for it in content.get("items", []) if it.get("region") in ("uk", "us", "other")]
+    non_eu.sort(key=lambda it: PRIORITY_RANK.get(it.get("priority"), 2))
+    return non_eu[:limit]
+
+
 def render_email_html(content: dict, week_label: str) -> str:
     essentiel = content.get("essentiel") or ["Aucune évolution notable cette semaine."]
     essentiel_html = "".join(f"<li>{_esc(b)}</li>" for b in essentiel)
 
-    banner_html = ""
     if content.get("priority_banner"):
         banner_html = (
             '<div style="background-color:#fff3e0; border-left:4px solid #e8850c; padding:12px 16px; '
             'border-radius:8px; margin-bottom:24px;">'
             f'<p style="color:#1c2837; font-size:12px; font-weight:600; margin:0;">'
             f'{_esc(content["priority_banner"])}</p></div>'
+        )
+    else:
+        banner_html = (
+            '<p style="color:#8a9099; font-size:12px; font-style:italic; margin:0 0 24px 0;">'
+            'Aucune nouvelle echeance a traiter cette semaine ; voir les points de vigilance.</p>'
         )
 
     eu_items = [it for it in content.get("items", []) if it.get("region") == "eu"][:6]
@@ -814,6 +840,20 @@ def render_email_html(content: dict, week_label: str) -> str:
             f'<p style="margin:8px 0 0 0; font-size:11px;">{_source_link(it)}</p>'
             '</div>'
         )
+
+    hors_ue = _hors_ue_items(content)
+    if hors_ue:
+        hors_ue_html = ""
+        for it in hors_ue:
+            hors_ue_html += (
+                '<div style="margin-bottom:12px;">'
+                f'<p style="color:#1c2837; font-size:12px; margin:0 0 4px 0;">'
+                f'<strong>{_esc(it["title"])}</strong> — {_esc(it["summary"])}</p>'
+                f'<p style="margin:0; font-size:11px;">{_source_link(it)}</p>'
+                '</div>'
+            )
+    else:
+        hors_ue_html = '<p style="font-size:12px; color:#1c2837;">Aucune evolution notable hors UE cette semaine.</p>'
 
     vigilance = content.get("points_vigilance") or []
     vigilance_html = "".join(f"<li>{_esc(v)}</li>" for v in vigilance)
@@ -853,7 +893,7 @@ def render_email_html(content: dict, week_label: str) -> str:
 <h2 style="color:#1c2837; font-size:16px; font-weight:700; margin:0 0 16px 0; border-bottom:2px solid #ff512c; padding-bottom:8px;">UE et international</h2>
 {items_html or '<p style="font-size:12px; color:#1c2837;">Aucune evolution notable cette semaine.</p>'}
 <h2 style="color:#1c2837; font-size:16px; font-weight:700; margin:24px 0 16px 0; border-bottom:2px solid #ff512c; padding-bottom:8px;">Hors UE</h2>
-<p style="font-size:12px; color:#1c2837; margin:0 0 24px 0;">{_esc(content.get("hors_ue_note", ""))}</p>
+{hors_ue_html}
 {vigilance_section}
 </td></tr>
 </table>
