@@ -1374,11 +1374,17 @@ async function init() {
     // reloads), which silently falls back to a possibly-stale localStorage
     // copy and makes proposals look mis-filed between Pending/Archived.
     const ghToken = getGitHubToken();
+    // cache: "no-store" + a cache-busting query param: browser HTTP caching on
+    // these two static files was making a hard refresh of the page look like
+    // it changed nothing (the page reloads, but a plain fetch() can still be
+    // served from cache regardless of that reload).
+    const bust = Date.now();
     const [dataResp, propResp, decResp] = await Promise.all([
-      fetch("data.json"),
-      fetch("proposals.json").catch(() => null),
+      fetch(`data.json?_=${bust}`, { cache: "no-store" }),
+      fetch(`proposals.json?_=${bust}`, { cache: "no-store" }).catch(() => null),
       fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DEC_PATH}`, {
         headers: ghToken ? { "Authorization": `token ${ghToken}` } : {},
+        cache: "no-store",
       }).catch(() => null),
     ]);
 
@@ -1421,7 +1427,7 @@ async function init() {
     if (!decLoaded) {
       // Try fetching from Pages
       try {
-        const fallback = await fetch("decisions.json");
+        const fallback = await fetch(`decisions.json?_=${Date.now()}`, { cache: "no-store" });
         if (fallback.ok) {
           const parsed = await fallback.json();
           if (parsed.approved_proposals?.length || parsed.hidden_cards?.length) {
