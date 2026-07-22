@@ -499,7 +499,7 @@ genuinely moved this week, by their exact "reference" string, in standards_chang
 
 ## JSON SCHEMA — every field below is required unless marked optional
 {{
-  "essentiel": ["3-5 short one-line highlights spanning ALL regions this week (EU, UK, US, other) — not EU-only, or one honest line if quiet"],
+  "essentiel": ["3-5 short one-line highlights spanning ALL regions this week (EU, UK, US, other) — not EU-only, or one honest line if quiet. Each bullet covers a DISTINCT fact: never two bullets about the same development, even worded differently"],
   "priority_banner": "one line, ONLY if a genuine new/imminent CRITIQUE or ELEVE deadline exists, else null",
   "items": [
     {{
@@ -1535,9 +1535,17 @@ def _run(config: dict, recipients: list, data_json: list, known_topics: list, cl
     # Fold this run's items into the persistent anti-repetition archive and
     # write it back — grows every run, never overwritten, so next week's
     # comparison isn't limited to a single previous edition.
-    known_topics = merge_known_topics(known_topics, content.get("items", []), date.today().isoformat())
-    STATE_DIR.mkdir(parents=True, exist_ok=True)
-    KNOWN_TOPICS_PATH.write_text(json.dumps(known_topics, ensure_ascii=False, indent=2), encoding="utf-8")
+    # JAMAIS en dry-run : un test enregistrerait ses items comme "déjà
+    # couverts" alors qu'aucun destinataire ne les a reçus, et le vrai run
+    # suivant les passerait sous silence (vécu : Swissdamed disparu après
+    # deux dry-runs successifs). La mémoire ne reflète que ce qui a été
+    # réellement envoyé.
+    if is_dry_run():
+        log(f"DRY_RUN actif : known_topics.json NON mis à jour ({len(content.get('items', []))} item(s) non enregistrés).")
+    else:
+        known_topics = merge_known_topics(known_topics, content.get("items", []), date.today().isoformat())
+        STATE_DIR.mkdir(parents=True, exist_ok=True)
+        KNOWN_TOPICS_PATH.write_text(json.dumps(known_topics, ensure_ascii=False, indent=2), encoding="utf-8")
 
     if replay_proposals():
         cached = STATE_DIR / "debug_last_proposals_output.txt"
