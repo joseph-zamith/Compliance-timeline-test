@@ -1391,6 +1391,54 @@ def write_outputs(proposals_en: dict, proposals_fr: dict, email_body_html: str, 
     (ARCHIVE_DIR / f"email-{date_slug}.html").write_text(email_body_html, encoding="utf-8")
 
 
+def _git_push_with_rebase(max_attempts: int = 3) -> None:
+    """git push avec rattrapage : si le remote a avancé pendant le run (~6 min
+    de LLM pendant lesquelles l'admin peut pousser decisions.json, ou un humain
+    n'importe quoi d'autre — vécu le 2026-07-22), un push nu est rejeté
+    non-fast-forward. On rebase nos commits par-dessus et on retente.
+    --autostash: les fichiers d'état modifiés mais pas encore committés
+    (commit_state_for_qa passe après) ne doivent pas bloquer le rebase."""
+    for attempt in range(1, max_attempts + 1):
+        try:
+            subprocess.run(["git", "push"], cwd=REPO_ROOT, check=True)
+            return
+        except subprocess.CalledProcessError:
+            if attempt == max_attempts:
+                raise
+            log(f"git push rejeté (essai {attempt}/{max_attempts}) — pull --rebase puis nouvel essai.")
+            subprocess.run(["git", "pull", "--rebase", "--autostash"], cwd=REPO_ROOT, check=True)
+
+
+def flag_rewritten_updates(proposals: dict, data_json: list) -> None:
+    """Garde-fou déterministe contre le détournement d'un jalon existant : si la
+    description proposée en update n'a presque aucun vocabulaire commun avec la
+    description actuelle (Jaccard < 0.2), c'est très probablement un NOUVEAU
+    développement déguisé en update (règle CHOOSING THE ACTION du prompt non
+    respectée). On ne bloque pas — le modèle peut avoir raison — mais on
+    préfixe le reason d'un flag visible dans le back office, à côté du diff."""
+    by_id = {m["id"]: m for m in data_json if "id" in m}
+    for p in proposals["proposals"]:
+        if p.get("action") != "update" or not p.get("card"):
+            continue
+        old = by_id.get(p.get("existing_id"))
+        if not old:
+            continue
+        old_words = set(re.findall(r"[a-zà-ÿ0-9]+", str(old.get("x", "")).lower()))
+        new_words = set(re.findall(r"[a-zà-ÿ0-9]+", str(p["card"].get("x", "")).lower()))
+        if not old_words or not new_words:
+            continue
+        overlap = len(old_words & new_words) / len(old_words | new_words)
+        if overlap < 0.2:
+            p["reason"] = (
+                "[REVIEW: description entierement reecrite — verifier que ce n'est pas "
+                "un nouveau jalon qui devrait etre un add] " + str(p.get("reason", ""))
+            )
+            log(
+                f"  Proposition {p['id']}: recouvrement de description {int(overlap * 100)}% "
+                f"— flag REVIEW ajouté pour la revue admin."
+            )
+
+
 def git_commit_and_push() -> None:
     """Publish site-critical files (proposals.json/-fr.json) — gated behind
     DRY_RUN, since these are what the public site and admin.html actually
@@ -1416,7 +1464,7 @@ def git_commit_and_push() -> None:
         ["git", "commit", "-m", f"Regulatory watch: proposals for {date_slug}"],
         cwd=REPO_ROOT, check=True,
     )
-    subprocess.run(["git", "push"], cwd=REPO_ROOT, check=True)
+    _git_push_with_rebase()
     log("Changements poussés sur main.")
 
 
@@ -1440,7 +1488,7 @@ def commit_state_for_qa() -> None:
         ["git", "commit", "-m", f"Regulatory watch: état/diagnostic pour {date_slug}"],
         cwd=REPO_ROOT, check=True,
     )
-    subprocess.run(["git", "push"], cwd=REPO_ROOT, check=True)
+    _git_push_with_rebase()
     log("État/diagnostic (automation/state) poussé sur main.")
 
 
@@ -1592,6 +1640,7 @@ def _run(config: dict, recipients: list, data_json: list, known_topics: list, cl
         # Jamais laissé à la main du modèle — c'est une donnée du run, pas du contenu.
         proposals_en["generated"] = date.today().isoformat()
         prefix_proposal_ids(proposals_en, date.today().isoformat())
+        flag_rewritten_updates(proposals_en, data_json)
         log("Traduction FR des propositions, carte par carte...")
         proposals_fr = translate_proposals_fr(client, config["translate_model"], proposals_en)
         # Cache replay au format historique 3 marqueurs (état FINAL : ids déjà
@@ -1614,9 +1663,14 @@ def _run(config: dict, recipients: list, data_json: list, known_topics: list, cl
     validate_existing_ids(proposals_fr, data_json)
     log("JSON valide.")
 
-    send_email(email_body_html, full_report_html, recipients)
+    # Publier AVANT d'envoyer : si le push échoue, aucun destinataire n'a
+    # encore reçu d'email pointant vers une timeline jamais mise à jour, et on
+    # peut relancer le run sans envoyer de doublon (vécu le 2026-07-22 :
+    # email parti, push rejeté, run en échec). L'inverse (push ok, email
+    # échoué) est bénin : relancer n'aboutit qu'à un commit vide.
     write_outputs(proposals_en, proposals_fr, email_body_html, full_report_html)
     git_commit_and_push()
+    send_email(email_body_html, full_report_html, recipients)
 
 
 if __name__ == "__main__":
