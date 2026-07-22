@@ -868,12 +868,19 @@ function saveDecisionsLocal() {
 
 let _pushTimer = null;
 let _pushPending = false;
+// Set when a debounced push fires while a previous push is still in flight —
+// without this, that change would be saved locally but silently never make
+// it to GitHub (the old code just skipped the push and nothing rescheduled
+// it), which is exactly what made a removed comment look "stuck" on the
+// public page: it was persisted locally but the GitHub sync got dropped.
+let _pushDirtyDuringFlight = false;
 
 async function _doPush() {
   const token = getGitHubToken();
   if (!token) return;
 
   _pushPending = true;
+  _pushDirtyDuringFlight = false;
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(decisions, null, 2))));
   try {
     const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DEC_PATH}`, {
@@ -901,6 +908,11 @@ async function _doPush() {
     console.error("GitHub push error:", e);
   }
   _pushPending = false;
+  // A change came in while this push was in flight — push again immediately
+  // instead of leaving it stranded in localStorage only.
+  if (_pushDirtyDuringFlight) {
+    _doPush();
+  }
 }
 
 function pushDecisions() {
@@ -912,7 +924,11 @@ function pushDecisions() {
   // This batches rapid clicks (approve, approve, approve) into a single commit
   clearTimeout(_pushTimer);
   _pushTimer = setTimeout(() => {
-    if (!_pushPending) _doPush();
+    if (_pushPending) {
+      _pushDirtyDuringFlight = true;
+    } else {
+      _doPush();
+    }
   }, 3000);
 }
 
