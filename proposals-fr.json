@@ -3,44 +3,21 @@
   "proposals": [
     {
       "action": "add",
-      "id": "2026-07-09--iso-ts-24971-2-published",
-      "reason": "First dedicated standard for ML-based device risk management, directly affecting technical files.",
+      "id": "2026-07-22--mdcg-2026-5-udi-di-attribution-clarified",
+      "reason": "New guidance clarifies UDI-DI attribution between manufacturers and distributors, resolving frequent ambiguity ahead of Q3 EUDAMED submissions.",
       "card": {
-        "id": "2026-07-09--iso-ts-24971-2-published",
-        "d": "2026-07-09",
-        "l": "9 juil. 2026",
+        "id": "2026-07-22--mdcg-2026-5-udi-di-attribution-clarified",
+        "d": "2026-07-22",
+        "l": "22 juil. 2026",
         "y": 2026,
-        "t": "ISO/TS 24971-2 publiée",
-        "x": "Première spécification technique pour la gestion des risques des DM à base de ML. Couvre les biais algorithmiques, la robustesse des modèles, la traçabilité des données d'entraînement et la surveillance post-déploiement.",
-        "u": "https://www.qualitiso.com/veille/",
-        "tp": [
-          "ai",
-          "standards"
-        ],
-        "tg": [
-          "new",
-          "high"
-        ],
-        "v": "h"
-      }
-    },
-    {
-      "action": "add",
-      "id": "2026-07-01--eu-2026-977-notified-body-rules",
-      "reason": "Regulation immediately affects certification audits for Class IIb/III devices with algorithms.",
-      "card": {
-        "id": "2026-07-01--eu-2026-977-notified-body-rules",
-        "d": "2026-07-01",
-        "l": "1er juil. 2026",
-        "y": 2026,
-        "t": "UE 2026/977 — Règles d'évaluation par les ON",
-        "x": "Nouvelles exigences d'audit pour les dispositifs de classe IIb/III avec algorithmes. Les ON doivent documenter explicitement l'évaluation du cycle de vie logiciel et de la robustesse de la surveillance post-commercialisation.",
-        "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
+        "t": "MDCG 2026-5 : attribution des identifiants UDI-DI clarifiée",
+        "x": "Précise quand un distributeur doit obtenir son propre UDI-DI ou conserver celui du fabricant, notamment en cas de reconditionnement/réétiquetage.",
+        "u": "https://www.qualitiso.com/mdcg-2026-5-attribution-des-identifiants-iud-entre-fabricants-et-distributeurs/",
         "tp": [
           "mdr"
         ],
         "tg": [
-          "in-force",
+          "new",
           "high"
         ],
         "v": "h"
@@ -48,68 +25,135 @@
     },
     {
       "action": "add",
-      "id": "2026-05-23--cnil-mr-001-mr-003-updated",
-      "reason": "Updated methodologies affect clinical trial and observational study protocols using personal data.",
+      "id": "2026-06-18--mdcg-2026-4-manufacturers-upload-all-summaries",
+      "reason": "MDCG 2026-4 finalizes that manufacturers must upload all SSP/SSCP summaries in EUDAMED, reversing previous NB involvement.",
       "card": {
-        "id": "2026-05-23--cnil-mr-001-mr-003-updated",
-        "d": "2026-05-23",
-        "l": "23 mai 2026",
+        "id": "2026-06-18--mdcg-2026-4-manufacturers-upload-all-summaries",
+        "d": "2026-06-18",
+        "l": "18 juin 2026",
         "y": 2026,
-        "t": "CNIL — MR-001 & MR-003 mises à jour",
-        "x": "Exigences clarifiées pour la réutilisation de données de santé en recherche : consentement, information, durées de conservation, pseudonymisation et mesures de sécurité techniques. Obligatoire pour les dépôts après le 23 mai.",
-        "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
+        "t": "MDCG 2026-4 : les fabricants chargent tous les résumés SSP/SSCP",
+        "x": "Tous les résumés SSP et SSCP doivent désormais être chargés par les fabricants, quel que soit le type de certification, pour accélérer la conformité EUDAMED.",
+        "u": "https://www.dm-experts.fr/2026/07/eudamed-le-mdcg-2026-4-confie-aux-fabricants-le-chargement-de-tous-les-resumes-ssp-et-sscp/",
         "tp": [
-          "france",
-          "data"
+          "mdr"
         ],
         "tg": [
-          "in-force",
-          "medium"
+          "high",
+          "in-force"
+        ],
+        "v": "h"
+      }
+    },
+    {
+      "action": "add",
+      "id": "2026-06-18--eu-2026-1231-new-harmonised-standards-mdr",
+      "reason": "New harmonised MDR standards published (biocompatibility, sterilization), presuming conformity with essential requirements.",
+      "card": {
+        "id": "2026-06-18--eu-2026-1231-new-harmonised-standards-mdr",
+        "d": "2026-06-18",
+        "l": "18 juin 2026",
+        "y": 2026,
+        "t": "Nouvelles normes harmonisées pour le RDM (décision 2026/1231)",
+        "x": "Élargit la liste des normes harmonisées pour la biocompatibilité et la stérilisation, facilitant la présomption de conformité.",
+        "u": "https://www.qualitiso.com/nouvelles-normes-harmonisees-rdm-decision-execution-ue-2026-1231/",
+        "tp": [
+          "mdr",
+          "standards"
+        ],
+        "tg": [
+          "medium",
+          "in-force"
         ],
         "v": "n"
       }
     },
     {
       "action": "add",
-      "id": "2026-06-09--mhra-ai-airlock-phase-2-report",
-      "reason": "Report identifies recurring gaps in AI device submissions, useful for both UK and EU manufacturers.",
+      "id": "2026-07-22--enisa-sbom-medical-device-cybersecurity-report",
+      "reason": "ENISA report analyzes current SBOM practices and identifies obstacles, recommending harmonization (SPDX, CycloneDX) for NIS2/MDR compliance.",
       "card": {
-        "id": "2026-06-09--mhra-ai-airlock-phase-2-report",
-        "d": "2026-06-09",
-        "l": "9 juin 2026",
+        "id": "2026-07-22--enisa-sbom-medical-device-cybersecurity-report",
+        "d": "2026-07-22",
+        "l": "22 juil. 2026",
         "y": 2026,
-        "t": "MHRA — Rapport AI Airlock Phase 2",
-        "x": "L'évaluation de dix dispositifs IA révèle des lacunes récurrentes : validation clinique insuffisante, manque de transparence des données d'entraînement et absence de plans de surveillance continue des performances.",
-        "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
+        "t": "ENISA : rapport sur les SBOM et la cybersécurité des DM",
+        "x": "Recommande des formats SBOM harmonisés et leur intégration dans la documentation technique avant les révisions MDCG 2019-16 sur la cybersécurité.",
+        "u": "https://www.dm-experts.fr/2026/07/enisa-etat-des-lieux-en-matiere-de-nomenclature-logicielle-sbom-et-de-cybersecurite/",
         "tp": [
-          "uk",
-          "ai"
+          "cyber",
+          "mdr"
         ],
         "tg": [
-          "new",
-          "medium"
+          "medium",
+          "new"
         ],
         "v": "n"
       }
     },
     {
       "action": "add",
-      "id": "2026-07-01--swissdamed-tga-traceability",
-      "reason": "Mandatory traceability requirements now in force for Swiss and Australian markets.",
+      "id": "2026-06-18--mdr-implantable-exemptions-articles-52-4-61-6",
+      "reason": "MDR modification exempts certain low-risk implantable devices from disproportionate administrative burdens (articles 52.4 and 61.6).",
       "card": {
-        "id": "2026-07-01--swissdamed-tga-traceability",
-        "d": "2026-07-01",
-        "l": "1er juil. 2026",
+        "id": "2026-06-18--mdr-implantable-exemptions-articles-52-4-61-6",
+        "d": "2026-06-18",
+        "l": "18 juin 2026",
         "y": 2026,
-        "t": "Swissdamed & TGA — Traçabilité en vigueur",
-        "x": "Swissmedic rend obligatoire la base Swissdamed pour tous les dispositifs. La TGA exige l'enregistrement ARTG et des déclarations accélérées d'événements indésirables pour les dispositifs de classe II+. Les deux sont désormais applicables.",
-        "u": "https://www.dm-experts.fr/flash-reglementaire-normatif/",
+        "t": "RDM : exemptions pour certains DM implantables (art. 52.4, 61.6)",
+        "x": "Exempte certains implantables à faible risque (ex. : sutures, implants dentaires) de certaines exigences ; vérifier l'éligibilité avant les soumissions EUDAMED du T3.",
+        "u": "https://www.qualitiso.com/modifications-du-mdr-concernant-les-exemptions-pour-certains-dm-implantables-articles-52-4-et-61-6/",
         "tp": [
-          "other"
+          "mdr"
         ],
         "tg": [
-          "in-force",
-          "medium"
+          "medium",
+          "in-force"
+        ],
+        "v": "n"
+      }
+    },
+    {
+      "action": "add",
+      "id": "2026-07-22--imdrf-mdsap-annual-report-2025",
+      "reason": "IMDRF's first annual MDSAP 2025 report consolidates audit experience and identifies frequent gaps (risk management, software validation).",
+      "card": {
+        "id": "2026-07-22--imdrf-mdsap-annual-report-2025",
+        "d": "2026-07-22",
+        "l": "juil. 2026",
+        "y": 2026,
+        "t": "IMDRF : rapport annuel MDSAP 2025",
+        "x": "Premier rapport annuel identifiant les écarts d'audit fréquents (gestion des risques, validation logicielle) utiles pour l'accès multimarché.",
+        "u": "https://www.dm-experts.fr/2026/07/mdsap-1er-rapport-annuel-sur-les-avancees-de-2025/",
+        "tp": [
+          "other",
+          "standards"
+        ],
+        "tg": [
+          "medium",
+          "new"
+        ],
+        "v": "n"
+      }
+    },
+    {
+      "action": "add",
+      "id": "2026-12-31--ec-rep-to-eu-rep-symbol-transition-deadline",
+      "reason": "Transition from 'EC REP' to 'EU REP' symbol (MDCG 2021-5 Annex published 18 Jun) must be completed on all labelling by this date.",
+      "card": {
+        "id": "2026-12-31--ec-rep-to-eu-rep-symbol-transition-deadline",
+        "d": "2026-12-31",
+        "l": "31 déc. 2026",
+        "y": 2026,
+        "t": "Date limite de transition du symbole 'EC REP' vers 'EU REP'",
+        "x": "Tous les étiquetages doivent afficher 'EU REP' au lieu de 'EC REP' pour les mandataires autorisés avant fin 2026.",
+        "u": "https://www.qualitiso.com/mdcg-2026-5-attribution-des-identifiants-iud-entre-fabricants-et-distributeurs/",
+        "tp": [
+          "mdr"
+        ],
+        "tg": [
+          "medium",
+          "in-force"
         ],
         "v": "n"
       }
