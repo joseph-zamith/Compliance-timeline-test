@@ -1333,6 +1333,7 @@ def send_email(email_body_html: str, full_report_html: str, recipients: list) ->
     from email.mime.application import MIMEApplication
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
+    from email.utils import formataddr
 
     # En DRY_RUN, on ne cherche jamais à envoyer réellement — donc pas besoin
     # d'exiger les identifiants Gmail, qui ne sont pas encore configurés tant
@@ -1346,7 +1347,12 @@ def send_email(email_body_html: str, full_report_html: str, recipients: list) ->
     outer = MIMEMultipart("mixed")
     outer["To"] = ", ".join(recipients)
     outer["Subject"] = f"Veille reglementaire (focus UE) - Logiciels DM & AI Act - {today_str}"
-    outer["From"] = gmail_address or "(dry-run, adresse non configurée)"
+    # Nom d'affichage seulement — l'adresse d'envoi reste celle du compte
+    # Gmail authentifié (formataddr ne fait qu'ajouter le nom en clair devant).
+    outer["From"] = (
+        formataddr(("Regulatory Watch Tower", gmail_address))
+        if gmail_address else "(dry-run, adresse non configurée)"
+    )
 
     body = MIMEMultipart("alternative")
     plain_text = (
