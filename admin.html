@@ -516,6 +516,43 @@
     margin: var(--space-xs) 0;
     max-width: 70ch;
   }
+  .proposal-title-input, .proposal-desc-input {
+    display: block;
+    width: 100%;
+    max-width: 70ch;
+    font-family: inherit;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 2px 6px;
+    margin: 2px 0;
+  }
+  .proposal-title-input {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ink-primary);
+  }
+  .proposal-desc-input {
+    font-size: 0.8125rem;
+    color: var(--ink-secondary);
+    line-height: 1.55;
+    resize: vertical;
+    min-height: 2.6em;
+  }
+  .proposal-title-input:hover, .proposal-desc-input:hover {
+    border-color: var(--surface-3);
+  }
+  .proposal-title-input:focus, .proposal-desc-input:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: var(--surface-1);
+  }
+  .proposal-original {
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    font-style: italic;
+    margin: 0 0 var(--space-xs) 0;
+  }
   .proposal-reason {
     font-size: 0.75rem;
     color: var(--ink-muted);
@@ -793,7 +830,7 @@ const CONFIG_PATH = "automation/config.json";
 let decisions = {
   hidden_cards: [], approved_proposals: [], rejected_proposals: [],
   deleted_cards: [], comments: {}, comments_fr: {},
-  tag_overrides: {}, approval_dates: {}
+  tag_overrides: {}, approval_dates: {}, proposal_edits: {}
 };
 let decisionsSha = null; // GitHub file SHA for updates
 
@@ -1063,6 +1100,27 @@ function saveComment(cid, text, lang){
   else delete decisions[key][cid];
   pushDecisions();
 }
+
+/* ===== Proposal text edits — override layer on top of proposals.json =====
+   Comme les tag_overrides : on ne touche jamais proposals.json (trace fidèle
+   de ce que l'IA a proposé), l'édition humaine vit à part dans decisions.json
+   et prend le dessus au rendu (ici et sur les pages publiques une fois
+   approuvée). Si l'édition revient au texte original de l'IA, on supprime
+   l'override plutôt que de garder une entrée vide. */
+function getProposalEdits(){ return decisions.proposal_edits || {}; }
+function saveProposalEdit(pid, field, value, original){
+  if (!decisions.proposal_edits) decisions.proposal_edits = {};
+  const trimmed = value.trim();
+  const entry = decisions.proposal_edits[pid] || {};
+  if (trimmed && trimmed !== original) entry[field] = trimmed;
+  else delete entry[field];
+  if (Object.keys(entry).length) decisions.proposal_edits[pid] = entry;
+  else delete decisions.proposal_edits[pid];
+  pushDecisions();
+}
+function escAttr(s){
+  return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+}
 const PRIORITY_TAGS = ["critical", "high", "medium"];
 const STATUS_TAGS = ["new", "in-force", "draft", "proposed"];
 
@@ -1159,8 +1217,13 @@ function renderProposalCard(p, baseCardMap, isApproved, isRejected) {
       html += `<div class="proposal-topics">${existing.tp.map(tp => `<span class="tp tp-${tp}">${TL[tp]||tp}</span>`).join("")}</div>`;
     }
   } else if (p.card) {
-    html += `<div class="proposal-title">${p.card.t}</div>`;
-    html += `<div class="proposal-desc">${p.card.x}</div>`;
+    const edits = getProposalEdits()[p.id] || {};
+    const effTitle = edits.t !== undefined ? edits.t : p.card.t;
+    const effDesc = edits.x !== undefined ? edits.x : p.card.x;
+    html += `<input type="text" class="proposal-title-input" data-proposal-edit="${p.id}" data-edit-field="t" data-edit-original="${escAttr(p.card.t)}" value="${escAttr(effTitle)}">`;
+    if (edits.t !== undefined) html += `<div class="proposal-original">IA proposait : "${p.card.t}"</div>`;
+    html += `<textarea class="proposal-desc-input" data-proposal-edit="${p.id}" data-edit-field="x" data-edit-original="${escAttr(p.card.x)}">${effDesc}</textarea>`;
+    if (edits.x !== undefined) html += `<div class="proposal-original">IA proposait : "${p.card.x}"</div>`;
     if (p.card.u) html += `<div class="proposal-source"><a href="${p.card.u}" target="_blank" rel="noopener">Source ↗</a></div>`;
     if (p.card.tp) {
       html += `<div class="proposal-topics">${p.card.tp.map(tp => `<span class="tp tp-${tp}">${TL[tp]||tp}</span>`).join("")}</div>`;
@@ -1422,6 +1485,20 @@ document.getElementById("proposals-section").addEventListener("click", e => {
     activeProposalTab = tab.dataset.ptab;
     renderProposals();
     return;
+  }
+});
+
+// Proposal text edits — save on blur (input) or Enter (title field only,
+// textarea keeps Enter for line breaks). Full re-render on change so the
+// "IA proposait" note appears/disappears immediately.
+document.getElementById("proposals-section").addEventListener("change", e => {
+  if (!e.target.matches("[data-proposal-edit]")) return;
+  saveProposalEdit(e.target.dataset.proposalEdit, e.target.dataset.editField, e.target.value, e.target.dataset.editOriginal);
+  renderProposals();
+});
+document.getElementById("proposals-section").addEventListener("keydown", e => {
+  if (e.target.matches(".proposal-title-input") && e.key === "Enter") {
+    e.target.blur();
   }
 });
 

@@ -744,15 +744,25 @@ async function init() {
     // Start with base milestones, remove deleted
     M = base.filter(m => !deleted.has(cardId(m)));
 
-    // Add approved "add" proposals, apply approved "update" proposals
+    // Add approved "add" proposals, apply approved "update" proposals.
+    // proposal_edits is a manual-correction override layer (title/description)
+    // saved from the admin back office — it never touches proposals.json
+    // itself (kept as a faithful record of what the AI proposed), so we
+    // apply it here at merge time instead.
+    const proposalEdits = dec.proposal_edits || {};
+    const applyProposalEdit = (p) => {
+      const edit = proposalEdits[p.id];
+      if (!edit) return p.card;
+      return { ...p.card, ...(edit.t !== undefined ? { t: edit.t } : {}), ...(edit.x !== undefined ? { x: edit.x } : {}) };
+    };
     proposals.forEach(p => {
       if (!approved.has(p.id)) return;
       if (p.action === "add" && p.card) {
-        M.push(p.card);
+        M.push(applyProposalEdit(p));
       } else if (p.action === "update" && p.card && p.existing_id) {
         const idx = M.findIndex(m => cardId(m) === p.existing_id);
-        if (idx >= 0) M[idx] = p.card;
-        else M.push(p.card);
+        if (idx >= 0) M[idx] = applyProposalEdit(p);
+        else M.push(applyProposalEdit(p));
       }
     });
 
