@@ -739,14 +739,23 @@ async function init() {
 
     M = base.filter(m => !deleted.has(cardId(m)));
 
+    // proposal_edits.t_fr/x_fr est le pendant FR de l'override admin (t/x
+    // pour l'EN dans index.html) — même principe : jamais écrit dans
+    // proposals-fr.json, appliqué ici au moment du rendu.
+    const proposalEdits = dec.proposal_edits || {};
+    const applyProposalEdit = (p) => {
+      const edit = proposalEdits[p.id];
+      if (!edit) return p.card;
+      return { ...p.card, ...(edit.t_fr !== undefined ? { t: edit.t_fr } : {}), ...(edit.x_fr !== undefined ? { x: edit.x_fr } : {}) };
+    };
     proposals.forEach(p => {
       if (!approved.has(p.id)) return;
       if (p.action === "add" && p.card) {
-        M.push(p.card);
+        M.push(applyProposalEdit(p));
       } else if (p.action === "update" && p.card && p.existing_id) {
         const idx = M.findIndex(m => cardId(m) === p.existing_id);
-        if (idx >= 0) M[idx] = p.card;
-        else M.push(p.card);
+        if (idx >= 0) M[idx] = applyProposalEdit(p);
+        else M.push(applyProposalEdit(p));
       }
     });
 

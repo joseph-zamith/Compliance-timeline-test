@@ -553,6 +553,30 @@
     font-style: italic;
     margin: 0 0 var(--space-xs) 0;
   }
+  .proposal-lang-toggle {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+  .lang-pill {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--surface-3);
+    background: transparent;
+    color: var(--ink-tertiary);
+    cursor: pointer;
+  }
+  .lang-pill.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--ink-primary);
+  }
+  .lang-pill:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
   .proposal-reason {
     font-size: 0.75rem;
     color: var(--ink-muted);
@@ -813,6 +837,8 @@
 <script>
 let M = [];
 let allProposals = [];
+let proposalsFrMap = new Map();
+let proposalLangView = {}; // { [proposal.id]: "en" | "fr" } — vue en cours par carte, pas persisté
 
 function cardId(m){ return m.id || m.d+"__"+m.t.slice(0,40).replace(/\W+/g,"_"); }
 
@@ -1108,12 +1134,16 @@ function saveComment(cid, text, lang){
    approuvée). Si l'édition revient au texte original de l'IA, on supprime
    l'override plutôt que de garder une entrée vide. */
 function getProposalEdits(){ return decisions.proposal_edits || {}; }
-function saveProposalEdit(pid, field, value, original){
+function saveProposalEdit(pid, field, value, original, lang){
+  // field est toujours "t" ou "x" ; lang détermine si on écrit dans
+  // t/x (EN) ou t_fr/x_fr (FR) — deux corrections indépendantes qui peuvent
+  // toutes les deux exister pour la même proposition.
+  const key = lang === "fr" ? `${field}_fr` : field;
   if (!decisions.proposal_edits) decisions.proposal_edits = {};
   const trimmed = value.trim();
   const entry = decisions.proposal_edits[pid] || {};
-  if (trimmed && trimmed !== original) entry[field] = trimmed;
-  else delete entry[field];
+  if (trimmed && trimmed !== original) entry[key] = trimmed;
+  else delete entry[key];
   if (Object.keys(entry).length) decisions.proposal_edits[pid] = entry;
   else delete decisions.proposal_edits[pid];
   pushDecisions();
@@ -1217,13 +1247,23 @@ function renderProposalCard(p, baseCardMap, isApproved, isRejected) {
       html += `<div class="proposal-topics">${existing.tp.map(tp => `<span class="tp tp-${tp}">${TL[tp]||tp}</span>`).join("")}</div>`;
     }
   } else if (p.card) {
+    const lang = proposalLangView[p.id] === "fr" ? "fr" : "en";
+    const frProposal = proposalsFrMap.get(p.id);
+    const langCard = (lang === "fr" && frProposal && frProposal.card) ? frProposal.card : p.card;
     const edits = getProposalEdits()[p.id] || {};
-    const effTitle = edits.t !== undefined ? edits.t : p.card.t;
-    const effDesc = edits.x !== undefined ? edits.x : p.card.x;
-    html += `<input type="text" class="proposal-title-input" data-proposal-edit="${p.id}" data-edit-field="t" data-edit-original="${escAttr(p.card.t)}" value="${escAttr(effTitle)}">`;
-    if (edits.t !== undefined) html += `<div class="proposal-original">IA proposait : "${p.card.t}"</div>`;
-    html += `<textarea class="proposal-desc-input" data-proposal-edit="${p.id}" data-edit-field="x" data-edit-original="${escAttr(p.card.x)}">${effDesc}</textarea>`;
-    if (edits.x !== undefined) html += `<div class="proposal-original">IA proposait : "${p.card.x}"</div>`;
+    const tKey = lang === "fr" ? "t_fr" : "t";
+    const xKey = lang === "fr" ? "x_fr" : "x";
+    const effTitle = edits[tKey] !== undefined ? edits[tKey] : langCard.t;
+    const effDesc = edits[xKey] !== undefined ? edits[xKey] : langCard.x;
+
+    html += `<div class="proposal-lang-toggle">`;
+    html += `<button type="button" class="lang-pill ${lang==='en'?'active':''}" data-lang-toggle="${p.id}" data-lang="en">EN</button>`;
+    html += `<button type="button" class="lang-pill ${lang==='fr'?'active':''}" data-lang-toggle="${p.id}" data-lang="fr" ${frProposal?'':'disabled title="proposals-fr.json indisponible"'}>FR</button>`;
+    html += `</div>`;
+    html += `<input type="text" class="proposal-title-input" data-proposal-edit="${p.id}" data-edit-field="t" data-edit-lang="${lang}" data-edit-original="${escAttr(langCard.t)}" value="${escAttr(effTitle)}">`;
+    if (edits[tKey] !== undefined) html += `<div class="proposal-original">IA proposait (${lang.toUpperCase()}) : "${langCard.t}"</div>`;
+    html += `<textarea class="proposal-desc-input" data-proposal-edit="${p.id}" data-edit-field="x" data-edit-lang="${lang}" data-edit-original="${escAttr(langCard.x)}">${effDesc}</textarea>`;
+    if (edits[xKey] !== undefined) html += `<div class="proposal-original">IA proposait (${lang.toUpperCase()}) : "${langCard.x}"</div>`;
     if (p.card.u) html += `<div class="proposal-source"><a href="${p.card.u}" target="_blank" rel="noopener">Source ↗</a></div>`;
     if (p.card.tp) {
       html += `<div class="proposal-topics">${p.card.tp.map(tp => `<span class="tp tp-${tp}">${TL[tp]||tp}</span>`).join("")}</div>`;
@@ -1493,13 +1533,25 @@ document.getElementById("proposals-section").addEventListener("click", e => {
 // "IA proposait" note appears/disappears immediately.
 document.getElementById("proposals-section").addEventListener("change", e => {
   if (!e.target.matches("[data-proposal-edit]")) return;
-  saveProposalEdit(e.target.dataset.proposalEdit, e.target.dataset.editField, e.target.value, e.target.dataset.editOriginal);
+  saveProposalEdit(
+    e.target.dataset.proposalEdit, e.target.dataset.editField,
+    e.target.value, e.target.dataset.editOriginal, e.target.dataset.editLang,
+  );
   renderProposals();
 });
 document.getElementById("proposals-section").addEventListener("keydown", e => {
   if (e.target.matches(".proposal-title-input") && e.key === "Enter") {
     e.target.blur();
   }
+});
+
+// Toggle EN/FR view per proposal card — purement une vue, rien n'est
+// sauvegardé ici (juste quel champ de langue est affiché/édité).
+document.getElementById("proposals-section").addEventListener("click", e => {
+  const langBtn = e.target.closest("[data-lang-toggle]");
+  if (!langBtn || langBtn.disabled) return;
+  proposalLangView[langBtn.dataset.langToggle] = langBtn.dataset.lang;
+  renderProposals();
 });
 
 // Proposal actions (delegated)
@@ -1620,9 +1672,10 @@ async function init() {
     // it changed nothing (the page reloads, but a plain fetch() can still be
     // served from cache regardless of that reload).
     const bust = Date.now();
-    const [dataResp, propResp, decResp] = await Promise.all([
+    const [dataResp, propResp, propFrResp, decResp] = await Promise.all([
       fetch(`data.json?_=${bust}`, { cache: "no-store" }),
       fetch(`proposals.json?_=${bust}`, { cache: "no-store" }).catch(() => null),
+      fetch(`proposals-fr.json?_=${bust}`, { cache: "no-store" }).catch(() => null),
       fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DEC_PATH}`, {
         headers: ghToken ? { "Authorization": `token ${ghToken}` } : {},
         cache: "no-store",
@@ -1636,6 +1689,13 @@ async function init() {
       const propData = await propResp.json();
       allProposals = propData.proposals || [];
     }
+    // proposals-fr.json : même ids que proposals.json par construction
+    // (translate_proposals_fr traduit une copie exacte) — sert uniquement à
+    // afficher/éditer le texte FR en regard de l'EN, jamais fusionné ici.
+    if (propFrResp && propFrResp.ok) {
+      const propFrData = await propFrResp.json();
+      proposalsFrMap = new Map((propFrData.proposals || []).map(p => [p.id, p]));
+    }
 
     // Load decisions: try GitHub API first (for SHA), then Pages, then localStorage
     let decLoaded = false;
@@ -1647,7 +1707,8 @@ async function init() {
         // Only use if it has real content (not empty defaults)
         if (parsed.approved_proposals?.length || parsed.hidden_cards?.length ||
             parsed.rejected_proposals?.length || Object.keys(parsed.comments || {}).length ||
-            Object.keys(parsed.tag_overrides || {}).length) {
+            Object.keys(parsed.tag_overrides || {}).length ||
+            Object.keys(parsed.proposal_edits || {}).length) {
           decisions = parsed;
           decLoaded = true;
         }
@@ -1659,7 +1720,8 @@ async function init() {
         const local = JSON.parse(localStorage.getItem("rw_decisions") || "null");
         if (local && (local.approved_proposals?.length || local.hidden_cards?.length ||
             local.rejected_proposals?.length || Object.keys(local.comments || {}).length ||
-            Object.keys(local.tag_overrides || {}).length)) {
+            Object.keys(local.tag_overrides || {}).length ||
+            Object.keys(local.proposal_edits || {}).length)) {
           decisions = local;
           decLoaded = true;
         }
