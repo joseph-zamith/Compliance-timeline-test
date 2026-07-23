@@ -193,6 +193,16 @@ def replay_proposals() -> bool:
     return os.environ.get("REPLAY_PROPOSALS", "").lower() == "true"
 
 
+def skip_sonar() -> bool:
+    """Test-only escape hatch: skip the 8 Perplexity Sonar queries (real
+    money, unlike LiteLLM/Claude calls which REPLAY_CONTENT already avoids).
+    Combined with REPLAY_CONTENT=true + REPLAY_PROPOSALS=true, this makes a
+    full end-to-end run (including a real email send) genuinely zero-cost —
+    useful to test things unrelated to content (email formatting, SMTP,
+    recipients) without touching any paid API."""
+    return os.environ.get("SKIP_SONAR", "").lower() == "true"
+
+
 # ---------------------------------------------------------------------------
 # Step 1: config, recipients, existing data
 # ---------------------------------------------------------------------------
@@ -1544,9 +1554,13 @@ def _run(config: dict, recipients: list, data_json: list, known_topics: list, cl
         log("Recherche — fetch des sources fixes...")
         fixed_sources_blob = fetch_fixed_sources()
 
-    log("Recherche — requêtes Perplexity Sonar...")
-    sonar_blob = run_sonar_research(client, config["research_model"])
-    log(f"Recherche Sonar terminée — {len(sonar_blob)} caractères récupérés sur {len(SONAR_QUERIES)} requêtes.")
+    if skip_sonar():
+        log("Recherche — requêtes Perplexity Sonar SKIPPÉES (SKIP_SONAR=true, test à coût zéro).")
+        sonar_blob = "(recherche Sonar non interrogée cette fois — SKIP_SONAR actif, test à coût zéro)"
+    else:
+        log("Recherche — requêtes Perplexity Sonar...")
+        sonar_blob = run_sonar_research(client, config["research_model"])
+        log(f"Recherche Sonar terminée — {len(sonar_blob)} caractères récupérés sur {len(SONAR_QUERIES)} requêtes.")
 
     # No artificial cap here: input size was never the real constraint (Sonar
     # runs ~13k chars total, fixed sources max out around 30k — both trivial

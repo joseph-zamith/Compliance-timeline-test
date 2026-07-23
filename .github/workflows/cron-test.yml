@@ -1,13 +1,16 @@
-name: Cron test (déclenchement automatique sans action humaine — à supprimer après test)
+name: Cron test
 
 on:
   workflow_dispatch: {}
   schedule:
-    # Ponctuel : 16:40 CEST le 23 juillet 2026 (= 14:40 UTC). Cron GitHub
-    # Actions est toujours en UTC. Comme day-of-month et month sont fixés,
-    # ça ne se redéclenchera pas avant le 23 juillet 2027 — pas besoin de
-    # le désactiver en urgence après le test, mais à supprimer une fois validé.
-    - cron: "40 14 23 7 *"
+    # Ponctuel : 17:05 CEST le 23 juillet 2026 (= 15:05 UTC — décalé de
+    # l'heure pile, GitHub prévenant que le début de chaque heure est la
+    # période la plus chargée et donc la plus susceptible de retard). Cron
+    # GitHub Actions est toujours en UTC. Comme day-of-month et month sont
+    # fixés, ça ne se redéclenchera pas avant le 23 juillet 2027 — pas besoin
+    # de le désactiver en urgence après le test, mais à supprimer une fois
+    # validé.
+    - cron: "5 15 23 7 *"
 
 jobs:
   send-test-email:
@@ -21,6 +24,7 @@ jobs:
           python3 -c "
           import os, smtplib
           from email.mime.text import MIMEText
+          from email.utils import formataddr
           from datetime import datetime, timezone
 
           body = (
@@ -28,11 +32,13 @@ jobs:
               '(schedule: cron), sans aucune action humaine.\n\n'
               f'Heure UTC au moment de l ecriture du mail : {datetime.now(timezone.utc).isoformat()}\n\n'
               'Si tu recois ce mail sans avoir rien clique, le mecanisme de cron '
-              'marche et on peut activer le vrai cron hebdomadaire en confiance.'
+              'marche et on peut activer le vrai cron hebdomadaire en confiance.\n\n'
+              'Ce test verifie aussi le nom d expediteur : tu dois voir '
+              \"'Regulatory Watch Tower' plutot que l adresse Gmail brute.\"
           )
           msg = MIMEText(body)
           msg['Subject'] = 'Test cron GitHub Actions — Compliance-timeline'
-          msg['From'] = os.environ['GMAIL_ADDRESS']
+          msg['From'] = formataddr(('Regulatory Watch Tower', os.environ['GMAIL_ADDRESS']))
           msg['To'] = os.environ['GMAIL_ADDRESS']
 
           with smtplib.SMTP_SSL('smtp.gmail.com', 465) as s:
