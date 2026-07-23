@@ -3,14 +3,14 @@ name: Cron test
 on:
   workflow_dispatch: {}
   schedule:
-    # Ponctuel : 17:05 CEST le 23 juillet 2026 (= 15:05 UTC — décalé de
-    # l'heure pile, GitHub prévenant que le début de chaque heure est la
-    # période la plus chargée et donc la plus susceptible de retard). Cron
-    # GitHub Actions est toujours en UTC. Comme day-of-month et month sont
-    # fixés, ça ne se redéclenchera pas avant le 23 juillet 2027 — pas besoin
-    # de le désactiver en urgence après le test, mais à supprimer une fois
-    # validé.
-    - cron: "5 15 23 7 *"
+    # Test sur la durée : 4 créneaux posés bien à l'avance (contrairement au
+    # tout premier essai poussé à la dernière minute, qui n'a donc rien
+    # prouvé sur la fiabilité réelle du cron GitHub Actions). Toutes les
+    # heures ci-dessous sont en UTC ; CEST = UTC+2 en ce moment.
+    - cron: "0 6 24 7 *"   # ven. 24/07 08:00 CEST
+    - cron: "0 10 24 7 *"  # ven. 24/07 12:00 CEST
+    - cron: "0 16 24 7 *"  # ven. 24/07 18:00 CEST
+    - cron: "0 6 27 7 *"   # lun. 27/07 08:00 CEST
 
 jobs:
   send-test-email:
