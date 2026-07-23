@@ -530,6 +530,17 @@
     flex-wrap: wrap;
     margin: var(--space-sm) 0;
   }
+  .proposal-source {
+    font-size: 0.75rem;
+    margin: 2px 0 var(--space-xs) 0;
+  }
+  .proposal-source a {
+    color: var(--ink-tertiary);
+    text-decoration: none;
+  }
+  .proposal-source a:hover {
+    text-decoration: underline;
+  }
 
   .proposal-diff {
     background: var(--surface-2);
@@ -1144,11 +1155,13 @@ function renderProposalCard(p, baseCardMap, isApproved, isRejected) {
     html += `<div class="proposal-title">${existing ? existing.t : p.existing_id}</div>`;
     if (existing) {
       html += `<div class="proposal-desc">${existing.x}</div>`;
+      if (existing.u) html += `<div class="proposal-source"><a href="${existing.u}" target="_blank" rel="noopener">Source ↗</a></div>`;
       html += `<div class="proposal-topics">${existing.tp.map(tp => `<span class="tp tp-${tp}">${TL[tp]||tp}</span>`).join("")}</div>`;
     }
   } else if (p.card) {
     html += `<div class="proposal-title">${p.card.t}</div>`;
     html += `<div class="proposal-desc">${p.card.x}</div>`;
+    if (p.card.u) html += `<div class="proposal-source"><a href="${p.card.u}" target="_blank" rel="noopener">Source ↗</a></div>`;
     if (p.card.tp) {
       html += `<div class="proposal-topics">${p.card.tp.map(tp => `<span class="tp tp-${tp}">${TL[tp]||tp}</span>`).join("")}</div>`;
     }
