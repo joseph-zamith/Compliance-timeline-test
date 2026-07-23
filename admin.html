@@ -661,16 +661,16 @@
 </div>
 
 <div class="page">
-  <!-- AI model configuration (research + writing models used by the weekly automation) -->
+  <!-- AI model configuration — un modèle par étape du pipeline fan-out -->
   <div class="proposal-card" id="model-config-card">
     <div class="proposal-top">
       <span class="proposal-title">Configuration IA — veille hebdomadaire</span>
       <span id="model-config-status" class="gh-token-status"></span>
     </div>
-    <div class="proposal-desc">Modèles utilisés par le job automatique du vendredi. Change ici, pas besoin de toucher au code.</div>
+    <div class="proposal-desc">Un modèle par étape du pipeline (recherche, triage, rédaction par item, propositions, traduction). Change ici, pas besoin de toucher au code.</div>
     <div style="display:flex; gap:24px; margin-top:12px; flex-wrap:wrap;">
       <label style="display:flex; flex-direction:column; gap:4px; font-size:0.75rem; color:var(--ink-tertiary);">
-        Modèle de recherche
+        Recherche
         <select id="research-model-select" class="search" style="max-width:280px;">
           <option value="vercel/perplexity-sonar">Sonar (standard) — coût de base</option>
           <option value="vercel/perplexity-sonar-pro">Sonar Pro — ~5x plus cher</option>
@@ -678,10 +678,37 @@
         </select>
       </label>
       <label style="display:flex; flex-direction:column; gap:4px; font-size:0.75rem; color:var(--ink-tertiary);">
-        Modèle de rédaction
-        <select id="writing-model-select" class="search" style="max-width:280px;">
+        Triage (sélection des items + faits clés)
+        <select id="triage-model-select" class="search" style="max-width:280px;">
           <option value="vercel/anthropic-claude-haiku-4.5">Claude Haiku 4.5 — le moins cher</option>
           <option value="vercel/anthropic-claude-sonnet-4.5">Claude Sonnet 4.5 — recommandé</option>
+          <option value="vercel/anthropic-claude-opus-4.5">Claude Opus 4.5 — plus cher</option>
+          <option value="vercel/anthropic-claude-opus-4.6">Claude Opus 4.6 — le plus cher</option>
+        </select>
+      </label>
+      <label style="display:flex; flex-direction:column; gap:4px; font-size:0.75rem; color:var(--ink-tertiary);">
+        Rédaction par item (summary/detail)
+        <select id="item-model-select" class="search" style="max-width:280px;">
+          <option value="vercel/anthropic-claude-haiku-4.5">Claude Haiku 4.5 — recommandé (coût)</option>
+          <option value="vercel/anthropic-claude-sonnet-4.5">Claude Sonnet 4.5 — plus cher</option>
+          <option value="vercel/anthropic-claude-opus-4.5">Claude Opus 4.5 — plus cher</option>
+          <option value="vercel/anthropic-claude-opus-4.6">Claude Opus 4.6 — le plus cher</option>
+        </select>
+      </label>
+      <label style="display:flex; flex-direction:column; gap:4px; font-size:0.75rem; color:var(--ink-tertiary);">
+        Propositions (mises à jour chronologie)
+        <select id="proposals-model-select" class="search" style="max-width:280px;">
+          <option value="vercel/anthropic-claude-haiku-4.5">Claude Haiku 4.5 — le moins cher</option>
+          <option value="vercel/anthropic-claude-sonnet-4.5">Claude Sonnet 4.5 — recommandé</option>
+          <option value="vercel/anthropic-claude-opus-4.5">Claude Opus 4.5 — plus cher</option>
+          <option value="vercel/anthropic-claude-opus-4.6">Claude Opus 4.6 — le plus cher</option>
+        </select>
+      </label>
+      <label style="display:flex; flex-direction:column; gap:4px; font-size:0.75rem; color:var(--ink-tertiary);">
+        Traduction FR
+        <select id="translate-model-select" class="search" style="max-width:280px;">
+          <option value="vercel/anthropic-claude-haiku-4.5">Claude Haiku 4.5 — recommandé (coût)</option>
+          <option value="vercel/anthropic-claude-sonnet-4.5">Claude Sonnet 4.5 — plus cher</option>
           <option value="vercel/anthropic-claude-opus-4.5">Claude Opus 4.5 — plus cher</option>
           <option value="vercel/anthropic-claude-opus-4.6">Claude Opus 4.6 — le plus cher</option>
         </select>
@@ -759,10 +786,17 @@ let decisions = {
 };
 let decisionsSha = null; // GitHub file SHA for updates
 
-/* ===== automation/config.json — AI model selection for the weekly job ===== */
+/* ===== automation/config.json — AI model selection for the weekly job =====
+   Un modèle par étape du pipeline fan-out. `writing_model` n'est plus écrit
+   par l'admin (obsolète depuis le fan-out) mais reste lu en repli si un
+   ancien config.json à 2 champs traîne encore, pour ne pas casser la
+   compat — voir la même logique de fallback côté Python (load_config()). */
 let modelConfig = {
   research_model: "vercel/perplexity-sonar",
-  writing_model: "vercel/anthropic-claude-sonnet-4.5"
+  triage_model: "vercel/anthropic-claude-sonnet-4.5",
+  item_model: "vercel/anthropic-claude-haiku-4.5",
+  proposals_model: "vercel/anthropic-claude-sonnet-4.5",
+  translate_model: "vercel/anthropic-claude-haiku-4.5"
 };
 let modelConfigSha = null;
 
@@ -812,14 +846,32 @@ async function loadModelConfig() {
       const ghFile = await resp.json();
       modelConfigSha = ghFile.sha;
       const parsed = JSON.parse(atob(ghFile.content.replace(/\n/g, "")));
-      if (parsed.research_model) modelConfig = parsed;
+      if (parsed.research_model) {
+        // Repli si un ancien config.json (2 champs : research_model / writing_model)
+        // ou un config.json partiel est encore en place — même logique que
+        // load_config() côté Python.
+        const writingFallback = parsed.writing_model || modelConfig.triage_model;
+        modelConfig = {
+          research_model: parsed.research_model,
+          triage_model: parsed.triage_model || writingFallback,
+          item_model: parsed.item_model || modelConfig.item_model,
+          proposals_model: parsed.proposals_model || writingFallback,
+          translate_model: parsed.translate_model || modelConfig.translate_model,
+        };
+      }
     }
   } catch(e) { console.warn("Could not load automation/config.json:", e); }
 
   const researchSelect = document.getElementById("research-model-select");
-  const writingSelect = document.getElementById("writing-model-select");
+  const triageSelect = document.getElementById("triage-model-select");
+  const itemSelect = document.getElementById("item-model-select");
+  const proposalsSelect = document.getElementById("proposals-model-select");
+  const translateSelect = document.getElementById("translate-model-select");
   if (researchSelect) researchSelect.value = modelConfig.research_model;
-  if (writingSelect) writingSelect.value = modelConfig.writing_model;
+  if (triageSelect) triageSelect.value = modelConfig.triage_model;
+  if (itemSelect) itemSelect.value = modelConfig.item_model;
+  if (proposalsSelect) proposalsSelect.value = modelConfig.proposals_model;
+  if (translateSelect) translateSelect.value = modelConfig.translate_model;
 
   const status = document.getElementById("model-config-status");
   if (status) {
@@ -869,13 +921,28 @@ document.addEventListener("DOMContentLoaded", () => {
   if (runNowBtn) runNowBtn.addEventListener("click", triggerWorkflowRun);
 
   const researchSelect = document.getElementById("research-model-select");
-  const writingSelect = document.getElementById("writing-model-select");
+  const triageSelect = document.getElementById("triage-model-select");
+  const itemSelect = document.getElementById("item-model-select");
+  const proposalsSelect = document.getElementById("proposals-model-select");
+  const translateSelect = document.getElementById("translate-model-select");
   if (researchSelect) researchSelect.addEventListener("change", () => {
     modelConfig.research_model = researchSelect.value;
     pushModelConfig();
   });
-  if (writingSelect) writingSelect.addEventListener("change", () => {
-    modelConfig.writing_model = writingSelect.value;
+  if (triageSelect) triageSelect.addEventListener("change", () => {
+    modelConfig.triage_model = triageSelect.value;
+    pushModelConfig();
+  });
+  if (itemSelect) itemSelect.addEventListener("change", () => {
+    modelConfig.item_model = itemSelect.value;
+    pushModelConfig();
+  });
+  if (proposalsSelect) proposalsSelect.addEventListener("change", () => {
+    modelConfig.proposals_model = proposalsSelect.value;
+    pushModelConfig();
+  });
+  if (translateSelect) translateSelect.addEventListener("change", () => {
+    modelConfig.translate_model = translateSelect.value;
     pushModelConfig();
   });
   loadModelConfig();

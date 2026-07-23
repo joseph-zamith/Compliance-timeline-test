@@ -1,6 +1,7 @@
 {
   "research_model": "vercel/perplexity-sonar",
-  "writing_model": "vercel/anthropic-claude-sonnet-4.5",
+  "triage_model": "vercel/anthropic-claude-sonnet-4.5",
   "item_model": "vercel/anthropic-claude-haiku-4.5",
+  "proposals_model": "vercel/anthropic-claude-sonnet-4.5",
   "translate_model": "vercel/anthropic-claude-haiku-4.5"
 }
