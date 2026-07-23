@@ -20,7 +20,8 @@
     "proposal-2026-05-01-004",
     "proposal-2026-05-01-006",
     "2026-07-09--iso-ts-24971-2-published",
-    "proposal-2026-07-22--2026-05-06--mdr-ivdr-simplification-feedback-deadline"
+    "proposal-2026-07-22--2026-05-06--mdr-ivdr-simplification-feedback-deadline",
+    "proposal-2026-07-22--2026-07-01--swissmedic-tga-device-traceability-mandatory"
   ],
   "rejected_proposals": [
     "proposal-2026-04-17-002",
@@ -76,5 +77,10 @@
     "2026-07-09--iso-ts-24971-2-published": "2026-07-22",
     "proposal-2026-07-22--2026-05-06--mdr-ivdr-simplification-feedback-deadline": "2026-07-22",
     "proposal-2026-07-22--2026-07-01--swissmedic-tga-device-traceability-mandatory": "2026-07-23"
+  },
+  "proposal_edits": {
+    "proposal-2026-07-22--2026-07-01--swissmedic-tga-device-traceability-mandatory": {
+      "x": "Swissdamed (Switzerland) and Device ID (Australia) systems are now mandatory for all device registrations and market surveillance."
+    }
   }
 }
