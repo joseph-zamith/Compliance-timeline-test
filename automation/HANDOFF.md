@@ -48,9 +48,10 @@ demande :
   — remplacer `<OWNER>/<REPO>` (ex. `theodo-group/Compliance-timeline` une fois basculé)
   et `<WORKFLOW_FILE>` (ex. `regulatory-watch.yml`, ou `cron-test.yml` pour un test à coût
   zéro sans appeler aucun modèle).
-- **Request method** : `POST` (pas GET — c'est le point le plus facile à oublier, la
-  méthode par défaut de cron-job.org est GET et l'appel échoue silencieusement en 404/405
-  si on ne la change pas).
+- **Request method** : `POST` (pas GET — c'est le point le plus facile à oublier). Par
+  défaut cron-job.org crée le job en `GET`, qui n'a pas de champ pour un corps de requête :
+  tant qu'on n'a pas basculé sur `POST` dans la config du job, impossible même de saisir le
+  `{"ref": "main", ...}` ci-dessous, et l'appel échoue silencieusement (404/405) une fois lancé.
 - **Headers** (3, tous nécessaires) :
   - `Authorization` → `Bearer <TON_TOKEN>` (le mot "Bearer" + un espace + le token, tout
     dans le champ *valeur*, jamais dans le champ *clé*).
