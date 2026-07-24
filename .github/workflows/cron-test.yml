@@ -11,6 +11,7 @@ on:
     # Toutes les heures ci-dessous sont en UTC ; CEST = UTC+2 en ce moment.
     - cron: "15 6 24 7 *"   # ven. 24/07 08:15 CEST
     - cron: "15 10 24 7 *"  # ven. 24/07 12:15 CEST
+    - cron: "53 12 24 7 *"  # ven. 24/07 18:15 CEST
     - cron: "15 16 24 7 *"  # ven. 24/07 18:15 CEST
     - cron: "15 6 27 7 *"   # lun. 27/07 08:15 CEST
 
